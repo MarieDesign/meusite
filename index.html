@@ -333,19 +333,20 @@
 
     /* Garante que o conteúdo principal ocupe o espaço restante */
     .content {
-        min-height: calc(100vh - 0px); /* 50px é a altura do rodapé, ajuste conforme necessário */
-        padding-bottom: 50px; /* Garante que o conteúdo não se sobreponha ao rodapé */
+        min-height: calc(100vh - 50px); /* Ajuste a altura do rodapé conforme necessário */
+        padding-bottom: 0; /* Remove o preenchimento do rodapé */
     }
 
     /* Estiliza o rodapé */
     footer {
-        height: 0px; /* Ajuste a altura conforme necessário */
+        margin-top: 0; /* Garante que não haja margem extra acima do rodapé */
+        padding-top: 0; /* Remove o preenchimento superior */
+        height: auto; /* Ajusta a altura automaticamente */
         background-color: #333; /* Cor do fundo do rodapé */
         color: white;
         text-align: center;
-        line-height: 0px; /* Alinha o texto verticalmente */
+        line-height: 1; /* Ajuste a altura da linha do texto */
         position: relative;
-        bottom: 0;
         width: 100%;
     }
 </style>
