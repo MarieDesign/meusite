@@ -482,11 +482,10 @@ if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_c
 </body>
 <style>
   <style>
-  <style>
   body {
     margin: 0;
     background: black; /* Fundo escuro para destacar as estrelas */
-    overflow: hidden; /* Impede rolagem inesperada */
+    overflow: hidden;
   }
 
   #estrelas-container {
@@ -495,7 +494,8 @@ if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_c
     height: 100%;
     top: 0;
     left: 0;
-    pointer-events: none; /* Permite clicar nos elementos do site normalmente */
+    pointer-events: none; /* Permite interação normal com o site */
+    z-index: -1; /* Faz com que as estrelas fiquem no fundo do site */
   }
 
   .estrela {
@@ -536,7 +536,7 @@ if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_c
   function criarEstrela() {
     const estrela = document.createElement("div");
     estrela.classList.add("estrela");
-    
+
     const tamanho = Math.random() * 10 + 10; // Tamanhos aleatórios entre 10px e 20px
     estrela.style.width = `${tamanho}px`;
     estrela.style.height = `${tamanho}px`;
