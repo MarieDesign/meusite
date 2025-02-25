@@ -301,7 +301,7 @@
                 </div>
             </div>
         </div>
-     <div class="elementor-element elementor-element-547d112 elementor-hidden-tablet elementor-hidden-mobile e-flex e-con-boxed e-con e-parent e-lazyloaded" data-id="547d112" data-element_type="container">
+   <div class="elementor-element elementor-element-547d112 elementor-hidden-tablet elementor-hidden-mobile e-flex e-con-boxed e-con e-parent e-lazyloaded" data-id="547d112" data-element_type="container">
     <div class="e-con-inner">
         <div class="elementor-element elementor-element-a52dc3b elementor-widget elementor-widget-html" data-id="a52dc3b" data-element_type="widget" data-widget_type="html.default">
             <div class="elementor-widget-container"></div>
@@ -334,25 +334,37 @@
         padding: 0;
     }
 
-    /* Remover qualquer margem/padding dos containers internos do rodapé */
-    .elementor-element-68bcbfe .e-con-inner, 
-    .elementor-element-68bcbfe .elementor-widget-container {
-        margin: 0;
-        padding: 0;
-    }
-
-    /* Garantir que o rodapé se comporte como a última parte da página */
+    /* Garantir que o rodapé fique no fundo da página */
     body {
         display: flex;
         flex-direction: column;
         min-height: 100vh;
     }
 
-    /* Garantir que o conteúdo da página ocupe todo o espaço disponível */
+    /* Garantir que o conteúdo principal ocupe o espaço restante e empurre o rodapé para o fundo */
     main {
         flex: 1;
     }
-</style>
 
+    /* Ajuste para garantir que o rodapé tenha o alinhamento correto e sem espaçamento extra */
+    .elementor-element-68bcbfe .e-con-inner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+    }
+
+    /* Corrigir o texto do rodapé e garantir que ele não fique descentralizado */
+    .elementor-element-68bcbfe .elementor-widget-container {
+        text-align: center;
+        padding: 0;
+    }
+
+    /* Garantir que o texto do rodapé fique alinhado ao centro e sem margens */
+    .elementor-element-68bcbfe h2 {
+        margin: 0;
+        padding: 0;
+    }
+</style>
 
 </html>
