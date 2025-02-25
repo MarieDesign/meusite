@@ -478,7 +478,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Site com Degradê</title>
     <style>
         html, body {
             background: linear-gradient(to bottom, black, #792bd9);
@@ -487,28 +486,20 @@
             font-family: Arial, sans-serif;
         }
 
-        .content {
-            min-height: 100vh; /* Garante que a página ocupe toda a tela, mas sem ir além do conteúdo */
+        #container {
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        .footer {
-            background: black;
-            padding: 20px;
-            text-align: center;
+        main {
+            flex: 1;
         }
     </style>
 </head>
 <body>
-    <div class="content">
-        <h1>Bem-vindo ao Site</h1>
-        <p>Este é um site de exemplo com fundo em degradê.</p>
-
-        <!-- Rodapé -->
-        <div class="footer">
-            &copy; 2025 Meu Site
-        </div>
+    <div id="container">
+        <main></main>
     </div>
 </body>
 </html>
