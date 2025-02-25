@@ -457,16 +457,16 @@ if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_c
 </body>
 <style>
 	.lightb .elementor-heading-title {
-    color: white !important; /* Garante que o texto fique branco */
+    color: white !important; /* Texto sempre branco */
+    opacity: 1 !important; /* Garante que o texto apareça */
+    visibility: visible !important; /* Impede ocultação */
     background: none !important; /* Remove qualquer efeito de fundo */
-    mix-blend-mode: normal !important; /* Impede misturas de cores estranhas */
-    text-shadow: none !important; /* Remove sombras que podem escurecer o texto */
-    opacity: 1 !important; /* Garante que o texto fique 100% visível */
-    filter: none !important; /* Remove qualquer efeito de escurecimento */
-    position: relative !important; /* Mantém o texto no lugar */
-    z-index: 10 !important; /* Garante que ele fique por cima de outros elementos */
+    mix-blend-mode: normal !important; /* Evita mistura estranha com o fundo */
+    text-shadow: none !important; /* Remove sombras escuras */
+    filter: none !important; /* Remove filtros de escurecimento */
+    position: relative !important; /* Mantém no lugar certo */
+    z-index: 1000 !important; /* Garante que fique por cima */
 }
-
 
   <style>
   body {
