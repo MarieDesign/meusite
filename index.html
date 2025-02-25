@@ -454,21 +454,6 @@
       }
 </style>
 <div id="estrelas-container"></div>
-<script>
-    function criarEstrela() {
-        const estrela = document.createElement("div");
-        estrela.classList.add("estrela");
-    
-        const tamanho = Math.random() * 10 + 10; // Tamanhos aleatórios entre 10px e 20px
-        estrela.style.width = `${tamanho}px`;
-        estrela.style.height = `${tamanho}px`;
-    
-        estrela.style.left = `${Math.random() * 100}vw`; // Posição horizontal aleatória
-        estrela.style.animationDuration = `${Math.random() * 5 + 8}s`; // Velocidade entre 8s e 13s
-        estrela.style.animationDelay = `${Math.random() * 5}s`; // Delay aleatório para suavizar o efeito
-    
-        document.getElementById("estrelas-container").appendChild(estrela);// Remover a estrela após a animação para evitar sobrecarga na página setTimeout(()=>{estrela.remove()},13000)}// Criar novas estrelas continuamente setInterval(criarEstrela,500);
-</script>
 <style>
     /* Garante que o corpo ocupe a altura total da tela */
     html, body {
