@@ -350,32 +350,34 @@ Ao longo dos anos, tive o privilégio de colaborar com diversas empresas, desde 
 					<div class="e-con-inner">
 				<div class="elementor-element elementor-element-a52dc3b elementor-widget elementor-widget-html" data-id="a52dc3b" data-element_type="widget" data-widget_type="html.default">
 				<div class="elementor-widget-container">
-					<script src="data:text/javascript;base64,CiAgICBkb2N1bWVudC5hZGRFdmVudExpc3RlbmVyKCJET01Db250ZW50TG9hZGVkIiwgZnVuY3Rpb24oKSB7CiAgICBjb25zdCBoZWFkaW5ncyA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoIi5saWdodGIgLmVsZW1lbnRvci1oZWFkaW5nLXRpdGxlIik7CgogICAgbGV0IG1vdXNlWCA9IDA7CiAgICBsZXQgbW91c2VZID0gMDsKCiAgICBkb2N1bWVudC5hZGRFdmVudExpc3RlbmVyKCJtb3VzZW1vdmUiLCBmdW5jdGlvbihlKSB7CiAgICAgICAgbW91c2VYID0gZS5jbGllbnRYOwogICAgICAgIG1vdXNlWSA9IGUuY2xpZW50WTsKCiAgICAgICAgaGVhZGluZ3MuZm9yRWFjaChoZWFkaW5nID0+IHsKICAgICAgICAgICAgY29uc3QgcmVjdCA9IGhlYWRpbmcuZ2V0Qm91bmRpbmdDbGllbnRSZWN0KCk7CiAgICAgICAgICAgIGNvbnN0IHggPSBtb3VzZVggLSByZWN0LmxlZnQ7CiAgICAgICAgICAgIGNvbnN0IHkgPSBtb3VzZVkgLSByZWN0LnRvcDsKCiAgICAgICAgICAgIGNvbnN0IHhQZXJjZW50ID0gKHggLyByZWN0LndpZHRoKSAqIDEwMDsKICAgICAgICAgICAgY29uc3QgeVBlcmNlbnQgPSAoeSAvIHJlY3QuaGVpZ2h0KSAqIDEwMDsKCiAgICAgICAgICAgIGhlYWRpbmcuc3R5bGUuc2V0UHJvcGVydHkoIi0tbW91c2UteCIsIGAke3hQZXJjZW50fSVgKTsKICAgICAgICAgICAgaGVhZGluZy5zdHlsZS5zZXRQcm9wZXJ0eSgiLS1tb3VzZS15IiwgYCR7eVBlcmNlbnR9JWApOwogICAgICAgIH0pOwogICAgfSk7Cn0pOwoK" data-rocket-status="executed">
+					<!--
+<script>
     document.addEventListener("DOMContentLoaded", function() {
-    const headings = document.querySelectorAll(".lightb .elementor-heading-title");
+        const headings = document.querySelectorAll(".lightb .elementor-heading-title");
 
-    let mouseX = 0;
-    let mouseY = 0;
+        let mouseX = 0;
+        let mouseY = 0;
 
-    document.addEventListener("mousemove", function(e) {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
+        document.addEventListener("mousemove", function(e) {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
 
-        headings.forEach(heading => {
-            const rect = heading.getBoundingClientRect();
-            const x = mouseX - rect.left;
-            const y = mouseY - rect.top;
+            headings.forEach(heading => {
+                const rect = heading.getBoundingClientRect();
+                const x = mouseX - rect.left;
+                const y = mouseY - rect.top;
 
-            const xPercent = (x / rect.width) * 100;
-            const yPercent = (y / rect.height) * 100;
+                const xPercent = (x / rect.width) * 100;
+                const yPercent = (y / rect.height) * 100;
 
-            heading.style.setProperty("--mouse-x", `${xPercent}%`);
-            heading.style.setProperty("--mouse-y", `${yPercent}%`);
+                heading.style.setProperty("--mouse-x", `${xPercent}%`);
+                heading.style.setProperty("--mouse-y", `${yPercent}%`);
+            });
         });
     });
-});
-
-</script>				
+</script>
+-->
+			
 </div>
 </div>
 <div class="elementor-element elementor-element-5847535 elementor-widget__width-initial lightb elementor-widget elementor-widget-heading" data-id="5847535" data-element_type="widget" data-widget_type="heading.default">
