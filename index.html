@@ -334,45 +334,50 @@
         padding: 0;
     }
 
-    /* Garantir que o rodapé fique no fundo da página */
+    /* Garantir que o rodapé fique na parte inferior da tela */
     body {
         display: flex;
         flex-direction: column;
         min-height: 100vh;
+        margin: 0;
     }
 
-    /* Garantir que o conteúdo principal ocupe o espaço restante e empurre o rodapé para o fundo */
+    /* Garantir que o conteúdo principal ocupe o espaço restante */
     main {
         flex: 1;
     }
 
-    /* Garantir que o conteúdo dentro do rodapé tenha zero padding e margem */
+    /* Estilizar a estrutura do rodapé para garantir que ele preencha corretamente a parte inferior */
     .elementor-element-68bcbfe .e-con-inner {
         display: flex;
         justify-content: center;
         align-items: center;
         padding: 0;
         margin: 0;
+        height: 100%; /* Para garantir que preencha todo o espaço disponível */
     }
 
-    /* Corrigir o texto do rodapé e garantir que ele não fique descentralizado */
+    /* Alinhamento do conteúdo do rodapé */
     .elementor-element-68bcbfe .elementor-widget-container {
         text-align: center;
         padding: 0;
         margin: 0;
     }
 
-    /* Garantir que o texto do rodapé fique alinhado ao centro e sem margens */
+    /* Estilizar o texto do rodapé para não ter margem ou padding */
     .elementor-element-68bcbfe h2 {
         margin: 0;
         padding: 0;
     }
 
-    /* Remover qualquer margin extra que possa ser aplicada ao corpo da página ou ao elemento do rodapé */
-    body, .elementor-element-68bcbfe {
-        margin: 0;
-        padding: 0;
+    /* Garantir que o rodapé seja o último elemento da página */
+    body > .elementor-element-68bcbfe {
+        margin-top: auto;
+    }
+
+    /* Remover qualquer padding extra que possa ser aplicado ao elemento principal */
+    .elementor-element-68bcbfe {
+        margin-bottom: 0; /* Garantir que não há espaço abaixo do rodapé */
+        padding-bottom: 0;
     }
 </style>
-
-</html>
