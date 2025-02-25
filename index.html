@@ -473,68 +473,23 @@
     
         document.getElementById("estrelas-container").appendChild(estrela);// Remover a estrela após a animação para evitar sobrecarga na página setTimeout(()=>{estrela.remove()},13000)}// Criar novas estrelas continuamente setInterval(criarEstrela,500);
 </script>
- <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seu Site</title>
-    <style>
-        /* Eliminar qualquer margem ou padding do body */
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-        }
-
-        /* Remover margens e preenchimentos do rodapé */
-        footer {
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Remover qualquer espaço extra do rodapé */
-        footer:after {
-            content: "";
-            display: block;
-            height: 0;
-        }
-
-        /* Garantir que o rodapé fique no final da página */
-        .content {
-            padding-bottom: 50px; /* Ajuste conforme o tamanho do seu rodapé */
-        }
-    </style>
-</head>
-<body>
-    <div class="content">
-        <!-- Conteúdo do site -->
-    </div>
-
-    <footer>
-        <!-- Rodapé -->
-        <p>Seu rodapé aqui</p>
-    </footer>
-</body>
  <style>
-    body, html {
-        margin: 0;
-        padding: 0;
-    }
-
-    footer {
-        margin-bottom: 0; /* Remove qualquer margem abaixo do rodapé */
-    }
-
-    /* Remove qualquer margem ou padding do último elemento */
-    * {
-        margin: 0;
-        padding: 0;
-    }
-
-    /* Garantir que o body e o html ocupem toda a altura da página */
+    /* Remove qualquer margem e padding do corpo e HTML */
     html, body {
+        margin: 0;
+        padding: 0;
         height: 100%;
+    }
+
+    /* Remove o espaço abaixo do rodapé */
+    footer {
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    /* Elimina qualquer margem ou padding que possa ser adicionada por elementos após o footer */
+    body > *:last-child {
+        margin-bottom: 0 !important;
     }
 </style>
 
