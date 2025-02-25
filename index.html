@@ -481,24 +481,33 @@ if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_c
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=497914479895090&amp;ev=PageView&amp;noscript=1"></noscript><iframe height="0" width="0" style="display: none; visibility: hidden;"></iframe><iframe allow="join-ad-interest-group" data-tagging-id="AW-10967365964" data-load-time="1740497764193" height="0" width="0" src="https://td.doubleclick.net/td/rul/10967365964?random=1740497764185&amp;cv=11&amp;fst=1740497764185&amp;fmt=3&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;gtm=45be52o0v9186456992z89195951770za200zb9195951770&amp;gcd=13t3t3t3t5l1&amp;dma=0&amp;tag_exp=101732282~101732284~102067808~102482433~102539968~102558064~102587591~102605417~102640600~102658453&amp;u_w=1920&amp;u_h=1080&amp;url=https%3A%2F%2Fbrunobastosdg.com.br%2Fhome%2F%3Ffbclid%3DPAZXh0bgNhZW0CMTEAAaZIyHGGY-vCk1hA2DbFGWez-V1IZkq93-2y3VSb4BGbrHUn-NpA1ObhR7w_aem_IfIvTtuPzUNIZUdf85k4ww&amp;hn=www.googleadservices.com&amp;frm=0&amp;tiba=Bruno%20Bastos%20%E2%80%93%20Designer%20Gr%C3%A1fico%20%E2%80%93%20Especialista%20em%20design%20de%20Social%20Media%20e%20P%C3%A1ginas%20de%20venda&amp;npa=0&amp;pscdl=noapi&amp;auid=1963724046.1740497764&amp;uaa=x86&amp;uab=64&amp;uafvl=Not(A%253ABrand%3B99.0.0.0%7CGoogle%2520Chrome%3B133.0.6943.127%7CChromium%3B133.0.6943.127&amp;uamb=0&amp;uam=&amp;uap=Windows&amp;uapv=15.0.0&amp;uaw=0&amp;fledge=1" style="display: none; visibility: hidden;"></iframe><iframe allow="join-ad-interest-group" data-tagging-id="AW-10967365964" data-load-time="1740497764206" height="0" width="0" src="https://td.doubleclick.net/td/rul/10967365964?random=1740497764195&amp;cv=11&amp;fst=1740497764195&amp;fmt=3&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;gtm=45be52o0v9186456992za200zb9195951770&amp;gcd=13t3t3t3t5l1&amp;dma=0&amp;tag_exp=101732282~101732284~102067808~102482433~102539968~102558064~102587591~102605417~102640600~102658453&amp;u_w=1920&amp;u_h=1080&amp;url=https%3A%2F%2Fbrunobastosdg.com.br%2Fhome%2F%3Ffbclid%3DPAZXh0bgNhZW0CMTEAAaZIyHGGY-vCk1hA2DbFGWez-V1IZkq93-2y3VSb4BGbrHUn-NpA1ObhR7w_aem_IfIvTtuPzUNIZUdf85k4ww&amp;hn=www.googleadservices.com&amp;frm=0&amp;tiba=Bruno%20Bastos%20%E2%80%93%20Designer%20Gr%C3%A1fico%20%E2%80%93%20Especialista%20em%20design%20de%20Social%20Media%20e%20P%C3%A1ginas%20de%20venda&amp;did=dZTNiMT&amp;gdid=dZTNiMT&amp;npa=0&amp;pscdl=noapi&amp;auid=1963724046.1740497764&amp;uaa=x86&amp;uab=64&amp;uafvl=Not(A%253ABrand%3B99.0.0.0%7CGoogle%2520Chrome%3B133.0.6943.127%7CChromium%3B133.0.6943.127&amp;uamb=0&amp;uam=&amp;uap=Windows&amp;uapv=15.0.0&amp;uaw=0&amp;fledge=1&amp;data=event%3Dgtag.config" style="display: none; visibility: hidden;"></iframe><iframe allow="join-ad-interest-group" data-tagging-id="G-ZL3RL0F8Y6" data-load-time="1740497764264" height="0" width="0" src="https://td.doubleclick.net/td/ga/rul?tid=G-ZL3RL0F8Y6&amp;gacid=265467054.1740497764&amp;gtm=45je52o0v9196093045z89195951770za200zb9195951770&amp;dma=0&amp;gcs=G111&amp;gcd=13t3t3t3t5l1&amp;npa=0&amp;pscdl=noapi&amp;aip=1&amp;fledge=1&amp;frm=0&amp;tag_exp=101732282~101732284~102067808~102482433~102539968~102558064~102587591~102605417~102640600~102658453&amp;z=562815187" style="display: none; visibility: hidden;"></iframe>
 </body>
 <style>
+  <style>
   @keyframes subir {
-    0% { transform: translateY(100vh); opacity: 0; }
-    100% { transform: translateY(-10vh); opacity: 1; }
+    0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
   }
 
   .estrela {
     position: absolute;
-    width: 5px;
-    height: 5px;
+    width: 20px;
+    height: 20px;
     background: white;
-    border-radius: 50%;
+    clip-path: polygon(
+      50% 0%, 61% 35%, 98% 35%, 68% 57%, 
+      79% 91%, 50% 70%, 21% 91%, 32% 57%, 
+      2% 35%, 39% 35%
+    ); /* Formato de estrela */
     top: 100vh;
-    animation: subir 5s linear infinite;
+    animation: subir 8s linear infinite;
   }
 </style>
 
-<div class="estrela" style="left: 10%; animation-duration: 3s;"></div>
-<div class="estrela" style="left: 50%; animation-duration: 4s;"></div>
-<div class="estrela" style="left: 80%; animation-duration: 5s;"></div>
+<!-- Estrelas espalhadas na tela com durações diferentes -->
+<div class="estrela" style="left: 10%; animation-duration: 6s;"></div>
+<div class="estrela" style="left: 30%; animation-duration: 8s;"></div>
+<div class="estrela" style="left: 50%; animation-duration: 10s;"></div>
+<div class="estrela" style="left: 70%; animation-duration: 9s;"></div>
+<div class="estrela" style="left: 90%; animation-duration: 7s;"></div>
 
 </html>
