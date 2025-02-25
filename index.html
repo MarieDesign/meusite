@@ -473,21 +473,25 @@
     
         document.getElementById("estrelas-container").appendChild(estrela);// Remover a estrela após a animação para evitar sobrecarga na página setTimeout(()=>{estrela.remove()},13000)}// Criar novas estrelas continuamente setInterval(criarEstrela,500);
 </script>
- <style>
-    /* Remove qualquer margem e padding do corpo e HTML */
+<style>
+    /* Remove margem e padding do corpo e HTML */
     html, body {
         margin: 0;
         padding: 0;
         height: 100%;
     }
 
-    /* Remove o espaço abaixo do rodapé */
+    /* Ajusta a altura do rodapé */
     footer {
-        margin-bottom: 0 !important;
-        padding-bottom: 0 !important;
+        margin: 0;
+        padding: 10px 0; /* Reduz a altura do rodapé, ajustando o padding */
+        position: absolute;
+        bottom: 0; /* Posiciona o rodapé na parte inferior da tela */
+        width: 100%;
+        text-align: center; /* Alinha o conteúdo do rodapé ao centro */
     }
 
-    /* Elimina qualquer margem ou padding que possa ser adicionada por elementos após o footer */
+    /* Remove qualquer espaço adicional abaixo do rodapé */
     body > *:last-child {
         margin-bottom: 0 !important;
     }
