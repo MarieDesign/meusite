@@ -432,15 +432,40 @@
 
   <!-- Container para os ícones -->
   <div id="design-background">
-    <i class="fas fa-pencil-alt design-icon" style="top: 10%; left: 10%;"></i>
-    <i class="fas fa-laptop design-icon" style="top: 20%; left: 30%;"></i>
-    <i class="fas fa-lightbulb design-icon" style="top: 30%; left: 50%;"></i>
-    <i class="fas fa-brain design-icon" style="top: 40%; left: 70%;"></i>
-    <i class="fas fa-palette design-icon" style="top: 50%; left: 80%;"></i>
-    <i class="fas fa-cogs design-icon" style="top: 60%; left: 20%;"></i>
-    <i class="fas fa-camera-retro design-icon" style="top: 70%; left: 40%;"></i>
-    <i class="fas fa-rocket design-icon" style="top: 80%; left: 60%;"></i>
+    <i class="fas fa-pencil-alt design-icon"></i>
+    <i class="fas fa-laptop design-icon"></i>
+    <i class="fas fa-lightbulb design-icon"></i>
+    <i class="fas fa-brain design-icon"></i>
+    <i class="fas fa-palette design-icon"></i>
+    <i class="fas fa-cogs design-icon"></i>
+    <i class="fas fa-camera-retro design-icon"></i>
+    <i class="fas fa-rocket design-icon"></i>
   </div>
+
+  <script>
+    // Função para gerar posições aleatórias dentro da tela
+    function getRandomPosition() {
+      let top = Math.random() * 100; // 0 a 100%
+      let left = Math.random() * 100; // 0 a 100%
+      return { top: top + '%', left: left + '%' };
+    }
+
+    // Função para atualizar a posição de cada ícone
+    function updateIconPositions() {
+      const icons = document.querySelectorAll('.design-icon');
+      icons.forEach(icon => {
+        const position = getRandomPosition();
+        icon.style.top = position.top;
+        icon.style.left = position.left;
+      });
+    }
+
+    // Atualizar posições a cada 3 segundos
+    setInterval(updateIconPositions, 3000);
+
+    // Chama a função para atualizar a posição ao carregar a página
+    updateIconPositions();
+  </script>
 
 </body>
 </html>
