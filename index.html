@@ -407,6 +407,12 @@
   <!-- Container para as partículas -->
   <div id="particles-js"></div>
 
+  <!-- Conteúdo do site -->
+  <div class="conteudo">
+    <h1>Bem-vindo ao meu site!</h1>
+    <p>Observe como as partículas se movem quando você passa o mouse sobre elas.</p>
+  </div>
+
   <!-- Script para inicializar as partículas -->
   <script>
     particlesJS('particles-js', {
@@ -425,7 +431,7 @@
           type: "circle"  // Forma das partículas
         },
         opacity: {
-          value: 0.3,  // Torna as partículas mais discretas (opacidade reduzida)
+          value: 0.4,  // Opacidade das partículas
           random: true,
           animation: {
             enable: true,
@@ -434,7 +440,7 @@
           }
         },
         size: {
-          value: 4,  // Tamanho das partículas
+          value: 5,  // Tamanho das partículas
           random: true,
           animation: {
             enable: true,
@@ -461,7 +467,12 @@
         events: {
           onhover: {
             enable: true,
-            mode: "repulse"  // As partículas se afastam quando o mouse passa
+            mode: "repulse",  // Ativa a repulsão das partículas
+            // Personalização para a repulsão
+            distance: 100,  // Distância de repulsão (quanto mais alto, maior o efeito de afastamento)
+            duration: 0.4,  // A duração do efeito de repulsão
+            speed: 3,  // Velocidade do efeito de repulsão
+            size: 10  // Intensidade do efeito de repulsão
           }
         }
       },
