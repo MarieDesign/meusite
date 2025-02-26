@@ -357,7 +357,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     body {
@@ -376,7 +376,6 @@
       width: 100%;
       height: 100%;
       z-index: -1;
-
       pointer-events: none;
     }
 
@@ -385,6 +384,7 @@
       color: #fff;
       position: absolute;
       opacity: 0;
+      will-change: transform, opacity;
     }
 
     .conteudo {
@@ -402,7 +402,6 @@
       font-size: 1.5em;
     }
 
-    /* Desvanecimento */
     @keyframes fade {
       0% { opacity: 0; }
       50% { opacity: 0.8; }
@@ -432,45 +431,93 @@
 
   <script>
     const icons = document.querySelectorAll('.design-icon');
+    const numIcons = icons.length;
+    const minDistance = 150; // Distância mínima entre ícones
 
-    icons.forEach((icon, index) => {
-      // Posição inicial aleatória
-      const x = Math.random() * (window.innerWidth - 60);
-      const y = Math.random() * (window.innerHeight - 60);
-      icon.style.left = `${x}px`;
-      icon.style.top = `${y}px`;
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
 
-      // Movimento único para cada ícone
-      const moveDuration = 15 + Math.random() * 10; // 15s a 25s
-      const moveDelay = Math.random() * 5; // 0s a 5s
-      const xMove1 = (Math.random() - 0.5) * 200; // -100px a 100px
-      const yMove1 = (Math.random() - 0.5) * 200;
-      const xMove2 = (Math.random() - 0.5) * 200;
-      const yMove2 = (Math.random() - 0.5) * 200;
+    function setRandomPositions() {
+      const positions = [];
+      const cols = Math.ceil(Math.sqrt(numIcons)); // Número de colunas
+      const rows = Math.ceil(numIcons / cols); // Número de linhas
+      const cellWidth = (window.innerWidth - 60) / cols;
+      const cellHeight = (window.innerHeight - 60) / rows;
 
-      // Criar keyframes únicos
-      const styleSheet = document.createElement('style');
-      styleSheet.textContent = `
-        @keyframes moveIcon${index} {
-          0% { transform: translate(0, 0) rotate(0deg); }
-          25% { transform: translate(${xMove1}px, ${yMove1}px) rotate(90deg); }
-          50% { transform: translate(${xMove2}px, ${yMove2}px) rotate(180deg); }
-          75% { transform: translate(${-xMove1}px, ${-yMove1}px) rotate(270deg); }
-          100% { transform: translate(0, 0) rotate(360deg); }
+      // Criar uma lista de todas as células possíveis
+      const cells = [];
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+          cells.push({ row, col });
         }
-      `;
-      document.head.appendChild(styleSheet);
+      }
 
-      // Fade único
-      const fadeDuration = 6 + Math.random() * 4; // 6s a 10s
-      const fadeDelay = Math.random() * 5; // 0s a 5s
+      // Embaralhar as células e pegar apenas o número necessário
+      const shuffledCells = shuffleArray(cells).slice(0, numIcons);
 
-      // Aplicar animações
-      icon.style.animation = `
-        moveIcon${index} ${moveDuration}s infinite ease-in-out ${moveDelay}s,
-        fade ${fadeDuration}s infinite ease-in-out ${fadeDelay}s
-      `;
-    });
+      icons.forEach((icon, index) => {
+        const { row, col } = shuffledCells[index];
+        
+        // Posição base no centro da célula
+        const baseX = col * cellWidth + cellWidth / 2;
+        const baseY = row * cellHeight + cellHeight / 2;
+
+        // Pequeno deslocamento aleatório dentro da célula
+        const offsetX = (Math.random() - 0.5) * (cellWidth - minDistance);
+        const offsetY = (Math.random() - 0.5) * (cellHeight - minDistance);
+
+        let x = baseX + offsetX;
+        let y = baseY + offsetY;
+
+        // Garantir que a posição fique dentro dos limites da tela
+        x = Math.max(0, Math.min(x, window.innerWidth - 60));
+        y = Math.max(0, Math.min(y, window.innerHeight - 60));
+
+        icon.style.left = `${x}px`;
+        icon.style.top = `${y}px`;
+        positions.push({ x, y });
+
+        // Movimento único para cada ícone
+        const moveDuration = 15 + Math.random() * 10; // 15s a 25s
+        const moveDelay = Math.random() * 5; // 0s a 5s
+        const xMove1 = (Math.random() - 0.5) * 200;
+        const yMove1 = (Math.random() - 0.5) * 200;
+        const xMove2 = (Math.random() - 0.5) * 200;
+        const yMove2 = (Math.random() - 0.5) * 200;
+
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = `
+          @keyframes moveIcon${index} {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(${xMove1}px, ${yMove1}px) rotate(90deg); }
+            50% { transform: translate(${xMove2}px, ${yMove2}px) rotate(180deg); }
+            75% { transform: translate(${-xMove1}px, ${-yMove1}px) rotate(270deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+          }
+        `;
+        document.head.appendChild(styleSheet);
+
+        // Fade único
+        const fadeDuration = 6 + Math.random() * 4; // 6s a 10s
+        const fadeDelay = Math.random() * 5; // 0s a 5s
+
+        icon.style.animation = `
+          moveIcon${index} ${moveDuration}s infinite ease-in-out ${moveDelay}s,
+          fade ${fadeDuration}s infinite ease-in-out ${fadeDelay}s
+        `;
+      });
+    }
+
+    // Aplicar posições e animações no carregamento
+    setRandomPositions();
+
+    // Ajustar posições ao redimensionar
+    window.onresize = setRandomPositions;
   </script>
 </body>
 </html>
