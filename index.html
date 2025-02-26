@@ -375,7 +375,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: -1;
+      z-index: -1; /* Fica atrás de tudo */
       pointer-events: none;
     }
 
@@ -385,11 +385,13 @@
       position: absolute;
       opacity: 0;
       will-change: transform, opacity;
+      z-index: -1; /* Garante que os ícones fiquem atrás */
     }
 
+    /* Todos os elementos de conteúdo terão z-index maior */
     .conteudo {
       position: relative;
-      z-index: 1;
+      z-index: 10; /* Acima dos ícones */
       padding: 20px;
       text-align: center;
     }
@@ -400,6 +402,12 @@
 
     p {
       font-size: 1.5em;
+    }
+
+    /* Estilo para imagens, garantindo que fiquem acima dos ícones */
+    img {
+      position: relative;
+      z-index: 10; /* Acima dos ícones */
     }
 
     @keyframes fade {
@@ -428,11 +436,14 @@
     <i class="fas fa-drafting-compass design-icon"></i>
   </div>
 
+    <!-- Exemplo de imagem para teste -->
+    <img src="https://via.placeholder.com/300x200" alt="Exemplo">
+  </div>
 
   <script>
     const icons = document.querySelectorAll('.design-icon');
     const numIcons = icons.length;
-    const minDistance = 150; // Distância mínima entre ícones
+    const minDistance = 150;
 
     function shuffleArray(array) {
       for (let i = array.length - 1; i > 0; i--) {
@@ -444,12 +455,11 @@
 
     function setRandomPositions() {
       const positions = [];
-      const cols = Math.ceil(Math.sqrt(numIcons)); // Número de colunas
-      const rows = Math.ceil(numIcons / cols); // Número de linhas
+      const cols = Math.ceil(Math.sqrt(numIcons));
+      const rows = Math.ceil(numIcons / cols);
       const cellWidth = (window.innerWidth - 60) / cols;
       const cellHeight = (window.innerHeight - 60) / rows;
 
-      // Criar uma lista de todas as células possíveis
       const cells = [];
       for (let row = 0; row < rows; row++) {
         for (let col = 0; col < cols; col++) {
@@ -457,24 +467,19 @@
         }
       }
 
-      // Embaralhar as células e pegar apenas o número necessário
       const shuffledCells = shuffleArray(cells).slice(0, numIcons);
 
       icons.forEach((icon, index) => {
         const { row, col } = shuffledCells[index];
-        
-        // Posição base no centro da célula
         const baseX = col * cellWidth + cellWidth / 2;
         const baseY = row * cellHeight + cellHeight / 2;
 
-        // Pequeno deslocamento aleatório dentro da célula
         const offsetX = (Math.random() - 0.5) * (cellWidth - minDistance);
         const offsetY = (Math.random() - 0.5) * (cellHeight - minDistance);
 
         let x = baseX + offsetX;
         let y = baseY + offsetY;
 
-        // Garantir que a posição fique dentro dos limites da tela
         x = Math.max(0, Math.min(x, window.innerWidth - 60));
         y = Math.max(0, Math.min(y, window.innerHeight - 60));
 
@@ -482,9 +487,8 @@
         icon.style.top = `${y}px`;
         positions.push({ x, y });
 
-        // Movimento único para cada ícone
-        const moveDuration = 15 + Math.random() * 10; // 15s a 25s
-        const moveDelay = Math.random() * 5; // 0s a 5s
+        const moveDuration = 15 + Math.random() * 10;
+        const moveDelay = Math.random() * 5;
         const xMove1 = (Math.random() - 0.5) * 200;
         const yMove1 = (Math.random() - 0.5) * 200;
         const xMove2 = (Math.random() - 0.5) * 200;
@@ -502,9 +506,8 @@
         `;
         document.head.appendChild(styleSheet);
 
-        // Fade único
-        const fadeDuration = 6 + Math.random() * 4; // 6s a 10s
-        const fadeDelay = Math.random() * 5; // 0s a 5s
+        const fadeDuration = 6 + Math.random() * 4;
+        const fadeDelay = Math.random() * 5;
 
         icon.style.animation = `
           moveIcon${index} ${moveDuration}s infinite ease-in-out ${moveDelay}s,
@@ -513,10 +516,8 @@
       });
     }
 
-    // Aplicar posições e animações no carregamento
     setRandomPositions();
 
-    // Ajustar posições ao redimensionar
     window.onresize = setRandomPositions;
   </script>
 </body>
