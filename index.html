@@ -370,18 +370,18 @@
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: -1; /* Garante que as partículas fiquem atrás dos outros elementos */
-      pointer-events: none; /* Evita que as partículas interfiram com cliques */
+      z-index: -1; /* Coloca o efeito atrás de outros elementos */
+      pointer-events: none; /* Impede que as partículas interfiram com a navegação */
     }
 
-    /* Estilos do corpo do site */
+    /* Estilos gerais do site */
     body {
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
       color: white;
-      background-color: #121212; /* Cor de fundo padrão */
-      overflow: auto; /* Garante que o conteúdo possa ser rolado */
+      background-color: #121212; /* Cor de fundo */
+      overflow: auto;
     }
 
     /* Conteúdo do site */
@@ -389,7 +389,6 @@
       position: relative; /* Garante que o conteúdo fique acima das partículas */
       z-index: 1;
       padding: 20px;
-      color: white; /* Cor do texto */
     }
 
     h1 {
@@ -426,7 +425,7 @@
           type: "circle"  // Forma das partículas
         },
         opacity: {
-          value: 0.3,  // Tornando as partículas mais discretas (opacidade reduzida)
+          value: 0.3,  // Torna as partículas mais discretas (opacidade reduzida)
           random: true,
           animation: {
             enable: true,
@@ -462,7 +461,7 @@
         events: {
           onhover: {
             enable: true,
-            mode: "repulse"  // Efeito de afastamento das partículas ao passar o mouse
+            mode: "repulse"  // As partículas se afastam quando o mouse passa
           }
         }
       },
