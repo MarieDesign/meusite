@@ -357,6 +357,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Site com Partículas</title>
 
   <!-- Particles.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
@@ -411,7 +412,7 @@
     particlesJS('particles-js', {
       particles: {
         number: {
-          value: 50,  // Reduzir o número de partículas
+          value: 80,  // Ajustar o número para dar um efeito mais sutil
           density: {
             enable: true,
             value_area: 800
@@ -421,24 +422,28 @@
           value: "#ffffff"  // Cor das partículas (branco)
         },
         shape: {
-          type: "circle"  // Forma das partículas
+          type: "circle",  // Forma das partículas
+          stroke: {
+            width: 0,  // Remove a borda das partículas
+            color: "#ffffff"  // Mantém a borda branca, mas sem visibilidade
+          }
         },
         opacity: {
-          value: 0.05,  // Diminuir a opacidade para tornar as partículas bem sutis
+          value: 0.1,  // Diminuir a opacidade das partículas
           random: true,
           animation: {
             enable: true,
             speed: 1,
-            minimumValue: 0.01
+            minimumValue: 0.05
           }
         },
         size: {
-          value: 2,  // Reduzir o tamanho das partículas para que fiquem quase invisíveis
+          value: 4,  // Tamanho pequeno, para efeito difuso
           random: true,
           animation: {
             enable: true,
             speed: 2,
-            minimumValue: 0.5
+            minimumValue: 1
           }
         },
         links: {
@@ -446,7 +451,7 @@
         },
         move: {
           enable: true,
-          speed: 1,  // Velocidade das partículas
+          speed: 0.5,  // Velocidade reduzida para tornar o movimento suave
           direction: "none",
           random: true,
           straight: false,
@@ -462,9 +467,9 @@
             enable: true,
             mode: "repulse",  // Ativa a repulsão das partículas
             // Personalização para a repulsão
-            distance: 150,  // Distância de repulsão mais distante
-            duration: 0.5,  // Duração mais suave do efeito de repulsão
-            speed: 1,  // Velocidade mais suave do efeito de repulsão
+            distance: 150,  // Distância de repulsão
+            duration: 0.5,  // Duração suave
+            speed: 1,  // Velocidade do efeito de repulsão
             size: 5  // Intensidade mais baixa do efeito de repulsão
           }
         }
