@@ -329,3 +329,25 @@
 				</div>
 					</div>
 				</div>
+	    <style>
+    body {
+        background: linear-gradient(45deg, #000000, #792bd9, #000000, #792bd9);
+        background-size: 400% 400%;  /* Ajusta a área do gradiente */
+        animation: gradientMove 10s ease infinite;  /* Anima o fundo com uma duração de 10 segundos */
+        height: 100vh;
+        margin: 0;
+    }
+
+    /* Animação de movimento do gradiente */
+    @keyframes gradientMove {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+</style>
