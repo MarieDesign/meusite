@@ -412,7 +412,7 @@
     particlesJS('particles-js', {
       particles: {
         number: {
-          value: 100,  // Número de partículas
+          value: 50,  // Reduzir o número de partículas
           density: {
             enable: true,
             value_area: 800
@@ -425,21 +425,21 @@
           type: "circle"  // Forma das partículas
         },
         opacity: {
-          value: 0.4,  // Opacidade das partículas
+          value: 0.05,  // Diminuir a opacidade para tornar as partículas bem sutis
           random: true,
           animation: {
             enable: true,
             speed: 1,
-            minimumValue: 0.1
+            minimumValue: 0.01
           }
         },
         size: {
-          value: 5,  // Tamanho das partículas
+          value: 2,  // Reduzir o tamanho das partículas para que fiquem quase invisíveis
           random: true,
           animation: {
             enable: true,
-            speed: 3,
-            minimumValue: 0.1
+            speed: 2,
+            minimumValue: 0.5
           }
         },
         links: {
@@ -463,10 +463,10 @@
             enable: true,
             mode: "repulse",  // Ativa a repulsão das partículas
             // Personalização para a repulsão
-            distance: 100,  // Distância de repulsão (quanto mais alto, maior o efeito de afastamento)
-            duration: 0.4,  // A duração do efeito de repulsão
-            speed: 3,  // Velocidade do efeito de repulsão
-            size: 10  // Intensidade do efeito de repulsão
+            distance: 150,  // Distância de repulsão mais distante
+            duration: 0.5,  // Duração mais suave do efeito de repulsão
+            speed: 1,  // Velocidade mais suave do efeito de repulsão
+            size: 5  // Intensidade mais baixa do efeito de repulsão
           }
         }
       },
