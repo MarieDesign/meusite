@@ -370,7 +370,8 @@
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: -1; /* Garante que as partículas fiquem atrás de todo o conteúdo */
+      z-index: -1; /* Coloca as partículas atrás de todos os elementos */
+      pointer-events: none; /* Garante que as partículas não interfiram em cliques no conteúdo */
     }
 
     /* Outros estilos do site */
@@ -397,25 +398,28 @@
   <!-- Container para as partículas -->
   <div id="particles-js"></div>
 
+  <!-- Seu conteúdo do site -->
+  <div class="conteudo">
+
   <!-- Script para inicializar as partículas -->
   <script>
     particlesJS('particles-js', {
       particles: {
         number: {
-          value: 100,  // Aumenta o número de partículas
+          value: 80,  // Número de partículas
           density: {
             enable: true,
             value_area: 800
           }
         },
         color: {
-          value: "#ffffff"
+          value: "#ffffff"  // Cor das partículas
         },
         shape: {
           type: "circle"
         },
         opacity: {
-          value: 0.2,  // Aumenta a opacidade para que as partículas fiquem mais ofuscadas
+          value: 0.1,  // Opacidade bem mais baixa, para ofuscar as partículas
           random: true,
           animation: {
             enable: true,
@@ -435,13 +439,13 @@
         links: {
           enable: true,
           distance: 150,
-          color: "#ffffff",
+          color: "#ffffff", // Cor dos links entre as partículas
           opacity: 0.4,
           width: 1
         },
         move: {
           enable: true,
-          speed: 2,  // Ajusta a velocidade das partículas
+          speed: 1,  // Velocidade das partículas mais lenta
           direction: "none",
           random: true,
           straight: false,
@@ -455,7 +459,7 @@
         events: {
           onhover: {
             enable: true,
-            mode: "repulse"  // As partículas se afastam quando o mouse passa sobre elas
+            mode: "repulse"  // As partículas se afastam ao passar o mouse sobre elas
           },
           onclick: {
             enable: true,
