@@ -492,26 +492,39 @@
 
   <!-- Container para os ícones -->
   <div id="design-background">
-    <i class="fas fa-pencil-alt design-icon" style="top: 10%; left: 10%;"></i>
-    <i class="fas fa-laptop design-icon" style="top: 20%; left: 30%;"></i>
-    <i class="fas fa-lightbulb design-icon" style="top: 30%; left: 50%;"></i>
-    <i class="fas fa-brain design-icon" style="top: 40%; left: 70%;"></i>
-    <i class="fas fa-palette design-icon" style="top: 50%; left: 80%;"></i>
-    <i class="fas fa-cogs design-icon" style="top: 60%; left: 20%;"></i>
-    <i class="fas fa-camera-retro design-icon" style="top: 70%; left: 40%;"></i>
-    <i class="fas fa-rocket design-icon" style="top: 80%; left: 60%;"></i>
-
-    <!-- Novos ícones adicionados -->
-    <i class="fas fa-code design-icon" style="top: 15%; left: 40%;"></i>
-    <i class="fas fa-cogs design-icon" style="top: 25%; left: 60%;"></i>
-    <i class="fas fa-mouse-pointer design-icon" style="top: 35%; left: 80%;"></i>
-    <i class="fas fa-glasses design-icon" style="top: 45%; left: 20%;"></i>
-    <i class="fas fa-laptop-code design-icon" style="top: 55%; left: 30%;"></i>
-    <i class="fas fa-paint-brush design-icon" style="top: 65%; left: 50%;"></i>
-    <i class="fas fa-swatchbook design-icon" style="top: 75%; left: 70%;"></i>
-    <i class="fas fa-drafting-compass design-icon" style="top: 85%; left: 90%;"></i>
+    <i class="fas fa-pencil-alt design-icon"></i>
+    <i class="fas fa-laptop design-icon"></i>
+    <i class="fas fa-lightbulb design-icon"></i>
+    <i class="fas fa-brain design-icon"></i>
+    <i class="fas fa-palette design-icon"></i>
+    <i class="fas fa-cogs design-icon"></i>
+    <i class="fas fa-camera-retro design-icon"></i>
+    <i class="fas fa-rocket design-icon"></i>
+    <i class="fas fa-code design-icon"></i>
+    <i class="fas fa-cogs design-icon"></i>
+    <i class="fas fa-mouse-pointer design-icon"></i>
+    <i class="fas fa-glasses design-icon"></i>
+    <i class="fas fa-laptop-code design-icon"></i>
+    <i class="fas fa-paint-brush design-icon"></i>
+    <i class="fas fa-swatchbook design-icon"></i>
+    <i class="fas fa-drafting-compass design-icon"></i>
   </div>
 
 
+  <script>
+    // Função para alterar a posição de cada ícone aleatoriamente
+    function setRandomPosition() {
+      const icons = document.querySelectorAll('.design-icon');
+      icons.forEach(icon => {
+        const x = Math.random() * 100;  // Posição horizontal (0% a 100%)
+        const y = Math.random() * 100;  // Posição vertical (0% a 100%)
+        icon.style.left = `${x}%`;
+        icon.style.top = `${y}%`;
+      });
+    }
+
+    // Chama a função para ajustar as posições a cada 4 segundos (duração do fade)
+    setInterval(setRandomPosition, 4000);
+  </script>
 </body>
 </html>
