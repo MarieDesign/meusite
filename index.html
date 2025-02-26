@@ -365,16 +365,16 @@
   <style>
     /* Estilo para o fundo das partículas */
     #particles-js {
-      position: fixed; /* Fixa as partículas no fundo */
+      position: fixed; /* Coloca as partículas fixas no fundo */
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: -1; /* Coloca as partículas atrás de todos os elementos */
+      z-index: -1; /* Coloca o efeito atrás de outros elementos */
       pointer-events: none; /* Garante que as partículas não interfiram em cliques no conteúdo */
     }
 
-    /* Outros estilos do site */
+    /* Estilos do corpo do site */
     body {
       margin: 0;
       padding: 0;
@@ -398,15 +398,12 @@
   <!-- Container para as partículas -->
   <div id="particles-js"></div>
 
-  <!-- Seu conteúdo do site -->
-  <div class="conteudo">
-
   <!-- Script para inicializar as partículas -->
   <script>
     particlesJS('particles-js', {
       particles: {
         number: {
-          value: 80,  // Número de partículas
+          value: 100,  // Número de partículas
           density: {
             enable: true,
             value_area: 800
@@ -419,7 +416,7 @@
           type: "circle"
         },
         opacity: {
-          value: 0.1,  // Opacidade bem mais baixa, para ofuscar as partículas
+          value: 0.2,  // Tornando as partículas mais discretas
           random: true,
           animation: {
             enable: true,
@@ -437,11 +434,7 @@
           }
         },
         links: {
-          enable: true,
-          distance: 150,
-          color: "#ffffff", // Cor dos links entre as partículas
-          opacity: 0.4,
-          width: 1
+          enable: false,  // Desativa as linhas entre as partículas
         },
         move: {
           enable: true,
@@ -459,7 +452,7 @@
         events: {
           onhover: {
             enable: true,
-            mode: "repulse"  // As partículas se afastam ao passar o mouse sobre elas
+            mode: "repulse"  // As partículas se afastam do mouse
           },
           onclick: {
             enable: true,
