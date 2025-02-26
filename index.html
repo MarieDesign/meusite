@@ -462,8 +462,10 @@
     <i class="fas fa-drafting-compass design-icon"></i>
   </div>
 
+ 
+
   <script>
-    // Função para definir a posição aleatória e o atraso de animação
+    // Função para definir a posição aleatória e o atraso de animação para cada ícone
     function setRandomPositionAndDelay() {
       const icons = document.querySelectorAll('.design-icon');
       
@@ -483,6 +485,10 @@
         // Definir a duração da animação de fade de forma aleatória para cada ícone
         const fadeDuration = 4 + Math.random() * 4;  // Tempo aleatório entre 4s e 8s
         icon.style.animationDuration = `${fadeDuration}s`;
+
+        // Ajusta o tempo de animação para o efeito de movimento para garantir independência
+        const floatDuration = 10 + Math.random() * 5;  // Tempo aleatório entre 10s e 15s
+        icon.style.animationDuration = `${floatDuration}s`;
       });
     }
 
