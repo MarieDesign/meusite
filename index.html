@@ -357,7 +357,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+ 
 
   <!-- Link para Font Awesome (ícones) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -516,15 +516,20 @@
     function setRandomPosition() {
       const icons = document.querySelectorAll('.design-icon');
       icons.forEach(icon => {
-        const x = Math.random() * 100;  // Posição horizontal (0% a 100%)
-        const y = Math.random() * 100;  // Posição vertical (0% a 100%)
-        icon.style.left = `${x}%`;
-        icon.style.top = `${y}%`;
+        // Posição horizontal: garante que o ícone apareça em qualquer lugar da tela
+        const x = Math.random() * (window.innerWidth - 60);  // Subtrai o tamanho do ícone (60px)
+        // Posição vertical: também garantindo que o ícone não saia da tela
+        const y = Math.random() * (window.innerHeight - 60);  // Subtrai o tamanho do ícone (60px)
+        icon.style.left = `${x}px`;
+        icon.style.top = `${y}px`;
       });
     }
 
     // Chama a função para ajustar as posições a cada 4 segundos (duração do fade)
     setInterval(setRandomPosition, 4000);
+
+    // Inicializa a primeira posição aleatória ao carregar a página
+    window.onload = setRandomPosition;
   </script>
 </body>
 </html>
