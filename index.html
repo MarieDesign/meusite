@@ -383,8 +383,8 @@
     .design-icon {
       font-size: 60px;
       color: #fff; /* Cor dos ícones */
-      opacity: 0.3;  /* Opacidade aumentada */
-      animation: float 10s infinite ease-in-out, fade 4s infinite ease-in-out;
+      opacity: 0;  /* Começa invisível */
+      animation: fade 4s infinite ease-in-out, float 10s infinite ease-in-out;
       position: absolute;
     }
 
@@ -439,53 +439,6 @@
       font-size: 1.5em;
       text-align: center;
     }
-
-    /* Atraso para cada ícone */
-    .design-icon:nth-child(1) {
-      animation-delay: 0s;
-    }
-    .design-icon:nth-child(2) {
-      animation-delay: 1s;
-    }
-    .design-icon:nth-child(3) {
-      animation-delay: 2s;
-    }
-    .design-icon:nth-child(4) {
-      animation-delay: 3s;
-    }
-    .design-icon:nth-child(5) {
-      animation-delay: 4s;
-    }
-    .design-icon:nth-child(6) {
-      animation-delay: 5s;
-    }
-    .design-icon:nth-child(7) {
-      animation-delay: 6s;
-    }
-    .design-icon:nth-child(8) {
-      animation-delay: 7s;
-    }
-    .design-icon:nth-child(9) {
-      animation-delay: 8s;
-    }
-    .design-icon:nth-child(10) {
-      animation-delay: 9s;
-    }
-    .design-icon:nth-child(11) {
-      animation-delay: 10s;
-    }
-    .design-icon:nth-child(12) {
-      animation-delay: 11s;
-    }
-    .design-icon:nth-child(13) {
-      animation-delay: 12s;
-    }
-    .design-icon:nth-child(14) {
-      animation-delay: 13s;
-    }
-    .design-icon:nth-child(15) {
-      animation-delay: 14s;
-    }
   </style>
 </head>
 <body>
@@ -501,7 +454,6 @@
     <i class="fas fa-camera-retro design-icon"></i>
     <i class="fas fa-rocket design-icon"></i>
     <i class="fas fa-code design-icon"></i>
-    <i class="fas fa-cogs design-icon"></i>
     <i class="fas fa-mouse-pointer design-icon"></i>
     <i class="fas fa-glasses design-icon"></i>
     <i class="fas fa-laptop-code design-icon"></i>
@@ -511,25 +463,32 @@
   </div>
 
 
+
   <script>
-    // Função para alterar a posição de cada ícone aleatoriamente
-    function setRandomPosition() {
+    // Função para definir a posição aleatória e o atraso de animação
+    function setRandomPositionAndDelay() {
       const icons = document.querySelectorAll('.design-icon');
+      
       icons.forEach(icon => {
-        // Posição horizontal: garante que o ícone apareça em qualquer lugar da tela
+        // Posição horizontal e vertical aleatória
         const x = Math.random() * (window.innerWidth - 60);  // Subtrai o tamanho do ícone (60px)
-        // Posição vertical: também garantindo que o ícone não saia da tela
         const y = Math.random() * (window.innerHeight - 60);  // Subtrai o tamanho do ícone (60px)
+
+        // Atribui posições aleatórias
         icon.style.left = `${x}px`;
         icon.style.top = `${y}px`;
+
+        // Atraso aleatório para a animação de fade e movimento
+        const delay = Math.random() * 5;  // Tempo aleatório entre 0 e 5 segundos
+        icon.style.animationDelay = `${delay}s`;
       });
     }
 
-    // Função para garantir que os ícones não fiquem no centro ao iniciar
-    window.onload = setRandomPosition;
+    // Chama a função para definir a posição e atraso assim que a página for carregada
+    window.onload = setRandomPositionAndDelay;
 
-    // Chama a função para ajustar as posições a cada 4 segundos (duração do fade)
-    setInterval(setRandomPosition, 4000);
+    // Função para manter o posicionamento aleatório durante a navegação
+    setInterval(setRandomPositionAndDelay, 5000);  // Chama a função a cada 5 segundos
   </script>
 </body>
 </html>
