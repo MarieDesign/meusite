@@ -357,93 +357,60 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-  <!-- Link para Font Awesome (ícones) -->
+ 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
   <style>
-    /* Estilo para o fundo dos ícones */
-    #design-background {
-      position: fixed; /* Fica fixo no fundo */
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1; /* Fica atrás do conteúdo */
-      pointer-events: none; /* Impede que interfira na interação */
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      opacity: 0.15; /* Opacidade aumentada para um visual mais suave */
-    }
-
-    /* Estilo para cada ícone */
-    .design-icon {
-      font-size: 60px;
-      color: #fff; /* Cor dos ícones */
-      opacity: 0;  /* Começa invisível */
-      position: absolute;
-      animation: float 10s infinite ease-in-out, fade 4s infinite ease-in-out;
-    }
-
-    /* Efeito de movimento suave dos ícones */
-    @keyframes float {
-      0% {
-        transform: translate(0, 0) rotate(0deg);
-      }
-      50% {
-        transform: translate(50px, -50px) rotate(180deg);
-      }
-      100% {
-        transform: translate(0, 0) rotate(360deg);
-      }
-    }
-
-    /* Efeito de desvanecimento (opacidade) */
-    @keyframes fade {
-      0% {
-        opacity: 0;
-      }
-      50% {
-        opacity: 1;
-      }
-      100% {
-        opacity: 0;
-      }
-    }
-
-    /* Estilos gerais do site */
     body {
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
       color: white;
-      background-color: #121212; /* Cor de fundo */
+      background-color: #121212;
       overflow: auto;
+    }
+
+    #design-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+
+      pointer-events: none;
+    }
+
+    .design-icon {
+      font-size: 60px;
+      color: #fff;
+      position: absolute;
+      opacity: 0;
     }
 
     .conteudo {
       position: relative;
       z-index: 1;
       padding: 20px;
+      text-align: center;
     }
 
     h1 {
       font-size: 3em;
-      text-align: center;
     }
 
     p {
       font-size: 1.5em;
-      text-align: center;
+    }
+
+    /* Desvanecimento */
+    @keyframes fade {
+      0% { opacity: 0; }
+      50% { opacity: 0.8; }
+      100% { opacity: 0; }
     }
   </style>
 </head>
 <body>
-
-  <!-- Container para os ícones -->
   <div id="design-background">
     <i class="fas fa-pencil-alt design-icon"></i>
     <i class="fas fa-laptop design-icon"></i>
@@ -462,42 +429,48 @@
     <i class="fas fa-drafting-compass design-icon"></i>
   </div>
 
- 
 
   <script>
-    // Função para definir a posição aleatória e o atraso de animação para cada ícone
-    function setRandomPositionAndDelay() {
-      const icons = document.querySelectorAll('.design-icon');
-      
-      icons.forEach(icon => {
-        // Posição horizontal e vertical aleatória
-        const x = Math.random() * (window.innerWidth - 60);  // Subtrai o tamanho do ícone (60px)
-        const y = Math.random() * (window.innerHeight - 60);  // Subtrai o tamanho do ícone (60px)
+    const icons = document.querySelectorAll('.design-icon');
 
-        // Atribui posições aleatórias
-        icon.style.left = `${x}px`;
-        icon.style.top = `${y}px`;
+    icons.forEach((icon, index) => {
+      // Posição inicial aleatória
+      const x = Math.random() * (window.innerWidth - 60);
+      const y = Math.random() * (window.innerHeight - 60);
+      icon.style.left = `${x}px`;
+      icon.style.top = `${y}px`;
 
-        // Atraso aleatório para a animação de fade e movimento
-        const delay = Math.random() * 5;  // Tempo aleatório entre 0 e 5 segundos
-        icon.style.animationDelay = `${delay}s`;
+      // Movimento único para cada ícone
+      const moveDuration = 15 + Math.random() * 10; // 15s a 25s
+      const moveDelay = Math.random() * 5; // 0s a 5s
+      const xMove1 = (Math.random() - 0.5) * 200; // -100px a 100px
+      const yMove1 = (Math.random() - 0.5) * 200;
+      const xMove2 = (Math.random() - 0.5) * 200;
+      const yMove2 = (Math.random() - 0.5) * 200;
 
-        // Definir a duração da animação de fade de forma aleatória para cada ícone
-        const fadeDuration = 4 + Math.random() * 4;  // Tempo aleatório entre 4s e 8s
-        icon.style.animationDuration = `${fadeDuration}s`;
+      // Criar keyframes únicos
+      const styleSheet = document.createElement('style');
+      styleSheet.textContent = `
+        @keyframes moveIcon${index} {
+          0% { transform: translate(0, 0) rotate(0deg); }
+          25% { transform: translate(${xMove1}px, ${yMove1}px) rotate(90deg); }
+          50% { transform: translate(${xMove2}px, ${yMove2}px) rotate(180deg); }
+          75% { transform: translate(${-xMove1}px, ${-yMove1}px) rotate(270deg); }
+          100% { transform: translate(0, 0) rotate(360deg); }
+        }
+      `;
+      document.head.appendChild(styleSheet);
 
-        // Ajusta o tempo de animação para o efeito de movimento para garantir independência
-        const floatDuration = 10 + Math.random() * 5;  // Tempo aleatório entre 10s e 15s
-        icon.style.animationDuration = `${floatDuration}s`;
-      });
-    }
+      // Fade único
+      const fadeDuration = 6 + Math.random() * 4; // 6s a 10s
+      const fadeDelay = Math.random() * 5; // 0s a 5s
 
-    // Chama a função para definir a posição e atraso assim que a página for carregada
-    window.onload = setRandomPositionAndDelay;
-
-    // Função para manter o posicionamento aleatório durante a navegação
-    setInterval(setRandomPositionAndDelay, 5000);  // Chama a função a cada 5 segundos
+      // Aplicar animações
+      icon.style.animation = `
+        moveIcon${index} ${moveDuration}s infinite ease-in-out ${moveDelay}s,
+        fade ${fadeDuration}s infinite ease-in-out ${fadeDelay}s
+      `;
+    });
   </script>
-
 </body>
 </html>
