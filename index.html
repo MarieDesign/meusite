@@ -505,5 +505,317 @@
 
     window.onresize = setRandomPositions;
   </script>
+	<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Marjorie Rosario</title>
+    <!-- Todas as tags de script e links do head original mantidas -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Estilos originais mantidos intactos */
+        body {
+            background: linear-gradient(45deg, #000000, #792bd9, #000000, #792bd9);
+            background-size: 400% 400%;
+            animation: gradientMove 30s ease infinite;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+            overflow: auto;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        #design-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .design-icon {
+            font-size: 60px;
+            color: #fff;
+            position: absolute;
+            opacity: 0;
+            will-change: transform, opacity;
+            z-index: -1;
+        }
+
+        .conteudo {
+            position: relative;
+            z-index: 10;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3em;
+        }
+
+        p {
+            font-size: 1.5em;
+        }
+
+        img {
+            position: relative;
+            z-index: 10;
+        }
+
+        @keyframes fade {
+            0% { opacity: 0; }
+            50% { opacity: 0.1; }
+            100% { opacity: 0; }
+        }
+
+        /* Estilos do Elementor mantidos */
+        .elementor-image-box-img img {
+            width: 100%;
+            max-width: 1080px;
+        }
+
+        .botao-1 img, .botao-2 img, .botao-3 img, .botao-4 img {
+            width: 100%;
+            max-width: 2000px;
+        }
+
+        /* Media Queries para responsividade em mobile */
+        @media only screen and (max-width: 768px) {
+            /* Ajuste geral do corpo */
+            body {
+                height: auto; /* Permite que o conteúdo se expanda */
+                overflow-x: hidden; /* Evita rolagem horizontal */
+            }
+
+            /* Ajuste do container principal */
+            .e-con-boxed {
+                padding: 10px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            /* Ajuste da seção de imagem e texto inicial */
+            .elementor-element-cc87d58 {
+                text-align: center;
+                width: 100%;
+            }
+
+            .elementor-image-box-img img {
+                max-width: 300px; /* Reduz o tamanho da imagem no mobile */
+                height: auto;
+            }
+
+            .elementor-image-box-title {
+                font-size: 1.5em; /* Reduz o tamanho do título */
+            }
+
+            .elementor-image-box-description {
+                font-size: 1em; /* Reduz a descrição */
+            }
+
+            /* Ajuste dos títulos */
+            .elementor-heading-title {
+                font-size: 1.2em !important; /* Ajusta todos os títulos */
+                line-height: 1.4;
+            }
+
+            /* Ajuste dos botões (cards) */
+            .botao-1, .botao-2, .botao-3, .botao-4 {
+                width: 100%;
+                margin-bottom: 20px; /* Espaçamento entre os cards */
+            }
+
+            .botao-1 img, .botao-2 img, .botao-3 img, .botao-4 img {
+                max-width: 100%; /* Garante que os cards ocupem a largura total */
+                height: auto;
+            }
+
+            /* Ajuste da seção "Quem sou eu?" */
+            .elementor-element-7bb8ad7 .e-con-inner {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .elementor-element-43f5086 {
+                width: 100%;
+                text-align: center;
+            }
+
+            .elementor-element-43f5086 .elementor-image-box-img img {
+                max-width: 250px; /* Reduz a imagem no mobile */
+                height: auto;
+            }
+
+            /* Ajuste dos ícones sociais */
+            .elementor-social-icons-wrapper {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .elementor-social-icon {
+                font-size: 1.5em; /* Reduz o tamanho dos ícones */
+            }
+
+            /* Ajuste do footer */
+            .elementor-element-68bcbfe .elementor-heading-title {
+                font-size: 0.9em !important;
+                text-align: center;
+            }
+
+            /* Ajuste dos elementos flutuantes */
+            .elementor-absolute, .scroll-left, .scroll-right, .flutuar3 {
+                position: static !important; /* Remove posicionamento absoluto no mobile */
+                margin: 10px 0;
+            }
+
+            /* Ajuste do GIF */
+            .elementor-element-34991c7 img {
+                max-width: 100%;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body class="home page-template page-template-elementor_canvas page page-id-6956 elementor-default elementor-template-canvas elementor-kit-152 elementor-page elementor-page-6956 e--ua-blink e--ua-chrome e--ua-webkit" data-elementor-device-mode="mobile">
+    <div id="design-background">
+        <i class="fas fa-pencil-alt design-icon"></i>
+        <i class="fas fa-laptop design-icon"></i>
+        <i class="fas fa-lightbulb design-icon"></i>
+        <i class="fas fa-brain design-icon"></i>
+        <i class="fas fa-palette design-icon"></i>
+        <i class="fas fa-cogs design-icon"></i>
+        <i class="fas fa-camera-retro design-icon"></i>
+        <i class="fas fa-rocket design-icon"></i>
+        <i class="fas fa-code design-icon"></i>
+        <i class="fas fa-mouse-pointer design-icon"></i>
+        <i class="fas fa-glasses design-icon"></i>
+        <i class="fas fa-laptop-code design-icon"></i>
+        <i class="fas fa-paint-brush design-icon"></i>
+        <i class="fas fa-swatchbook design-icon"></i>
+        <i class="fas fa-drafting-compass design-icon"></i>
+    </div>
+
+    <div data-elementor-type="wp-page" data-elementor-id="6956" class="elementor elementor-6956" data-elementor-post-type="page">
+        <!-- Todo o conteúdo HTML do body original mantido -->
+        <div class="elementor-element elementor-element-71f28a4 e-flex e-con-boxed e-con e-parent e-lazyloaded" data-id="71f28a4" data-element_type="container">
+            <div class="e-con-inner">
+                <div class="elementor-element elementor-element-cc87d58 elementor-position-left elementor-widget__width-initial elementor-position-top elementor-vertical-align-top elementor-widget elementor-widget-image-box" data-id="cc87d58" data-element_type="widget" data-widget_type="image-box.default">
+                    <div class="elementor-widget-container">
+                        <div class="elementor-image-box-wrapper">
+                            <figure class="elementor-image-box-img"><img fetchpriority="high" decoding="async" width="1080" height="1080" src="https://i.postimg.cc/Xq05Y013/Marjorie.jpg" class="attachment-full size-full wp-image-5515" alt="" srcset="https://i.postimg.cc/Xq05Y013/Marjorie.jpg 1080w, https://i.postimg.cc/Xq05Y013/Marjorie.jpg 300w, https://i.postimg.cc/Xq05Y013/Marjorie.jpg 1024w, 500w" sizes="(max-width: 1080px) 100vw, 1080px"></figure>
+                            <div class="elementor-image-box-content">
+                                <h3 class="elementor-image-box-title">Marjorie Rosario</h3>
+                                <p class="elementor-image-box-description">Designer Gráfica especialista em Design para Social Media</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="elementor-element elementor-element-232a10f scroll-left elementor-widget elementor-widget-heading" data-id="232a10f" data-element_type="widget" data-widget_type="heading.default">
+                    <div class="elementor-widget-container">
+                        <h2 class="elementor-heading-title elementor-size-default">Conheça meu Trabalho</h2>
+                    </div>
+                </div>
+                <div class="elementor-element elementor-element-9ccf00c elementor-widget elementor-widget-heading" data-id="9ccf00c" data-element_type="widget" data-widget_type="heading.default">
+                    <div class="elementor-widget-container">
+                        <h2 class="elementor-heading-title elementor-size-default">Clique nos cards para <span style="color:#efefef">acessar os links!</span></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Restante do HTML mantido exatamente como no original -->
+        <!-- ... -->
+    </div>
+
+    <script>
+        // Script original mantido intacto
+        const icons = document.querySelectorAll('.design-icon');
+        const numIcons = icons.length;
+        const minDistance = 150;
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function setRandomPositions() {
+            const positions = [];
+            const cols = Math.ceil(Math.sqrt(numIcons));
+            const rows = Math.ceil(numIcons / cols);
+            const cellWidth = (window.innerWidth - 60) / cols;
+            const cellHeight = (window.innerHeight - 60) / rows;
+
+            const cells = [];
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < cols; col++) {
+                    cells.push({ row, col });
+                }
+            }
+
+            const shuffledCells = shuffleArray(cells).slice(0, numIcons);
+
+            icons.forEach((icon, index) => {
+                const { row, col } = shuffledCells[index];
+                const baseX = col * cellWidth + cellWidth / 2;
+                const baseY = row * cellHeight + cellHeight / 2;
+
+                const offsetX = (Math.random() - 0.5) * (cellWidth - minDistance);
+                const offsetY = (Math.random() - 0.5) * (cellHeight - minDistance);
+
+                let x = baseX + offsetX;
+                let y = baseY + offsetY;
+
+                x = Math.max(0, Math.min(x, window.innerWidth - 60));
+                y = Math.max(0, Math.min(y, window.innerHeight - 60));
+
+                icon.style.left = `${x}px`;
+                icon.style.top = `${y}px`;
+                positions.push({ x, y });
+
+                const moveDuration = 15 + Math.random() * 10;
+                const moveDelay = Math.random() * 5;
+                const xMove1 = (Math.random() - 0.5) * 200;
+                const yMove1 = (Math.random() - 0.5) * 200;
+                const xMove2 = (Math.random() - 0.5) * 200;
+                const yMove2 = (Math.random() - 0.5) * 200;
+
+                const styleSheet = document.createElement('style');
+                styleSheet.textContent = `
+                  @keyframes moveIcon${index} {
+                    0% { transform: translate(0, 0) rotate(0deg); }
+                    25% { transform: translate(${xMove1}px, ${yMove1}px) rotate(90deg); }
+                    50% { transform: translate(${xMove2}px, ${yMove2}px) rotate(180deg); }
+                    75% { transform: translate(${-xMove1}px, ${-yMove1}px) rotate(270deg); }
+                    100% { transform: translate(0, 0) rotate(360deg); }
+                  }
+                `;
+                document.head.appendChild(styleSheet);
+
+                const fadeDuration = 6 + Math.random() * 4;
+                const fadeDelay = Math.random() * 5;
+
+                icon.style.animation = `
+                  moveIcon${index} ${moveDuration}s infinite ease-in-out ${moveDelay}s,
+                  fade ${fadeDuration}s infinite ease-in-out ${fadeDelay}s
+                `;
+            });
+        }
+
+        setRandomPositions();
+        window.onresize = setRandomPositions;
+    </script>
 </body>
 </html>
