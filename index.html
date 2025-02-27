@@ -51,89 +51,140 @@
 }
 /* Media Queries para responsividade em mobile */
 @media only screen and (max-width: 768px) {
+    /* Ajuste geral do corpo para ocupar toda a largura e evitar sobras */
     body {
-        height: auto;
+        width: 100%;
+        max-width: 100vw;
+        margin: 0;
+        padding: 0;
         overflow-x: hidden;
+        height: auto;
     }
 
-    .e-con-boxed {
-        padding: 10px;
+    /* Containers principais ajustados para ocupar toda a largura sem padding excessivo */
+    .e-con-boxed, .e-con-inner {
         width: 100%;
+        max-width: 100%;
+        padding: 5px;
+        margin: 0 auto;
         box-sizing: border-box;
     }
 
+    /* Seção inicial com imagem e texto */
     .elementor-element-cc87d58 {
-        text-align: center;
         width: 100%;
+        text-align: center;
+        padding: 10px 0;
+    }
+
+    .elementor-image-box-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .elementor-image-box-img img {
-        max-width: 300px;
+        max-width: 200px; /* Reduzido para caber bem no mobile */
         height: auto;
+        margin: 0 auto;
     }
 
     .elementor-image-box-title {
-        font-size: 1.5em;
+        font-size: 1.3em;
+        margin: 10px 0 5px;
     }
 
     .elementor-image-box-description {
-        font-size: 1em;
+        font-size: 0.9em;
+        margin: 0 10px 10px;
     }
 
+    /* Títulos gerais */
     .elementor-heading-title {
-        font-size: 1.2em !important;
-        line-height: 1.4;
+        font-size: 1.1em !important;
+        line-height: 1.3;
+        margin: 10px 0;
+        padding: 0 10px;
     }
 
+    /* Cards (botões) */
     .botao-1, .botao-2, .botao-3, .botao-4 {
         width: 100%;
-        margin-bottom: 20px;
+        max-width: 100%;
+        margin: 10px 0; /* Espaçamento reduzido e uniforme */
+        padding: 0;
     }
 
     .botao-1 img, .botao-2 img, .botao-3 img, .botao-4 img {
-        max-width: 100%;
+        max-width: 100%; /* Imagens ajustadas à largura da tela */
         height: auto;
+        display: block;
+        margin: 0 auto;
     }
 
+    /* Seção "Quem sou eu?" */
     .elementor-element-7bb8ad7 .e-con-inner {
         flex-direction: column;
         align-items: center;
+        padding: 10px;
     }
 
     .elementor-element-43f5086 {
         width: 100%;
         text-align: center;
+        padding: 10px 0;
     }
 
     .elementor-element-43f5086 .elementor-image-box-img img {
-        max-width: 250px;
+        max-width: 180px; /* Imagem ajustada para não ficar tão grande */
         height: auto;
+        margin: 0 auto;
     }
 
+    /* Ícones sociais */
     .elementor-social-icons-wrapper {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 15px;
+        gap: 10px; /* Espaçamento reduzido */
+        padding: 10px 0;
     }
 
     .elementor-social-icon {
-        font-size: 1.5em;
+        font-size: 1.2em; /* Tamanho reduzido para melhor proporção */
+    }
+
+    /* Footer */
+    .elementor-element-68bcbfe {
+        padding: 10px 0;
     }
 
     .elementor-element-68bcbfe .elementor-heading-title {
-        font-size: 0.9em !important;
+        font-size: 0.8em !important;
         text-align: center;
+        margin: 0;
+        padding: 0 10px;
     }
 
+    /* Elementos flutuantes ajustados */
     .elementor-absolute, .scroll-left, .scroll-right, .flutuar3 {
         position: static !important;
-        margin: 10px 0;
+        width: 100%;
+        margin: 5px 0;
     }
 
+    /* GIF ajustado */
     .elementor-element-34991c7 img {
         max-width: 100%;
         height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+
+    /* Evitar espaçamentos excessivos */
+    .elementor-widget-container {
+        padding: 5px;
+        margin: 0;
     }
 }
     </style>
