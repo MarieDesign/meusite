@@ -84,7 +84,7 @@
     }
 
     .elementor-image-box-img img {
-        max-width: 200px; /* Reduzido para caber bem no mobile */
+        max-width: 200px;
         height: auto;
         margin: 0 auto;
     }
@@ -111,12 +111,12 @@
     .botao-1, .botao-2, .botao-3, .botao-4 {
         width: 100%;
         max-width: 100%;
-        margin: 10px 0; /* Espaçamento reduzido e uniforme */
+        margin: 10px 0;
         padding: 0;
     }
 
     .botao-1 img, .botao-2 img, .botao-3 img, .botao-4 img {
-        max-width: 100%; /* Imagens ajustadas à largura da tela */
+        max-width: 100%;
         height: auto;
         display: block;
         margin: 0 auto;
@@ -129,16 +129,9 @@
         padding: 10px;
     }
 
+    /* Esconder o card com "Marjorie Rosario - Designer Gráfica" após "+70 clientes" */
     .elementor-element-43f5086 {
-        width: 100%;
-        text-align: center;
-        padding: 10px 0;
-    }
-
-    .elementor-element-43f5086 .elementor-image-box-img img {
-        max-width: 180px; /* Imagem ajustada para não ficar tão grande */
-        height: auto;
-        margin: 0 auto;
+        display: none; /* Remove o card na versão mobile */
     }
 
     /* Ícones sociais */
@@ -146,12 +139,12 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 10px; /* Espaçamento reduzido */
+        gap: 10px;
         padding: 10px 0;
     }
 
     .elementor-social-icon {
-        font-size: 1.2em; /* Tamanho reduzido para melhor proporção */
+        font-size: 1.2em;
     }
 
     /* Footer */
@@ -173,12 +166,17 @@
         margin: 5px 0;
     }
 
-    /* GIF ajustado */
+    /* GIF ajustado e redução de espaço após ele */
     .elementor-element-34991c7 img {
         max-width: 100%;
         height: auto;
         display: block;
         margin: 0 auto;
+    }
+
+    /* Reduzir espaço entre o GIF e o rodapé */
+    .elementor-element-7bb8ad7 {
+        padding-bottom: 20px; /* Reduz o espaço após o GIF */
     }
 
     /* Evitar espaçamentos excessivos */
