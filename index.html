@@ -60,7 +60,6 @@
         overflow-x: hidden !important;
         height: auto;
         box-sizing: border-box;
-        -webkit-overflow-scrolling: touch; /* Suporte à rolagem suave no iOS */
     }
 
     /* Garantir que todos os elementos principais respeitem a largura da tela */
@@ -72,7 +71,19 @@
         box-sizing: border-box;
     }
 
-    /* Ocultar completamente o card "+70 clientes atendidos" */
+    /* Seção inicial - Manter apenas o card inicial visível */
+    .elementor-element-71f28a4 {
+        padding: 5px 0 !important;
+    }
+
+    .elementor-element-cc87d58 {
+        width: 100% !important;
+        text-align: center;
+        padding: 5px 0 !important;
+        margin: 0 !important;
+    }
+
+    /* Remover COMPLETAMENTE o card "+70 clientes atendidos" */
     .elementor-element-bd87a32 {
         display: none !important;
         visibility: hidden !important;
@@ -86,7 +97,7 @@
         top: -9999px !important;
     }
 
-    /* Ocultar completamente o card "Marjorie Rosario Designer Gráfica" */
+    /* Remover COMPLETAMENTE o card "Marjorie Rosario Designer Gráfica" na seção "Quem sou eu?" */
     .elementor-element-43f5086 {
         display: none !important;
         visibility: hidden !important;
