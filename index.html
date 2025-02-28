@@ -51,30 +51,36 @@
 }
 /* Media Queries para responsividade em mobile */
 @media only screen and (max-width: 768px) {
-    /* Ajuste geral do corpo para ocupar toda a largura e evitar rolagem lateral */
+    /* Ajuste geral do corpo */
     body {
         width: 100%;
         max-width: 100vw;
         margin: 0;
         padding: 0;
-        overflow-x: hidden !important; /* Impede rolagem lateral */
+        overflow-x: hidden !important; /* Bloqueia rolagem lateral */
         height: auto;
-    }
-
-    /* Containers principais ajustados para ocupar toda a largura */
-    .e-con-boxed, .e-con-inner {
-        width: 100%;
-        max-width: 100vw;
-        padding: 5px 0;
-        margin: 0;
         box-sizing: border-box;
     }
 
-    /* Seção inicial com imagem e texto */
+    /* Garantir que todos os containers respeitem a largura da tela */
+    .e-con-boxed, .e-con-inner, .elementor-6956 {
+        width: 100%;
+        max-width: 100vw !important;
+        margin: 0 auto;
+        padding: 5px 0;
+        box-sizing: border-box;
+    }
+
+    /* Seção inicial */
+    .elementor-element-71f28a4 {
+        padding: 10px 0;
+        margin: 0;
+    }
+
     .elementor-element-cc87d58 {
         width: 100%;
         text-align: center;
-        padding: 10px 0;
+        padding: 5px 0;
         margin: 0;
     }
 
@@ -85,26 +91,26 @@
     }
 
     .elementor-image-box-img img {
-        max-width: 200px;
+        max-width: 180px;
         height: auto;
         margin: 0 auto;
     }
 
     .elementor-image-box-title {
-        font-size: 1.3em;
-        margin: 10px 0 5px;
+        font-size: 1.2em;
+        margin: 5px 0;
     }
 
     .elementor-image-box-description {
-        font-size: 0.9em;
-        margin: 0 10px 10px;
+        font-size: 0.85em;
+        margin: 5px 10px;
     }
 
     /* Títulos gerais */
     .elementor-heading-title {
-        font-size: 1.1em !important;
-        line-height: 1.3;
-        margin: 10px 0;
+        font-size: 1em !important;
+        line-height: 1.2;
+        margin: 5px 0;
         padding: 0 10px;
     }
 
@@ -112,7 +118,7 @@
     .botao-1, .botao-2, .botao-3, .botao-4 {
         width: 100%;
         max-width: 100%;
-        margin: 10px 0;
+        margin: 5px 0;
         padding: 0;
     }
 
@@ -125,8 +131,10 @@
 
     /* Seção "Quem sou eu?" */
     .elementor-element-7bb8ad7 {
-        padding: 10px 0;
-        margin: 0;
+        padding: 5px 0 !important;
+        margin: 0 !important;
+        width: 100%;
+        max-width: 100vw;
     }
 
     .elementor-element-7bb8ad7 .e-con-inner {
@@ -136,17 +144,25 @@
         margin: 0;
     }
 
-    /* Remover completamente o card com "Marjorie Rosario - Designer Gráfica" */
+    /* Remover completamente o card após "+70 clientes atendidos" */
     .elementor-element-43f5086 {
-        display: none !important; /* Remove o card completamente */
-        visibility: hidden !important; /* Garante que não seja visível */
-        height: 0 !important; /* Remove qualquer espaço ocupado */
+        display: none !important; /* Remove o elemento */
+        visibility: hidden !important; /* Garante invisibilidade */
+        height: 0 !important; /* Remove qualquer espaço vertical */
+        width: 0 !important; /* Remove qualquer espaço horizontal */
         margin: 0 !important;
         padding: 0 !important;
         overflow: hidden !important;
+        position: absolute !important; /* Remove do fluxo */
+        top: -9999px !important; /* Força saída da tela */
     }
 
-    /* GIF ajustado */
+    /* GIF */
+    .elementor-element-34991c7 {
+        margin: 0 !important;
+        padding: 5px 0 !important;
+    }
+
     .elementor-element-34991c7 img {
         max-width: 100%;
         height: auto;
@@ -154,15 +170,11 @@
         margin: 0 auto;
     }
 
-    /* Reduzir o espaço entre o GIF e o rodapé */
-    .elementor-element-3a0c9f6 { /* Container do GIF */
-        margin: 0;
-        padding: 5px 0;
-    }
-
-    .elementor-element-7bb8ad7 { /* Container geral da seção "Quem sou eu?" */
-        padding-bottom: 5px !important; /* Reduz drasticamente o espaço */
-        margin-bottom: 0 !important;
+    /* Container do GIF */
+    .elementor-element-3a0c9f6 {
+        margin: 0 !important;
+        padding: 0 !important;
+        padding-bottom: 2px !important; /* Espaço mínimo antes do rodapé */
     }
 
     /* Ícones sociais */
@@ -170,29 +182,31 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 10px;
-        padding: 10px 0;
-        margin: 0;
-    }
-
-    .elementor-social-icon {
-        font-size: 1.2em;
-    }
-
-    /* Footer */
-    .elementor-element-68bcbfe {
+        gap: 8px;
         padding: 5px 0;
         margin: 0;
     }
 
+    .elementor-social-icon {
+        font-size: 1em;
+    }
+
+    /* Footer */
+    .elementor-element-68bcbfe {
+        padding: 5px 0 !important;
+        margin: 0 !important;
+        width: 100%;
+        max-width: 100vw;
+    }
+
     .elementor-element-68bcbfe .elementor-heading-title {
-        font-size: 0.8em !important;
+        font-size: 0.75em !important;
         text-align: center;
         margin: 0;
         padding: 0 10px;
     }
 
-    /* Elementos flutuantes ajustados */
+    /* Elementos flutuantes */
     .elementor-absolute, .scroll-left, .scroll-right, .flutuar3 {
         position: static !important;
         width: 100%;
@@ -200,19 +214,20 @@
         padding: 0;
     }
 
-    /* Remover animações pesadas do #design-background */
+    /* Remover animações pesadas */
     #design-background {
-        display: none !important; /* Remove os ícones animados no mobile */
+        display: none !important; /* Remove os ícones animados */
     }
 
     .design-icon {
-        display: none !important; /* Garante que os ícones não apareçam */
+        display: none !important;
+        animation: none !important; /* Garante que não haja animações */
     }
 
-    /* Evitar espaçamentos excessivos */
+    /* Minimizar espaçamentos */
     .elementor-widget-container {
-        padding: 5px 0;
-        margin: 0;
+        padding: 2px 0 !important;
+        margin: 0 !important;
     }
 }
     </style>
