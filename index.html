@@ -58,9 +58,10 @@
         margin: 0 !important;
         padding: 0 !important;
         overflow-x: hidden !important; /* Impede rolagem horizontal */
-        overflow-y: hidden !important; /* Remove a barra de rolagem vertical */
-        height: 100% !important; /* Define a altura como 100% da viewport */
+        overflow-y: scroll !important; /* Permite rolagem vertical */
+        height: auto;
         box-sizing: border-box;
+        -webkit-overflow-scrolling: touch !important; /* Melhora a sensibilidade ao toque */
     }
 
     /* Garantir que todos os elementos principais respeitem a largura da tela */
@@ -183,16 +184,7 @@
         line-height: 1 !important; /* Elimina espaço vertical */
     }
 
-    /* Garantir compactação máxima */
-    * {
-        box-sizing: border-box;
-        margin: 0 !important;
-        padding: 0 !important;
-        min-height: 0 !important;
-        line-height: 1 !important;
-    }
-
-    /* Remover a barra de rolagem lateral esteticamente */
+    /* Remover a barra de rolagem esteticamente, mas manter a rolagem funcional */
     ::-webkit-scrollbar {
         display: none !important; /* Remove a barra de rolagem no Webkit (Chrome, Safari) */
     }
@@ -200,6 +192,15 @@
     body {
         -ms-overflow-style: none !important; /* Remove a barra de rolagem no IE/Edge */
         scrollbar-width: none !important; /* Remove a barra de rolagem no Firefox */
+    }
+
+    /* Garantir compactação máxima */
+    * {
+        box-sizing: border-box;
+        margin: 0 !important;
+        padding: 0 !important;
+        min-height: 0 !important;
+        line-height: 1 !important;
     }
 }
     </style>
