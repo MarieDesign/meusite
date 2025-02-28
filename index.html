@@ -57,7 +57,7 @@
         max-width: 100vw;
         margin: 0 !important;
         padding: 0 !important;
-        overflow-x: hidden !important; /* Bloqueia rolagem lateral */
+        overflow-x: hidden !important;
         height: auto;
         box-sizing: border-box;
     }
@@ -90,7 +90,7 @@
     }
 
     .elementor-image-box-img img {
-        max-width: 150px !important; /* Reduzido para melhor ajuste */
+        max-width: 150px !important;
         height: auto;
         margin: 0 auto !important;
     }
@@ -145,15 +145,15 @@
 
     /* Remover COMPLETAMENTE o card após "+70 clientes atendidos" */
     .elementor-element-43f5086 {
-        display: none !important; /* Remove do layout */
-        visibility: hidden !important; /* Garante invisibilidade */
-        height: 0 !important; /* Sem altura */
-        width: 0 !important; /* Sem largura */
-        margin: 0 !important; /* Sem margens */
-        padding: 0 !important; /* Sem paddings */
-        overflow: hidden !important; /* Sem conteúdo visível */
-        position: absolute !important; /* Fora do fluxo */
-        left: -9999px !important; /* Forçado fora da tela */
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        width: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+        position: absolute !important;
+        left: -9999px !important;
         top: -9999px !important;
     }
 
@@ -163,7 +163,7 @@
         max-width: 100vw !important;
         padding: 0 !important;
         margin: 0 !important;
-        padding-bottom: 1px !important; /* Espaço mínimo antes do rodapé */
+        padding-bottom: 0 !important; /* Remove qualquer espaço extra */
     }
 
     /* GIF */
@@ -180,18 +180,28 @@
         margin: 0 auto !important;
     }
 
-    /* Ícones sociais */
+    /* Mover e ajustar ícones sociais para o espaço entre o GIF e o rodapé */
+    .elementor-element-31b2e1c {
+        position: static !important; /* Remove posicionamento absoluto */
+        width: 100% !important;
+        margin: 5px 0 !important; /* Espaço mínimo após o GIF */
+        padding: 0 !important;
+    }
+
     .elementor-social-icons-wrapper {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 5px !important;
+        display: flex !important;
+        flex-wrap: nowrap !important; /* Mantém os ícones em linha */
+        justify-content: center !important;
+        gap: 15px !important; /* Espaçamento entre os ícones */
         padding: 5px 0 !important;
-        margin: 0 !important;
+        margin: 0 auto !important;
+        width: 100% !important;
+        max-width: 300px !important; /* Limita a largura dos ícones */
     }
 
     .elementor-social-icon {
-        font-size: 0.9em !important;
+        font-size: 1.5em !important; /* Aumenta o tamanho dos ícones */
+        padding: 5px !important;
     }
 
     /* Footer */
@@ -219,13 +229,12 @@
 
     /* Remover animações pesadas */
     #design-background {
-        display: none !important; /* Remove os ícones animados */
+        display: none !important;
     }
 
     .design-icon {
         display: none !important;
         animation: none !important;
-        visibility: hidden !important;
     }
 
     /* Forçar espaçamentos mínimos */
