@@ -57,11 +57,10 @@
         max-width: 100vw;
         margin: 0 !important;
         padding: 0 !important;
-        overflow-x: hidden !important; /* Impede rolagem horizontal */
-        overflow-y: auto !important; /* Permite rolagem vertical suave */
+        overflow-x: hidden !important;
         height: auto;
         box-sizing: border-box;
-        -webkit-overflow-scrolling: touch !important; /* Melhora a sensibilidade ao toque */
+        -webkit-overflow-scrolling: touch; /* Suporte à rolagem suave no iOS */
     }
 
     /* Garantir que todos os elementos principais respeitem a largura da tela */
@@ -73,19 +72,7 @@
         box-sizing: border-box;
     }
 
-    /* Seção inicial */
-    .elementor-element-71f28a4 {
-        padding: 5px 0 !important;
-    }
-
-    .elementor-element-cc87d58 {
-        width: 100% !important;
-        text-align: center;
-        padding: 5px 0 !important;
-        margin: 0 !important;
-    }
-
-    /* Remover COMPLETAMENTE o card "+70 clientes atendidos" */
+    /* Ocultar completamente o card "+70 clientes atendidos" */
     .elementor-element-bd87a32 {
         display: none !important;
         visibility: hidden !important;
@@ -99,7 +86,7 @@
         top: -9999px !important;
     }
 
-    /* Remover COMPLETAMENTE o card "Marjorie Rosario Designer Gráfica" na seção "Quem sou eu?" */
+    /* Ocultar completamente o card "Marjorie Rosario Designer Gráfica" */
     .elementor-element-43f5086 {
         display: none !important;
         visibility: hidden !important;
@@ -111,17 +98,6 @@
         position: absolute !important;
         left: -9999px !important;
         top: -9999px !important;
-        border: none !important; /* Remove qualquer borda que possa criar linhas */
-        outline: none !important; /* Remove qualquer contorno */
-        background: none !important; /* Remove fundo que possa aparecer */
-    }
-
-    .elementor-element-43f5086 * {
-        display: none !important; /* Garante que todos os filhos sejam ocultos */
-        height: 0 !important;
-        width: 0 !important;
-        margin: 0 !important;
-        padding: 0 !important;
     }
 
     /* Container do GIF */
@@ -195,11 +171,11 @@
         line-height: 1 !important; /* Elimina espaço vertical */
     }
 
-    /* Garantir rolagem suave e sensível ao toque */
+    /* Eliminar qualquer espaço adicional abaixo do rodapé */
     body {
-        -webkit-overflow-scrolling: touch !important; /* Melhora a sensibilidade ao toque */
-        overflow-y: auto !important; /* Rolagem vertical suave */
-        height: auto !important; /* Ajusta ao conteúdo */
+        height: auto !important; /* Ajusta a altura ao conteúdo */
+        overflow-x: hidden !important; /* Impede rolagem horizontal */
+        overflow-y: auto !important; /* Permite rolagem vertical apenas até o rodapé */
     }
 
     /* Garantir compactação máxima */
@@ -209,7 +185,6 @@
         padding: 0 !important;
         min-height: 0 !important;
         line-height: 1 !important;
-        border: none !important; /* Remove bordas que possam criar linhas */
     }
 }
     </style>
