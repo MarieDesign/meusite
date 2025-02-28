@@ -51,37 +51,36 @@
 }
 /* Media Queries para responsividade em mobile */
 @media only screen and (max-width: 768px) {
-    /* Ajuste geral do corpo */
-    body {
+    /* Forçar o corpo a ocupar exatamente a largura da tela */
+    html, body {
         width: 100%;
         max-width: 100vw;
-        margin: 0;
-        padding: 0;
+        margin: 0 !important;
+        padding: 0 !important;
         overflow-x: hidden !important; /* Bloqueia rolagem lateral */
         height: auto;
         box-sizing: border-box;
     }
 
-    /* Garantir que todos os containers respeitem a largura da tela */
-    .e-con-boxed, .e-con-inner, .elementor-6956 {
-        width: 100%;
+    /* Garantir que todos os elementos principais respeitem a largura da tela */
+    .elementor-6956, .e-con-boxed, .e-con-inner, .elementor-element {
+        width: 100% !important;
         max-width: 100vw !important;
-        margin: 0 auto;
-        padding: 5px 0;
+        margin: 0 !important;
+        padding: 0 !important;
         box-sizing: border-box;
     }
 
     /* Seção inicial */
     .elementor-element-71f28a4 {
-        padding: 10px 0;
-        margin: 0;
+        padding: 5px 0 !important;
     }
 
     .elementor-element-cc87d58 {
-        width: 100%;
+        width: 100% !important;
         text-align: center;
-        padding: 5px 0;
-        margin: 0;
+        padding: 5px 0 !important;
+        margin: 0 !important;
     }
 
     .elementor-image-box-wrapper {
@@ -91,90 +90,94 @@
     }
 
     .elementor-image-box-img img {
-        max-width: 180px;
+        max-width: 150px !important; /* Reduzido para melhor ajuste */
         height: auto;
-        margin: 0 auto;
+        margin: 0 auto !important;
     }
 
     .elementor-image-box-title {
-        font-size: 1.2em;
-        margin: 5px 0;
+        font-size: 1.1em !important;
+        margin: 5px 0 !important;
     }
 
     .elementor-image-box-description {
-        font-size: 0.85em;
-        margin: 5px 10px;
+        font-size: 0.8em !important;
+        margin: 5px 0 !important;
     }
 
     /* Títulos gerais */
     .elementor-heading-title {
-        font-size: 1em !important;
-        line-height: 1.2;
-        margin: 5px 0;
-        padding: 0 10px;
+        font-size: 0.9em !important;
+        line-height: 1.2 !important;
+        margin: 5px 0 !important;
+        padding: 0 5px !important;
     }
 
     /* Cards (botões) */
     .botao-1, .botao-2, .botao-3, .botao-4 {
-        width: 100%;
-        max-width: 100%;
-        margin: 5px 0;
-        padding: 0;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 5px 0 !important;
+        padding: 0 !important;
     }
 
     .botao-1 img, .botao-2 img, .botao-3 img, .botao-4 img {
-        max-width: 100%;
+        max-width: 100% !important;
         height: auto;
         display: block;
-        margin: 0 auto;
+        margin: 0 auto !important;
     }
 
     /* Seção "Quem sou eu?" */
     .elementor-element-7bb8ad7 {
+        width: 100% !important;
+        max-width: 100vw !important;
         padding: 5px 0 !important;
         margin: 0 !important;
-        width: 100%;
-        max-width: 100vw;
     }
 
     .elementor-element-7bb8ad7 .e-con-inner {
-        flex-direction: column;
+        flex-direction: column !important;
         align-items: center;
-        padding: 0;
-        margin: 0;
-    }
-
-    /* Remover completamente o card após "+70 clientes atendidos" */
-    .elementor-element-43f5086 {
-        display: none !important; /* Remove o elemento */
-        visibility: hidden !important; /* Garante invisibilidade */
-        height: 0 !important; /* Remove qualquer espaço vertical */
-        width: 0 !important; /* Remove qualquer espaço horizontal */
-        margin: 0 !important;
         padding: 0 !important;
-        overflow: hidden !important;
-        position: absolute !important; /* Remove do fluxo */
-        top: -9999px !important; /* Força saída da tela */
-    }
-
-    /* GIF */
-    .elementor-element-34991c7 {
         margin: 0 !important;
-        padding: 5px 0 !important;
     }
 
-    .elementor-element-34991c7 img {
-        max-width: 100%;
-        height: auto;
-        display: block;
-        margin: 0 auto;
+    /* Remover COMPLETAMENTE o card após "+70 clientes atendidos" */
+    .elementor-element-43f5086 {
+        display: none !important; /* Remove do layout */
+        visibility: hidden !important; /* Garante invisibilidade */
+        height: 0 !important; /* Sem altura */
+        width: 0 !important; /* Sem largura */
+        margin: 0 !important; /* Sem margens */
+        padding: 0 !important; /* Sem paddings */
+        overflow: hidden !important; /* Sem conteúdo visível */
+        position: absolute !important; /* Fora do fluxo */
+        left: -9999px !important; /* Forçado fora da tela */
+        top: -9999px !important;
     }
 
     /* Container do GIF */
     .elementor-element-3a0c9f6 {
-        margin: 0 !important;
+        width: 100% !important;
+        max-width: 100vw !important;
         padding: 0 !important;
-        padding-bottom: 2px !important; /* Espaço mínimo antes do rodapé */
+        margin: 0 !important;
+        padding-bottom: 1px !important; /* Espaço mínimo antes do rodapé */
+    }
+
+    /* GIF */
+    .elementor-element-34991c7 {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 5px 0 0 !important;
+    }
+
+    .elementor-element-34991c7 img {
+        max-width: 100% !important;
+        height: auto;
+        display: block;
+        margin: 0 auto !important;
     }
 
     /* Ícones sociais */
@@ -182,36 +185,36 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 8px;
-        padding: 5px 0;
-        margin: 0;
+        gap: 5px !important;
+        padding: 5px 0 !important;
+        margin: 0 !important;
     }
 
     .elementor-social-icon {
-        font-size: 1em;
+        font-size: 0.9em !important;
     }
 
     /* Footer */
     .elementor-element-68bcbfe {
+        width: 100% !important;
+        max-width: 100vw !important;
         padding: 5px 0 !important;
         margin: 0 !important;
-        width: 100%;
-        max-width: 100vw;
     }
 
     .elementor-element-68bcbfe .elementor-heading-title {
-        font-size: 0.75em !important;
+        font-size: 0.7em !important;
         text-align: center;
-        margin: 0;
-        padding: 0 10px;
+        margin: 0 !important;
+        padding: 0 5px !important;
     }
 
     /* Elementos flutuantes */
     .elementor-absolute, .scroll-left, .scroll-right, .flutuar3 {
         position: static !important;
-        width: 100%;
-        margin: 5px 0;
-        padding: 0;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
     /* Remover animações pesadas */
@@ -221,13 +224,21 @@
 
     .design-icon {
         display: none !important;
-        animation: none !important; /* Garante que não haja animações */
+        animation: none !important;
+        visibility: hidden !important;
     }
 
-    /* Minimizar espaçamentos */
+    /* Forçar espaçamentos mínimos */
     .elementor-widget-container {
-        padding: 2px 0 !important;
+        padding: 0 !important;
         margin: 0 !important;
+    }
+
+    /* Garantir que o layout seja compacto */
+    * {
+        box-sizing: border-box;
+        margin: 0 !important;
+        padding: 0 !important;
     }
 }
     </style>
