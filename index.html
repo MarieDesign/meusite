@@ -76,28 +76,19 @@
     /* Seção inicial - Manter apenas o card inicial visível */
     .elementor-element-71f28a4 {
         padding: 5px 0 !important;
-        text-align: center !important; /* Centraliza tudo na seção inicial */
     }
 
     .elementor-element-cc87d58 {
         width: 100% !important;
-        text-align: center !important; /* Centraliza o container */
+        text-align: center !important; /* Centraliza a seção inicial */
         padding: 5px 0 !important;
-        margin: 0 auto !important; /* Garante centralização */
-        display: block !important;
+        margin: 0 !important;
     }
 
     /* Centralizar os textos do card inicial */
-    .elementor-element-cc87d58 .elementor-image-box-wrapper {
-        text-align: center !important;
-    }
-
     .elementor-element-cc87d58 .elementor-image-box-title,
     .elementor-element-cc87d58 .elementor-image-box-description {
-        text-align: center !important; /* Centraliza título e descrição */
-        margin: 0 auto !important;
-        display: block !important;
-        width: 100% !important;
+        text-align: center !important;
     }
 
     /* Remover COMPLETAMENTE o card "+70 clientes atendidos" */
@@ -126,6 +117,37 @@
         position: absolute !important;
         left: -9999px !important;
         top: -9999px !important;
+    }
+
+    /* Centralizar textos na seção "Quem sou eu?" e outras seções */
+    .elementor-element-3a0c9f6,
+    .elementor-element-34991c7,
+    .elementor-element-68bcbfe {
+        text-align: center !important; /* Centraliza o conteúdo de todos os textos */
+        margin: 0 auto !important; /* Garante o alinhamento centralizado */
+    }
+
+    /* Ocultar o texto original de "Quem sou eu?" */
+    .elementor-element-43f5086 .elementor-image-box-title,
+    .elementor-element-43f5086 .elementor-image-box-description {
+        visibility: hidden !important; /* Oculta o texto original */
+    }
+
+    /* Criar uma cópia do texto centralizado sobre o oculto */
+    .elementor-element-43f5086 .elementor-image-box-title::after,
+    .elementor-element-43f5086 .elementor-image-box-description::after {
+        content: attr(data-text) !important; /* Cria uma cópia do texto */
+        display: block;
+        text-align: center !important;
+        margin: 0 auto !important;
+        visibility: visible !important;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        text-align: center;
+        font-size: 1.2em !important;
     }
 
     /* Container do GIF */
@@ -170,7 +192,7 @@
         top: -9999px !important;
     }
 
-    /* Footer - Colado ao GIF e texto centralizado */
+    /* Footer - Colado ao GIF */
     .elementor-element-68bcbfe {
         width: 100% !important;
         max-width: 100vw !important;
@@ -178,7 +200,7 @@
         margin: 0 !important; /* Remover margem ao redor do rodapé */
         position: relative !important;
         top: 0 !important; /* Coloca o rodapé imediatamente após o GIF */
-        text-align: center !important; /* Centraliza o container */
+        text-align: center;
         min-height: 0 !important;
         height: auto !important;
         line-height: 1 !important; /* Reduz altura do texto */
@@ -189,19 +211,14 @@
         margin: 0 !important;
         min-height: 0 !important;
         height: auto !important;
-        text-align: center !important; /* Centraliza o conteúdo interno */
-        display: block !important;
-        width: 100% !important;
     }
 
     .elementor-element-68bcbfe .elementor-heading-title {
         font-size: 0.7em !important;
         text-align: center !important; /* Centraliza o texto do rodapé */
-        margin: 0 auto !important;
+        margin: 0 !important;
         padding: 0 5px !important; /* Apenas padding lateral */
         line-height: 1 !important; /* Elimina espaço vertical */
-        display: block !important;
-        width: 100% !important;
     }
 
     /* Remover a barra de rolagem esteticamente, mas manter a rolagem funcional */
