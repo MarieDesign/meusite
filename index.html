@@ -128,12 +128,14 @@
         margin: 0 auto !important;
     }
 
-    /* Seção "Quem sou eu?" */
+    /* Seção "Quem sou eu?" - Reorganizar ordem dos elementos */
     .elementor-element-7bb8ad7 {
         width: 100% !important;
         max-width: 100vw !important;
-        padding: 0 !important; /* Removido qualquer padding */
+        padding: 0 !important;
         margin: 0 !important;
+        display: flex !important; /* Usar flex para controlar ordem */
+        flex-direction: column !important;
     }
 
     .elementor-element-7bb8ad7 .e-con-inner {
@@ -141,6 +143,8 @@
         align-items: center;
         padding: 0 !important;
         margin: 0 !important;
+        display: flex !important; /* Garantir controle de ordem */
+        width: 100% !important;
     }
 
     /* Remover COMPLETAMENTE o card após "+70 clientes atendidos" */
@@ -163,13 +167,14 @@
         max-width: 100vw !important;
         padding: 0 !important;
         margin: 0 !important;
+        order: 1 !important; /* GIF vem primeiro */
     }
 
     /* GIF */
     .elementor-element-34991c7 {
         width: 100% !important;
         margin: 0 !important;
-        padding: 0 !important; /* Removido padding para colar no próximo elemento */
+        padding: 0 !important;
     }
 
     .elementor-element-34991c7 img {
@@ -179,45 +184,44 @@
         margin: 0 auto !important;
     }
 
-    /* Ajustando ícones sociais */
+    /* Mover os 3 ícones sociais (Instagram, Behance, Email) para logo abaixo do GIF */
     .elementor-element-31b2e1c {
-        position: static !important; /* Coloca no fluxo normal após o GIF */
         width: 100% !important;
         max-width: 100vw !important;
-        padding: 10px 0 !important; /* Espaço mínimo */
+        padding: 5px 0 !important; /* Espaço mínimo */
         margin: 0 !important;
-        text-align: center;
+        order: 2 !important; /* Coloca logo após o GIF */
+        position: static !important; /* Remove qualquer posicionamento absoluto */
     }
 
     .elementor-social-icons-wrapper {
         display: flex !important;
-        flex-direction: column !important; /* Organiza os botões verticalmente */
-        align-items: center !important;
-        gap: 10px !important; /* Espaço entre os ícones */
-        padding: 0 !important;
+        flex-wrap: nowrap !important;
+        justify-content: center !important;
+        gap: 30px !important; /* Espaçamento maior entre os ícones */
+        padding: 5px 0 !important;
         margin: 0 auto !important;
         width: 100% !important;
-        max-width: 320px !important; /* Largura ajustada para os ícones */
+        max-width: 400px !important; /* Largura ajustada para os ícones */
     }
 
-    .elementor-social-icon {
-        font-size: 2em !important; /* Ícones maiores e visíveis */
-        padding: 10px !important;
-        width: 50px; /* Tamanho adequado para os ícones */
-        height: 50px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #333; /* Fundo para destacar os ícones */
-        border-radius: 50%; /* Ícones circulares */
+    /* Ajustar tamanho dos ícones específicos (Instagram, Behance, Email) */
+    .elementor-social-icon-instagram,
+    .elementor-social-icon-behance,
+    .elementor-social-icon-envelope {
+        font-size: 3em !important; /* Tamanho grande e visível */
+        padding: 5px !important;
+        margin: 0 !important;
+        line-height: 1 !important; /* Evita espaçamento extra */
     }
 
     /* Footer */
     .elementor-element-68bcbfe {
         width: 100% !important;
         max-width: 100vw !important;
-        padding: 2px 0 !important; /* Espaço mínimo */
+        padding: 5px 0 !important;
         margin: 0 !important;
+        order: 3 !important; /* Coloca após os ícones */
     }
 
     .elementor-element-68bcbfe .elementor-heading-title {
