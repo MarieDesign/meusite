@@ -132,7 +132,7 @@
     .elementor-element-7bb8ad7 {
         width: 100% !important;
         max-width: 100vw !important;
-        padding: 0 !important;
+        padding: 0 !important; /* Removido qualquer padding */
         margin: 0 !important;
     }
 
@@ -169,7 +169,7 @@
     .elementor-element-34991c7 {
         width: 100% !important;
         margin: 0 !important;
-        padding: 0 !important;
+        padding: 0 !important; /* Removido padding para colar no próximo elemento */
     }
 
     .elementor-element-34991c7 img {
@@ -179,25 +179,21 @@
         margin: 0 auto !important;
     }
 
-    /* Remover COMPLETAMENTE os 3 ícones sociais (Instagram, Behance, Email) */
+    /* Remover os botões sociais */
     .elementor-element-31b2e1c {
-        display: none !important; /* Remove os ícones */
-        visibility: hidden !important;
-        height: 0 !important;
-        width: 0 !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        overflow: hidden !important;
-        position: absolute !important;
-        left: -9999px !important;
-        top: -9999px !important;
+        display: none !important; /* Esconde os botões sociais */
+    }
+
+    /* Ajuste do espaçamento abaixo do GIF */
+    .elementor-element-34991c7 {
+        margin-bottom: 10px !important; /* Espaço reduzido entre o GIF e o rodapé */
     }
 
     /* Footer */
     .elementor-element-68bcbfe {
         width: 100% !important;
         max-width: 100vw !important;
-        padding: 5px 0 !important; /* Espaço mínimo */
+        padding: 2px 0 !important; /* Espaço mínimo */
         margin: 0 !important;
     }
 
