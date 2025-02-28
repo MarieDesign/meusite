@@ -71,6 +71,31 @@
         box-sizing: border-box;
     }
 
+    /* Seção inicial */
+    .elementor-element-71f28a4 {
+        padding: 5px 0 !important;
+    }
+
+    .elementor-element-cc87d58 {
+        width: 100% !important;
+        text-align: center;
+        padding: 5px 0 !important;
+        margin: 0 !important;
+    }
+
+    /* Ajuste para o card "+70 clientes atendidos" */
+    .elementor-element-43f5086 {
+        margin: 0 !important;
+        padding: 0 !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        width: 0 !important;
+        overflow: hidden !important;
+        position: absolute !important;
+        left: -9999px !important;
+        top: -9999px !important;
+    }
+
     /* Container do GIF */
     .elementor-element-3a0c9f6 {
         width: 100% !important;
@@ -84,7 +109,7 @@
         width: 100% !important;
         margin: 0 !important;
         padding: 0 !important; /* Removido padding para colar no próximo elemento */
-        margin-bottom: 5px !important; /* Ajuste de margem para reduzir o espaço abaixo do GIF */
+        margin-bottom: 0 !important; /* Remover margem abaixo do GIF para reduzir o espaço */
     }
 
     .elementor-element-34991c7 img {
@@ -92,37 +117,6 @@
         height: auto;
         display: block;
         margin: 0 auto !important;
-    }
-
-    /* Formulário de envio de e-mail abaixo do GIF */
-    .elementor-element-email {
-        width: 100% !important;
-        padding: 15px 0 !important; /* Adicionando espaço ao redor do formulário */
-        text-align: center;
-        margin-top: 20px !important;  /* Margem superior para separação com o GIF */
-        margin-bottom: 20px !important; /* Margem inferior para separação com o rodapé */
-    }
-
-    /* Campo de entrada de e-mail */
-    .elementor-element-email input[type="email"] {
-        width: 80% !important;  /* Largura do campo de e-mail */
-        padding: 10px;
-        margin-bottom: 10px;
-        font-size: 1em;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-    }
-
-    /* Botão de envio */
-    .elementor-element-email button {
-        width: 80% !important;  /* Largura do botão */
-        padding: 10px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        font-size: 1em;
-        cursor: pointer;
     }
 
     /* Remover os botões sociais */
@@ -136,6 +130,8 @@
         max-width: 100vw !important;
         padding: 2px 0 !important; /* Espaço mínimo */
         margin: 0 !important;
+        position: relative !important;
+        top: 0 !important; /* Posiciona o rodapé imediatamente abaixo do conteúdo */
     }
 
     .elementor-element-68bcbfe .elementor-heading-title {
@@ -143,6 +139,12 @@
         text-align: center;
         margin: 0 !important;
         padding: 0 5px !important;
+    }
+
+    /* Eliminar qualquer espaço adicional abaixo do rodapé */
+    body {
+        height: 100% !important;
+        overflow: hidden !important; /* Impede qualquer rolagem além do conteúdo */
     }
 
     /* Elementos flutuantes */
