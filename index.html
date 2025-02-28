@@ -83,142 +83,82 @@
         margin: 0 !important;
     }
 
-    .elementor-image-box-wrapper {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .elementor-image-box-img img {
-        max-width: 150px !important;
-        height: auto;
-        margin: 0 auto !important;
-    }
-
-    .elementor-image-box-title {
-        font-size: 1.1em !important;
-        margin: 5px 0 !important;
-    }
-
-    .elementor-image-box-description {
-        font-size: 0.8em !important;
-        margin: 5px 0 !important;
-    }
-
-    /* Títulos gerais */
-    .elementor-heading-title {
-        font-size: 0.9em !important;
-        line-height: 1.2 !important;
-        margin: 5px 0 !important;
-        padding: 0 5px !important;
-    }
-
-    /* Cards (botões) */
-    .botao-1, .botao-2, .botao-3, .botao-4 {
-        width: 100% !important;
-        max-width: 100% !important;
-        margin: 5px 0 !important;
+    /* Ajuste para o card "+70 clientes atendidos" */
+    .elementor-element-43f5086 {
+        margin: 0 !important;
         padding: 0 !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        width: 0 !important;
+        overflow: hidden !important;
+        position: absolute !important;
+        left: -9999px !important;
+        top: -9999px !important;
     }
 
-    .botao-1 img, .botao-2 img, .botao-3 img, .botao-4 img {
+    /* Container do GIF */
+    .elementor-element-3a0c9f6 {
+        width: 100% !important;
+        max-width: 100vw !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* GIF */
+    .elementor-element-34991c7 {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important; /* Removido padding para colar no próximo elemento */
+        margin-bottom: 5px !important; /* Ajuste de margem para reduzir o espaço abaixo do GIF */
+    }
+
+    .elementor-element-34991c7 img {
         max-width: 100% !important;
         height: auto;
         display: block;
         margin: 0 auto !important;
     }
 
-    /* Seção "Quem sou eu?" - Reorganizar e limitar conteúdo */
-    .elementor-element-7bb8ad7 {
+    /* Formulário de envio de e-mail abaixo do GIF */
+    .elementor-element-email {
         width: 100% !important;
-        max-width: 100vw !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        display: flex !important; /* Usar flex para controle */
-        flex-direction: column !important;
-        min-height: 0 !important;
+        padding: 15px 0 !important; /* Adicionando espaço ao redor do formulário */
+        text-align: center;
+        margin-top: 20px !important;  /* Margem superior para separação com o GIF */
+        margin-bottom: 20px !important; /* Margem inferior para separação com o rodapé */
     }
 
-    .elementor-element-7bb8ad7 .e-con-inner {
-        flex-direction: column !important;
-        align-items: center;
-        padding: 0 !important;
-        margin: 0 !important;
-        min-height: 0 !important;
+    .elementor-element-email input[type="email"] {
+        width: 80% !important;  /* Largura do campo de e-mail */
+        padding: 10px;
+        margin-bottom: 10px;
+        font-size: 1em;
+        border-radius: 5px;
+        border: 1px solid #ccc;
     }
 
-    /* Card "+70 clientes atendidos" */
-    .elementor-element-bd87a32 {
-        width: 100% !important;
-        padding: 5px 0 !important;
-        margin: 0 !important;
-        order: 1 !important; /* Primeiro na ordem */
+    .elementor-element-email button {
+        width: 80% !important;  /* Largura do botão */
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 1em;
+        cursor: pointer;
     }
 
-    /* Remover COMPLETAMENTE o card após "+70 clientes atendidos" */
-    .elementor-element-43f5086 {
-        display: none !important;
-        visibility: hidden !important;
-        height: 0 !important;
-        width: 0 !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        overflow: hidden !important;
-        position: absolute !important;
-        left: -9999px !important;
-        top: -9999px !important;
-    }
-
-    /* Container do GIF - Remover completamente */
-    .elementor-element-3a0c9f6 {
-        display: none !important;
-        visibility: hidden !important;
-        height: 0 !important;
-        width: 0 !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        overflow: hidden !important;
-        position: absolute !important;
-        left: -9999px !important;
-        top: -9999px !important;
-    }
-
-    /* GIF - Remover completamente */
-    .elementor-element-34991c7 {
-        display: none !important;
-        visibility: hidden !important;
-        height: 0 !important;
-        width: 0 !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        overflow: hidden !important;
-        position: absolute !important;
-        left: -9999px !important;
-        top: -9999px !important;
-    }
-
-    /* Remover COMPLETAMENTE os 3 ícones sociais (Instagram, Behance, Email) */
+    /* Remover os botões sociais */
     .elementor-element-31b2e1c {
-        display: none !important;
-        visibility: hidden !important;
-        height: 0 !important;
-        width: 0 !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        overflow: hidden !important;
-        position: absolute !important;
-        left: -9999px !important;
-        top: -9999px !important;
+        display: none !important; /* Esconde os botões sociais */
     }
 
-    /* Footer - Mover para logo abaixo do card "+70 clientes atendidos" */
+    /* Footer */
     .elementor-element-68bcbfe {
         width: 100% !important;
         max-width: 100vw !important;
         padding: 2px 0 !important; /* Espaço mínimo */
         margin: 0 !important;
-        order: 2 !important; /* Coloca logo após o card */
-        min-height: 0 !important;
     }
 
     .elementor-element-68bcbfe .elementor-heading-title {
@@ -250,7 +190,6 @@
     .elementor-widget-container {
         padding: 0 !important;
         margin: 0 !important;
-        min-height: 0 !important;
     }
 
     /* Garantir compactação máxima */
@@ -258,7 +197,6 @@
         box-sizing: border-box;
         margin: 0 !important;
         padding: 0 !important;
-        min-height: 0 !important;
     }
 }
     </style>
