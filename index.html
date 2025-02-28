@@ -85,15 +85,12 @@
 
     /* Ajuste para o card "+70 clientes atendidos" */
     .elementor-element-43f5086 {
+        display: block !important;  /* Exibir o card normalmente */
         margin: 0 !important;
-        padding: 0 !important;
-        visibility: hidden !important;
-        height: 0 !important;
-        width: 0 !important;
-        overflow: hidden !important;
-        position: absolute !important;
-        left: -9999px !important;
-        top: -9999px !important;
+        padding: 10px 0 !important;  /* Adicionando padding para o card */
+        visibility: visible !important;
+        height: auto !important;
+        width: 100% !important;
     }
 
     /* Container do GIF */
@@ -108,8 +105,8 @@
     .elementor-element-34991c7 {
         width: 100% !important;
         margin: 0 !important;
-        padding: 0 !important; /* Removido padding para colar no próximo elemento */
-        margin-bottom: 5px !important; /* Ajuste de margem para reduzir o espaço abaixo do GIF */
+        padding: 0 !important;
+        margin-bottom: 5px !important;  /* Ajuste do espaço abaixo do GIF */
     }
 
     .elementor-element-34991c7 img {
@@ -124,12 +121,14 @@
         display: none !important; /* Esconde os botões sociais */
     }
 
-    /* Footer */
+    /* Footer - Movendo para baixo do card "+70 clientes atendidos" */
     .elementor-element-68bcbfe {
         width: 100% !important;
         max-width: 100vw !important;
-        padding: 2px 0 !important; /* Espaço mínimo */
+        padding: 10px 0 !important;  /* Espaçamento adequado no rodapé */
         margin: 0 !important;
+        position: relative !important;
+        top: 0 !important;  /* Garantir que o rodapé esteja logo após o conteúdo */
     }
 
     .elementor-element-68bcbfe .elementor-heading-title {
@@ -137,6 +136,12 @@
         text-align: center;
         margin: 0 !important;
         padding: 0 5px !important;
+    }
+
+    /* Eliminar qualquer espaço adicional abaixo do rodapé */
+    body {
+        height: 100% !important;
+        overflow: hidden !important; /* Impede qualquer rolagem além do conteúdo */
     }
 
     /* Elementos flutuantes */
