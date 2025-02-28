@@ -83,43 +83,13 @@
         margin: 0 !important;
     }
 
-    /* Seção "Quem sou eu?" - Reestruturar completamente */
-    .elementor-element-7bb8ad7 {
-        width: 100% !important;
-        max-width: 100vw !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        display: flex !important;
-        flex-direction: column !important;
-        min-height: 0 !important;
-        height: auto !important;
-    }
-
-    .elementor-element-7bb8ad7 .e-con-inner {
-        flex-direction: column !important;
-        align-items: center;
-        padding: 0 !important;
-        margin: 0 !important;
-        min-height: 0 !important;
-        height: auto !important;
-    }
-
-    /* Card "+70 clientes atendidos" */
-    .elementor-element-bd87a32 {
-        width: 100% !important;
-        padding: 5px 0 !important;
-        margin: 0 !important;
-        order: 1 !important; /* Primeiro na ordem */
-    }
-
-    /* Remover COMPLETAMENTE o outro card após "+70 clientes atendidos" */
+    /* Ajuste para o card "+70 clientes atendidos" */
     .elementor-element-43f5086 {
-        display: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
         visibility: hidden !important;
         height: 0 !important;
         width: 0 !important;
-        margin: 0 !important;
-        padding: 0 !important;
         overflow: hidden !important;
         position: absolute !important;
         left: -9999px !important;
@@ -132,20 +102,14 @@
         max-width: 100vw !important;
         padding: 0 !important;
         margin: 0 !important;
-        order: 2 !important; /* Segundo na ordem */
-        min-height: 0 !important;
-        height: auto !important;
     }
 
-    /* GIF - Último elemento antes do rodapé */
+    /* GIF */
     .elementor-element-34991c7 {
         width: 100% !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        margin-bottom: 0 !important; /* Sem espaço antes do rodapé */
-        order: 3 !important; /* Penúltimo na ordem */
-        min-height: 0 !important;
-        height: auto !important;
+        margin: 0 !important;  /* Remover qualquer margem ao redor do GIF */
+        padding: 0 !important; /* Remover padding */
+        margin-bottom: 0 !important; /* Garantir que não tenha margem abaixo do GIF */
     }
 
     .elementor-element-34991c7 img {
@@ -155,45 +119,32 @@
         margin: 0 auto !important;
     }
 
-    /* Remover COMPLETAMENTE os ícones sociais */
+    /* Remover os botões sociais */
     .elementor-element-31b2e1c {
-        display: none !important;
-        visibility: hidden !important;
-        height: 0 !important;
-        width: 0 !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        overflow: hidden !important;
-        position: absolute !important;
-        left: -9999px !important;
-        top: -9999px !important;
+        display: none !important; /* Esconde os botões sociais */
     }
 
-    /* Footer - Colado diretamente ao GIF */
+    /* Footer */
     .elementor-element-68bcbfe {
         width: 100% !important;
         max-width: 100vw !important;
-        padding: 0 !important; /* Sem espaço interno */
-        margin: 0 !important;
-        order: 4 !important; /* Último na ordem, colado ao GIF */
-        min-height: 0 !important;
-        height: auto !important;
-        line-height: 1 !important; /* Reduz altura do texto */
-    }
-
-    .elementor-element-68bcbfe .elementor-widget-container {
-        padding: 0 !important;
-        margin: 0 !important;
-        min-height: 0 !important;
-        height: auto !important;
+        padding: 0 !important; /* Remover padding no rodapé */
+        margin: 0 !important;  /* Remover margem ao redor do rodapé */
+        position: relative !important;
+        top: 0 !important; /* Coloca o rodapé imediatamente após o conteúdo */
     }
 
     .elementor-element-68bcbfe .elementor-heading-title {
         font-size: 0.7em !important;
         text-align: center;
         margin: 0 !important;
-        padding: 2px 5px !important; /* Espaço interno mínimo */
-        line-height: 1 !important; /* Reduz altura do texto */
+        padding: 0 5px !important;
+    }
+
+    /* Eliminar qualquer espaço adicional abaixo do rodapé */
+    body {
+        height: 100% !important;
+        overflow: hidden !important; /* Impede qualquer rolagem além do conteúdo */
     }
 
     /* Elementos flutuantes */
@@ -214,24 +165,17 @@
         animation: none !important;
     }
 
-    /* Forçar espaçamentos mínimos e compactação total */
-    .elementor-widget-container,
-    .e-con-inner,
-    .e-con-boxed,
-    .elementor-element {
+    /* Forçar espaçamentos mínimos */
+    .elementor-widget-container {
         padding: 0 !important;
         margin: 0 !important;
-        min-height: 0 !important;
-        height: auto !important;
     }
 
-    /* Garantir compactação máxima em todos os elementos */
+    /* Garantir compactação máxima */
     * {
         box-sizing: border-box;
         margin: 0 !important;
         padding: 0 !important;
-        min-height: 0 !important;
-        line-height: 1 !important; /* Reduz alturas residuais */
     }
 }
     </style>
