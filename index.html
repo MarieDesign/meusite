@@ -71,59 +71,28 @@
         box-sizing: border-box;
     }
 
-    /* Seção inicial */
-    .elementor-element-71f28a4 {
-        padding: 5px 0 !important;
-    }
-
-    .elementor-element-cc87d58 {
-        width: 100% !important;
-        text-align: center;
-        padding: 5px 0 !important;
-        margin: 0 !important;
-    }
-
-    /* Seção "Quem sou eu?" - Reestruturar completamente */
-    .elementor-element-7bb8ad7 {
-        width: 100% !important;
-        max-width: 100vw !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        display: flex !important;
-        flex-direction: column !important;
-        min-height: 0 !important;
-        height: auto !important;
-    }
-
-    .elementor-element-7bb8ad7 .e-con-inner {
-        flex-direction: column !important;
-        align-items: center;
-        padding: 0 !important;
-        margin: 0 !important;
-        min-height: 0 !important;
-        height: auto !important;
-    }
-
-    /* Card "+70 clientes atendidos" */
-    .elementor-element-bd87a32 {
-        width: 100% !important;
-        padding: 5px 0 !important;
-        margin: 0 !important;
-        order: 1 !important; /* Primeiro na ordem */
-    }
-
-    /* Remover COMPLETAMENTE o outro card após "+70 clientes atendidos" */
+    /* Esconder ou remover o card de "+70 clientes atendidos" */
     .elementor-element-43f5086 {
-        display: none !important;
+        display: none !important; /* Esconde completamente o card "+70 clientes atendidos" */
         visibility: hidden !important;
         height: 0 !important;
         width: 0 !important;
-        margin: 0 !important;
-        padding: 0 !important;
         overflow: hidden !important;
         position: absolute !important;
         left: -9999px !important;
         top: -9999px !important;
+    }
+
+    /* Ajuste para o card de "Marjorie Rosario Designer" */
+    .elementor-element-cc87d58 {
+        width: 90% !important; /* Ajusta o card para caber na tela sem ultrapassar */
+        margin: 0 auto !important; /* Centraliza o card */
+        text-align: center; /* Centraliza o conteúdo dentro do card */
+    }
+
+    .elementor-element-cc87d58 .elementor-image-box-img img {
+        max-width: 100% !important; /* Garante que a imagem do card se ajuste ao tamanho do card */
+        height: auto !important;
     }
 
     /* Container do GIF */
@@ -132,21 +101,14 @@
         max-width: 100vw !important;
         padding: 0 !important;
         margin: 0 !important;
-        order: 2 !important; /* Segundo na ordem */
-        min-height: 0 !important;
-        height: auto !important;
     }
 
-    /* GIF - Último elemento antes do rodapé */
+    /* GIF */
     .elementor-element-34991c7 {
         width: 100% !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        margin-bottom: 0 !important; /* Sem espaço antes do rodapé */
-        padding-bottom: 0 !important; /* Garante que não haja espaço */
-        order: 3 !important; /* Penúltimo na ordem */
-        min-height: 0 !important;
-        height: auto !important;
+        margin: 0 !important;  /* Remover qualquer margem ao redor do GIF */
+        padding: 0 !important; /* Remover padding */
+        margin-bottom: 0 !important; /* Garantir que não tenha margem abaixo do GIF */
     }
 
     .elementor-element-34991c7 img {
@@ -154,90 +116,42 @@
         height: auto;
         display: block;
         margin: 0 auto !important;
-        padding: 0 !important;
     }
 
-    /* Remover COMPLETAMENTE os ícones sociais */
+    /* Remover os botões sociais */
     .elementor-element-31b2e1c {
-        display: none !important;
-        visibility: hidden !important;
-        height: 0 !important;
-        width: 0 !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        overflow: hidden !important;
-        position: absolute !important;
-        left: -9999px !important;
-        top: -9999px !important;
+        display: none !important; /* Esconde os botões sociais */
     }
 
-    /* Footer - Colado diretamente ao GIF */
+    /* Footer */
     .elementor-element-68bcbfe {
         width: 100% !important;
         max-width: 100vw !important;
-        padding: 0 !important; /* Sem espaço interno */
-        margin: 0 !important;
-        margin-top: 0 !important; /* Garante que fique colado ao GIF */
-        order: 4 !important; /* Último na ordem, colado ao GIF */
-        min-height: 0 !important;
-        height: auto !important;
-        line-height: 1 !important; /* Reduz altura do texto */
-        background: none !important; /* Remove fundo que pode adicionar espaço */
-    }
-
-    .elementor-element-68bcbfe .elementor-widget-container {
-        padding: 0 !important;
-        margin: 0 !important;
-        min-height: 0 !important;
-        height: auto !important;
+        padding: 0 !important; /* Remover padding no rodapé */
+        margin: 0 !important;  /* Remover margem ao redor do rodapé */
+        position: relative !important;
+        top: 0 !important; /* Coloca o rodapé imediatamente após o conteúdo */
+        text-align: center;
     }
 
     .elementor-element-68bcbfe .elementor-heading-title {
         font-size: 0.7em !important;
         text-align: center;
         margin: 0 !important;
-        padding: 0 5px !important; /* Apenas padding lateral, sem vertical */
-        line-height: 1 !important; /* Reduz altura do texto */
+        padding: 0 5px !important;
     }
 
-    /* Elementos flutuantes */
-    .elementor-absolute, .scroll-left, .scroll-right, .flutuar3 {
-        position: static !important;
-        width: 100% !important;
-        margin: 0 !important;
-        padding: 0 !important;
+    /* Eliminar qualquer espaço adicional abaixo do rodapé */
+    body {
+        height: 100% !important;
+        overflow: hidden !important; /* Impede qualquer rolagem além do conteúdo */
     }
 
-    /* Remover animações pesadas */
-    #design-background {
-        display: none !important;
-    }
-
-    .design-icon {
-        display: none !important;
-        animation: none !important;
-    }
-
-    /* Forçar espaçamentos mínimos e compactação total */
-    .elementor-widget-container,
-    .e-con-inner,
-    .e-con-boxed,
-    .elementor-element {
-        padding: 0 !important;
-        margin: 0 !important;
-        min-height: 0 !important;
-        height: auto !important;
-        line-height: 1 !important;
-    }
-
-    /* Garantir compactação máxima em todos os elementos */
+    /* Garantir compactação máxima */
     * {
         box-sizing: border-box;
         margin: 0 !important;
         padding: 0 !important;
-        min-height: 0 !important;
-        line-height: 1 !important;
-        border: none !important; /* Remove bordas que podem adicionar espaço */
     }
 }
     </style>
