@@ -71,19 +71,77 @@
         box-sizing: border-box;
     }
 
+    /* Seção inicial */
+    .elementor-element-71f28a4 {
+        padding: 5px 0 !important;
+    }
+
+    .elementor-element-cc87d58 {
+        width: 100% !important;
+        text-align: center;
+        padding: 5px 0 !important;
+        margin: 0 !important;
+    }
+
+    /* Seção "Quem sou eu?" - Compactar e controlar ordem */
+    .elementor-element-7bb8ad7 {
+        width: 100% !important;
+        max-width: 100vw !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        min-height: 0 !important;
+    }
+
+    .elementor-element-7bb8ad7 .e-con-inner {
+        flex-direction: column !important;
+        align-items: center;
+        padding: 0 !important;
+        margin: 0 !important;
+        min-height: 0 !important;
+    }
+
+    /* Card "+70 clientes atendidos" */
+    .elementor-element-bd87a32 {
+        width: 100% !important;
+        padding: 5px 0 !important;
+        margin: 0 !important;
+        order: 1 !important; /* Primeiro na ordem */
+    }
+
+    /* Remover COMPLETAMENTE o outro card após "+70 clientes atendidos" */
+    .elementor-element-43f5086 {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        width: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+        position: absolute !important;
+        left: -9999px !important;
+        top: -9999px !important;
+    }
+
     /* Container do GIF */
     .elementor-element-3a0c9f6 {
         width: 100% !important;
         max-width: 100vw !important;
         padding: 0 !important;
         margin: 0 !important;
+        order: 2 !important; /* Segundo na ordem */
+        min-height: 0 !important;
     }
 
-    /* GIF */
+    /* GIF - Último elemento antes do rodapé */
     .elementor-element-34991c7 {
         width: 100% !important;
-        margin: 0 !important; /* Remover qualquer margem abaixo do GIF */
-        padding: 0 !important; /* Remover padding */
+        margin: 0 !important;
+        padding: 0 !important;
+        margin-bottom: 0 !important; /* Sem espaço antes do rodapé */
+        order: 3 !important; /* Penúltimo na ordem */
+        min-height: 0 !important;
     }
 
     .elementor-element-34991c7 img {
@@ -95,30 +153,33 @@
 
     /* Remover os botões sociais */
     .elementor-element-31b2e1c {
-        display: none !important; /* Esconde os botões sociais */
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        width: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+        position: absolute !important;
+        left: -9999px !important;
+        top: -9999px !important;
     }
 
-    /* Footer */
+    /* Footer - Colado ao GIF */
     .elementor-element-68bcbfe {
         width: 100% !important;
         max-width: 100vw !important;
-        padding: 0 !important; /* Remover padding no rodapé */
+        padding: 0 !important; /* Sem espaço interno */
         margin: 0 !important;
-        position: relative !important;
-        top: 0 !important; /* Coloca o rodapé imediatamente após o conteúdo */
+        order: 4 !important; /* Último na ordem, colado ao GIF */
+        min-height: 0 !important;
     }
 
     .elementor-element-68bcbfe .elementor-heading-title {
         font-size: 0.7em !important;
         text-align: center;
         margin: 0 !important;
-        padding: 0 5px !important;
-    }
-
-    /* Eliminar qualquer espaço adicional abaixo do rodapé */
-    body {
-        height: 100% !important;
-        overflow: hidden !important; /* Impede qualquer rolagem além do conteúdo */
+        padding: 2px 5px !important; /* Espaço interno mínimo */
     }
 
     /* Elementos flutuantes */
@@ -143,6 +204,7 @@
     .elementor-widget-container {
         padding: 0 !important;
         margin: 0 !important;
+        min-height: 0 !important;
     }
 
     /* Garantir compactação máxima */
@@ -150,6 +212,7 @@
         box-sizing: border-box;
         margin: 0 !important;
         padding: 0 !important;
+        min-height: 0 !important;
     }
 }
     </style>
