@@ -71,20 +71,65 @@
         box-sizing: border-box;
     }
 
+    /* Seção inicial - Manter apenas o card inicial visível */
+    .elementor-element-71f28a4 {
+        padding: 5px 0 !important;
+    }
+
+    .elementor-element-cc87d58 {
+        width: 100% !important;
+        text-align: center;
+        padding: 5px 0 !important;
+        margin: 0 !important;
+    }
+
+    /* Remover COMPLETAMENTE o card "+70 clientes atendidos" */
+    .elementor-element-bd87a32 {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        width: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+        position: absolute !important;
+        left: -9999px !important;
+        top: -9999px !important;
+    }
+
+    /* Remover COMPLETAMENTE o card "Marjorie Rosario Designer Gráfica" na seção "Quem sou eu?" */
+    .elementor-element-43f5086 {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        width: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+        position: absolute !important;
+        left: -9999px !important;
+        top: -9999px !important;
+    }
+
     /* Container do GIF */
     .elementor-element-3a0c9f6 {
         width: 100% !important;
         max-width: 100vw !important;
         padding: 0 !important;
         margin: 0 !important;
+        min-height: 0 !important;
+        height: auto !important;
     }
 
-    /* GIF */
+    /* GIF - Último elemento antes do rodapé */
     .elementor-element-34991c7 {
         width: 100% !important;
-        margin: 0 !important;  /* Remover qualquer margem ao redor do GIF */
-        padding: 0 !important; /* Remover padding */
+        margin: 0 !important;
+        padding: 0 !important;
         margin-bottom: 0 !important; /* Garantir que não tenha margem abaixo do GIF */
+        padding-bottom: 0 !important; /* Sem espaço abaixo */
+        min-height: 0 !important;
+        height: auto !important;
     }
 
     .elementor-element-34991c7 img {
@@ -94,33 +139,54 @@
         margin: 0 auto !important;
     }
 
-    /* Remover os botões sociais */
+    /* Remover COMPLETAMENTE os botões sociais */
     .elementor-element-31b2e1c {
-        display: none !important; /* Esconde os botões sociais */
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        width: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+        position: absolute !important;
+        left: -9999px !important;
+        top: -9999px !important;
     }
 
-    /* Footer */
+    /* Footer - Colado ao GIF */
     .elementor-element-68bcbfe {
         width: 100% !important;
         max-width: 100vw !important;
         padding: 0 !important; /* Remover padding no rodapé */
-        margin: 0 !important;  /* Remover margem ao redor do rodapé */
+        margin: 0 !important; /* Remover margem ao redor do rodapé */
         position: relative !important;
-        top: 0 !important; /* Coloca o rodapé imediatamente após o conteúdo */
+        top: 0 !important; /* Coloca o rodapé imediatamente após o GIF */
         text-align: center;
+        min-height: 0 !important;
+        height: auto !important;
+        line-height: 1 !important; /* Reduz altura do texto */
+    }
+
+    .elementor-element-68bcbfe .elementor-widget-container {
+        padding: 0 !important;
+        margin: 0 !important;
+        min-height: 0 !important;
+        height: auto !important;
     }
 
     .elementor-element-68bcbfe .elementor-heading-title {
         font-size: 0.7em !important;
         text-align: center;
         margin: 0 !important;
-        padding: 0 5px !important;
+        padding: 0 5px !important; /* Apenas padding lateral */
+        line-height: 1 !important; /* Elimina espaço vertical */
     }
 
     /* Eliminar qualquer espaço adicional abaixo do rodapé */
     body {
-        height: 100% !important;
-        overflow: hidden !important; /* Impede qualquer rolagem além do conteúdo */
+        height: auto !important; /* Ajusta a altura ao conteúdo */
+        overflow-x: hidden !important; /* Impede rolagem horizontal */
+        overflow-y: auto !important; /* Permite rolagem vertical apenas até o rodapé */
     }
 
     /* Garantir compactação máxima */
@@ -128,6 +194,8 @@
         box-sizing: border-box;
         margin: 0 !important;
         padding: 0 !important;
+        min-height: 0 !important;
+        line-height: 1 !important;
     }
 }
     </style>
