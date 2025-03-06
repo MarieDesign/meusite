@@ -197,6 +197,32 @@
     </script>
     <script type="application/javascript" id="pys-version-script" src="data:text/javascript;base64,Y29uc29sZS5sb2coJ1BpeGVsWW91clNpdGUgRnJlZSB2ZXJzaW9uIDkuNy4yJyk7" data-rocket-status="executed">
         console.log('PixelYourSite Free version 9.7.2');
+	    <!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evitar Atualização Automática</title>
+    <script>
+        // Previne a atualização automática da página
+        window.addEventListener('beforeunload', function(event) {
+            // Impede a atualização ou fechamento sem a ação explícita do usuário
+            event.preventDefault();
+            event.returnValue = ''; // Mensagem de confirmação para alguns navegadores
+        });
+
+        // Se houver recarga automática via setInterval, remova isso ou desative
+        // Exemplo (remover este código se ele existir no seu site):
+        // setInterval(function() {
+        //     location.reload();
+        // }, 5000); // Evite esse tipo de código
+    </script>
+</head>
+<body>
+    <h1>Evitar Atualizações Automáticas</h1>
+    <p>Este site não será atualizado automaticamente. A página só será recarregada quando você pressionar F5 ou clicar no botão de recarregar do navegador.</p>
+</body>
+</html>
     </script>
     <link rel="dns-prefetch" href="//www.googletagmanager.com">
     <link rel="dns-prefetch" href="//fonts.google.com">
