@@ -656,16 +656,17 @@
             margin: 0;
             padding: 0;
             color: #fff;
-            min-height: 100vh;
+            min-height: 100vh; /* Garante que o body ocupe a tela toda */
             display: flex;
             flex-direction: column;
+            justify-content: space-between; /* Distribui o conteúdo */
         }
 
         /* Estilo do botão discreto, centralizado no conteúdo */
         .btn-container {
             text-align: center;
-            margin-top: auto; /* Permite que o botão se mova para cima */
-            margin-bottom: 30px; /* Afastando o botão do rodapé */
+            margin-top: 60px; /* Mantido o ajuste anterior */
+            margin-bottom: 40px; /* Adicionado para descolar do rodapé */
         }
 
         .btn-container button {
