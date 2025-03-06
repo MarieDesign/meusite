@@ -667,9 +667,9 @@
         .btn-container button {
             background-color: #6a1b9a;
             color: white;
-            font-size: 14px;
+            font-size: 16px; /* Aumentado de 14px para 16px */
             font-weight: bold;
-            padding: 8px 15px;
+            padding: 10px 20px; /* Aumentado de 8px 15px para 10px 20px */
             border-radius: 20px;
             border: none;
             cursor: pointer;
@@ -1089,7 +1089,7 @@
                 alert("Formulário enviado com sucesso!");
                 this.reset();
                 localStorage.removeItem("formData");
-                hideForm(); // Fecha o formulário e mostra o botão novamente
+                hideForm();
             })
             .catch(error => {
                 console.error("Erro ao enviar o formulário:", error);
