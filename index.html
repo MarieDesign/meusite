@@ -871,9 +871,9 @@
                     <label><span class="option-text">8 posts</span><input type="radio" name="pacote" value="8 posts"></label>
                     <label><span class="option-text">12 posts</span><input type="radio" name="pacote" value="12 posts"></label>
                     <label><span class="option-text">16 posts</span><input type="radio" name="pacote" value="16 posts"></label>
-                    <label><div class="option-container"><span class="option-text">Outro:</span><input type="text" name="outro_pacote"></div><input type="radio" name="pacote" value="Outro"></label>
+                    <label><div class="option-container"><span class="option-text">Outro:</span><input type="text" id="outro_pacote" name="outro_pacote"></div><input type="radio" name="pacote" value="Outro" onchange="toggleRequired('outro_pacote', this.checked)"></label>
                 </div>
-                <div class="error-message" id="pacote-error">Selecione um pacote de Social Media.</div>
+                <div class="error-message" id="pacote-error">Selecione um pacote de Social Media ou preencha o campo "Outro".</div>
             </div>
 
             <div class="form-group hidden" id="materiaisImpressosOptions">
@@ -884,9 +884,9 @@
                     <label><span class="option-text">Cartão de Visita</span><input type="radio" name="material" value="Cartão de Visita"></label>
                     <label><span class="option-text">Panfletos</span><input type="radio" name="material" value="Panfletos"></label>
                     <label><span class="option-text">Edição de Vídeo</span><input type="radio" name="material" value="Edição de Vídeo"></label>
-                    <label><div class="option-container"><span class="option-text">Outro:</span><input type="text" name="outro_material"></div><input type="radio" name="material" value="Outro"></label>
+                    <label><div class="option-container"><span class="option-text">Outro:</span><input type="text" id="outro_material" name="outro_material"></div><input type="radio" name="material" value="Outro" onchange="toggleRequired('outro_material', this.checked)"></label>
                 </div>
-                <div class="error-message" id="material-error">Selecione um tipo de material.</div>
+                <div class="error-message" id="material-error">Selecione um tipo de material ou preencha o campo "Outro".</div>
             </div>
 
             <div class="form-group">
@@ -916,6 +916,15 @@
             document.querySelector(".btn-container").style.display = "none";
         }
 
+        function toggleRequired(inputId, isChecked) {
+            const input = document.getElementById(inputId);
+            if (isChecked) {
+                input.setAttribute("required", "required");
+            } else {
+                input.removeAttribute("required");
+            }
+        }
+
         function clearErrors() {
             document.querySelectorAll('.form-group').forEach(group => {
                 group.classList.remove('invalid');
@@ -934,6 +943,10 @@
             const identidade = document.getElementById('identidade').value.trim();
             const socialMediaOptions = document.getElementById('socialMediaOptions');
             const materiaisImpressosOptions = document.getElementById('materiaisImpressosOptions');
+            const pacoteSelected = document.querySelector('input[name="pacote"]:checked');
+            const materialSelected = document.querySelector('input[name="material"]:checked');
+            const outroPacoteInput = document.getElementById('outro_pacote');
+            const outroMaterialInput = document.getElementById('outro_material');
 
             if (!nome) {
                 document.getElementById('nome').parentElement.classList.add('invalid');
@@ -962,14 +975,24 @@
                 isValid = false;
             }
 
-            if (servico === "Design para Social Media" && !document.querySelector('input[name="pacote"]:checked')) {
-                socialMediaOptions.classList.add('invalid');
-                isValid = false;
+            if (servico === "Design para Social Media") {
+                if (!pacoteSelected) {
+                    socialMediaOptions.classList.add('invalid');
+                    isValid = false;
+                } else if (pacoteSelected.value === "Outro" && !outroPacoteInput.value.trim()) {
+                    socialMediaOptions.classList.add('invalid');
+                    isValid = false;
+                }
             }
 
-            if (servico === "Design para materiais impressos e digitais" && !document.querySelector('input[name="material"]:checked')) {
-                materiaisImpressosOptions.classList.add('invalid');
-                isValid = false;
+            if (servico === "Design para materiais impressos e digitais") {
+                if (!materialSelected) {
+                    materiaisImpressosOptions.classList.add('invalid');
+                    isValid = false;
+                } else if (materialSelected.value === "Outro" && !outroMaterialInput.value.trim()) {
+                    materiaisImpressosOptions.classList.add('invalid');
+                    isValid = false;
+                }
             }
 
             if (!detalhes || detalhes.length < 100) {
