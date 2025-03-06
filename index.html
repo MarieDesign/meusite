@@ -657,31 +657,58 @@
             padding: 0;
             color: #fff;
         }
+
+        /* Estilo do botão flutuante */
+        .floating-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #6a1b9a;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 12px 20px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+
+        .floating-button:hover {
+            background-color: #4a148c;
+        }
+
         .container {
             width: 80%;
-            max-width: 380px; /* Largura do formulário */
+            max-width: 380px;
             margin: 30px auto;
             background-color: rgba(0, 0, 0, 0.8);
             padding: 10px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            display: none; /* Escondido inicialmente */
+            display: none; /* Inicialmente oculto */
+            transition: all 0.3s ease;
         }
+
         h1 {
             color: #fff;
             text-align: center;
             font-size: 16px;
             margin-bottom: 10px;
         }
+
         p {
             text-align: center;
             color: #ddd;
             font-size: 10px;
             margin-bottom: 15px;
         }
+
         .form-group {
             margin-bottom: 8px;
         }
+
         label {
             font-weight: bold;
             color: #fff;
@@ -689,6 +716,7 @@
             display: block;
             margin-bottom: 4px;
         }
+
         input, select, textarea {
             width: 100%;
             padding: 6px;
@@ -699,20 +727,25 @@
             font-size: 12px;
             color: #333;
         }
+
         input:focus, select:focus, textarea:focus {
             outline: none;
             border-color: #6a1b9a;
         }
+
         textarea {
             height: 40px;
         }
+
         .radio-group {
             margin-top: 5px;
         }
+
         .radio-group label {
             margin-right: 8px;
             font-size: 12px;
         }
+
         button {
             width: 100%;
             padding: 8px;
@@ -724,12 +757,15 @@
             border-radius: 6px;
             cursor: pointer;
         }
+
         button:hover {
             background-color: #4a148c;
         }
+
         .required {
             color: red;
         }
+
         .hidden {
             display: none;
         }
@@ -737,10 +773,8 @@
 </head>
 <body>
 
-    <!-- Botão para solicitar orçamento -->
-    <div class="button-container" style="text-align:center; margin-top: 20px;">
-        <button onclick="showForm()">Solicitar Orçamento</button>
-    </div>
+    <!-- Botão flutuante de Solicitar Orçamento -->
+    <button class="floating-button" onclick="showForm()">Solicitar Orçamento</button>
 
     <!-- Formulário que aparece após clicar no botão -->
     <div class="container" id="formContainer">
@@ -824,10 +858,10 @@
     </div>
 
     <script>
-        // Função para mostrar o formulário
+        // Função para mostrar o formulário e esconder o botão
         function showForm() {
-            const formContainer = document.getElementById("formContainer");
-            formContainer.style.display = "block"; // Exibe o formulário
+            document.getElementById("formContainer").style.display = "block"; // Exibe o formulário
+            document.querySelector(".floating-button").style.display = "none"; // Esconde o botão
         }
 
         function validateForm() {
