@@ -202,41 +202,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evitar Atualização Automática</title>
     <script>
-        // Evitar recarga automática via setInterval ou setTimeout
-        window.onload = function() {
-            // Bloquear recarregamento da página
-            if (window.history && window.history.pushState) {
-                // Bloquear recarga ao manipular o histórico
-                window.history.pushState(null, null, window.location.href);
-                window.onpopstate = function() {
-                    window.history.pushState(null, null, window.location.href);
-                };
-            }
-
-            // Desabilitar qualquer intervalo de recarga da página
-            setInterval(function() {
-                console.log("Tentativa de recarga detectada e bloqueada!");
-                return false;
-            }, 1000);
+        const originalReload = window.location.reload;
+        window.location.reload = function() {
+            console.log('Tentativa de recarga automática bloqueada');
         };
 
-        // Prevenir o comportamento padrão de atualização da página
-        window.addEventListener('beforeunload', function(event) {
-            event.preventDefault();
-            event.returnValue = ''; // Necessário para navegadores antigos
-        });
+        const originalSetInterval = window.setInterval;
+        const originalSetTimeout = window.setTimeout;
 
-        // Desabilitar a tecla F5 e Ctrl+R que causam recarga da página
-        window.addEventListener("keydown", function(e) {
-            if (e.key === "F5" || (e.ctrlKey && e.key === "r")) {
-                e.preventDefault(); // Impede a recarga da página
+        window.setInterval = function(fn, time) {
+            if (typeof fn === 'function' && (fn.toString().includes('reload') || fn.toString().includes('location'))) {
+                console.log('setInterval bloqueado: tentativa de recarga detectada');
+                return -1;
             }
-        });
+            return originalSetInterval(fn, time);
+        };
+
+        window.setTimeout = function(fn, time) {
+            if (typeof fn === 'function' && (fn.toString().includes('reload') || fn.toString().includes('location'))) {
+                console.log('setTimeout bloqueado: tentativa de recarga detectada');
+                return -1;
+            }
+            return originalSetTimeout(fn, time);
+        };
+
+        window.onload = function() {
+            const metaTags = document.getElementsByTagName('meta');
+            for (let i = 0; i < metaTags.length; i++) {
+                if (metaTags[i].getAttribute('http-equiv') === 'refresh') {
+                    metaTags[i].parentNode.removeChild(metaTags[i]);
+                    console.log('Meta tag de refresh removida');
+                }
+            }
+
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    const addedNodes = mutation.addedNodes;
+                    for (let i = 0; i < addedNodes.length; i++) {
+                        if (addedNodes[i].tagName === 'META' && addedNodes[i].getAttribute('http-equiv') === 'refresh') {
+                            addedNodes[i].parentNode.removeChild(addedNodes[i]);
+                            console.log('Meta tag de refresh dinâmica removida');
+                        }
+                    }
+                });
+            });
+            observer.observe(document.head, { childList: true, subtree: true });
+        };
+
+        function recarregarManualmente() {
+            window.location.reload = originalReload;
+            window.location.reload();
+        }
+
+        setTimeout(function() {
+            window.location.reload();
+        }, 5000);
     </script>
 </head>
 <body>
+    <button onclick="recarregarManualmente()">Atualizar Manualmente</button>
 </body>
 </html>
     </script>
