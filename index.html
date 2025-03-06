@@ -837,7 +837,7 @@
 
             <div class="form-group">
                 <label for="detalhes">Detalhes do projeto <span class="required">*</span></label>
-                <textarea id="detalhes" name="detalhes" required></textarea>
+                <textarea id="detalhes" name="detalhes" required minlength="100"></textarea>
             </div>
 
             <div class="form-group">
@@ -863,11 +863,18 @@
         function validateForm() {
             const email = document.getElementById('email').value.trim();
             const whatsapp = document.getElementById('whatsapp').value.trim();
+            const detalhes = document.getElementById('detalhes').value.trim();
 
             if (!email && !whatsapp) {
                 alert("Você precisa preencher pelo menos um dos campos: E-mail ou WhatsApp.");
                 return false;
             }
+
+            if (detalhes.length < 100) {
+                alert("O campo 'Detalhes do projeto' deve conter no mínimo 100 caracteres.");
+                return false;
+            }
+
             return true;
         }
 
