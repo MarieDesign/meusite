@@ -868,25 +868,25 @@
             <div class="form-group hidden" id="socialMediaOptions">
                 <label>Escolha o pacote de Social Media <span class="required">*</span></label>
                 <div class="radio-group">
-                    <label><span class="option-text">8 posts</span><input type="radio" name="pacote" value="8 posts"></label>
-                    <label><span class="option-text">12 posts</span><input type="radio" name="pacote" value="12 posts"></label>
-                    <label><span class="option-text">16 posts</span><input type="radio" name="pacote" value="16 posts"></label>
+                    <label><span class="option-text">8 posts</span><input type="radio" name="pacote" value="8 posts" onchange="toggleRequired('outro_pacote', false)"></label>
+                    <label><span class="option-text">12 posts</span><input type="radio" name="pacote" value="12 posts" onchange="toggleRequired('outro_pacote', false)"></label>
+                    <label><span class="option-text">16 posts</span><input type="radio" name="pacote" value="16 posts" onchange="toggleRequired('outro_pacote', false)"></label>
                     <label><div class="option-container"><span class="option-text">Outro:</span><input type="text" id="outro_pacote" name="outro_pacote"></div><input type="radio" name="pacote" value="Outro" onchange="toggleRequired('outro_pacote', this.checked)"></label>
                 </div>
-                <div class="error-message" id="pacote-error">Selecione um pacote de Social Media ou preencha o campo "Outro".</div>
+                <div class="error-message" id="pacote-error">Selecione um pacote de Social Media ou preencha o campo "Outro" se selecionado.</div>
             </div>
 
             <div class="form-group hidden" id="materiaisImpressosOptions">
                 <label>Escolha o tipo de material <span class="required">*</span></label>
                 <div class="radio-group">
-                    <label><span class="option-text">Banners</span><input type="radio" name="material" value="Banners"></label>
-                    <label><span class="option-text">Alinhamento Visual</span><input type="radio" name="material" value="Alinhamento Visual"></label>
-                    <label><span class="option-text">Cartão de Visita</span><input type="radio" name="material" value="Cartão de Visita"></label>
-                    <label><span class="option-text">Panfletos</span><input type="radio" name="material" value="Panfletos"></label>
-                    <label><span class="option-text">Edição de Vídeo</span><input type="radio" name="material" value="Edição de Vídeo"></label>
+                    <label><span class="option-text">Banners</span><input type="radio" name="material" value="Banners" onchange="toggleRequired('outro_material', false)"></label>
+                    <label><span class="option-text">Alinhamento Visual</span><input type="radio" name="material" value="Alinhamento Visual" onchange="toggleRequired('outro_material', false)"></label>
+                    <label><span class="option-text">Cartão de Visita</span><input type="radio" name="material" value="Cartão de Visita" onchange="toggleRequired('outro_material', false)"></label>
+                    <label><span class="option-text">Panfletos</span><input type="radio" name="material" value="Panfletos" onchange="toggleRequired('outro_material', false)"></label>
+                    <label><span class="option-text">Edição de Vídeo</span><input type="radio" name="material" value="Edição de Vídeo" onchange="toggleRequired('outro_material', false)"></label>
                     <label><div class="option-container"><span class="option-text">Outro:</span><input type="text" id="outro_material" name="outro_material"></div><input type="radio" name="material" value="Outro" onchange="toggleRequired('outro_material', this.checked)"></label>
                 </div>
-                <div class="error-message" id="material-error">Selecione um tipo de material ou preencha o campo "Outro".</div>
+                <div class="error-message" id="material-error">Selecione um tipo de material ou preencha o campo "Outro" se selecionado.</div>
             </div>
 
             <div class="form-group">
