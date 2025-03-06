@@ -661,7 +661,10 @@
         /* Estilo do botão discreto */
         .btn-container {
             text-align: center;
-            margin-top: 20px;
+            position: fixed;
+            bottom: 30px; /* Ajustado para afastar do rodapé */
+            left: 50%;
+            transform: translateX(-50%); /* Centraliza horizontalmente */
         }
 
         .btn-container button {
@@ -676,7 +679,6 @@
             transition: all 0.3s ease;
             width: auto; /* Largura automática */
             max-width: 250px; /* Largura limitada */
-            margin: 0 auto; /* Centraliza o botão */
         }
 
         .btn-container button:hover {
