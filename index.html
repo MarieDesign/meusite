@@ -840,200 +840,200 @@
   </script>
 </body>
 	<!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solicitação de Orçamento - Marjorie Rosário</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f7f7f7;
-            margin: 0;
-            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f1ed;
             color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
         }
-        .container {
-            width: 80%;
-            margin: 50px auto;
+        .form-container {
             background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
         }
         h1 {
-            color: #333;
             text-align: center;
-        }
-        .form-group {
-            margin-bottom: 15px;
+            color: #d4af37;
+            font-size: 24px;
+            margin-bottom: 20px;
         }
         label {
+            display: block;
+            margin-bottom: 5px;
             font-weight: bold;
-            color: #333;
         }
-        input, select, textarea {
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        textarea,
+        select {
             width: 100%;
             padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
             border-radius: 5px;
-            border: 1px solid #ddd;
-            margin-top: 5px;
             box-sizing: border-box;
         }
-        textarea {
-            height: 150px;
+        .conditional {
+            display: none;
         }
-        .radio-group {
-            margin-top: 10px;
+        .radio-group, .checkbox-group {
+            margin-bottom: 15px;
         }
-        .radio-group label {
-            margin-right: 20px;
+        .radio-group label, .checkbox-group label {
+            font-weight: normal;
+            margin-left: 5px;
         }
         button {
-            width: 100%;
-            padding: 12px;
-            background-color: #000;
-            color: white;
-            font-size: 16px;
+            background-color: #d4af37;
+            color: #fff;
+            padding: 12px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            width: 100%;
+            font-size: 16px;
         }
         button:hover {
-            background-color: #333;
+            background-color: #b89b2f;
+        }
+        .required::after {
+            content: " *";
+            color: red;
         }
     </style>
 </head>
 <body>
+    <div class="form-container">
+        <h1>Solicitação de Orçamento (Resposta em até 20 minutos)</h1>
+        <form action="https://formspree.io/f/{SEU_FORM_ID}" method="POST">
+            <label for="nome" class="required">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
 
-    <div class="container">
-        <h1>Solicitação de Orçamento</h1>
-        <p>Resposta em até 20 minutos</p>
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email">
 
-        <form action="https://formspree.io/f/mleqyqgq" method="POST">
+            <label for="whatsapp">WhatsApp:</label>
+            <input type="tel" id="whatsapp" name="whatsapp">
 
-            <!-- Nome -->
-            <div class="form-group">
-                <label for="nome">Nome <span style="color: red;">*</span></label>
-                <input type="text" id="nome" name="nome" required>
+            <label class="required">Qual tipo de serviço você procura?</label>
+            <div class="radio-group">
+                <input type="radio" id="social-media" name="servico" value="Design para Social Media" onchange="toggleFields()" required>
+                <label for="social-media">Design para Social Media</label><br>
+                <input type="radio" id="materiais" name="servico" value="Design para materiais impressos e digitais" onchange="toggleFields()">
+                <label for="materiais">Design para materiais impressos e digitais</label>
             </div>
 
-            <!-- E-mail ou WhatsApp -->
-            <div class="form-group">
-                <label for="email">E-mail <span style="color: red;">*</span></label>
-                <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="whatsapp">WhatsApp <span style="color: red;">*</span></label>
-                <input type="tel" id="whatsapp" name="whatsapp" placeholder="Digite seu número de WhatsApp">
-            </div>
-
-            <!-- Tipo de Serviço -->
-            <div class="form-group">
-                <label for="servico">Qual tipo de serviço você procura? <span style="color: red;">*</span></label>
-                <select id="servico" name="servico" required>
-                    <option value="Design para Social Media">Design para Social Media</option>
-                    <option value="Design para materiais impressos e digitais">Design para materiais impressos e digitais</option>
-                </select>
-            </div>
-
-            <!-- Primeira Opção: Social Media -->
-            <div class="form-group" id="socialMedia" style="display: none;">
-                <label>Escolha o pacote de Social Media <span style="color: red;">*</span></label>
+            <!-- Campos condicionais para Social Media -->
+            <div id="social-media-fields" class="conditional">
+                <label class="required">Escolha uma opção:</label>
                 <div class="radio-group">
-                    <label><input type="radio" name="pacote" value="8 posts"> Pacote de 8 posts</label>
-                    <label><input type="radio" name="pacote" value="12 posts"> Pacote de 12 posts</label>
-                    <label><input type="radio" name="pacote" value="16 posts"> Pacote de 16 posts</label>
-                    <label><input type="radio" name="pacote" value="Outro"> Outro (especifique): <input type="text" name="outro_pacote"></label>
+                    <input type="radio" id="pacote8" name="pacote" value="Pacote de 8 posts">
+                    <label for="pacote8">Pacote de 8 posts</label><br>
+                    <input type="radio" id="pacote12" name="pacote" value="Pacote de 12 posts">
+                    <label for="pacote12">Pacote de 12 posts</label><br>
+                    <input type="radio" id="pacote16" name="pacote" value="Pacote de 16 posts">
+                    <label for="pacote16">Pacote de 16 posts</label><br>
+                    <input type="radio" id="outro-social" name="pacote" value="Outro">
+                    <label for="outro-social">Outro (especifique):</label>
+                    <input type="text" id="outro-social-text" name="outro_social" placeholder="Especifique">
                 </div>
+                <label for="detalhes-social" class="required">Informe os detalhes do projeto (mínimo 100 caracteres):</label>
+                <textarea id="detalhes-social" name="detalhes_social" rows="4" minlength="100"></textarea>
+                <label for="segmento-social" class="required">Segmento da marca:</label>
+                <input type="text" id="segmento-social" name="segmento_social">
+                <label for="identidade-social" class="required">Qual identidade visual seguir? (Possui uma identidade visual ou paleta de cores?)</label>
+                <input type="text" id="identidade-social" name="identidade_social">
+                <label for="referencia-social">Algum modelo de referência? (opcional)</label>
+                <input type="text" id="referencia-social" name="referencia_social">
+                <label for="observacoes-social">Observações adicionais: (opcional)</label>
+                <textarea id="observacoes-social" name="observacoes_social" rows="2"></textarea>
             </div>
 
-            <!-- Detalhes do Projeto -->
-            <div class="form-group">
-                <label for="detalhes">Informe os detalhes do projeto <span style="color: red;">*</span></label>
-                <textarea id="detalhes" name="detalhes" required></textarea>
-            </div>
-
-            <!-- Segmento da Marca -->
-            <div class="form-group">
-                <label for="segmento">Segmento da marca <span style="color: red;">*</span></label>
-                <input type="text" id="segmento" name="segmento" required>
-            </div>
-
-            <!-- Identidade Visual -->
-            <div class="form-group">
-                <label for="identidade">Qual identidade visual seguir? <span style="color: red;">*</span></label>
-                <input type="text" id="identidade" name="identidade" required>
-            </div>
-
-            <!-- Modelo de Referência -->
-            <div class="form-group">
-                <label for="referencia">Algum modelo de referência? (opcional)</label>
-                <input type="text" id="referencia" name="referencia">
-            </div>
-
-            <!-- Observações Adicionais -->
-            <div class="form-group">
-                <label for="observacoes">Observações adicionais (opcional)</label>
-                <textarea id="observacoes" name="observacoes"></textarea>
-            </div>
-
-            <!-- Segunda Opção: Materiais Impressos -->
-            <div class="form-group" id="materiaisImpressos" style="display: none;">
-                <label>Escolha o tipo de material impresso/digital <span style="color: red;">*</span></label>
+            <!-- Campos condicionais para Materiais Impressos e Digitais -->
+            <div id="materiais-fields" class="conditional">
+                <label class="required">Escolha uma opção:</label>
                 <div class="radio-group">
-                    <label><input type="radio" name="material" value="Banners"> Criação de Banners</label>
-                    <label><input type="radio" name="material" value="Alinhamento Visual"> Alinhamento Visual</label>
-                    <label><input type="radio" name="material" value="Cartão de Visita"> Cartão de Visita</label>
-                    <label><input type="radio" name="material" value="Panfletos"> Panfletos</label>
-                    <label><input type="radio" name="material" value="Edição de Vídeo"> Edição de Vídeo</label>
-                    <label><input type="radio" name="material" value="Outro"> Outro (especifique): <input type="text" name="outro_material"></label>
+                    <input type="radio" id="banners" name="materiais" value="Criação de Banners">
+                    <label for="banners">Criação de Banners</label><br>
+                    <input type="radio" id="alinhamento" name="materiais" value="Alinhamento Visual">
+                    <label for="alinhamento">Alinhamento Visual</label><br>
+                    <input type="radio" id="cartao" name="materiais" value="Cartão de Visita">
+                    <label for="cartao">Cartão de Visita</label><br>
+                    <input type="radio" id="panfletos" name="materiais" value="Panfletos">
+                    <label for="panfletos">Panfletos</label><br>
+                    <input type="radio" id="video" name="materiais" value="Edição de Vídeo">
+                    <label for="video">Edição de Vídeo</label><br>
+                    <input type="radio" id="outro-materiais" name="materiais" value="Outro">
+                    <label for="outro-materiais">Outro (especifique):</label>
+                    <input type="text" id="outro-materiais-text" name="outro_materiais" placeholder="Especifique">
                 </div>
-            </div>
-
-            <!-- Dimensões -->
-            <div class="form-group">
-                <label for="dimensoes">Dimensões da arte (opcional)</label>
+                <label for="detalhes-materiais" class="required">Informe os detalhes do projeto (mínimo 100 caracteres):</label>
+                <textarea id="detalhes-materiais" name="detalhes_materiais" rows="4" minlength="100"></textarea>
+                <label for="identidade-materiais" class="required">Qual identidade visual seguir? (Possui uma identidade visual ou paleta de cores?)</label>
+                <input type="text" id="identidade-materiais" name="identidade_materiais">
+                <label for="dimensoes">Dimensões da arte: (opcional)</label>
                 <input type="text" id="dimensoes" name="dimensoes">
-            </div>
-
-            <!-- Quantidade de Artes -->
-            <div class="form-group">
-                <label for="quantidade">Quantidade de artes <span style="color: red;">*</span></label>
-                <input type="number" id="quantidade" name="quantidade" required>
-            </div>
-
-            <!-- Prazo -->
-            <div class="form-group">
-                <label>Possui um prazo específico?</label>
+                <label for="quantidade" class="required">Quantidade de artes:</label>
+                <input type="text" id="quantidade" name="quantidade" required>
+                <label class="required">Possui um prazo específico?</label>
                 <div class="radio-group">
-                    <label><input type="radio" name="prazo" value="Sim"> Sim, até: <input type="date" name="prazo_data"></label>
-                    <label><input type="radio" name="prazo" value="Não"> Não, pode ser alinhado</label>
+                    <input type="radio" id="prazo-sim" name="prazo" value="Sim" onchange="togglePrazo()">
+                    <label for="prazo-sim">Sim, até:</label>
+                    <input type="date" id="prazo-data" name="prazo_data" style="display:none;">
+                    <br>
+                    <input type="radio" id="prazo-nao" name="prazo" value="Não">
+                    <label for="prazo-nao">Não, pode ser alinhado</label>
                 </div>
+                <label for="observacoes-materiais">Observações adicionais: (opcional)</label>
+                <textarea id="observacoes-materiais" name="observacoes_materiais" rows="2"></textarea>
             </div>
 
-            <!-- Enviar -->
+            <input type="hidden" name="_subject" value="Nova Solicitação de Orçamento">
+            <input type="hidden" name="_cc" value="marjorienettorosario@gmail.com">
             <button type="submit">Enviar Solicitação</button>
-
         </form>
     </div>
 
     <script>
-        const servicoSelect = document.getElementById("servico");
-        const socialMedia = document.getElementById("socialMedia");
-        const materiaisImpressos = document.getElementById("materiaisImpressos");
+        function toggleFields() {
+            const socialMediaFields = document.getElementById('social-media-fields');
+            const materiaisFields = document.getElementById('materiais-fields');
+            const socialMediaRadio = document.getElementById('social-media');
+            const materiaisRadio = document.getElementById('materiais');
 
-        servicoSelect.addEventListener("change", function () {
-            if (this.value === "Design para Social Media") {
-                socialMedia.style.display = "block";
-                materiaisImpressos.style.display = "none";
-            } else if (this.value === "Design para materiais impressos e digitais") {
-                materiaisImpressos.style.display = "block";
-                socialMedia.style.display = "none";
+            socialMediaFields.style.display = socialMediaRadio.checked ? 'block' : 'none';
+            materiaisFields.style.display = materiaisRadio.checked ? 'block' : 'none';
+        }
+
+        function togglePrazo() {
+            const prazoSim = document.getElementById('prazo-sim');
+            const prazoData = document.getElementById('prazo-data');
+            prazoData.style.display = prazoSim.checked ? 'inline-block' : 'none';
+        }
+
+        // Validação personalizada para e-mail ou WhatsApp
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const email = document.getElementById('email').value;
+            const whatsapp = document.getElementById('whatsapp').value;
+            if (!email && !whatsapp) {
+                e.preventDefault();
+                alert('Por favor, preencha pelo menos o e-mail ou o WhatsApp.');
             }
         });
     </script>
-
 </body>
 </html>
