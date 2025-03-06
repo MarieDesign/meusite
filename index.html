@@ -7,38 +7,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marjorie</title>
     <script>
-        // Impede qualquer tipo de atualização automática da página
-        window.onload = function() {
-            // Bloqueia a navegação do histórico e tenta impedir qualquer recarga forçada
-            if (window.history && window.history.pushState) {
-                window.history.pushState(null, null, window.location.href);
-                window.onpopstate = function() {
-                    window.history.pushState(null, null, window.location.href); // Bloqueia a retroceder/avançar
-                };
-            }
-
-            // Impede intervalos que tentem recarregar a página automaticamente
-            setInterval(function() {
-                return false;  // Bloqueia qualquer tentativa de recarregar
-            }, 1000);
+        // Bloqueia métodos comuns de recarga automática
+        window.location.reload = function() {
+            console.log('Tentativa de recarga automática bloqueada');
+            // Não faz nada, impedindo a recarga
         };
 
-        // Desabilita F5 e Ctrl+R para evitar recarga com essas teclas
-        window.addEventListener("keydown", function(e) {
-            // Impede o recarregamento ao pressionar F5 ou Ctrl+R
-            if (e.key === "F5" || (e.ctrlKey && e.key === "r")) {
-                e.preventDefault(); // Impede a recarga da página
-            }
-        });
+        window.location.href = window.location.href; // Impede redirecionamentos automáticos
+        window.location.assign = function() {
+            console.log('Tentativa de assign bloqueada');
+        };
+        window.location.replace = function() {
+            console.log('Tentativa de replace bloqueada');
+        };
 
-        // Bloqueia a recarga da página sem mostrar a caixa de confirmação
-        window.addEventListener('beforeunload', function(event) {
-            // Não executa o comportamento padrão que gera a confirmação
-            event.preventDefault();
-            event.returnValue = ''; // Para navegadores modernos
-        });
+        // Bloqueia setInterval e setTimeout que tentem recarregar
+        const originalSetInterval = window.setInterval;
+        const originalSetTimeout = window.setTimeout;
+
+        window.setInterval = function(fn, time) {
+            if (typeof fn === 'function' && (fn.toString().includes('reload') || fn.toString().includes('location'))) {
+                console.log('setInterval bloqueado: tentativa de recarga detectada');
+                return -1;
+            }
+            return originalSetInterval(fn, time);
+        };
+
+        window.setTimeout = function(fn, time) {
+            if (typeof fn === 'function' && (fn.toString().includes('reload') || fn.toString().includes('location'))) {
+                console.log('setTimeout bloqueado: tentativa de recarga detectada');
+                return -1;
+            }
+            return originalSetTimeout(fn, time);
+        };
+
+        // Remove meta tags de refresh e monitora alterações dinâmicas
+        window.onload = function() {
+            const metaTags = document.getElementsByTagName('meta');
+            for (let i = 0; i < metaTags.length; i++) {
+                if (metaTags[i].getAttribute('http-equiv') === 'refresh') {
+                    metaTags[i].parentNode.removeChild(metaTags[i]);
+                    console.log('Meta tag de refresh removida');
+                }
+            }
+
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    const addedNodes = mutation.addedNodes;
+                    for (let i = 0; i < addedNodes.length; i++) {
+                        if (addedNodes[i].tagName === 'META' && addedNodes[i].getAttribute('http-equiv') === 'refresh') {
+                            addedNodes[i].parentNode.removeChild(addedNodes[i]);
+                            console.log('Meta tag de refresh dinâmica removida');
+                        }
+                    }
+                });
+            });
+            observer.observe(document.head, { childList: true, subtree: true });
+
+            // Teste de recarga automática para verificar o bloqueio
+            setTimeout(function() {
+                window.location.reload();
+            }, 5000);
+        };
     </script>
 </head>
 <body>
