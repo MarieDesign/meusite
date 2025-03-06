@@ -748,18 +748,26 @@
 
         .radio-group {
             margin-top: 5px;
-        }
-
-        /* Ajuste para os rótulos e círculos de radio */
-        .radio-group input[type="radio"] {
-            vertical-align: middle;
-            margin-right: 10px;
+            display: flex;
+            flex-direction: column; /* Alinha os itens em coluna */
         }
 
         .radio-group label {
-            display: inline-block;
-            vertical-align: middle;
+            margin-right: 8px;
             font-size: 12px;
+            display: flex; /* Usa flex para alinhar rádio e texto */
+            align-items: center; /* Centraliza verticalmente o rádio com o texto */
+            margin-bottom: 5px; /* Espaço entre as opções */
+        }
+
+        .radio-group input[type="radio"] {
+            margin-right: 5px; /* Espaço entre o círculo e o texto */
+            vertical-align: middle; /* Garante alinhamento fino */
+        }
+
+        .radio-group input[type="text"] {
+            width: auto; /* Ajusta o campo "Outro" para não ocupar toda a largura */
+            margin-left: 5px; /* Espaço após "Outro:" */
         }
 
         button {
@@ -917,13 +925,11 @@
             const socialMediaOptions = document.getElementById('socialMediaOptions');
             const materiaisImpressosOptions = document.getElementById('materiaisImpressosOptions');
 
-            // Validação do Nome
             if (!nome) {
                 document.getElementById('nome').parentElement.classList.add('invalid');
                 isValid = false;
             }
 
-            // Validação de E-mail ou WhatsApp
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             const whatsappRegex = /^(\+55)?\s?\(?[1-9]{2}\)?\s?[9]?\d{4}-?\d{4}$/;
             const isEmailValid = email ? emailRegex.test(email) : true;
@@ -941,31 +947,26 @@
                 isValid = false;
             }
 
-            // Validação do Serviço
             if (!servico) {
                 document.getElementById('servico').parentElement.classList.add('invalid');
                 isValid = false;
             }
 
-            // Validação do Pacote (Social Media)
             if (servico === "Design para Social Media" && !document.querySelector('input[name="pacote"]:checked')) {
                 socialMediaOptions.classList.add('invalid');
                 isValid = false;
             }
 
-            // Validação do Material (Materiais Impressos)
             if (servico === "Design para materiais impressos e digitais" && !document.querySelector('input[name="material"]:checked')) {
                 materiaisImpressosOptions.classList.add('invalid');
                 isValid = false;
             }
 
-            // Validação dos Detalhes
             if (!detalhes || detalhes.length < 100) {
                 document.getElementById('detalhes').parentElement.classList.add('invalid');
                 isValid = false;
             }
 
-            // Validação da Identidade Visual
             if (!identidade) {
                 document.getElementById('identidade').parentElement.classList.add('invalid');
                 isValid = false;
