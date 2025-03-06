@@ -750,8 +750,15 @@
             margin-top: 5px;
         }
 
+        /* Ajuste para os rótulos e círculos de radio */
+        .radio-group input[type="radio"] {
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
         .radio-group label {
-            margin-right: 8px;
+            display: inline-block;
+            vertical-align: middle;
             font-size: 12px;
         }
 
@@ -904,7 +911,7 @@
             const nome = document.getElementById('nome').value.trim();
             const email = document.getElementById('email').value.trim();
             const whatsapp = document.getElementById('whatsapp').value.trim();
-            const servico = document.getElementById('servico').value.trim(); // Adicionado .trim() para consistência
+            const servico = document.getElementById('servico').value.trim();
             const detalhes = document.getElementById('detalhes').value.trim();
             const identidade = document.getElementById('identidade').value.trim();
             const socialMediaOptions = document.getElementById('socialMediaOptions');
