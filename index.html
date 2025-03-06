@@ -647,9 +647,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solicitação de Orçamento - Marjorie Rosário</title>
     <style>
+        /* Estilo geral */
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(to right, #000000, #6a1b9a); /* Degradê preto e roxo */
+            background: linear-gradient(to right, #000000, #6a1b9a);
             margin: 0;
             padding: 0;
             color: #fff;
@@ -658,11 +659,10 @@
             min-height: 100vh;
         }
 
-        /* Estilo do botão discreto, centralizado no conteúdo */
         .btn-container {
             text-align: center;
-            margin-top: auto; /* Faz o botão subir para o meio da página */
-            margin-bottom: 100px; /* Aumentei o espaço abaixo do botão para distanciá-lo do rodapé */
+            margin-top: auto;
+            margin-bottom: 100px;
         }
 
         .btn-container button {
@@ -675,16 +675,15 @@
             border: none;
             cursor: pointer;
             transition: all 0.3s ease;
-            width: auto; /* Largura automática */
-            max-width: 250px; /* Largura limitada */
-            margin: 0 auto; /* Centraliza o botão */
+            width: auto;
+            max-width: 250px;
+            margin: 0 auto;
         }
 
         .btn-container button:hover {
             background-color: #4a148c;
         }
 
-        /* Estilo do formulário */
         .container {
             width: 80%;
             max-width: 380px;
@@ -693,7 +692,7 @@
             padding: 10px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            display: none; /* Inicialmente oculto */
+            display: none;
         }
 
         h1 {
@@ -719,7 +718,7 @@
         label {
             font-weight: bold;
             color: transparent;
-            background: linear-gradient(to right, #6a1b9a, #f06292, #ffffff); /* Degradê de roxo para rosa e branco */
+            background: linear-gradient(to right, #6a1b9a, #f06292, #ffffff);
             -webkit-background-clip: text;
             font-size: 14px;
             display: block;
@@ -734,8 +733,8 @@
             margin-top: 4px;
             box-sizing: border-box;
             font-size: 14px;
-            color: #fff; /* Alterei o texto para branco */
-            background-color: #333; /* Cor de fundo mais escura para contraste */
+            color: #fff;
+            background-color: #333;
         }
 
         input:focus, select:focus, textarea:focus {
@@ -745,15 +744,6 @@
 
         textarea {
             height: 40px;
-        }
-
-        .radio-group {
-            margin-top: 5px;
-        }
-
-        .radio-group label {
-            margin-right: 8px;
-            font-size: 12px;
         }
 
         button {
@@ -783,7 +773,7 @@
 </head>
 <body>
 
-    <!-- Botão para Solicitar Orçamento, agora discreto e pequeno, centralizado -->
+    <!-- Botão para Solicitar Orçamento -->
     <div class="btn-container">
         <button onclick="showForm()">Solicitar Orçamento</button>
     </div>
@@ -802,13 +792,13 @@
 
             <!-- E-mail ou WhatsApp -->
             <div class="form-group">
-                <label for="email">E-mail <span class="required">*</span></label>
-                <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="Digite seu e-mail">
             </div>
 
             <div class="form-group">
-                <label for="whatsapp">WhatsApp <span class="required">*</span></label>
-                <input type="tel" id="whatsapp" name="whatsapp" placeholder="Digite seu número de WhatsApp" required>
+                <label for="whatsapp">WhatsApp</label>
+                <input type="tel" id="whatsapp" name="whatsapp" placeholder="Digite seu número de WhatsApp">
             </div>
 
             <!-- Tipo de Serviço -->
@@ -819,30 +809,6 @@
                     <option value="Design para Social Media">Design para Social Media</option>
                     <option value="Design para materiais impressos e digitais">Design para materiais impressos e digitais</option>
                 </select>
-            </div>
-
-            <!-- Social Media - Opções -->
-            <div class="form-group hidden" id="socialMediaOptions">
-                <label>Escolha o pacote de Social Media <span class="required">*</span></label>
-                <div class="radio-group">
-                    <label><input type="radio" name="pacote" value="8 posts"> 8 posts</label>
-                    <label><input type="radio" name="pacote" value="12 posts"> 12 posts</label>
-                    <label><input type="radio" name="pacote" value="16 posts"> 16 posts</label>
-                    <label><input type="radio" name="pacote" value="Outro"> Outro: <input type="text" name="outro_pacote"></label>
-                </div>
-            </div>
-
-            <!-- Materiais Impressos - Opções -->
-            <div class="form-group hidden" id="materiaisImpressosOptions">
-                <label>Escolha o tipo de material <span class="required">*</span></label>
-                <div class="radio-group">
-                    <label><input type="radio" name="material" value="Banners"> Banners</label>
-                    <label><input type="radio" name="material" value="Alinhamento Visual"> Alinhamento Visual</label>
-                    <label><input type="radio" name="material" value="Cartão de Visita"> Cartão de Visita</label>
-                    <label><input type="radio" name="material" value="Panfletos"> Panfletos</label>
-                    <label><input type="radio" name="material" value="Edição de Vídeo"> Edição de Vídeo</label>
-                    <label><input type="radio" name="material" value="Outro"> Outro: <input type="text" name="outro_material"></label>
-                </div>
             </div>
 
             <!-- Detalhes do Projeto -->
@@ -857,12 +823,6 @@
                 <input type="text" id="identidade" name="identidade" required>
             </div>
 
-            <!-- Observações Adicionais -->
-            <div class="form-group">
-                <label for="observacoes">Observações (opcional)</label>
-                <textarea id="observacoes" name="observacoes"></textarea>
-            </div>
-
             <!-- Enviar -->
             <button type="submit">Enviar Solicitação</button>
         </form>
@@ -871,93 +831,24 @@
     <script>
         // Função para mostrar o formulário e esconder o botão
         function showForm() {
-            document.getElementById("formContainer").style.display = "block"; // Exibe o formulário
-            document.querySelector(".btn-container").style.display = "none"; // Esconde o botão
+            document.getElementById("formContainer").style.display = "block";
+            document.querySelector(".btn-container").style.display = "none";
         }
 
-        function validateForm() {
+        // Função para validar se ao menos um dos campos (E-mail ou WhatsApp) foi preenchido
+        function validateForm(event) {
             const email = document.getElementById('email').value;
             const whatsapp = document.getElementById('whatsapp').value;
 
+            // Se ambos os campos (E-mail e WhatsApp) estiverem vazios, exibe alerta
             if (!email && !whatsapp) {
                 alert("Você precisa preencher pelo menos um dos campos: E-mail ou WhatsApp.");
-                return false;
-            }
-            return true;
-        }
-
-        function toggleOptions() {
-            const servico = document.getElementById('servico').value;
-            const socialMediaOptions = document.getElementById('socialMediaOptions');
-            const materiaisImpressosOptions = document.getElementById('materiaisImpressosOptions');
-
-            if (servico === "Design para Social Media") {
-                socialMediaOptions.classList.remove('hidden');
-                materiaisImpressosOptions.classList.add('hidden');
-            } else if (servico === "Design para materiais impressos e digitais") {
-                materiaisImpressosOptions.classList.remove('hidden');
-                socialMediaOptions.classList.add('hidden');
-            } else {
-                socialMediaOptions.classList.add('hidden');
-                materiaisImpressosOptions.classList.add('hidden');
+                event.preventDefault(); // Impede o envio do formulário
             }
         }
 
-        // Inicializar com a exibição correta
-        window.onload = function() {
-            toggleOptions();
-            loadFormData(); // Carregar dados salvos ao carregar a página
-        };
-
-        // Função para carregar os dados do formulário do localStorage
-        function loadFormData() {
-            const formData = JSON.parse(localStorage.getItem("formData"));
-
-            if (formData) {
-                document.getElementById('nome').value = formData.nome;
-                document.getElementById('email').value = formData.email;
-                document.getElementById('whatsapp').value = formData.whatsapp;
-                document.getElementById('servico').value = formData.servico;
-                document.getElementById('detalhes').value = formData.detalhes;
-                document.getElementById('identidade').value = formData.identidade;
-                document.getElementById('observacoes').value = formData.observacoes;
-            }
-        }
-
-        // Armazenar os dados do formulário no localStorage
-        document.getElementById("orçamentoForm").addEventListener("input", function() {
-            const formData = {
-                nome: document.getElementById('nome').value,
-                email: document.getElementById('email').value,
-                whatsapp: document.getElementById('whatsapp').value,
-                servico: document.getElementById('servico').value,
-                detalhes: document.getElementById('detalhes').value,
-                identidade: document.getElementById('identidade').value,
-                observacoes: document.getElementById('observacoes').value
-            };
-
-            localStorage.setItem("formData", JSON.stringify(formData)); // Salva no localStorage
-        });
-
-        // Evitar o envio do formulário e fazer o envio assíncrono
-        document.getElementById("orçamentoForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Evita o envio padrão do formulário
-
-            const formData = new FormData(this); // Pega os dados do formulário
-            fetch("https://formspree.io/f/mleqyqgq", {
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert("Formulário enviado com sucesso!"); // Alerta de sucesso
-                this.reset(); // Limpa o formulário
-                localStorage.removeItem("formData"); // Remove os dados do localStorage
-            })
-            .catch(error => {
-                alert("Ocorreu um erro ao enviar o formulário. Tente novamente.");
-            });
-        });
+        // Adiciona a validação ao envio do formulário
+        document.getElementById("orçamentoForm").addEventListener("submit", validateForm);
     </script>
 
 </body>
