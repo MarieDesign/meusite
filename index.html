@@ -7,38 +7,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marjorie Rosario</title>
+    <title>Evitar Atualização Automática</title>
     <script>
-        // Bloquear qualquer tipo de recarregamento automático
+        // Impede qualquer recarregamento automático da página
         window.onload = function() {
-            // Bloqueio forte para garantir que a página não seja recarregada automaticamente
+            // Bloqueio para qualquer tentativa de recarregar via setInterval
+            setInterval(function() {
+                return false; // Impede recarga automática
+            }, 1000);
+
+            // Evitar mudanças no histórico (evita recarga via manipulação do navegador)
             if (window.history && window.history.pushState) {
                 window.history.pushState(null, null, window.location.href);
                 window.onpopstate = function() {
-                    window.history.pushState(null, null, window.location.href); // Bloqueia navegação de recarga
+                    window.history.pushState(null, null, window.location.href); // Bloqueia retroceder/atualizar
                 };
             }
-
-            // Desabilitar qualquer tipo de recarregamento forçado
-            setInterval(function() {
-                return false;  // Evita qualquer recarga automática
-            }, 1000);
-
-            // Remover qualquer chamada para "location.reload()"
-            window.addEventListener('beforeunload', function(event) {
-                // Impede a execução do recarregamento sem qualquer confirmação do usuário
-                event.preventDefault();
-                event.returnValue = ''; // Necessário para alguns navegadores antigos
-            });
         };
 
-        // Impede as teclas F5 e Ctrl+R que causam recarga
+        // Desabilitar a tecla F5 e Ctrl+R que causam recarga
         window.addEventListener("keydown", function(e) {
+            // Impede recarga quando pressionado F5 ou Ctrl+R
             if (e.key === "F5" || (e.ctrlKey && e.key === "r")) {
-                e.preventDefault(); // Impede recarregar a página
+                e.preventDefault(); // Impede o recarregamento da página
             }
         });
 
+        // Impede recarregamento da página com o clique direito ou recarregamento pelo navegador
+        window.addEventListener('beforeunload', function(event) {
+            // Previne o comportamento de recarga sem interação do usuário
+            event.preventDefault();
+            event.returnValue = ''; // Para alguns navegadores antigos
+        });
     </script>
 </head>
 <body>
