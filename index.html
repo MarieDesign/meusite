@@ -712,6 +712,7 @@
 
         .form-group {
             margin-bottom: 8px;
+            position: relative;
         }
 
         label {
@@ -777,6 +778,30 @@
         .hidden {
             display: none;
         }
+
+        .error-message {
+            display: none;
+            color: #ffcc00; /* Amarelo para destacar */
+            font-size: 12px;
+            margin-top: 4px;
+            padding: 4px 8px;
+            background-color: rgba(255, 204, 0, 0.1);
+            border: 1px solid #ffcc00;
+            border-radius: 4px;
+            position: absolute;
+            left: 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .error-message::before {
+            content: "⚠ "; /* Ícone de atenção */
+            font-size: 14px;
+        }
+
+        .form-group.invalid .error-message {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -792,11 +817,13 @@
             <div class="form-group">
                 <label for="nome">Nome <span class="required">*</span></label>
                 <input type="text" id="nome" name="nome" required>
+                <div class="error-message" id="nome-error">Preencha o campo Nome.</div>
             </div>
 
             <div class="form-group">
                 <label for="email">E-mail</label>
                 <input type="email" id="email" name="email" placeholder="Digite seu e-mail">
+                <div class="error-message" id="email-whatsapp-error">Preencha pelo menos um: E-mail ou WhatsApp.</div>
             </div>
 
             <div class="form-group">
@@ -811,6 +838,7 @@
                     <option value="Design para Social Media">Design para Social Media</option>
                     <option value="Design para materiais impressos e digitais">Design para materiais impressos e digitais</option>
                 </select>
+                <div class="error-message" id="servico-error">Selecione um tipo de serviço.</div>
             </div>
 
             <div class="form-group hidden" id="socialMediaOptions">
@@ -821,6 +849,7 @@
                     <label><input type="radio" name="pacote" value="16 posts"> 16 posts</label>
                     <label><input type="radio" name="pacote" value="Outro"> Outro: <input type="text" name="outro_pacote"></label>
                 </div>
+                <div class="error-message" id="pacote-error">Selecione um pacote de Social Media.</div>
             </div>
 
             <div class="form-group hidden" id="materiaisImpressosOptions">
@@ -833,16 +862,19 @@
                     <label><input type="radio" name="material" value="Edição de Vídeo"> Edição de Vídeo</label>
                     <label><input type="radio" name="material" value="Outro"> Outro: <input type="text" name="outro_material"></label>
                 </div>
+                <div class="error-message" id="material-error">Selecione um tipo de material.</div>
             </div>
 
             <div class="form-group">
                 <label for="detalhes">Detalhes do projeto <span class="required">*</span></label>
                 <textarea id="detalhes" name="detalhes" required minlength="100"></textarea>
+                <div class="error-message" id="detalhes-error">O campo deve conter no mínimo 100 caracteres.</div>
             </div>
 
             <div class="form-group">
                 <label for="identidade">Identidade visual <span class="required">*</span></label>
                 <input type="text" id="identidade" name="identidade" required>
+                <div class="error-message" id="identidade-error">Preencha o campo Identidade visual.</div>
             </div>
 
             <div class="form-group">
@@ -860,22 +892,61 @@
             document.querySelector(".btn-container").style.display = "none";
         }
 
+        function clearErrors() {
+            document.querySelectorAll('.form-group').forEach(group => {
+                group.classList.remove('invalid');
+            });
+        }
+
         function validateForm() {
+            clearErrors();
+            let isValid = true;
+
+            const nome = document.getElementById('nome').value.trim();
             const email = document.getElementById('email').value.trim();
             const whatsapp = document.getElementById('whatsapp').value.trim();
+            const servico = document.getElementById('servico').value;
             const detalhes = document.getElementById('detalhes').value.trim();
+            const identidade = document.getElementById('identidade').value.trim();
+            const socialMediaOptions = document.getElementById('socialMediaOptions');
+            const materiaisImpressosOptions = document.getElementById('materiaisImpressosOptions');
+
+            if (!nome) {
+                document.getElementById('nome').parentElement.classList.add('invalid');
+                isValid = false;
+            }
 
             if (!email && !whatsapp) {
-                alert("Você precisa preencher pelo menos um dos campos: E-mail ou WhatsApp.");
-                return false;
+                document.getElementById('email').parentElement.classList.add('invalid');
+                isValid = false;
             }
 
-            if (detalhes.length < 100) {
-                alert("O campo 'Detalhes do projeto' deve conter no mínimo 100 caracteres.");
-                return false;
+            if (!servico) {
+                document.getElementById('servico').parentElement.classList.add('invalid');
+                isValid = false;
             }
 
-            return true;
+            if (servico === "Design para Social Media" && !document.querySelector('input[name="pacote"]:checked')) {
+                socialMediaOptions.classList.add('invalid');
+                isValid = false;
+            }
+
+            if (servico === "Design para materiais impressos e digitais" && !document.querySelector('input[name="material"]:checked')) {
+                materiaisImpressosOptions.classList.add('invalid');
+                isValid = false;
+            }
+
+            if (!detalhes || detalhes.length < 100) {
+                document.getElementById('detalhes').parentElement.classList.add('invalid');
+                isValid = false;
+            }
+
+            if (!identidade) {
+                document.getElementById('identidade').parentElement.classList.add('invalid');
+                isValid = false;
+            }
+
+            return isValid;
         }
 
         function toggleOptions() {
@@ -946,12 +1017,12 @@
                 return response.json();
             })
             .then(data => {
-                alert("Formulário enviado com sucesso!");
+                alert("Formulário enviado com sucesso!"); // Mantive este alert para confirmação de sucesso
                 this.reset();
                 localStorage.removeItem("formData");
             })
             .catch(error => {
-                alert("Ocorreu um erro ao enviar o formulário. Tente novamente.");
+                alert("Ocorreu um erro ao enviar o formulário. Tente novamente."); // Mantive este alert para erro
                 console.error(error);
             });
         });
