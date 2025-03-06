@@ -916,21 +916,21 @@
                 isValid = false;
             }
 
-            // Validação de E-mail ou WhatsApp (pelo menos um preenchido e válido)
+            // Validação de E-mail ou WhatsApp
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             const whatsappRegex = /^(\+55)?\s?\(?[1-9]{2}\)?\s?[9]?\d{4}-?\d{4}$/;
             const isEmailValid = email ? emailRegex.test(email) : true;
             const isWhatsappValid = whatsapp ? whatsappRegex.test(whatsapp) : true;
 
-            if ((!email && !whatsapp) || (email && !isEmailValid) || (whatsapp && !isWhatsappValid)) {
-                if (!email && !whatsapp) {
-                    document.getElementById('email').parentElement.classList.add('invalid');
-                    document.getElementById('whatsapp').parentElement.classList.add('invalid');
-                } else if (email && !isEmailValid) {
-                    document.getElementById('email').parentElement.classList.add('invalid');
-                } else if (whatsapp && !isWhatsappValid) {
-                    document.getElementById('whatsapp').parentElement.classList.add('invalid');
-                }
+            if (!email && !whatsapp) {
+                document.getElementById('email').parentElement.classList.add('invalid');
+                document.getElementById('whatsapp').parentElement.classList.add('invalid');
+                isValid = false;
+            } else if (email && !isEmailValid) {
+                document.getElementById('email').parentElement.classList.add('invalid');
+                isValid = false;
+            } else if (whatsapp && !isWhatsappValid) {
+                document.getElementById('whatsapp').parentElement.classList.add('invalid');
                 isValid = false;
             }
 
