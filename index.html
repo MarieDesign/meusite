@@ -796,8 +796,7 @@
         <h1>Solicitação de Orçamento</h1>
         <p>Resposta em até 20 minutos</p>
 
-        <form action="https://formspree.io/f/mleqyqgq" method="POST" onsubmit="return validateForm()">
-
+        <form id="orçamentoForm">
             <!-- Nome -->
             <div class="form-group">
                 <label for="nome">Nome <span class="required">*</span></label>
@@ -910,7 +909,58 @@
         // Inicializar com a exibição correta
         window.onload = function() {
             toggleOptions();
+            loadFormData(); // Carregar dados salvos ao carregar a página
         };
+
+        // Função para carregar os dados do formulário do localStorage
+        function loadFormData() {
+            const formData = JSON.parse(localStorage.getItem("formData"));
+
+            if (formData) {
+                document.getElementById('nome').value = formData.nome;
+                document.getElementById('email').value = formData.email;
+                document.getElementById('whatsapp').value = formData.whatsapp;
+                document.getElementById('servico').value = formData.servico;
+                document.getElementById('detalhes').value = formData.detalhes;
+                document.getElementById('identidade').value = formData.identidade;
+                document.getElementById('observacoes').value = formData.observacoes;
+            }
+        }
+
+        // Armazenar os dados do formulário no localStorage
+        document.getElementById("orçamentoForm").addEventListener("input", function() {
+            const formData = {
+                nome: document.getElementById('nome').value,
+                email: document.getElementById('email').value,
+                whatsapp: document.getElementById('whatsapp').value,
+                servico: document.getElementById('servico').value,
+                detalhes: document.getElementById('detalhes').value,
+                identidade: document.getElementById('identidade').value,
+                observacoes: document.getElementById('observacoes').value
+            };
+
+            localStorage.setItem("formData", JSON.stringify(formData)); // Salva no localStorage
+        });
+
+        // Evitar o envio do formulário e fazer o envio assíncrono
+        document.getElementById("orçamentoForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Evita o envio padrão do formulário
+
+            const formData = new FormData(this); // Pega os dados do formulário
+            fetch("https://formspree.io/f/mleqyqgq", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert("Formulário enviado com sucesso!"); // Alerta de sucesso
+                this.reset(); // Limpa o formulário
+                localStorage.removeItem("formData"); // Remove os dados do localStorage
+            })
+            .catch(error => {
+                alert("Ocorreu um erro ao enviar o formulário. Tente novamente.");
+            });
+        });
     </script>
 
 </body>
