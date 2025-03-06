@@ -764,9 +764,15 @@
             text-align: left; /* Alinha o texto à esquerda */
         }
 
+        .radio-group .option-container {
+            display: flex;
+            align-items: center; /* Alinha o texto "Outro:" e o campo de texto */
+            flex: 1; /* Ocupa o espaço disponível à esquerda */
+        }
+
         .radio-group input[type="radio"] {
             margin-left: 10px; /* Espaço entre o texto e o círculo */
-            width: 16px; /* Define uma largura fixa para os círculos */
+            width: 16px; /* Largura fixa para alinhamento perfeito */
         }
 
         .radio-group input[type="text"] {
@@ -865,7 +871,7 @@
                     <label><span class="option-text">8 posts</span><input type="radio" name="pacote" value="8 posts"></label>
                     <label><span class="option-text">12 posts</span><input type="radio" name="pacote" value="12 posts"></label>
                     <label><span class="option-text">16 posts</span><input type="radio" name="pacote" value="16 posts"></label>
-                    <label><span class="option-text">Outro:</span><input type="radio" name="pacote" value="Outro"><input type="text" name="outro_pacote"></label>
+                    <label><div class="option-container"><span class="option-text">Outro:</span><input type="text" name="outro_pacote"></div><input type="radio" name="pacote" value="Outro"></label>
                 </div>
                 <div class="error-message" id="pacote-error">Selecione um pacote de Social Media.</div>
             </div>
@@ -878,7 +884,7 @@
                     <label><span class="option-text">Cartão de Visita</span><input type="radio" name="material" value="Cartão de Visita"></label>
                     <label><span class="option-text">Panfletos</span><input type="radio" name="material" value="Panfletos"></label>
                     <label><span class="option-text">Edição de Vídeo</span><input type="radio" name="material" value="Edição de Vídeo"></label>
-                    <label><span class="option-text">Outro:</span><input type="radio" name="material" value="Outro"><input type="text" name="outro_material"></label>
+                    <label><div class="option-container"><span class="option-text">Outro:</span><input type="text" name="outro_material"></div><input type="radio" name="material" value="Outro"></label>
                 </div>
                 <div class="error-message" id="material-error">Selecione um tipo de material.</div>
             </div>
