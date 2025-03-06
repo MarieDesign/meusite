@@ -658,13 +658,10 @@
             color: #fff;
         }
 
-        /* Estilo do botão discreto */
+        /* Estilo do botão discreto, centralizado no conteúdo */
         .btn-container {
             text-align: center;
-            position: fixed;
-            bottom: 30px; /* Ajustado para afastar do rodapé */
-            left: 50%;
-            transform: translateX(-50%); /* Centraliza horizontalmente */
+            margin-top: 50px; /* Adicionando um espaçamento do topo */
         }
 
         .btn-container button {
@@ -679,6 +676,7 @@
             transition: all 0.3s ease;
             width: auto; /* Largura automática */
             max-width: 250px; /* Largura limitada */
+            margin: 0 auto; /* Centraliza o botão */
         }
 
         .btn-container button:hover {
@@ -779,7 +777,7 @@
 </head>
 <body>
 
-    <!-- Botão para Solicitar Orçamento, agora discreto e pequeno -->
+    <!-- Botão para Solicitar Orçamento, agora discreto e pequeno, centralizado -->
     <div class="btn-container">
         <button onclick="showForm()">Solicitar Orçamento</button>
     </div>
