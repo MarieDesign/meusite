@@ -658,27 +658,29 @@
             color: #fff;
         }
 
-        /* Estilo do botão flutuante */
-        .floating-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #6a1b9a;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            padding: 12px 20px;
-            border-radius: 50px;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
+        /* Estilo do botão discreto */
+        .btn-container {
+            text-align: center;
+            margin-top: 20px;
         }
 
-        .floating-button:hover {
+        .btn-container button {
+            background-color: #6a1b9a;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-container button:hover {
             background-color: #4a148c;
         }
 
+        /* Estilo do formulário */
         .container {
             width: 80%;
             max-width: 380px;
@@ -688,7 +690,6 @@
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
             display: none; /* Inicialmente oculto */
-            transition: all 0.3s ease;
         }
 
         h1 {
@@ -773,8 +774,10 @@
 </head>
 <body>
 
-    <!-- Botão flutuante de Solicitar Orçamento -->
-    <button class="floating-button" onclick="showForm()">Solicitar Orçamento</button>
+    <!-- Botão para Solicitar Orçamento, agora discreto e pequeno -->
+    <div class="btn-container">
+        <button onclick="showForm()">Solicitar Orçamento</button>
+    </div>
 
     <!-- Formulário que aparece após clicar no botão -->
     <div class="container" id="formContainer">
@@ -861,7 +864,7 @@
         // Função para mostrar o formulário e esconder o botão
         function showForm() {
             document.getElementById("formContainer").style.display = "block"; // Exibe o formulário
-            document.querySelector(".floating-button").style.display = "none"; // Esconde o botão
+            document.querySelector(".btn-container").style.display = "none"; // Esconde o botão
         }
 
         function validateForm() {
