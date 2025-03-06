@@ -647,7 +647,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solicitação de Orçamento - Marjorie Rosário</title>
     <style>
-        /* Estilo geral */
         body {
             font-family: 'Arial', sans-serif;
             background: linear-gradient(to right, #000000, #6a1b9a);
@@ -746,6 +745,15 @@
             height: 40px;
         }
 
+        .radio-group {
+            margin-top: 5px;
+        }
+
+        .radio-group label {
+            margin-right: 8px;
+            font-size: 12px;
+        }
+
         button {
             width: 100%;
             padding: 8px;
@@ -772,25 +780,20 @@
     </style>
 </head>
 <body>
-
-    <!-- Botão para Solicitar Orçamento -->
     <div class="btn-container">
         <button onclick="showForm()">Solicitar Orçamento</button>
     </div>
 
-    <!-- Formulário que aparece após clicar no botão -->
     <div class="container" id="formContainer">
         <h1>Solicitação de Orçamento</h1>
         <p>Resposta em até 20 minutos</p>
 
         <form id="orçamentoForm">
-            <!-- Nome -->
             <div class="form-group">
                 <label for="nome">Nome <span class="required">*</span></label>
                 <input type="text" id="nome" name="nome" required>
             </div>
 
-            <!-- E-mail ou WhatsApp -->
             <div class="form-group">
                 <label for="email">E-mail</label>
                 <input type="email" id="email" name="email" placeholder="Digite seu e-mail">
@@ -801,7 +804,6 @@
                 <input type="tel" id="whatsapp" name="whatsapp" placeholder="Digite seu número de WhatsApp">
             </div>
 
-            <!-- Tipo de Serviço -->
             <div class="form-group">
                 <label for="servico">Qual tipo de serviço você procura? <span class="required">*</span></label>
                 <select id="servico" name="servico" required onchange="toggleOptions()">
@@ -811,46 +813,142 @@
                 </select>
             </div>
 
-            <!-- Detalhes do Projeto -->
+            <div class="form-group hidden" id="socialMediaOptions">
+                <label>Escolha o pacote de Social Media <span class="required">*</span></label>
+                <div class="radio-group">
+                    <label><input type="radio" name="pacote" value="8 posts"> 8 posts</label>
+                    <label><input type="radio" name="pacote" value="12 posts"> 12 posts</label>
+                    <label><input type="radio" name="pacote" value="16 posts"> 16 posts</label>
+                    <label><input type="radio" name="pacote" value="Outro"> Outro: <input type="text" name="outro_pacote"></label>
+                </div>
+            </div>
+
+            <div class="form-group hidden" id="materiaisImpressosOptions">
+                <label>Escolha o tipo de material <span class="required">*</span></label>
+                <div class="radio-group">
+                    <label><input type="radio" name="material" value="Banners"> Banners</label>
+                    <label><input type="radio" name="material" value="Alinhamento Visual"> Alinhamento Visual</label>
+                    <label><input type="radio" name="material" value="Cartão de Visita"> Cartão de Visita</label>
+                    <label><input type="radio" name="material" value="Panfletos"> Panfletos</label>
+                    <label><input type="radio" name="material" value="Edição de Vídeo"> Edição de Vídeo</label>
+                    <label><input type="radio" name="material" value="Outro"> Outro: <input type="text" name="outro_material"></label>
+                </div>
+            </div>
+
             <div class="form-group">
                 <label for="detalhes">Detalhes do projeto <span class="required">*</span></label>
                 <textarea id="detalhes" name="detalhes" required></textarea>
             </div>
 
-            <!-- Identidade Visual -->
             <div class="form-group">
                 <label for="identidade">Identidade visual <span class="required">*</span></label>
                 <input type="text" id="identidade" name="identidade" required>
             </div>
 
-            <!-- Enviar -->
+            <div class="form-group">
+                <label for="observacoes">Observações (opcional)</label>
+                <textarea id="observacoes" name="observacoes"></textarea>
+            </div>
+
             <button type="submit">Enviar Solicitação</button>
         </form>
     </div>
 
     <script>
-        // Função para mostrar o formulário e esconder o botão
         function showForm() {
             document.getElementById("formContainer").style.display = "block";
             document.querySelector(".btn-container").style.display = "none";
         }
 
-        // Função para validar se ao menos um dos campos (E-mail ou WhatsApp) foi preenchido
-        function validateForm(event) {
-            const email = document.getElementById('email').value;
-            const whatsapp = document.getElementById('whatsapp').value;
+        function validateForm() {
+            const email = document.getElementById('email').value.trim();
+            const whatsapp = document.getElementById('whatsapp').value.trim();
 
-            // Se ambos os campos (E-mail e WhatsApp) estiverem vazios, exibe alerta
             if (!email && !whatsapp) {
                 alert("Você precisa preencher pelo menos um dos campos: E-mail ou WhatsApp.");
-                event.preventDefault(); // Impede o envio do formulário
+                return false;
+            }
+            return true;
+        }
+
+        function toggleOptions() {
+            const servico = document.getElementById('servico').value;
+            const socialMediaOptions = document.getElementById('socialMediaOptions');
+            const materiaisImpressosOptions = document.getElementById('materiaisImpressosOptions');
+
+            if (servico === "Design para Social Media") {
+                socialMediaOptions.classList.remove('hidden');
+                materiaisImpressosOptions.classList.add('hidden');
+            } else if (servico === "Design para materiais impressos e digitais") {
+                materiaisImpressosOptions.classList.remove('hidden');
+                socialMediaOptions.classList.add('hidden');
+            } else {
+                socialMediaOptions.classList.add('hidden');
+                materiaisImpressosOptions.classList.add('hidden');
             }
         }
 
-        // Adiciona a validação ao envio do formulário
-        document.getElementById("orçamentoForm").addEventListener("submit", validateForm);
-    </script>
+        window.onload = function() {
+            toggleOptions();
+            loadFormData();
+        };
 
+        function loadFormData() {
+            const formData = JSON.parse(localStorage.getItem("formData"));
+
+            if (formData) {
+                document.getElementById('nome').value = formData.nome;
+                document.getElementById('email').value = formData.email;
+                document.getElementById('whatsapp').value = formData.whatsapp;
+                document.getElementById('servico').value = formData.servico;
+                document.getElementById('detalhes').value = formData.detalhes;
+                document.getElementById('identidade').value = formData.identidade;
+                document.getElementById('observacoes').value = formData.observacoes;
+            }
+        }
+
+        document.getElementById("orçamentoForm").addEventListener("input", function() {
+            const formData = {
+                nome: document.getElementById('nome').value,
+                email: document.getElementById('email').value,
+                whatsapp: document.getElementById('whatsapp').value,
+                servico: document.getElementById('servico').value,
+                detalhes: document.getElementById('detalhes').value,
+                identidade: document.getElementById('identidade').value,
+                observacoes: document.getElementById('observacoes').value
+            };
+            localStorage.setItem("formData", JSON.stringify(formData));
+        });
+
+        document.getElementById("orçamentoForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            if (!validateForm()) {
+                return;
+            }
+
+            const formData = new FormData(this);
+            fetch("https://formspree.io/f/mleqyqgq", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Erro na resposta do servidor");
+                }
+                return response.json();
+            })
+            .then(data => {
+                alert("Formulário enviado com sucesso!");
+                this.reset();
+                localStorage.removeItem("formData");
+            })
+            .catch(error => {
+                alert("Ocorreu um erro ao enviar o formulário. Tente novamente.");
+                console.error(error);
+            });
+        });
+    </script>
 </body>
 </html>
  <div class="elementor-element elementor-element-68bcbfe e-flex e-con-boxed e-con e-parent e-lazyloaded" data-id="68bcbfe" data-element_type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
