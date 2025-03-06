@@ -659,12 +659,13 @@
         }
         .container {
             width: 80%;
-            max-width: 380px; /* Largura mais estreita */
+            max-width: 380px; /* Largura do formulário */
             margin: 30px auto;
             background-color: rgba(0, 0, 0, 0.8);
             padding: 10px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            display: none; /* Escondido inicialmente */
         }
         h1 {
             color: #fff;
@@ -679,7 +680,7 @@
             margin-bottom: 15px;
         }
         .form-group {
-            margin-bottom: 8px; /* Menos espaço entre os campos */
+            margin-bottom: 8px;
         }
         label {
             font-weight: bold;
@@ -736,7 +737,13 @@
 </head>
 <body>
 
-    <div class="container">
+    <!-- Botão para solicitar orçamento -->
+    <div class="button-container" style="text-align:center; margin-top: 20px;">
+        <button onclick="showForm()">Solicitar Orçamento</button>
+    </div>
+
+    <!-- Formulário que aparece após clicar no botão -->
+    <div class="container" id="formContainer">
         <h1>Solicitação de Orçamento</h1>
         <p>Resposta em até 20 minutos</p>
 
@@ -817,6 +824,12 @@
     </div>
 
     <script>
+        // Função para mostrar o formulário
+        function showForm() {
+            const formContainer = document.getElementById("formContainer");
+            formContainer.style.display = "block"; // Exibe o formulário
+        }
+
         function validateForm() {
             const email = document.getElementById('email').value;
             const whatsapp = document.getElementById('whatsapp').value;
