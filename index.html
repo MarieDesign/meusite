@@ -916,6 +916,11 @@
             document.querySelector(".btn-container").style.display = "none";
         }
 
+        function hideForm() {
+            document.getElementById("formContainer").style.display = "none";
+            document.querySelector(".btn-container").style.display = "block";
+        }
+
         function toggleRequired(inputId, isChecked) {
             const input = document.getElementById(inputId);
             if (isChecked) {
@@ -1084,6 +1089,7 @@
                 alert("Formulário enviado com sucesso!");
                 this.reset();
                 localStorage.removeItem("formData");
+                hideForm(); // Fecha o formulário e mostra o botão novamente
             })
             .catch(error => {
                 console.error("Erro ao enviar o formulário:", error);
