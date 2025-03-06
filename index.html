@@ -788,8 +788,6 @@
             background-color: rgba(255, 204, 0, 0.1);
             border: 1px solid #ffcc00;
             border-radius: 4px;
-            position: absolute;
-            left: 0;
             width: 100%;
             box-sizing: border-box;
         }
@@ -823,14 +821,13 @@
             <div class="form-group">
                 <label for="email">E-mail</label>
                 <input type="email" id="email" name="email" placeholder="Digite seu e-mail">
-                <div class="error-message" id="email-whatsapp-error">Preencha pelo menos um: E-mail ou WhatsApp.</div>
-                <div class="error-message" id="email-format-error">Digite um e-mail válido.</div>
+                <div class="error-message" id="email-error">Preencha pelo menos um: E-mail ou WhatsApp, com formato válido.</div>
             </div>
 
             <div class="form-group">
                 <label for="whatsapp">WhatsApp</label>
                 <input type="tel" id="whatsapp" name="whatsapp" placeholder="Digite seu número de WhatsApp">
-                <div class="error-message" id="whatsapp-format-error">Digite um número de WhatsApp válido (ex: (XX) XXXXX-XXXX ou +55XX XXXXX-XXXX).</div>
+                <div class="error-message" id="whatsapp-error">Preencha pelo menos um: E-mail ou WhatsApp, com formato válido.</div>
             </div>
 
             <div class="form-group">
@@ -919,31 +916,22 @@
                 isValid = false;
             }
 
-            // Validação de E-mail ou WhatsApp (pelo menos um deve estar preenchido)
-            if (!email && !whatsapp) {
-                document.getElementById('email').parentElement.classList.add('invalid');
-                document.getElementById('email-whatsapp-error').style.display = 'block';
-                isValid = false;
-            } else {
-                // Validação do formato do E-mail (se preenchido)
-                if (email) {
-                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                    if (!emailRegex.test(email)) {
-                        document.getElementById('email').parentElement.classList.add('invalid');
-                        document.getElementById('email-format-error').style.display = 'block';
-                        isValid = false;
-                    }
-                }
+            // Validação de E-mail ou WhatsApp (pelo menos um preenchido e válido)
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const whatsappRegex = /^(\+55)?\s?\(?[1-9]{2}\)?\s?[9]?\d{4}-?\d{4}$/;
+            const isEmailValid = email ? emailRegex.test(email) : true;
+            const isWhatsappValid = whatsapp ? whatsappRegex.test(whatsapp) : true;
 
-                // Validação do formato do WhatsApp (se preenchido)
-                if (whatsapp) {
-                    const whatsappRegex = /^(\+55)?\s?\(?[1-9]{2}\)?\s?[9]?\d{4}-?\d{4}$/;
-                    if (!whatsappRegex.test(whatsapp)) {
-                        document.getElementById('whatsapp').parentElement.classList.add('invalid');
-                        document.getElementById('whatsapp-format-error').style.display = 'block';
-                        isValid = false;
-                    }
+            if ((!email && !whatsapp) || (email && !isEmailValid) || (whatsapp && !isWhatsappValid)) {
+                if (!email && !whatsapp) {
+                    document.getElementById('email').parentElement.classList.add('invalid');
+                    document.getElementById('whatsapp').parentElement.classList.add('invalid');
+                } else if (email && !isEmailValid) {
+                    document.getElementById('email').parentElement.classList.add('invalid');
+                } else if (whatsapp && !isWhatsappValid) {
+                    document.getElementById('whatsapp').parentElement.classList.add('invalid');
                 }
+                isValid = false;
             }
 
             // Validação do Serviço
