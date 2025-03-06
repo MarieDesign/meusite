@@ -7,30 +7,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evitar Atualização Automática</title>
+    <title>Marjorie Rosario</title>
     <script>
-        // Impede qualquer recarregamento automático da página
+        // Bloquear qualquer tipo de recarregamento automático
         window.onload = function() {
-            // Bloquear recarga ao manipular o histórico
+            // Bloqueio forte para garantir que a página não seja recarregada automaticamente
             if (window.history && window.history.pushState) {
                 window.history.pushState(null, null, window.location.href);
                 window.onpopstate = function() {
-                    window.history.pushState(null, null, window.location.href);
+                    window.history.pushState(null, null, window.location.href); // Bloqueia navegação de recarga
                 };
             }
 
-            // Impede intervalos ou funções que tentem recarregar a página automaticamente
+            // Desabilitar qualquer tipo de recarregamento forçado
             setInterval(function() {
-                console.log("Tentativa de recarga detectada e bloqueada!");
-            }, 1000); // Só para bloqueio, sem executar ação de recarga
+                return false;  // Evita qualquer recarga automática
+            }, 1000);
+
+            // Remover qualquer chamada para "location.reload()"
+            window.addEventListener('beforeunload', function(event) {
+                // Impede a execução do recarregamento sem qualquer confirmação do usuário
+                event.preventDefault();
+                event.returnValue = ''; // Necessário para alguns navegadores antigos
+            });
         };
 
-        // Desabilita a tecla F5 e Ctrl+R para recarregar a página
+        // Impede as teclas F5 e Ctrl+R que causam recarga
         window.addEventListener("keydown", function(e) {
             if (e.key === "F5" || (e.ctrlKey && e.key === "r")) {
-                e.preventDefault(); // Impede a recarga da página
+                e.preventDefault(); // Impede recarregar a página
             }
         });
+
     </script>
 </head>
 <body>
