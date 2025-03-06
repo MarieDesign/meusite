@@ -7,37 +7,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evitar Atualização Automática</title>
+    <title>Marjorie</title>
     <script>
-        // Impede qualquer recarregamento automático da página
+        // Impede qualquer tipo de atualização automática da página
         window.onload = function() {
-            // Bloqueio para qualquer tentativa de recarregar via setInterval
-            setInterval(function() {
-                return false; // Impede recarga automática
-            }, 1000);
-
-            // Evitar mudanças no histórico (evita recarga via manipulação do navegador)
+            // Bloqueia a navegação do histórico e tenta impedir qualquer recarga forçada
             if (window.history && window.history.pushState) {
                 window.history.pushState(null, null, window.location.href);
                 window.onpopstate = function() {
-                    window.history.pushState(null, null, window.location.href); // Bloqueia retroceder/atualizar
+                    window.history.pushState(null, null, window.location.href); // Bloqueia a retroceder/avançar
                 };
             }
+
+            // Impede intervalos que tentem recarregar a página automaticamente
+            setInterval(function() {
+                return false;  // Bloqueia qualquer tentativa de recarregar
+            }, 1000);
         };
 
-        // Desabilitar a tecla F5 e Ctrl+R que causam recarga
+        // Desabilita F5 e Ctrl+R para evitar recarga com essas teclas
         window.addEventListener("keydown", function(e) {
-            // Impede recarga quando pressionado F5 ou Ctrl+R
+            // Impede o recarregamento ao pressionar F5 ou Ctrl+R
             if (e.key === "F5" || (e.ctrlKey && e.key === "r")) {
-                e.preventDefault(); // Impede o recarregamento da página
+                e.preventDefault(); // Impede a recarga da página
             }
         });
 
-        // Impede recarregamento da página com o clique direito ou recarregamento pelo navegador
+        // Bloqueia a recarga da página sem mostrar a caixa de confirmação
         window.addEventListener('beforeunload', function(event) {
-            // Previne o comportamento de recarga sem interação do usuário
+            // Não executa o comportamento padrão que gera a confirmação
             event.preventDefault();
-            event.returnValue = ''; // Para alguns navegadores antigos
+            event.returnValue = ''; // Para navegadores modernos
         });
     </script>
 </head>
