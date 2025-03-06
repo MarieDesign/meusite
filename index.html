@@ -803,7 +803,6 @@
     </style>
 </head>
 <body>
-
     <div class="btn-container">
         <button onclick="showForm()">Solicitar Orçamento</button>
     </div>
@@ -898,16 +897,18 @@
             });
         }
 
-        function validateForm(event) {
+        function validateForm() {
             clearErrors();
             let isValid = true;
 
             const nome = document.getElementById('nome').value.trim();
             const email = document.getElementById('email').value.trim();
             const whatsapp = document.getElementById('whatsapp').value.trim();
-            const servico = document.getElementById('servico').value;
+            const servico = document.getElementById('servico').value.trim(); // Adicionado .trim() para consistência
             const detalhes = document.getElementById('detalhes').value.trim();
             const identidade = document.getElementById('identidade').value.trim();
+            const socialMediaOptions = document.getElementById('socialMediaOptions');
+            const materiaisImpressosOptions = document.getElementById('materiaisImpressosOptions');
 
             // Validação do Nome
             if (!nome) {
@@ -941,13 +942,13 @@
 
             // Validação do Pacote (Social Media)
             if (servico === "Design para Social Media" && !document.querySelector('input[name="pacote"]:checked')) {
-                document.getElementById('pacote-error').style.display = 'block';
+                socialMediaOptions.classList.add('invalid');
                 isValid = false;
             }
 
             // Validação do Material (Materiais Impressos)
             if (servico === "Design para materiais impressos e digitais" && !document.querySelector('input[name="material"]:checked')) {
-                document.getElementById('material-error').style.display = 'block';
+                materiaisImpressosOptions.classList.add('invalid');
                 isValid = false;
             }
 
@@ -1044,7 +1045,6 @@
             });
         });
     </script>
-
 </body>
 </html>
  <div class="elementor-element elementor-element-68bcbfe e-flex e-con-boxed e-con e-parent e-lazyloaded" data-id="68bcbfe" data-element_type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
