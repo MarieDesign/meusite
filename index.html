@@ -659,43 +659,43 @@
         }
         .container {
             width: 80%;
-            max-width: 450px; /* Menor largura */
+            max-width: 400px; /* Largura ainda mais estreita */
             margin: 30px auto;
             background-color: rgba(0, 0, 0, 0.8);
-            padding: 15px;
+            padding: 10px; /* Menos padding */
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         }
         h1 {
             color: #fff;
             text-align: center;
-            font-size: 18px; /* Fonte menor */
-            margin-bottom: 15px;
+            font-size: 16px; /* Fonte menor */
+            margin-bottom: 10px;
         }
         p {
             text-align: center;
             color: #ddd;
-            font-size: 12px;
+            font-size: 10px;
             margin-bottom: 15px;
         }
         .form-group {
-            margin-bottom: 10px; /* Menos espaço entre os campos */
+            margin-bottom: 8px; /* Menos espaço entre os campos */
         }
         label {
             font-weight: bold;
             color: #fff;
-            font-size: 14px; /* Fonte menor */
+            font-size: 12px; /* Fonte bem menor */
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
         input, select, textarea {
             width: 100%;
-            padding: 8px; /* Menos padding */
+            padding: 6px; /* Menos padding */
             border-radius: 6px;
             border: 1px solid #ddd;
-            margin-top: 5px;
+            margin-top: 4px;
             box-sizing: border-box;
-            font-size: 14px; /* Fonte menor */
+            font-size: 12px; /* Fonte menor */
             color: #333;
         }
         input:focus, select:focus, textarea:focus {
@@ -703,21 +703,21 @@
             border-color: #6a1b9a; /* Cor roxa para foco */
         }
         textarea {
-            height: 60px; /* Diminuir altura do textarea */
+            height: 40px; /* Diminuir altura do textarea */
         }
         .radio-group {
             margin-top: 5px;
         }
         .radio-group label {
-            margin-right: 10px; /* Menos espaçamento entre as opções */
-            font-size: 14px; /* Fonte menor */
+            margin-right: 8px; /* Menos espaçamento entre as opções */
+            font-size: 12px; /* Fonte menor */
         }
         button {
             width: 100%;
-            padding: 10px; /* Menos padding */
+            padding: 8px; /* Menos padding */
             background-color: #6a1b9a; /* Cor roxa */
             color: white;
-            font-size: 16px; /* Fonte menor */
+            font-size: 14px; /* Fonte menor */
             font-weight: bold;
             border: none;
             border-radius: 6px;
@@ -778,41 +778,41 @@
             <div class="form-group hidden" id="socialMediaOptions">
                 <label>Escolha o pacote de Social Media <span class="required">*</span></label>
                 <div class="radio-group">
-                    <label><input type="radio" name="pacote" value="8 posts"> Pacote de 8 posts</label>
-                    <label><input type="radio" name="pacote" value="12 posts"> Pacote de 12 posts</label>
-                    <label><input type="radio" name="pacote" value="16 posts"> Pacote de 16 posts</label>
-                    <label><input type="radio" name="pacote" value="Outro"> Outro (especifique): <input type="text" name="outro_pacote"></label>
+                    <label><input type="radio" name="pacote" value="8 posts"> 8 posts</label>
+                    <label><input type="radio" name="pacote" value="12 posts"> 12 posts</label>
+                    <label><input type="radio" name="pacote" value="16 posts"> 16 posts</label>
+                    <label><input type="radio" name="pacote" value="Outro"> Outro: <input type="text" name="outro_pacote"></label>
                 </div>
             </div>
 
             <!-- Materiais Impressos - Opções -->
             <div class="form-group hidden" id="materiaisImpressosOptions">
-                <label>Escolha o tipo de material impresso/digital <span class="required">*</span></label>
+                <label>Escolha o tipo de material <span class="required">*</span></label>
                 <div class="radio-group">
-                    <label><input type="radio" name="material" value="Banners"> Criação de Banners</label>
+                    <label><input type="radio" name="material" value="Banners"> Banners</label>
                     <label><input type="radio" name="material" value="Alinhamento Visual"> Alinhamento Visual</label>
                     <label><input type="radio" name="material" value="Cartão de Visita"> Cartão de Visita</label>
                     <label><input type="radio" name="material" value="Panfletos"> Panfletos</label>
                     <label><input type="radio" name="material" value="Edição de Vídeo"> Edição de Vídeo</label>
-                    <label><input type="radio" name="material" value="Outro"> Outro (especifique): <input type="text" name="outro_material"></label>
+                    <label><input type="radio" name="material" value="Outro"> Outro: <input type="text" name="outro_material"></label>
                 </div>
             </div>
 
             <!-- Detalhes do Projeto -->
             <div class="form-group">
-                <label for="detalhes">Informe os detalhes do projeto <span class="required">*</span></label>
+                <label for="detalhes">Detalhes do projeto <span class="required">*</span></label>
                 <textarea id="detalhes" name="detalhes" required></textarea>
             </div>
 
             <!-- Identidade Visual -->
             <div class="form-group">
-                <label for="identidade">Qual identidade visual seguir? <span class="required">*</span></label>
+                <label for="identidade">Identidade visual <span class="required">*</span></label>
                 <input type="text" id="identidade" name="identidade" required>
             </div>
 
             <!-- Observações Adicionais -->
             <div class="form-group">
-                <label for="observacoes">Observações adicionais (opcional)</label>
+                <label for="observacoes">Observações (opcional)</label>
                 <textarea id="observacoes" name="observacoes"></textarea>
             </div>
 
