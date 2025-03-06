@@ -204,19 +204,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evitar Atualização Automática</title>
     <script>
-        // Sobrescreve métodos que podem causar recarga automática
-        window.onload = function() {
-            // Desabilita setInterval e setTimeout para recargas automáticas
-            window.setInterval = function() {
-                console.log('Tentativa de setInterval bloqueada');
-                return -1; // Retorna um ID inválido para impedir execução
-            };
-            window.setTimeout = function() {
-                console.log('Tentativa de setTimeout bloqueada');
-                return -1; // Retorna um ID inválido para impedir execução
-            };
+        // Salva as funções originais para uso legítimo, se necessário
+        const originalSetInterval = window.setInterval;
+        const originalSetTimeout = window.setTimeout;
 
-            // Remove qualquer meta tag de refresh, se existir
+        // Bloqueia recargas automáticas via setInterval e setTimeout
+        window.setInterval = function(fn, time) {
+            if (typeof fn === 'function' && fn.toString().includes('reload')) {
+                console.log('Recarga automática via setInterval bloqueada');
+                return -1; // Impede execução se tentar recarregar
+            }
+            return originalSetInterval(fn, time); // Permite outros usos
+        };
+
+        window.setTimeout = function(fn, time) {
+            if (typeof fn === 'function' && fn.toString().includes('reload')) {
+                console.log('Recarga automática via setTimeout bloqueada');
+                return -1; // Impede execução se tentar recarregar
+            }
+            return originalSetTimeout(fn, time); // Permite outros usos
+        };
+
+        // Remove meta tags de refresh ao carregar
+        window.onload = function() {
             const metaTags = document.getElementsByTagName('meta');
             for (let i = 0; i < metaTags.length; i++) {
                 if (metaTags[i].getAttribute('http-equiv') === 'refresh') {
@@ -226,21 +236,13 @@
             }
         };
 
-        // Permite recargas manuais normais (F5, Ctrl+R, botão do navegador)
-        // Não há necessidade de bloquear beforeunload ou keydown
-    </script>
-</head>
-<body>
-    <h1>Evitar Atualização Automática</h1>
-    <p>A página só será atualizada manualmente (F5, Ctrl+R ou botão do navegador).</p>
-    <!-- Exemplo de código que tentaria recarregar automaticamente (será bloqueado) -->
-    <script>
-        // Este código será bloqueado
+        // Teste de recarga automática (será bloqueado)
         setTimeout(function() {
             window.location.reload();
         }, 5000);
     </script>
-</body>
+</head>
+<body>
 </html>
     </script>
     <link rel="dns-prefetch" href="//www.googletagmanager.com">
