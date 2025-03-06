@@ -755,29 +755,29 @@
         .radio-group label {
             font-size: 12px;
             display: flex;
-            align-items: center; /* Alinha verticalmente o texto e o círculo */
-            margin-bottom: 5px; /* Espaço entre as linhas */
+            align-items: center;
+            margin-bottom: 5px;
         }
 
         .radio-group .option-text {
-            flex: 1; /* Faz o texto ocupar o espaço disponível à esquerda */
-            text-align: left; /* Alinha o texto à esquerda */
+            flex: 1;
+            text-align: left;
         }
 
         .radio-group .option-container {
             display: flex;
-            align-items: center; /* Alinha o texto "Outro:" e o campo de texto */
-            flex: 1; /* Ocupa o espaço disponível à esquerda */
+            align-items: center;
+            flex: 1;
         }
 
         .radio-group input[type="radio"] {
-            margin-left: 10px; /* Espaço entre o texto e o círculo */
-            width: 16px; /* Largura fixa para alinhamento perfeito */
+            margin-left: 10px;
+            width: 16px;
         }
 
         .radio-group input[type="text"] {
-            width: auto; /* Campo "Outro" não ocupa toda a largura */
-            margin-left: 5px; /* Espaço após "Outro:" */
+            width: auto;
+            margin-left: 5px;
         }
 
         button {
@@ -1065,24 +1065,29 @@
             }
 
             const formData = new FormData(this);
-            fetch("https://formspree.io/f/mleqyqgq", {
+
+            fetch("https://formspree.io/f/meoajgpy", {
                 method: "POST",
-                body: formData
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
             })
             .then(response => {
                 if (!response.ok) {
-                    throw new Error("Erro na resposta do servidor");
+                    throw new Error(`Erro ${response.status}: ${response.statusText}`);
                 }
                 return response.json();
             })
             .then(data => {
+                console.log("Resposta do servidor:", data);
                 alert("Formulário enviado com sucesso!");
                 this.reset();
                 localStorage.removeItem("formData");
             })
             .catch(error => {
-                alert("Ocorreu um erro ao enviar o formulário. Tente novamente.");
-                console.error(error);
+                console.error("Erro ao enviar o formulário:", error);
+                alert(`Ocorreu um erro ao enviar o formulário: ${error.message}. Verifique o console ou tente novamente.`);
             });
         });
     </script>
