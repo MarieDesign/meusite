@@ -9,31 +9,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evitar Atualização Automática</title>
     <script>
-        // Evitar recarga automática via setInterval ou setTimeout
+        // Impede qualquer recarregamento automático da página
         window.onload = function() {
-            // Bloquear recarregamento da página
+            // Bloquear recarga ao manipular o histórico
             if (window.history && window.history.pushState) {
-                // Bloquear recarga ao manipular o histórico
                 window.history.pushState(null, null, window.location.href);
                 window.onpopstate = function() {
                     window.history.pushState(null, null, window.location.href);
                 };
             }
 
-            // Desabilitar qualquer intervalo de recarga da página
+            // Impede intervalos ou funções que tentem recarregar a página automaticamente
             setInterval(function() {
                 console.log("Tentativa de recarga detectada e bloqueada!");
-                return false;
-            }, 1000);
+            }, 1000); // Só para bloqueio, sem executar ação de recarga
         };
 
-        // Prevenir o comportamento padrão de atualização da página
-        window.addEventListener('beforeunload', function(event) {
-            event.preventDefault();
-            event.returnValue = ''; // Necessário para navegadores antigos
-        });
-
-        // Desabilitar a tecla F5 e Ctrl+R que causam recarga da página
+        // Desabilita a tecla F5 e Ctrl+R para recarregar a página
         window.addEventListener("keydown", function(e) {
             if (e.key === "F5" || (e.ctrlKey && e.key === "r")) {
                 e.preventDefault(); // Impede a recarga da página
