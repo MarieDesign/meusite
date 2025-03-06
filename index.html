@@ -197,30 +197,38 @@
     </script>
     <script type="application/javascript" id="pys-version-script" src="data:text/javascript;base64,Y29uc29sZS5sb2coJ1BpeGVsWW91clNpdGUgRnJlZSB2ZXJzaW9uIDkuNy4yJyk7" data-rocket-status="executed">
         console.log('PixelYourSite Free version 9.7.2');
-	    <!DOCTYPE html>
+	   <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evitar Atualização Automática</title>
     <script>
-        // Previne a atualização automática da página
+        // Impede a atualização da página ao pressionar F5, Ctrl+R ou clicando no botão de recarregar do navegador
         window.addEventListener('beforeunload', function(event) {
-            // Impede a atualização ou fechamento sem a ação explícita do usuário
-            event.preventDefault();
-            event.returnValue = ''; // Mensagem de confirmação para alguns navegadores
+            event.preventDefault();  // Previne o comportamento padrão
+            event.returnValue = '';  // Para navegadores antigos
         });
 
-        // Se houver recarga automática via setInterval, remova isso ou desative
-        // Exemplo (remover este código se ele existir no seu site):
-        // setInterval(function() {
-        //     location.reload();
-        // }, 5000); // Evite esse tipo de código
+        // Para garantir que não haja recarga automática via setInterval ou setTimeout
+        window.onload = function() {
+            // Cancelando qualquer tentativa de recarregar a página automaticamente
+            if (window.history && window.history.pushState) {
+                // Bloqueia o histórico de navegação para não permitir recargas automáticas
+                window.history.pushState(null, null, window.location.href);
+                window.onpopstate = function() {
+                    window.history.pushState(null, null, window.location.href);
+                };
+            }
+
+            // Evita qualquer tipo de recarga forçada do conteúdo
+            setInterval(function() {
+                return false;
+            }, 1000);
+        };
     </script>
 </head>
 <body>
-    <h1>Evitar Atualizações Automáticas</h1>
-    <p>Este site não será atualizado automaticamente. A página só será recarregada quando você pressionar F5 ou clicar no botão de recarregar do navegador.</p>
 </body>
 </html>
     </script>
