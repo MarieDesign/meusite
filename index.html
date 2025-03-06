@@ -781,7 +781,7 @@
 
         .error-message {
             display: none;
-            color: #ffcc00; /* Amarelo para destacar */
+            color: #ffcc00;
             font-size: 12px;
             margin-top: 4px;
             padding: 4px 8px;
@@ -795,7 +795,7 @@
         }
 
         .error-message::before {
-            content: "⚠ "; /* Ícone de atenção */
+            content: "⚠ ";
             font-size: 14px;
         }
 
@@ -824,11 +824,13 @@
                 <label for="email">E-mail</label>
                 <input type="email" id="email" name="email" placeholder="Digite seu e-mail">
                 <div class="error-message" id="email-whatsapp-error">Preencha pelo menos um: E-mail ou WhatsApp.</div>
+                <div class="error-message" id="email-format-error">Digite um e-mail válido.</div>
             </div>
 
             <div class="form-group">
                 <label for="whatsapp">WhatsApp</label>
                 <input type="tel" id="whatsapp" name="whatsapp" placeholder="Digite seu número de WhatsApp">
+                <div class="error-message" id="whatsapp-format-error">Digite um número de WhatsApp válido (ex: (XX) XXXXX-XXXX ou +55XX XXXXX-XXXX).</div>
             </div>
 
             <div class="form-group">
@@ -911,36 +913,64 @@
             const socialMediaOptions = document.getElementById('socialMediaOptions');
             const materiaisImpressosOptions = document.getElementById('materiaisImpressosOptions');
 
+            // Validação do Nome
             if (!nome) {
                 document.getElementById('nome').parentElement.classList.add('invalid');
                 isValid = false;
             }
 
+            // Validação de E-mail ou WhatsApp (pelo menos um deve estar preenchido)
             if (!email && !whatsapp) {
                 document.getElementById('email').parentElement.classList.add('invalid');
+                document.getElementById('email-whatsapp-error').style.display = 'block';
                 isValid = false;
+            } else {
+                // Validação do formato do E-mail (se preenchido)
+                if (email) {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(email)) {
+                        document.getElementById('email').parentElement.classList.add('invalid');
+                        document.getElementById('email-format-error').style.display = 'block';
+                        isValid = false;
+                    }
+                }
+
+                // Validação do formato do WhatsApp (se preenchido)
+                if (whatsapp) {
+                    const whatsappRegex = /^(\+55)?\s?\(?[1-9]{2}\)?\s?[9]?\d{4}-?\d{4}$/;
+                    if (!whatsappRegex.test(whatsapp)) {
+                        document.getElementById('whatsapp').parentElement.classList.add('invalid');
+                        document.getElementById('whatsapp-format-error').style.display = 'block';
+                        isValid = false;
+                    }
+                }
             }
 
+            // Validação do Serviço
             if (!servico) {
                 document.getElementById('servico').parentElement.classList.add('invalid');
                 isValid = false;
             }
 
+            // Validação do Pacote (Social Media)
             if (servico === "Design para Social Media" && !document.querySelector('input[name="pacote"]:checked')) {
                 socialMediaOptions.classList.add('invalid');
                 isValid = false;
             }
 
+            // Validação do Material (Materiais Impressos)
             if (servico === "Design para materiais impressos e digitais" && !document.querySelector('input[name="material"]:checked')) {
                 materiaisImpressosOptions.classList.add('invalid');
                 isValid = false;
             }
 
+            // Validação dos Detalhes
             if (!detalhes || detalhes.length < 100) {
                 document.getElementById('detalhes').parentElement.classList.add('invalid');
                 isValid = false;
             }
 
+            // Validação da Identidade Visual
             if (!identidade) {
                 document.getElementById('identidade').parentElement.classList.add('invalid');
                 isValid = false;
@@ -1017,12 +1047,12 @@
                 return response.json();
             })
             .then(data => {
-                alert("Formulário enviado com sucesso!"); // Mantive este alert para confirmação de sucesso
+                alert("Formulário enviado com sucesso!");
                 this.reset();
                 localStorage.removeItem("formData");
             })
             .catch(error => {
-                alert("Ocorreu um erro ao enviar o formulário. Tente novamente."); // Mantive este alert para erro
+                alert("Ocorreu um erro ao enviar o formulário. Tente novamente.");
                 console.error(error);
             });
         });
