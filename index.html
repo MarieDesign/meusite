@@ -667,9 +667,9 @@
         .btn-container button {
             background-color: #6a1b9a;
             color: white;
-            font-size: 16px; /* Aumentado de 14px para 16px */
+            font-size: 16px;
             font-weight: bold;
-            padding: 10px 20px; /* Aumentado de 8px 15px para 10px 20px */
+            padding: 10px 20px;
             border-radius: 20px;
             border: none;
             cursor: pointer;
@@ -1042,7 +1042,7 @@
                 document.getElementById('nome').value = formData.nome;
                 document.getElementById('email').value = formData.email;
                 document.getElementById('whatsapp').value = formData.whatsapp;
-                document.getElementById('servico').value = formData.servico;
+                // Não carregamos o valor de 'servico' para que ele volte ao padrão "Selecione..."
                 document.getElementById('detalhes').value = formData.detalhes;
                 document.getElementById('identidade').value = formData.identidade;
                 document.getElementById('observacoes').value = formData.observacoes;
@@ -1054,7 +1054,7 @@
                 nome: document.getElementById('nome').value,
                 email: document.getElementById('email').value,
                 whatsapp: document.getElementById('whatsapp').value,
-                servico: document.getElementById('servico').value,
+                servico: document.getElementById('servico').value, // Ainda salvamos o valor, mas não o carregamos
                 detalhes: document.getElementById('detalhes').value,
                 identidade: document.getElementById('identidade').value,
                 observacoes: document.getElementById('observacoes').value
