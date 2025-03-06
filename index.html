@@ -656,12 +656,16 @@
             margin: 0;
             padding: 0;
             color: #fff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         /* Estilo do botão discreto, centralizado no conteúdo */
         .btn-container {
             text-align: center;
-            margin-top: 40px; /* Reduzido de 60px para 40px para subir mais */
+            margin-top: auto; /* Faz o botão subir para o meio da página */
+            margin-bottom: 50px; /* Espaço para não ficar colado ao rodapé */
         }
 
         .btn-container button {
