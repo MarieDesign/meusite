@@ -197,52 +197,47 @@
     </script>
     <script type="application/javascript" id="pys-version-script" src="data:text/javascript;base64,Y29uc29sZS5sb2coJ1BpeGVsWW91clNpdGUgRnJlZSB2ZXJzaW9uIDkuNy4yJyk7" data-rocket-status="executed">
         console.log('PixelYourSite Free version 9.7.2');
-	   <!DOCTYPE html>
+	  <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evitar Atualização Automática</title>
     <script>
-        // Salva as funções originais para uso legítimo, se necessário
-        const originalSetInterval = window.setInterval;
-        const originalSetTimeout = window.setTimeout;
-
-        // Bloqueia recargas automáticas via setInterval e setTimeout
-        window.setInterval = function(fn, time) {
-            if (typeof fn === 'function' && fn.toString().includes('reload')) {
-                console.log('Recarga automática via setInterval bloqueada');
-                return -1; // Impede execução se tentar recarregar
-            }
-            return originalSetInterval(fn, time); // Permite outros usos
-        };
-
-        window.setTimeout = function(fn, time) {
-            if (typeof fn === 'function' && fn.toString().includes('reload')) {
-                console.log('Recarga automática via setTimeout bloqueada');
-                return -1; // Impede execução se tentar recarregar
-            }
-            return originalSetTimeout(fn, time); // Permite outros usos
-        };
-
-        // Remove meta tags de refresh ao carregar
+        // Evitar recarga automática via setInterval ou setTimeout
         window.onload = function() {
-            const metaTags = document.getElementsByTagName('meta');
-            for (let i = 0; i < metaTags.length; i++) {
-                if (metaTags[i].getAttribute('http-equiv') === 'refresh') {
-                    metaTags[i].parentNode.removeChild(metaTags[i]);
-                    console.log('Meta tag de refresh removida');
-                }
+            // Bloquear recarregamento da página
+            if (window.history && window.history.pushState) {
+                // Bloquear recarga ao manipular o histórico
+                window.history.pushState(null, null, window.location.href);
+                window.onpopstate = function() {
+                    window.history.pushState(null, null, window.location.href);
+                };
             }
+
+            // Desabilitar qualquer intervalo de recarga da página
+            setInterval(function() {
+                console.log("Tentativa de recarga detectada e bloqueada!");
+                return false;
+            }, 1000);
         };
 
-        // Teste de recarga automática (será bloqueado)
-        setTimeout(function() {
-            window.location.reload();
-        }, 5000);
+        // Prevenir o comportamento padrão de atualização da página
+        window.addEventListener('beforeunload', function(event) {
+            event.preventDefault();
+            event.returnValue = ''; // Necessário para navegadores antigos
+        });
+
+        // Desabilitar a tecla F5 e Ctrl+R que causam recarga da página
+        window.addEventListener("keydown", function(e) {
+            if (e.key === "F5" || (e.ctrlKey && e.key === "r")) {
+                e.preventDefault(); // Impede a recarga da página
+            }
+        });
     </script>
 </head>
 <body>
+</body>
 </html>
     </script>
     <link rel="dns-prefetch" href="//www.googletagmanager.com">
