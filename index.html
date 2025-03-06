@@ -749,30 +749,20 @@
         .radio-group {
             margin-top: 5px;
             display: flex;
-            flex-direction: column; /* Organiza as opções em uma coluna */
+            flex-direction: column;
         }
 
+        /* Estilo de cada item de radio */
         .radio-group label {
-            font-size: 12px;
-            display: flex; /* Usa flex para alinhar texto e rádio */
-            justify-content: space-between; /* Texto à esquerda, rádio à direita */
-            align-items: center; /* Alinha verticalmente o texto e o círculo */
-            margin-bottom: 5px; /* Espaço entre as linhas */
-            width: 100%; /* Garante que todas as labels ocupem a mesma largura */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px; /* Espaço entre as opções */
+            font-size: 14px;
         }
 
         .radio-group input[type="radio"] {
-            margin-left: 10px; /* Espaço entre o texto e o círculo */
-            order: 1; /* Coloca o rádio depois do texto */
-        }
-
-        .radio-group input[type="text"] {
-            width: auto; /* Campo "Outro" não ocupa toda a largura */
-            margin-left: 5px; /* Espaço após "Outro:" */
-        }
-
-        .radio-group span {
-            order: 0; /* Garante que o texto fique antes do rádio */
+            margin-left: 10px; /* Círculo à direita do texto */
         }
 
         button {
@@ -866,7 +856,7 @@
                     <label><span>8 posts</span><input type="radio" name="pacote" value="8 posts"></label>
                     <label><span>12 posts</span><input type="radio" name="pacote" value="12 posts"></label>
                     <label><span>16 posts</span><input type="radio" name="pacote" value="16 posts"></label>
-                    <label><span>Outro:</span><input type="radio" name="pacote" value="Outro"><input type="text" name="outro_pacote"></label>
+                    <label><span>Outro:</span><input type="radio" name="pacote" value="Outro"> <input type="text" name="outro_pacote"></label>
                 </div>
                 <div class="error-message" id="pacote-error">Selecione um pacote de Social Media.</div>
             </div>
@@ -879,7 +869,7 @@
                     <label><span>Cartão de Visita</span><input type="radio" name="material" value="Cartão de Visita"></label>
                     <label><span>Panfletos</span><input type="radio" name="material" value="Panfletos"></label>
                     <label><span>Edição de Vídeo</span><input type="radio" name="material" value="Edição de Vídeo"></label>
-                    <label><span>Outro:</span><input type="radio" name="material" value="Outro"><input type="text" name="outro_material"></label>
+                    <label><span>Outro:</span><input type="radio" name="material" value="Outro"> <input type="text" name="outro_material"></label>
                 </div>
                 <div class="error-message" id="material-error">Selecione um tipo de material.</div>
             </div>
@@ -930,11 +920,13 @@
             const socialMediaOptions = document.getElementById('socialMediaOptions');
             const materiaisImpressosOptions = document.getElementById('materiaisImpressosOptions');
 
+            // Validação do Nome
             if (!nome) {
                 document.getElementById('nome').parentElement.classList.add('invalid');
                 isValid = false;
             }
 
+            // Validação de E-mail ou WhatsApp
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             const whatsappRegex = /^(\+55)?\s?\(?[1-9]{2}\)?\s?[9]?\d{4}-?\d{4}$/;
             const isEmailValid = email ? emailRegex.test(email) : true;
@@ -952,26 +944,31 @@
                 isValid = false;
             }
 
+            // Validação do Serviço
             if (!servico) {
                 document.getElementById('servico').parentElement.classList.add('invalid');
                 isValid = false;
             }
 
+            // Validação do Pacote (Social Media)
             if (servico === "Design para Social Media" && !document.querySelector('input[name="pacote"]:checked')) {
                 socialMediaOptions.classList.add('invalid');
                 isValid = false;
             }
 
+            // Validação do Material (Materiais Impressos)
             if (servico === "Design para materiais impressos e digitais" && !document.querySelector('input[name="material"]:checked')) {
                 materiaisImpressosOptions.classList.add('invalid');
                 isValid = false;
             }
 
+            // Validação dos Detalhes
             if (!detalhes || detalhes.length < 100) {
                 document.getElementById('detalhes').parentElement.classList.add('invalid');
                 isValid = false;
             }
 
+            // Validação da Identidade Visual
             if (!identidade) {
                 document.getElementById('identidade').parentElement.classList.add('invalid');
                 isValid = false;
