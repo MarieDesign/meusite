@@ -562,18 +562,26 @@ body {
 
 /* Estilos para a versão PC (acima de 768px) */
 @media only screen and (min-width: 769px) {
+    /* Container pai do GIF */
+    .elementor-element-3a0c9f6 {
+        width: 100% !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        height: auto !important; /* Ajusta à altura do conteúdo */
+        position: relative !important;
+        overflow: hidden !important; /* Remove qualquer fundo extra */
+    }
+
     /* Container do GIF */
     .elementor-element-34991c7 {
-        width: 100% !important; /* Mantém a largura total do container pai */
-        max-width: 1301px !important; /* Limita à largura original do GIF */
-        margin: 0 auto !important; /* Centraliza e remove margens extras */
-        padding: 0 !important; /* Remove padding */
-        height: auto !important; /* Ajusta à altura do GIF */
+        width: 100% !important; /* Ocupa toda a largura do container pai */
+        margin: 0 !important;
+        padding: 0 !important;
+        height: auto !important; /* Ajusta à altura natural do GIF */
         position: absolute !important;
-        top: 0 !important; /* Alinha ao topo do container pai */
-        left: 50% !important; /* Centraliza horizontalmente */
-        transform: translateX(-50%) !important; /* Ajusta o posicionamento */
-        overflow: hidden !important; /* Remove qualquer transbordo */
+        top: 0 !important; /* Alinha ao topo */
+        left: 0 !important;
+        overflow: hidden !important;
     }
 
     /* Widget container dentro do elemento do GIF */
@@ -586,31 +594,18 @@ body {
 
     /* Imagem do GIF */
     .elementor-element-34991c7 img {
-        width: 100% !important; /* Ocupa a largura do container */
-        max-width: 1301px !important; /* Respeita a largura original do GIF */
+        width: 100% !important; /* Ocupa toda a largura disponível */
         height: auto !important; /* Mantém a proporção */
         margin: 0 !important;
         padding: 0 !important;
         display: block !important; /* Remove espaços inline */
-        object-fit: contain !important; /* Garante que o GIF não seja cortado ou distorcido */
-        vertical-align: top !important; /* Alinha ao topo para evitar espaço abaixo */
-    }
-
-    /* Container pai do GIF */
-    .elementor-element-3a0c9f6 {
-        width: 100% !important;
-        max-width: 1301px !important; /* Alinha com a largura máxima do GIF */
-        margin: 0 auto !important;
-        padding: 0 !important;
-        height: auto !important; /* Ajusta à altura do conteúdo */
-        position: relative !important;
-        overflow: hidden !important; /* Evita fundo extra visível */
+        object-fit: contain !important; /* Exibe o GIF inteiro sem cortes */
+        vertical-align: top !important; /* Remove espaço abaixo */
     }
 }
 
 /* Media Queries para responsividade em mobile (mantida como estava) */
 @media only screen and (max-width: 768px) {
-    /* Forçar o corpo a ocupar exatamente a largura da tela */
     html, body {
         width: 100%;
         max-width: 100vw;
@@ -623,7 +618,6 @@ body {
         -webkit-overflow-scrolling: touch !important;
     }
 
-    /* Garantir que elementos principais tenham pequenos espaços laterais */
     .elementor-6956, .e-con-boxed, .e-con-inner, .elementor-element, .btn-container {
         width: 96% !important;
         max-width: 96vw !important;
@@ -632,7 +626,6 @@ body {
         box-sizing: border-box;
     }
 
-    /* Container do GIF */
     .elementor-element-3a0c9f6 {
         width: 96% !important;
         max-width: 96vw !important;
@@ -644,7 +637,6 @@ body {
         text-align: center !important;
     }
 
-    /* Ajustar a posição do GIF para respeitar o espaçamento do texto */
     .elementor-element-34991c7 {
         width: 100% !important;
         max-width: 100vw !important;
@@ -670,7 +662,6 @@ body {
         object-fit: cover !important;
     }
 
-    /* Adicionar espaçamento entre o último texto e o GIF */
     .elementor-element-be59053.elementor-widget.elementor-widget-heading {
         margin-bottom: 30px !important;
     }
