@@ -219,18 +219,18 @@
         max-width: 100vw;
         margin: 0 !important;
         padding: 0 !important;
-        overflow-x: hidden !important; /* Impede rolagem horizontal */
-        overflow-y: scroll !important; /* Permite rolagem vertical */
+        overflow-x: hidden !important;
+        overflow-y: scroll !important;
         height: auto;
         box-sizing: border-box;
-        -webkit-overflow-scrolling: touch !important; /* Melhora a sensibilidade ao toque */
+        -webkit-overflow-scrolling: touch !important;
     }
 
     /* Garantir que elementos principais tenham pequenos espaços laterais */
     .elementor-6956, .e-con-boxed, .e-con-inner, .elementor-element, .btn-container {
-        width: 96% !important; /* Pequenos espaços laterais */
+        width: 96% !important;
         max-width: 96vw !important;
-        margin: 0 auto !important; /* Centraliza com pequenos espaços */
+        margin: 0 auto !important;
         padding: 0 !important;
         box-sizing: border-box;
     }
@@ -239,7 +239,7 @@
     .container {
         width: 100% !important;
         max-width: 100vw !important;
-        margin: 20px 0 20px 0 !important; /* Mantido conforme seu envio */
+        margin: 20px 0 20px 0 !important;
         padding: 15px !important;
         box-sizing: border-box;
     }
@@ -247,17 +247,16 @@
     /* Seção inicial - Manter apenas o card inicial visível */
     .elementor-element-71f28a4 {
         padding: 5px 0 !important;
-        text-align: center !important; /* Centraliza o conteúdo da seção inicial */
+        text-align: center !important;
     }
 
     .elementor-element-cc87d58 {
         width: 100% !important;
-        text-align: center !important; /* Centraliza o conteúdo */
+        text-align: center !important;
         padding: 5px 0 !important;
         margin: 0 !important;
     }
 
-    /* Centralizar os textos do card inicial */
     .elementor-element-cc87d58 .elementor-image-box-title,
     .elementor-element-cc87d58 .elementor-image-box-description {
         text-align: center !important;
@@ -277,7 +276,7 @@
         top: -9999px !important;
     }
 
-    /* Remover COMPLETAMENTE o card "Marjorie Rosario Designer Gráfica" na seção "Quem sou eu?" */
+    /* Remover COMPLETAMENTE o card "Marjorie Rosario Designer Gráfica" */
     .elementor-element-43f5086 {
         display: none !important;
         visibility: hidden !important;
@@ -295,56 +294,59 @@
     .elementor-element-3a0c9f6,
     .elementor-element-34991c7,
     .elementor-element-68bcbfe {
-        text-align: center !important; /* Centraliza o conteúdo de todos os textos */
-        margin: 0 auto !important; /* Garante o alinhamento centralizado */
+        text-align: center !important;
+        margin: 0 auto !important;
     }
 
-    /* Container do GIF (antes do ajuste específico) */
+    /* Container do GIF */
     .elementor-element-3a0c9f6 {
-        width: 96% !important; /* Pequenos espaços laterais */
+        width: 96% !important;
         max-width: 96vw !important;
         padding: 0 !important;
         margin: 0 auto !important;
         min-height: 0 !important;
         height: auto !important;
-        position: relative !important; /* Adicionado para ser o ponto de referência do GIF */
-        text-align: center !important; /* Reforçado para garantir centralização */
+        position: relative !important;
+        text-align: center !important;
     }
 
-    /* Garantir que o texto "Quem sou eu?" dentro de .elementor-element-3a0c9f6 seja centralizado */
-    .elementor-element-3a0c9f6 .elementor-heading-title,
-    .elementor-element-3a0c9f6 .elementor-widget-container,
-    .elementor-element-3a0c9f6 h2,
-    .elementor-element-3a0c9f6 p {
-        text-align: center !important; /* Centraliza todos os elementos de texto dentro da seção */
+    /* Garantir que o texto "Quem sou eu?" dentro de .elementor-element-4e12f83 seja centralizado */
+    .elementor-element-4e12f83 {
+        text-align: center !important;
+    }
+
+    .elementor-element-4e12f83 .elementor-widget-container,
+    .elementor-element-4e12f83 .elementor-heading-title,
+    .elementor-element-4e12f83 h2 {
+        text-align: center !important;
         margin-left: auto !important;
         margin-right: auto !important;
     }
 
-    /* GIF - Tocando as laterais e centralizado, agora sobrepondo outros elementos */
+    /* GIF - Tocando as laterais e centralizado */
     .elementor-element-34991c7 {
-        width: 100% !important; /* Tocando as margens esquerda e direita */
+        width: 100% !important;
         max-width: 100vw !important;
         margin: 0 !important;
         padding: 0 !important;
         min-height: 0 !important;
         height: auto !important;
-        display: block !important; /* Garante comportamento de bloco */
-        overflow: hidden !important; /* Evita transbordo */
-        position: absolute !important; /* Mudado para absolute para sobreposição */
-        top: 0 !important; /* Alinha ao topo do container pai */
-        left: 0 !important; /* Alinha à esquerda do container pai */
-        z-index: 9999 !important; /* Fica acima de qualquer outro elemento */
+        display: block !important;
+        overflow: hidden !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        z-index: 9999 !important;
     }
 
     .elementor-element-34991c7 img {
-        width: 100% !important; /* Força a imagem a ocupar toda a largura */
-        max-width: 100vw !important; /* Garante que toque as bordas */
-        height: auto !important; /* Mantém proporção */
-        display: block !important; /* Remove espaços indesejados */
-        margin: 0 !important; /* Remove qualquer margem */
-        padding: 0 !important; /* Remove qualquer padding */
-        object-fit: cover !important; /* Garante que a imagem preencha o espaço */
+        width: 100% !important;
+        max-width: 100vw !important;
+        height: auto !important;
+        display: block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        object-fit: cover !important;
     }
 
     /* Remover COMPLETAMENTE os botões sociais */
@@ -364,23 +366,23 @@
     /* Ajustar o botão "Solicitar Orçamento" e suas setas */
     .btn-container {
         text-align: center !important;
-        margin-top: 40px !important; /* Aumentado para reforçar o afastamento do GIF */
-        margin-bottom: 30px !important; /* Mantido para o rodapé */
+        margin-top: 40px !important;
+        margin-bottom: 30px !important;
         padding: 0 !important;
         position: relative !important;
     }
 
     .btn-container button {
-        width: 100% !important; /* Ajustado para ocupar toda a largura do container (96%) */
-        max-width: 300px !important; /* Limite máximo */
-        padding: 12px 20px !important; /* Padding para melhor toque */
-        font-size: 14px !important; /* Tamanho de fonte ajustado para mobile */
+        width: 100% !important;
+        max-width: 300px !important;
+        padding: 12px 20px !important;
+        font-size: 14px !important;
         border-radius: 20px !important;
     }
 
     .arrows {
         position: absolute !important;
-        top: -30px !important; /* Próximo do botão */
+        top: -30px !important;
         left: 50% !important;
         transform: translateX(-50%) !important;
         display: flex !important;
@@ -417,9 +419,9 @@
 
     /* Ajustar o formulário "Solicitação de Orçamento" */
     .container {
-        width: 100% !important; /* Tocando as margens */
+        width: 100% !important;
         max-width: 100vw !important;
-        margin: 20px 0 20px 0 !important; /* Mantido conforme seu envio */
+        margin: 20px 0 20px 0 !important;
         padding: 15px !important;
         background-color: rgba(0, 0, 0, 0.85) !important;
         border-radius: 0 !important;
@@ -479,7 +481,7 @@
 
     /* Footer - Tocando as laterais */
     .elementor-element-68bcbfe {
-        width: 100% !important; /* Tocando as margens esquerda e direita */
+        width: 100% !important;
         max-width: 100vw !important;
         padding: 0 !important;
         margin: 0 !important;
@@ -506,14 +508,14 @@
         line-height: 1 !important;
     }
 
-    /* Remover a barra de rolagem esteticamente, mas manter a rolagem funcional */
+    /* Remover a barra de rolagem esteticamente */
     ::-webkit-scrollbar {
-        display: none !important; /* Remove a barra de rolagem no Webkit (Chrome, Safari) */
+        display: none !important;
     }
 
     body {
-        -ms-overflow-style: none !important; /* Remove a barra de rolagem no IE/Edge */
-        scrollbar-width: none !important; /* Remove a barra de rolagem no Firefox */
+        -ms-overflow-style: none !important;
+        scrollbar-width: none !important;
     }
 
     /* Garantir compactação máxima e consistência */
