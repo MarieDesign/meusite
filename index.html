@@ -307,22 +307,23 @@
         margin: 0 auto !important;
         min-height: 0 !important;
         height: auto !important;
+        position: relative !important; /* Adicionado para ser o ponto de referência do GIF */
     }
 
-    /* GIF - Tocando as laterais e centralizado, agora com prioridade sobre outros elementos */
+    /* GIF - Tocando as laterais e centralizado, agora sobrepondo outros elementos */
     .elementor-element-34991c7 {
         width: 100% !important; /* Tocando as margens esquerda e direita */
         max-width: 100vw !important;
         margin: 0 !important;
         padding: 0 !important;
-        margin-bottom: 100px !important; /* Aumentado significativamente para afastar do botão */
-        padding-bottom: 0 !important;
         min-height: 0 !important;
         height: auto !important;
         display: block !important; /* Garante comportamento de bloco */
         overflow: hidden !important; /* Evita transbordo */
-        position: relative !important; /* Adicionado para permitir z-index */
-        z-index: 9999 !important; /* Valor alto para ficar acima de outros elementos */
+        position: absolute !important; /* Mudado para absolute para sobreposição */
+        top: 0 !important; /* Alinha ao topo do container pai */
+        left: 0 !important; /* Alinha à esquerda do container pai */
+        z-index: 9999 !important; /* Fica acima de qualquer outro elemento */
     }
 
     .elementor-element-34991c7 img {
@@ -352,7 +353,7 @@
     /* Ajustar o botão "Solicitar Orçamento" e suas setas */
     .btn-container {
         text-align: center !important;
-        margin-top: 10px !important; /* Aumentado para reforçar o afastamento do GIF */
+        margin-top: 40px !important; /* Aumentado para reforçar o afastamento do GIF */
         margin-bottom: 30px !important; /* Mantido para o rodapé */
         padding: 0 !important;
         position: relative !important;
