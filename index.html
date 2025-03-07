@@ -662,7 +662,7 @@
             text-align: center;
             margin-top: auto;
             margin-bottom: 100px;
-            position: relative;
+            position: relative; /* Adicionado para posicionamento das setas */
         }
 
         .btn-container button {
@@ -678,46 +678,59 @@
             width: auto;
             max-width: 250px;
             margin: 0 auto;
+            position: relative; /* Adicionado */
+            z-index: 1; /* Adicionado para o botão ficar acima das setas */
         }
 
         .btn-container button:hover {
             background-color: #4a148c;
         }
 
-        .arrows {
-            position: absolute;
-            top: -40px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-            opacity: 0.7;
-        }
-
+        /* Estilos para as setas animadas */
         .arrow {
+            position: absolute;
+            top: 50%;
             width: 20px;
             height: 20px;
-            border: 3px solid #f06292;
-            border-top: none;
-            border-left: none;
-            transform: rotate(45deg);
-            animation: bounce 1s infinite alternate;
+            border: solid #ff69b4; /* Cor rosa */
+            border-width: 0 3px 3px 0;
+            display: inline-block;
+            padding: 3px;
+            animation: bounce 1s infinite;
         }
 
-        .arrow.left {
-            animation-delay: 0s;
+        .arrow-left {
+            left: -40px;
+            transform: translateY(-50%) rotate(135deg);
         }
 
-        .arrow.right {
-            animation-delay: 0.5s;
+        .arrow-right {
+            right: -40px;
+            transform: translateY(-50%) rotate(-45deg);
+            animation: bounce-right 1s infinite;
         }
 
         @keyframes bounce {
-            0% {
-                transform: rotate(45deg) translateY(0);
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(-50%) rotate(135deg);
             }
-            100% {
-                transform: rotate(45deg) translateY(-10px);
+            40% {
+                transform: translateY(-60%) rotate(135deg);
+            }
+            60% {
+                transform: translateY(-55%) rotate(135deg);
+            }
+        }
+
+        @keyframes bounce-right {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(-50%) rotate(-45deg);
+            }
+            40% {
+                transform: translateY(-60%) rotate(-45deg);
+            }
+            60% {
+                transform: translateY(-55%) rotate(-45deg);
             }
         }
 
@@ -867,11 +880,9 @@
 </head>
 <body>
     <div class="btn-container">
-        <div class="arrows">
-            <div class="arrow left"></div>
-            <div class="arrow right"></div>
-        </div>
+        <span class="arrow arrow-left"></span>
         <button onclick="showForm()">Solicitar Orçamento</button>
+        <span class="arrow arrow-right"></span>
     </div>
 
     <div class="container" id="formContainer">
@@ -1084,7 +1095,6 @@
                 document.getElementById('nome').value = formData.nome;
                 document.getElementById('email').value = formData.email;
                 document.getElementById('whatsapp').value = formData.whatsapp;
-                // Não carregamos o valor de 'servico' para que ele volte ao padrão "Selecione..."
                 document.getElementById('detalhes').value = formData.detalhes;
                 document.getElementById('identidade').value = formData.identidade;
                 document.getElementById('observacoes').value = formData.observacoes;
@@ -1096,7 +1106,7 @@
                 nome: document.getElementById('nome').value,
                 email: document.getElementById('email').value,
                 whatsapp: document.getElementById('whatsapp').value,
-                servico: document.getElementById('servico').value, // Ainda salvamos o valor, mas não o carregamos
+                servico: document.getElementById('servico').value,
                 detalhes: document.getElementById('detalhes').value,
                 identidade: document.getElementById('identidade').value,
                 observacoes: document.getElementById('observacoes').value
