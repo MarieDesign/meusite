@@ -309,7 +309,7 @@
         height: auto !important;
     }
 
-    /* GIF - Tocando as laterais e centralizado */
+    /* GIF - Tocando as laterais e centralizado, agora com prioridade sobre outros elementos */
     .elementor-element-34991c7 {
         width: 100% !important; /* Tocando as margens esquerda e direita */
         max-width: 100vw !important;
@@ -321,6 +321,8 @@
         height: auto !important;
         display: block !important; /* Garante comportamento de bloco */
         overflow: hidden !important; /* Evita transbordo */
+        position: relative !important; /* Adicionado para permitir z-index */
+        z-index: 9999 !important; /* Valor alto para ficar acima de outros elementos */
     }
 
     .elementor-element-34991c7 img {
