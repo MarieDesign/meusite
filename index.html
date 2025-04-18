@@ -1512,11 +1512,12 @@
   <h1>Solicitação de Orçamento</h1>
   <p>Resposta em até 20 minutos</p>
 
-  <form id="orçamentoForm">
-    <!-- Campo oculto para rastrear a promoção, com valor padrão -->
-    <input type="hidden" name="promo" id="promoField" value="nenhuma">
+  <form id="orçamentoForm" action="https://formspree.io/f/meoajgpy" method="POST">
+    <!-- Campos ocultos para rastrear a promoção e testar -->
+    <input type="hidden" name="campanha" id="promoField" value="nenhuma">
+    <input type="hidden" name="_subject" value="Nova submissão de orçamento">
     
-    <!-- Resto do formulário (mantido como está) -->
+    <!-- Resto do formulário -->
     <div class="form-group">
       <label for="nome">Nome <span class="required">*</span></label>
       <input type="text" id="nome" name="nome" required>
@@ -1671,13 +1672,8 @@
     const promoField = document.getElementById('promoField');
     
     if (promoField) {
-      if (promo === 'arte-gratis') {
-        promoField.value = 'arte-gratis';
-        console.log('Campo promo preenchido com: arte-gratis');
-      } else {
-        promoField.value = 'nenhuma';
-        console.log('Campo promo preenchido com: nenhuma');
-      }
+      promoField.value = promo === 'arte-gratis' ? 'arte-gratis' : 'nenhuma';
+      console.log('Campo campanha preenchido com: ' + promoField.value);
     } else {
       console.error('Campo promoField não encontrado no DOM');
     }
@@ -1685,7 +1681,7 @@
 
   // Executa após o DOM estar completamente carregado
   document.addEventListener('DOMContentLoaded', function() {
-    setPromoField(); // Preenche o campo oculto
+    setPromoField(); // Preenche o campo oculto inicialmente
     const promo = getQueryParam('promo');
     const popup = document.getElementById('promoPopup');
     
@@ -1695,6 +1691,16 @@
     // Chama as funções originais do site
     toggleOptions();
     loadFormData();
+  });
+
+  // Intercepta o envio do formulário para depuração
+  document.getElementById('orçamentoForm').addEventListener('submit', function(event) {
+    setPromoField(); // Garante que o campo esteja preenchido antes do envio
+    const formData = new FormData(this);
+    console.log('Dados do formulário a serem enviados:');
+    for (const [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`);
+    }
   });
 
   // Função para abrir o formulário, esconder a mensagem e rolar até o formulário
