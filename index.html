@@ -1513,6 +1513,7 @@
   <p>Resposta em até 20 minutos</p>
 
   <form id="orçamentoForm" action="https://formspree.io/f/meoajgpy" method="POST">
+    <input type="hidden" name="_promo" id="promoField" value="nenhuma">
     <div class="form-group">
       <label for="nome">Nome <span class="required">*</span></label>
       <input type="text" id="nome" name="nome" required>
@@ -1692,12 +1693,30 @@
     const popup = document.getElementById('promoPopup');
     popup.classList.remove('active');
     
-    // Preenche o campo mensagem com [Promoção] se for da promoção
+    // Configura a promoção
     if (isPromoSubmission) {
+      const promoField = document.getElementById('promoField');
       const mensagemField = document.getElementById('mensagem');
+      
+      if (promoField) {
+        promoField.value = 'arte-gratis';
+        console.log('Campo _promo preenchido com: arte-gratis');
+      } else {
+        console.error('Campo _promo não encontrado no DOM');
+      }
+      
       if (mensagemField) {
         mensagemField.value = '[Promoção] ' + (mensagemField.value || '');
+        mensagemField.setAttribute('data-promo', '[Promoção] ');
         console.log('Campo mensagem preenchido com: ' + mensagemField.value);
+        
+        // Impede a remoção de [Promoção]
+        mensagemField.addEventListener('input', function() {
+          if (!this.value.startsWith('[Promoção] ')) {
+            this.value = '[Promoção] ' + this.value;
+            console.log('Tentativa de remover [Promoção] bloqueada. Valor restaurado: ' + this.value);
+          }
+        });
       } else {
         console.error('Campo mensagem não encontrado no DOM');
       }
@@ -1710,8 +1729,24 @@
     }
   }
 
-  // Loga os dados do formulário antes do envio para depuração
+  // Garante que [Promoção] esteja presente no envio
   document.getElementById('orçamentoForm').addEventListener('submit', function(event) {
+    if (isPromoSubmission) {
+      const promoField = document.getElementById('promoField');
+      const mensagemField = document.getElementById('mensagem');
+      
+      if (promoField) {
+        promoField.value = 'arte-gratis';
+        console.log('Campo _promo confirmado antes do envio: arte-gratis');
+      }
+      
+      if (mensagemField && !mensagemField.value.startsWith('[Promoção] ')) {
+        mensagemField.value = '[Promoção] ' + mensagemField.value;
+        console.log('Campo mensagem corrigido antes do envio: ' + mensagemField.value);
+      }
+    }
+    
+    // Loga os dados do formulário
     const formData = new FormData(this);
     console.log('Dados do formulário a serem enviados:');
     for (const [key, value] of formData.entries()) {
