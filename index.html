@@ -1524,7 +1524,6 @@
 
 <!-- 2. Substitua o código do pop-up (antes do </body>) -->
 <style>
-  /* Estilo do pop-up com paleta do site e animação cintilante */
   .promo-popup {
     display: none;
     position: fixed;
@@ -1583,7 +1582,6 @@
     box-shadow: 0 0 25px rgba(106, 27, 154, 0.8);
   }
 
-  /* Efeito de faíscas com pseudo-elementos */
   .promo-popup::before, .promo-popup::after {
     content: '';
     position: absolute;
@@ -1607,7 +1605,6 @@
     animation-delay: 1s;
   }
 
-  /* Animação de entrada */
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -1619,7 +1616,6 @@
     }
   }
 
-  /* Animação cintilante com movimento */
   @keyframes sparkle {
     0% {
       transform: translateX(-50%) rotate(0deg) scale(1);
@@ -1635,7 +1631,6 @@
     }
   }
 
-  /* Animação de faíscas */
   @keyframes spark {
     0% {
       opacity: 0;
@@ -1650,6 +1645,17 @@
       transform: scale(0);
     }
   }
+
+  /* ✅ Estilo mobile para o botão do popup */
+  @media (max-width: 480px) {
+    .promo-popup button {
+      padding: 10px 18px;
+      font-size: 0.9em;
+      width: auto;
+      max-width: 80%;
+      white-space: nowrap;
+    }
+  }
 </style>
 
 <!-- Mensagem promocional -->
@@ -1660,16 +1666,13 @@
 </div>
 
 <script>
-  // Função para verificar o parâmetro na URL
   function getQueryParam(param) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(param);
   }
 
-  // Verifica se é uma submissão da promoção
   let isPromoSubmission = getQueryParam('promo') === 'arte-gratis';
 
-  // Executa após o DOM estar completamente carregado
   document.addEventListener('DOMContentLoaded', function() {
     const popup = document.getElementById('promoPopup');
     if (isPromoSubmission) {
@@ -1678,35 +1681,27 @@
     } else {
       console.log('Acesso normal, sem promoção');
     }
-    // Chama as funções originais do site
     toggleOptions();
     loadFormData();
   });
 
-  // Função para abrir o formulário, ocultar a mensagem e rolar até o formulário
   function openFormAndScroll() {
-    // Abre o formulário
     showForm();
-    // Esconde a mensagem promocional
     const popup = document.getElementById('promoPopup');
     popup.classList.remove('active');
-    // Configura o campo nome para a promoção
     if (isPromoSubmission) {
       const nomeField = document.getElementById('nome');
       if (nomeField) {
-        // Se o nome do campo já contém "Promoção", apenas preservamos o valor atual
         if (!nomeField.value.startsWith('[Promoção] ')) {
           nomeField.value = '[Promoção] ' + (nomeField.value || '');
           nomeField.setAttribute('data-previous-value', nomeField.value);
         }
         console.log('Campo preenchido com: ' + nomeField.value);
-        // Impede alterações que removem [Promoção]
         nomeField.addEventListener('input', function() {
           if (!this.value.startsWith('[Promoção] ')) {
             this.value = this.getAttribute('data-previous-value');
             console.log('Tentativa de alteração [Promoção] bloqueada. Valor restaurado: ' + this.value);
           } else {
-            // Atualiza o valor anterior apenas se válido
             this.setAttribute('data-previous-value', this.value);
             console.log('Valor do nome do campo atualizado: ' + this.value);
           }
@@ -1715,22 +1710,18 @@
         console.error('Nome do campo não encontrado no DOM');
       }
     }
-    // Rola até o formulário
     const formContainer = document.getElementById('formContainer');
     if (formContainer) {
       formContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
 
-  // Garantir que [Promoção] esteja presente no envio
   document.getElementById('orçamentoForm').addEventListener('submit', function(event) {
     event.preventDefault();
-    // Impedir o envio padrão
     const nomeField = document.getElementById('nome');
     if (isPromoSubmission && nomeField && !nomeField.value.startsWith('[Promoção] ')) {
       nomeField.value = '[Promoção] ' + nomeField.value;
     }
-    // Enviado manualmente com fetch
     const formData = new FormData(this);
     fetch('https://formspree.io/f/meoajgpy', {
       method: 'POST',
