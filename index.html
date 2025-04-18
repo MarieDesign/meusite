@@ -1513,8 +1513,8 @@
   <p>Resposta em até 20 minutos</p>
 
   <form id="orçamentoForm">
-    <!-- Campo oculto para rastrear a promoção -->
-    <input type="hidden" name="promo" id="promoField" value="">
+    <!-- Campo oculto para rastrear a promoção, com valor padrão -->
+    <input type="hidden" name="promo" id="promoField" value="nenhuma">
     
     <!-- Resto do formulário (mantido como está) -->
     <div class="form-group">
@@ -1665,22 +1665,37 @@
     return urlParams.get(param);
   }
 
-  // Verifica se o parâmetro promo=arte-gratis está na URL e preenche o campo oculto
-  window.onload = function() {
+  // Função para preencher o campo oculto
+  function setPromoField() {
+    const promo = getQueryParam('promo');
+    const promoField = document.getElementById('promoField');
+    
+    if (promoField) {
+      if (promo === 'arte-gratis') {
+        promoField.value = 'arte-gratis';
+        console.log('Campo promo preenchido com: arte-gratis');
+      } else {
+        promoField.value = 'nenhuma';
+        console.log('Campo promo preenchido com: nenhuma');
+      }
+    } else {
+      console.error('Campo promoField não encontrado no DOM');
+    }
+  }
+
+  // Executa após o DOM estar completamente carregado
+  document.addEventListener('DOMContentLoaded', function() {
+    setPromoField(); // Preenche o campo oculto
     const promo = getQueryParam('promo');
     const popup = document.getElementById('promoPopup');
-    const promoField = document.getElementById('promoField');
     
     if (promo === 'arte-gratis') {
       popup.classList.add('active');
-      if (promoField) {
-        promoField.value = 'arte-gratis'; // Preenche o campo oculto
-      }
     }
     // Chama as funções originais do site
     toggleOptions();
     loadFormData();
-  };
+  });
 
   // Função para abrir o formulário, esconder a mensagem e rolar até o formulário
   function openFormAndScroll() {
