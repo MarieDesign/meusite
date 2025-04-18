@@ -1518,7 +1518,11 @@
       <input type="text" id="nome" name="nome" required>
       <div class="error-message" id="nome-error">Preencha o campo Nome.</div>
     </div>
-    <!-- ... demais campos do formulário (sem campos ocultos) ... -->
+    <div class="form-group">
+      <label for="mensagem">Mensagem</label>
+      <textarea id="mensagem" name="mensagem"></textarea>
+    </div>
+    <!-- ... demais campos do formulário ... -->
     <button type="submit">Enviar Solicitação</button>
   </form>
 </div>
@@ -1679,22 +1683,6 @@
     loadFormData();
   });
 
-  // Intercepta o envio do formulário para adicionar [Promoção] ao nome
-  document.getElementById('orçamentoForm').addEventListener('submit', function(event) {
-    const nomeField = document.getElementById('nome');
-    if (isPromoSubmission && nomeField && nomeField.value) {
-      nomeField.value = nomeField.value + ' [Promoção]';
-      console.log('Nome modificado para: ' + nomeField.value);
-    }
-    
-    // Loga os dados do formulário para depuração
-    const formData = new FormData(this);
-    console.log('Dados do formulário a serem enviados:');
-    for (const [key, value] of formData.entries()) {
-      console.log(`${key}: ${value}`);
-    }
-  });
-
   // Função para abrir o formulário, esconder a mensagem e rolar até o formulário
   function openFormAndScroll() {
     // Abre o formulário
@@ -1704,12 +1692,32 @@
     const popup = document.getElementById('promoPopup');
     popup.classList.remove('active');
     
+    // Preenche o campo mensagem com [Promoção] se for da promoção
+    if (isPromoSubmission) {
+      const mensagemField = document.getElementById('mensagem');
+      if (mensagemField) {
+        mensagemField.value = '[Promoção] ' + (mensagemField.value || '');
+        console.log('Campo mensagem preenchido com: ' + mensagemField.value);
+      } else {
+        console.error('Campo mensagem não encontrado no DOM');
+      }
+    }
+    
     // Rola até o formulário
     const formContainer = document.getElementById('formContainer');
     if (formContainer) {
       formContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
+
+  // Loga os dados do formulário antes do envio para depuração
+  document.getElementById('orçamentoForm').addEventListener('submit', function(event) {
+    const formData = new FormData(this);
+    console.log('Dados do formulário a serem enviados:');
+    for (const [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`);
+    }
+  });
 </script>
 </body>
 </html>
