@@ -1506,7 +1506,28 @@
 
     window.onresize = setRandomPositions;
   </script>
-	<!-- Este código deve ser adicionado ao final do seu arquivo HTML, antes do </body> -->
+	<!-- Substitua apenas as partes relevantes do seu arquivo HTML -->
+<!-- 1. Atualize o formulário (dentro do <div class="container" id="formContainer">) -->
+<div class="container" id="formContainer">
+  <h1>Solicitação de Orçamento</h1>
+  <p>Resposta em até 20 minutos</p>
+
+  <form id="orçamentoForm">
+    <!-- Campo oculto para rastrear a promoção -->
+    <input type="hidden" name="promo" id="promoField" value="">
+    
+    <!-- Resto do formulário (mantido como está) -->
+    <div class="form-group">
+      <label for="nome">Nome <span class="required">*</span></label>
+      <input type="text" id="nome" name="nome" required>
+      <div class="error-message" id="nome-error">Preencha o campo Nome.</div>
+    </div>
+    <!-- ... demais campos do formulário ... -->
+    <button type="submit">Enviar Solicitação</button>
+  </form>
+</div>
+
+<!-- 2. Substitua o código do pop-up (antes do </body>) -->
 <style>
   /* Estilo do pop-up com paleta do site e animação cintilante */
   .promo-popup {
@@ -1644,13 +1665,17 @@
     return urlParams.get(param);
   }
 
-  // Verifica se o parâmetro promo=arte-gratis está na URL
+  // Verifica se o parâmetro promo=arte-gratis está na URL e preenche o campo oculto
   window.onload = function() {
     const promo = getQueryParam('promo');
     const popup = document.getElementById('promoPopup');
+    const promoField = document.getElementById('promoField');
     
     if (promo === 'arte-gratis') {
       popup.classList.add('active');
+      if (promoField) {
+        promoField.value = 'arte-gratis'; // Preenche o campo oculto
+      }
     }
     // Chama as funções originais do site
     toggleOptions();
