@@ -1529,9 +1529,9 @@
   .promo-popup {
     display: none;
     position: fixed;
-    top: 50%;
+    top: 20%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     background: linear-gradient(135deg, #6a1b9a, #f06292);
     color: #ffffff;
     padding: 25px;
@@ -1606,26 +1606,26 @@
   @keyframes fadeIn {
     from {
       opacity: 0;
-      transform: translate(-50%, -60%);
+      transform: translateX(-50%) translateY(-20px);
     }
     to {
       opacity: 1;
-      transform: translate(-50%, -50%);
+      transform: translateX(-50%) translateY(0);
     }
   }
 
   /* Animação cintilante com movimento */
   @keyframes sparkle {
     0% {
-      transform: translate(-50%, -50%) rotate(0deg) scale(1);
+      transform: translateX(-50%) rotate(0deg) scale(1);
       box-shadow: 0 0 15px rgba(255, 255, 255, 0.7), 0 0 30px rgba(240, 98, 146, 0.5);
     }
     50% {
-      transform: translate(-50%, -50%) rotate(2deg) scale(1.02);
+      transform: translateX(-50%) rotate(2deg) scale(1.02);
       box-shadow: 0 0 25px rgba(255, 255, 255, 1), 0 0 40px rgba(240, 98, 146, 0.7);
     }
     100% {
-      transform: translate(-50%, -50%) rotate(0deg) scale(1);
+      transform: translateX(-50%) rotate(0deg) scale(1);
       box-shadow: 0 0 15px rgba(255, 255, 255, 0.7), 0 0 30px rgba(240, 98, 146, 0.5);
     }
   }
@@ -1646,11 +1646,30 @@
     }
   }
 
-  /* Responsividade extra */
-  @media (max-height: 500px) {
+  /* Responsividade para dispositivos móveis */
+  @media (max-width: 480px) {
     .promo-popup {
-      top: 50%;
-      transform: translate(-50%, -50%);
+      top: 10%;
+      width: 90%;
+      max-width: 95vw;
+      padding: 20px;
+      border-radius: 20px;
+    }
+
+    .promo-popup h2 {
+      font-size: 1.4em;
+    }
+
+    .promo-popup p {
+      font-size: 1em;
+      margin-bottom: 20px;
+    }
+
+    .promo-popup button {
+      font-size: 1.1em;
+      padding: 14px 30px;
+      border-radius: 30px;
+      width: 100%;
     }
   }
 </style>
@@ -1710,6 +1729,7 @@
             this.value = this.getAttribute('data-previous-value');
             console.log('Tentativa de alterar [Promoção] bloqueada. Valor restaurado: ' + this.value);
           } else {
+            // Atualiza o valor anterior apenas se válido
             this.setAttribute('data-previous-value', this.value);
             console.log('Valor do campo nome atualizado: ' + this.value);
           }
@@ -1728,20 +1748,22 @@
 
   // Garante que [Promoção] esteja presente no envio
   document.getElementById('orçamentoForm').addEventListener('submit', function(event) {
-    event.preventDefault();
+    event.preventDefault(); // Impede o envio padrão
     const nomeField = document.getElementById('nome');
     
     if (isPromoSubmission && nomeField && !nomeField.value.startsWith('[Promoção] ')) {
       nomeField.value = '[Promoção] ' + nomeField.value;
       console.log('Campo nome corrigido antes do envio: ' + nomeField.value);
     }
-
+    
+    // Loga os dados do formulário
     const formData = new FormData(this);
     console.log('Dados do formulário a serem enviados:');
     for (const [key, value] of formData.entries()) {
       console.log(`${key}: ${value}`);
     }
-
+    
+    // Envia manualmente com fetch
     fetch('https://formspree.io/f/meoajgpy', {
       method: 'POST',
       body: formData,
@@ -1753,6 +1775,7 @@
       if (!response.ok) throw new Error('Erro no envio: ' + response.status);
       console.log('Formulário enviado com sucesso');
       alert('Formulário enviado com sucesso!');
+      // Opcional: fecha o formulário e volta ao botão, conforme pedido em 06/03/2025
       showForm(false);
     })
     .catch(error => {
