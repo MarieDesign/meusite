@@ -1508,48 +1508,90 @@
   </script>
 	<!-- Este código deve ser adicionado ao final do seu arquivo HTML, antes do </body> -->
 <style>
-  /* Estilo da mensagem promocional */
+  /* Estilo do pop-up com design futurista */
   .promo-popup {
     display: none;
     position: fixed;
     top: 20%;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #ffcc00;
-    color: #333;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #6a1b9a, #f06292, #00d4ff);
+    color: #fff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.8), 0 0 40px rgba(240, 98, 146, 0.5);
     z-index: 1000;
     text-align: center;
     max-width: 400px;
     width: 90%;
+    border: 2px solid #00d4ff;
+    animation: pulse 2s infinite ease-in-out;
   }
   .promo-popup.active {
     display: block;
+    animation: fadeIn 0.5s ease-out forwards, pulse 2s infinite ease-in-out;
   }
   .promo-popup h2 {
     margin: 0 0 10px;
-    font-size: 1.5em;
+    font-size: 1.8em;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    text-shadow: 0 0 10px #fff;
+  }
+  .promo-popup p {
+    margin: 0 0 15px;
+    font-size: 0.9em;
+    color: #e0e0e0;
+    text-shadow: 0 0 5px #fff;
   }
   .promo-popup button {
-    background-color: #6a1b9a;
+    background: linear-gradient(to right, #00d4ff, #f06292);
     color: #fff;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 12px 25px;
+    border-radius: 25px;
     cursor: pointer;
     font-size: 1em;
     font-weight: bold;
+    font-family: 'Arial', sans-serif;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
+    transition: transform 0.2s, box-shadow 0.2s;
   }
   .promo-popup button:hover {
-    background-color: #4a148c;
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(0, 212, 255, 1);
+  }
+
+  /* Animação de entrada */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateX(-50%) translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+  /* Animação de pulsação */
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.8), 0 0 40px rgba(240, 98, 146, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 30px rgba(0, 212, 255, 1), 0 0 50px rgba(240, 98, 146, 0.7);
+    }
+    100% {
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.8), 0 0 40px rgba(240, 98, 146, 0.5);
+    }
   }
 </style>
 
 <!-- Mensagem promocional -->
 <div class="promo-popup" id="promoPopup">
   <h2>Primeira Arte Estática Grátis!</h2>
+  <p>É necessário preencher o formulário para obter a arte grátis.</p>
   <button onclick="openFormAndScroll()">Clique Aqui!</button>
 </div>
 
