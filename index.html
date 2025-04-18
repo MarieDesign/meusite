@@ -1550,7 +1550,7 @@
 <!-- Mensagem promocional -->
 <div class="promo-popup" id="promoPopup">
   <h2>Primeira Arte Estática Grátis!</h2>
-  <button onclick="showForm()">Clique Aqui!</button>
+  <button onclick="openFormAndScroll()">Clique Aqui!</button>
 </div>
 
 <script>
@@ -1568,10 +1568,26 @@
     if (promo === 'arte-gratis') {
       popup.classList.add('active');
     }
-    // Chama a função original de loadFormData e toggleOptions
+    // Chama as funções originais do site
     toggleOptions();
     loadFormData();
   };
+
+  // Função para abrir o formulário, esconder a mensagem e rolar até o formulário
+  function openFormAndScroll() {
+    // Abre o formulário
+    showForm();
+    
+    // Esconde a mensagem promocional
+    const popup = document.getElementById('promoPopup');
+    popup.classList.remove('active');
+    
+    // Rola até o formulário
+    const formContainer = document.getElementById('formContainer');
+    if (formContainer) {
+      formContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
 </script>
 </body>
 </html>
