@@ -1511,14 +1511,13 @@
 <div class="container" id="formContainer">
   <h1>Solicitação de Orçamento</h1>
   <p>Resposta em até 20 minutos</p>
-
   <form id="orçamentoForm" action="https://formspree.io/f/meoajgpy" method="POST">
     <div class="form-group">
       <label for="nome">Nome <span class="required">*</span></label>
       <input type="text" id="nome" name="nome" required>
       <div class="error-message" id="nome-error">Preencha o campo Nome.</div>
     </div>
-    <!-- ... demais campos do formulário (ex.: e-mail, servico) ... -->
+    <!-- ... demais campos do formulário (ex.: e-mail, serviço) ... -->
     <button type="submit">Enviar Solicitação</button>
   </form>
 </div>
@@ -1545,22 +1544,26 @@
     animation: sparkle 1.5s infinite ease-in-out;
     font-family: 'Arial', sans-serif;
   }
+
   .promo-popup.active {
     display: block;
     animation: fadeIn 0.5s ease-out forwards, sparkle 1.5s infinite ease-in-out;
   }
+
   .promo-popup h2 {
     margin: 0 0 10px;
     font-size: 1.8em;
     font-weight: bold;
     text-shadow: 0 0 10px #ffffff, 0 0 20px #f06292;
   }
+
   .promo-popup p {
     margin: 0 0 15px;
     font-size: 0.9em;
     color: #e0e0e0;
     text-shadow: 0 0 5px #ffffff;
   }
+
   .promo-popup button {
     background: #f06292;
     color: #ffffff;
@@ -1573,6 +1576,7 @@
     box-shadow: 0 0 15px rgba(240, 98, 146, 0.6);
     transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
   }
+
   .promo-popup button:hover {
     background: #6a1b9a;
     transform: scale(1.05);
@@ -1580,8 +1584,7 @@
   }
 
   /* Efeito de faíscas com pseudo-elementos */
-  .promo-popup::before,
-  .promo-popup::after {
+  .promo-popup::before, .promo-popup::after {
     content: '';
     position: absolute;
     width: 10px;
@@ -1591,11 +1594,13 @@
     opacity: 0;
     animation: spark 2s infinite;
   }
+
   .promo-popup::before {
     top: 10px;
     left: 20px;
     animation-delay: 0.5s;
   }
+
   .promo-popup::after {
     bottom: 10px;
     right: 20px;
@@ -1667,7 +1672,6 @@
   // Executa após o DOM estar completamente carregado
   document.addEventListener('DOMContentLoaded', function() {
     const popup = document.getElementById('promoPopup');
-    
     if (isPromoSubmission) {
       popup.classList.add('active');
       console.log('Acesso via promoção: arte-gratis');
@@ -1679,39 +1683,35 @@
     loadFormData();
   });
 
-  // Função para abrir o formulário, esconder a mensagem e rolar até o formulário
+  // Função para abrir o formulário, ocultar a mensagem e rolar até o formulário
   function openFormAndScroll() {
     // Abre o formulário
     showForm();
-    
     // Esconde a mensagem promocional
     const popup = document.getElementById('promoPopup');
     popup.classList.remove('active');
-    
     // Configura o campo nome para a promoção
     if (isPromoSubmission) {
       const nomeField = document.getElementById('nome');
       if (nomeField) {
         nomeField.value = '[Promoção] ' + (nomeField.value || '');
         nomeField.setAttribute('data-previous-value', nomeField.value);
-        console.log('Campo nome preenchido com: ' + nomeField.value);
-        
-        // Impede alterações que removam [Promoção]
+        console.log('Campo preenchido com: ' + nomeField.value);
+        // Impede alterações que removem [Promoção]
         nomeField.addEventListener('input', function() {
           if (!this.value.startsWith('[Promoção] ')) {
             this.value = this.getAttribute('data-previous-value');
-            console.log('Tentativa de alterar [Promoção] bloqueada. Valor restaurado: ' + this.value);
+            console.log('Tentativa de alteração [Promoção] bloqueada. Valor restaurado: ' + this.value);
           } else {
             // Atualiza o valor anterior apenas se válido
             this.setAttribute('data-previous-value', this.value);
-            console.log('Valor do campo nome atualizado: ' + this.value);
+            console.log('Valor do nome do campo atualizado: ' + this.value);
           }
         });
       } else {
-        console.error('Campo nome não encontrado no DOM');
+        console.error('Nome do campo não encontrado no DOM');
       }
     }
-    
     // Rola até o formulário
     const formContainer = document.getElementById('formContainer');
     if (formContainer) {
@@ -1719,37 +1719,25 @@
     }
   }
 
-  // Garante que [Promoção] esteja presente no envio
+  // Garantir que [Promoção] esteja presente no envio
   document.getElementById('orçamentoForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Impede o envio padrão
+    event.preventDefault();
+    // Impedir o envio padrão
     const nomeField = document.getElementById('nome');
-    
     if (isPromoSubmission && nomeField && !nomeField.value.startsWith('[Promoção] ')) {
       nomeField.value = '[Promoção] ' + nomeField.value;
-      console.log('Campo nome corrigido antes do envio: ' + nomeField.value);
     }
-    
-    // Loga os dados do formulário
+    // Enviado manualmente com fetch
     const formData = new FormData(this);
-    console.log('Dados do formulário a serem enviados:');
-    for (const [key, value] of formData.entries()) {
-      console.log(`${key}: ${value}`);
-    }
-    
-    // Envia manualmente com fetch
     fetch('https://formspree.io/f/meoajgpy', {
       method: 'POST',
       body: formData,
-      headers: {
-        'Accept': 'application/json'
-      }
+      headers: { 'Accept': 'application/json' }
     })
     .then(response => {
       if (!response.ok) throw new Error('Erro no envio: ' + response.status);
       console.log('Formulário enviado com sucesso');
       alert('Formulário enviado com sucesso!');
-      // Opcional: fecha o formulário e volta ao botão, conforme pedido em 06/03/2025
-      showForm(false);
     })
     .catch(error => {
       console.error('Erro:', error);
