@@ -1506,38 +1506,26 @@
 
     window.onresize = setRandomPositions;
   </script>
-	<!-- Formulário -->
+	<!-- Substitua apenas as partes relevantes do seu arquivo HTML -->
+<!-- 1. Atualize o formulário (dentro do <div class="container" id="formContainer">) -->
 <div class="container" id="formContainer">
   <h1>Solicitação de Orçamento</h1>
   <p>Resposta em até 20 minutos</p>
 
   <form id="orçamentoForm" action="https://formspree.io/f/meoajgpy" method="POST">
-    <!-- Campo oculto para a campanha -->
-    <input type="hidden" name="campanha" id="promoField" value="nenhuma">
-    <input type="hidden" name="_subject" value="Nova submissão de orçamento">
-
-    <!-- Campos do formulário -->
     <div class="form-group">
       <label for="nome">Nome <span class="required">*</span></label>
       <input type="text" id="nome" name="nome" required>
       <div class="error-message" id="nome-error">Preencha o campo Nome.</div>
     </div>
-
-    <!-- Adicione mais campos conforme seu formulário -->
-
+    <!-- ... demais campos do formulário (sem campos ocultos) ... -->
     <button type="submit">Enviar Solicitação</button>
   </form>
 </div>
 
-<!-- Mensagem promocional -->
-<div class="promo-popup" id="promoPopup">
-  <h2>Primeira Arte Estática Grátis!</h2>
-  <p>É necessário preencher o formulário para obter a arte grátis.</p>
-  <button onclick="openFormAndScroll()">Clique Aqui!</button>
-</div>
-
-<!-- Estilo do pop-up (mantido igual) -->
+<!-- 2. Substitua o código do pop-up (antes do </body>) -->
 <style>
+  /* Estilo do pop-up com paleta do site e animação cintilante */
   .promo-popup {
     display: none;
     position: fixed;
@@ -1557,26 +1545,22 @@
     animation: sparkle 1.5s infinite ease-in-out;
     font-family: 'Arial', sans-serif;
   }
-
   .promo-popup.active {
     display: block;
     animation: fadeIn 0.5s ease-out forwards, sparkle 1.5s infinite ease-in-out;
   }
-
   .promo-popup h2 {
     margin: 0 0 10px;
     font-size: 1.8em;
     font-weight: bold;
     text-shadow: 0 0 10px #ffffff, 0 0 20px #f06292;
   }
-
   .promo-popup p {
     margin: 0 0 15px;
     font-size: 0.9em;
     color: #e0e0e0;
     text-shadow: 0 0 5px #ffffff;
   }
-
   .promo-popup button {
     background: #f06292;
     color: #ffffff;
@@ -1589,13 +1573,36 @@
     box-shadow: 0 0 15px rgba(240, 98, 146, 0.6);
     transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
   }
-
   .promo-popup button:hover {
     background: #6a1b9a;
     transform: scale(1.05);
     box-shadow: 0 0 25px rgba(106, 27, 154, 0.8);
   }
 
+  /* Efeito de faíscas com pseudo-elementos */
+  .promo-popup::before,
+  .promo-popup::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #ffffff;
+    border-radius: 50%;
+    opacity: 0;
+    animation: spark 2s infinite;
+  }
+  .promo-popup::before {
+    top: 10px;
+    left: 20px;
+    animation-delay: 0.5s;
+  }
+  .promo-popup::after {
+    bottom: 10px;
+    right: 20px;
+    animation-delay: 1s;
+  }
+
+  /* Animação de entrada */
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -1607,6 +1614,7 @@
     }
   }
 
+  /* Animação cintilante com movimento */
   @keyframes sparkle {
     0% {
       transform: translateX(-50%) rotate(0deg) scale(1);
@@ -1621,71 +1629,87 @@
       box-shadow: 0 0 15px rgba(255, 255, 255, 0.7), 0 0 30px rgba(240, 98, 146, 0.5);
     }
   }
+
+  /* Animação de faíscas */
+  @keyframes spark {
+    0% {
+      opacity: 0;
+      transform: scale(0);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.2);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0);
+    }
+  }
 </style>
 
-<!-- JavaScript -->
+<!-- Mensagem promocional -->
+<div class="promo-popup" id="promoPopup">
+  <h2>Primeira Arte Estática Grátis!</h2>
+  <p>É necessário preencher o formulário para obter a arte grátis.</p>
+  <button onclick="openFormAndScroll()">Clique Aqui!</button>
+</div>
+
 <script>
+  // Função para verificar o parâmetro na URL
   function getQueryParam(param) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(param);
   }
 
-  function setPromoField() {
-    const promo = getQueryParam('promo');
-    const promoField = document.getElementById('promoField');
-    if (promoField) {
-      promoField.value = promo === 'arte-gratis' ? 'arte-gratis' : 'nenhuma';
-      console.log('Campo campanha preenchido com: ' + promoField.value);
-    }
-  }
+  // Verifica se é uma submissão da promoção
+  let isPromoSubmission = getQueryParam('promo') === 'arte-gratis';
 
+  // Executa após o DOM estar completamente carregado
+  document.addEventListener('DOMContentLoaded', function() {
+    const popup = document.getElementById('promoPopup');
+    
+    if (isPromoSubmission) {
+      popup.classList.add('active');
+      console.log('Acesso via promoção: arte-gratis');
+    } else {
+      console.log('Acesso normal, sem promoção');
+    }
+    // Chama as funções originais do site
+    toggleOptions();
+    loadFormData();
+  });
+
+  // Intercepta o envio do formulário para adicionar [Promoção] ao nome
+  document.getElementById('orçamentoForm').addEventListener('submit', function(event) {
+    const nomeField = document.getElementById('nome');
+    if (isPromoSubmission && nomeField && nomeField.value) {
+      nomeField.value = nomeField.value + ' [Promoção]';
+      console.log('Nome modificado para: ' + nomeField.value);
+    }
+    
+    // Loga os dados do formulário para depuração
+    const formData = new FormData(this);
+    console.log('Dados do formulário a serem enviados:');
+    for (const [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`);
+    }
+  });
+
+  // Função para abrir o formulário, esconder a mensagem e rolar até o formulário
   function openFormAndScroll() {
+    // Abre o formulário
+    showForm();
+    
+    // Esconde a mensagem promocional
     const popup = document.getElementById('promoPopup');
     popup.classList.remove('active');
+    
+    // Rola até o formulário
     const formContainer = document.getElementById('formContainer');
     if (formContainer) {
       formContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
-
-  document.addEventListener('DOMContentLoaded', function() {
-    setPromoField();
-    const promo = getQueryParam('promo');
-    const popup = document.getElementById('promoPopup');
-    if (promo === 'arte-gratis') {
-      popup.classList.add('active');
-    }
-  });
-
-  document.getElementById('orçamentoForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    setPromoField();
-
-    const formData = new FormData(this);
-    for (const [key, value] of formData.entries()) {
-      console.log(`${key}: ${value}`);
-    }
-
-    fetch(this.action, {
-      method: 'POST',
-      body: formData,
-      headers: {
-        'Accept': 'application/json'
-      }
-    })
-    .then(response => {
-      if (response.ok) {
-        alert('Formulário enviado com sucesso!');
-        this.reset();
-      } else {
-        alert('Erro ao enviar. Tente novamente.');
-      }
-    })
-    .catch(error => {
-      alert('Erro inesperado: ' + error.message);
-    });
-  });
 </script>
 </body>
 </html>
