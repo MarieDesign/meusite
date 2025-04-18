@@ -1693,14 +1693,18 @@
       const nomeField = document.getElementById('nome');
       if (nomeField) {
         nomeField.value = '[Promoção] ' + (nomeField.value || '');
-        nomeField.setAttribute('data-promo', '[Promoção] ');
+        nomeField.setAttribute('data-previous-value', nomeField.value);
         console.log('Campo nome preenchido com: ' + nomeField.value);
         
-        // Impede a remoção de [Promoção]
+        // Impede alterações que removam [Promoção]
         nomeField.addEventListener('input', function() {
           if (!this.value.startsWith('[Promoção] ')) {
-            this.value = '[Promoção] ' + this.value.replace(/^\[Promoção\] /, '');
-            console.log('Tentativa de remover [Promoção] bloqueada. Valor restaurado: ' + this.value);
+            this.value = this.getAttribute('data-previous-value');
+            console.log('Tentativa de alterar [Promoção] bloqueada. Valor restaurado: ' + this.value);
+          } else {
+            // Atualiza o valor anterior apenas se válido
+            this.setAttribute('data-previous-value', this.value);
+            console.log('Valor do campo nome atualizado: ' + this.value);
           }
         });
       } else {
