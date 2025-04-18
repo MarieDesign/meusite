@@ -1529,9 +1529,9 @@
   .promo-popup {
     display: none;
     position: fixed;
-    top: 20%;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
     background: linear-gradient(135deg, #6a1b9a, #f06292);
     color: #ffffff;
     padding: 25px;
@@ -1606,26 +1606,26 @@
   @keyframes fadeIn {
     from {
       opacity: 0;
-      transform: translateX(-50%) translateY(-20px);
+      transform: translate(-50%, -60%);
     }
     to {
       opacity: 1;
-      transform: translateX(-50%) translateY(0);
+      transform: translate(-50%, -50%);
     }
   }
 
   /* Animação cintilante com movimento */
   @keyframes sparkle {
     0% {
-      transform: translateX(-50%) rotate(0deg) scale(1);
+      transform: translate(-50%, -50%) rotate(0deg) scale(1);
       box-shadow: 0 0 15px rgba(255, 255, 255, 0.7), 0 0 30px rgba(240, 98, 146, 0.5);
     }
     50% {
-      transform: translateX(-50%) rotate(2deg) scale(1.02);
+      transform: translate(-50%, -50%) rotate(2deg) scale(1.02);
       box-shadow: 0 0 25px rgba(255, 255, 255, 1), 0 0 40px rgba(240, 98, 146, 0.7);
     }
     100% {
-      transform: translateX(-50%) rotate(0deg) scale(1);
+      transform: translate(-50%, -50%) rotate(0deg) scale(1);
       box-shadow: 0 0 15px rgba(255, 255, 255, 0.7), 0 0 30px rgba(240, 98, 146, 0.5);
     }
   }
@@ -1646,70 +1646,11 @@
     }
   }
 
-  /* RESPONSIVIDADE MOBILE */
-  @media (max-width: 600px) {
-    #formContainer {
-      padding: 20px;
-      margin: 0 10px;
-    }
-
-    #formContainer h1 {
-      font-size: 1.5em;
-      text-align: center;
-    }
-
-    #formContainer p {
-      text-align: center;
-      font-size: 1em;
-    }
-
-    #formContainer form {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    #formContainer .form-group {
-      width: 100%;
-    }
-
-    #formContainer label {
-      font-size: 0.95em;
-    }
-
-    #formContainer input,
-    #formContainer select,
-    #formContainer textarea {
-      font-size: 1em;
-      width: 100%;
-      padding: 10px;
-      box-sizing: border-box;
-    }
-
-    #formContainer button[type="submit"] {
-      font-size: 1em;
-      padding: 12px;
-      width: 100%;
-      margin-top: 10px;
-    }
-
+  /* Responsividade extra */
+  @media (max-height: 500px) {
     .promo-popup {
-      top: 10%;
-      padding: 15px;
-      font-size: 0.9em;
-    }
-
-    .promo-popup h2 {
-      font-size: 1.4em;
-    }
-
-    .promo-popup p {
-      font-size: 0.85em;
-    }
-
-    .promo-popup button {
-      padding: 10px 20px;
-      font-size: 0.95em;
+      top: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 </style>
@@ -1722,13 +1663,16 @@
 </div>
 
 <script>
+  // Função para verificar o parâmetro na URL
   function getQueryParam(param) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(param);
   }
 
+  // Verifica se é uma submissão da promoção
   let isPromoSubmission = getQueryParam('promo') === 'arte-gratis';
 
+  // Executa após o DOM estar completamente carregado
   document.addEventListener('DOMContentLoaded', function() {
     const popup = document.getElementById('promoPopup');
     
@@ -1738,24 +1682,29 @@
     } else {
       console.log('Acesso normal, sem promoção');
     }
-
+    // Chama as funções originais do site
     toggleOptions();
     loadFormData();
   });
 
+  // Função para abrir o formulário, esconder a mensagem e rolar até o formulário
   function openFormAndScroll() {
+    // Abre o formulário
     showForm();
-
+    
+    // Esconde a mensagem promocional
     const popup = document.getElementById('promoPopup');
     popup.classList.remove('active');
-
+    
+    // Configura o campo nome para a promoção
     if (isPromoSubmission) {
       const nomeField = document.getElementById('nome');
       if (nomeField) {
         nomeField.value = '[Promoção] ' + (nomeField.value || '');
         nomeField.setAttribute('data-previous-value', nomeField.value);
         console.log('Campo nome preenchido com: ' + nomeField.value);
-
+        
+        // Impede alterações que removam [Promoção]
         nomeField.addEventListener('input', function() {
           if (!this.value.startsWith('[Promoção] ')) {
             this.value = this.getAttribute('data-previous-value');
@@ -1769,17 +1718,19 @@
         console.error('Campo nome não encontrado no DOM');
       }
     }
-
+    
+    // Rola até o formulário
     const formContainer = document.getElementById('formContainer');
     if (formContainer) {
       formContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
 
+  // Garante que [Promoção] esteja presente no envio
   document.getElementById('orçamentoForm').addEventListener('submit', function(event) {
     event.preventDefault();
     const nomeField = document.getElementById('nome');
-
+    
     if (isPromoSubmission && nomeField && !nomeField.value.startsWith('[Promoção] ')) {
       nomeField.value = '[Promoção] ' + nomeField.value;
       console.log('Campo nome corrigido antes do envio: ' + nomeField.value);
