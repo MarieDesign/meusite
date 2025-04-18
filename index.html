@@ -1694,8 +1694,11 @@
     if (isPromoSubmission) {
       const nomeField = document.getElementById('nome');
       if (nomeField) {
-        nomeField.value = '[Promoção] ' + (nomeField.value || '');
-        nomeField.setAttribute('data-previous-value', nomeField.value);
+        // Se o nome do campo já contém "Promoção", apenas preservamos o valor atual
+        if (!nomeField.value.startsWith('[Promoção] ')) {
+          nomeField.value = '[Promoção] ' + (nomeField.value || '');
+          nomeField.setAttribute('data-previous-value', nomeField.value);
+        }
         console.log('Campo preenchido com: ' + nomeField.value);
         // Impede alterações que removem [Promoção]
         nomeField.addEventListener('input', function() {
