@@ -1508,58 +1508,81 @@
   </script>
 	<!-- Este código deve ser adicionado ao final do seu arquivo HTML, antes do </body> -->
 <style>
-  /* Estilo do pop-up com design futurista */
+  /* Estilo do pop-up com paleta do site e animação cintilante */
   .promo-popup {
     display: none;
     position: fixed;
     top: 20%;
     left: 50%;
     transform: translateX(-50%);
-    background: linear-gradient(135deg, #6a1b9a, #f06292, #00d4ff);
-    color: #fff;
+    background: linear-gradient(135deg, #6a1b9a, #f06292);
+    color: #ffffff;
     padding: 25px;
     border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0, 212, 255, 0.8), 0 0 40px rgba(240, 98, 146, 0.5);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.7), 0 0 30px rgba(240, 98, 146, 0.5);
     z-index: 1000;
     text-align: center;
     max-width: 400px;
     width: 90%;
-    border: 2px solid #00d4ff;
-    animation: pulse 2s infinite ease-in-out;
+    border: 2px solid #ffffff;
+    animation: sparkle 1.5s infinite ease-in-out;
+    font-family: 'Arial', sans-serif;
   }
   .promo-popup.active {
     display: block;
-    animation: fadeIn 0.5s ease-out forwards, pulse 2s infinite ease-in-out;
+    animation: fadeIn 0.5s ease-out forwards, sparkle 1.5s infinite ease-in-out;
   }
   .promo-popup h2 {
     margin: 0 0 10px;
     font-size: 1.8em;
-    font-family: 'Arial', sans-serif;
     font-weight: bold;
-    text-shadow: 0 0 10px #fff;
+    text-shadow: 0 0 10px #ffffff, 0 0 20px #f06292;
   }
   .promo-popup p {
     margin: 0 0 15px;
     font-size: 0.9em;
     color: #e0e0e0;
-    text-shadow: 0 0 5px #fff;
+    text-shadow: 0 0 5px #ffffff;
   }
   .promo-popup button {
-    background: linear-gradient(to right, #00d4ff, #f06292);
-    color: #fff;
+    background: #f06292;
+    color: #ffffff;
     border: none;
     padding: 12px 25px;
     border-radius: 25px;
     cursor: pointer;
     font-size: 1em;
     font-weight: bold;
-    font-family: 'Arial', sans-serif;
-    box-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
-    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 0 15px rgba(240, 98, 146, 0.6);
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
   }
   .promo-popup button:hover {
+    background: #6a1b9a;
     transform: scale(1.05);
-    box-shadow: 0 0 25px rgba(0, 212, 255, 1);
+    box-shadow: 0 0 25px rgba(106, 27, 154, 0.8);
+  }
+
+  /* Efeito de faíscas com pseudo-elementos */
+  .promo-popup::before,
+  .promo-popup::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #ffffff;
+    border-radius: 50%;
+    opacity: 0;
+    animation: spark 2s infinite;
+  }
+  .promo-popup::before {
+    top: 10px;
+    left: 20px;
+    animation-delay: 0.5s;
+  }
+  .promo-popup::after {
+    bottom: 10px;
+    right: 20px;
+    animation-delay: 1s;
   }
 
   /* Animação de entrada */
@@ -1574,16 +1597,35 @@
     }
   }
 
-  /* Animação de pulsação */
-  @keyframes pulse {
+  /* Animação cintilante com movimento */
+  @keyframes sparkle {
     0% {
-      box-shadow: 0 0 20px rgba(0, 212, 255, 0.8), 0 0 40px rgba(240, 98, 146, 0.5);
+      transform: translateX(-50%) rotate(0deg) scale(1);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.7), 0 0 30px rgba(240, 98, 146, 0.5);
     }
     50% {
-      box-shadow: 0 0 30px rgba(0, 212, 255, 1), 0 0 50px rgba(240, 98, 146, 0.7);
+      transform: translateX(-50%) rotate(2deg) scale(1.02);
+      box-shadow: 0 0 25px rgba(255, 255, 255, 1), 0 0 40px rgba(240, 98, 146, 0.7);
     }
     100% {
-      box-shadow: 0 0 20px rgba(0, 212, 255, 0.8), 0 0 40px rgba(240, 98, 146, 0.5);
+      transform: translateX(-50%) rotate(0deg) scale(1);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.7), 0 0 30px rgba(240, 98, 146, 0.5);
+    }
+  }
+
+  /* Animação de faíscas */
+  @keyframes spark {
+    0% {
+      opacity: 0;
+      transform: scale(0);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.2);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0);
     }
   }
 </style>
