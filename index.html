@@ -1513,17 +1513,12 @@
   <p>Resposta em até 20 minutos</p>
 
   <form id="orçamentoForm" action="https://formspree.io/f/meoajgpy" method="POST">
-    <input type="hidden" name="_promo" id="promoField" value="nenhuma">
     <div class="form-group">
       <label for="nome">Nome <span class="required">*</span></label>
       <input type="text" id="nome" name="nome" required>
       <div class="error-message" id="nome-error">Preencha o campo Nome.</div>
     </div>
-    <div class="form-group">
-      <label for="mensagem">Mensagem</label>
-      <textarea id="mensagem" name="mensagem"></textarea>
-    </div>
-    <!-- ... demais campos do formulário ... -->
+    <!-- ... demais campos do formulário (ex.: e-mail, servico) ... -->
     <button type="submit">Enviar Solicitação</button>
   </form>
 </div>
@@ -1693,32 +1688,23 @@
     const popup = document.getElementById('promoPopup');
     popup.classList.remove('active');
     
-    // Configura a promoção
+    // Configura o campo nome para a promoção
     if (isPromoSubmission) {
-      const promoField = document.getElementById('promoField');
-      const mensagemField = document.getElementById('mensagem');
-      
-      if (promoField) {
-        promoField.value = 'arte-gratis';
-        console.log('Campo _promo preenchido com: arte-gratis');
-      } else {
-        console.error('Campo _promo não encontrado no DOM');
-      }
-      
-      if (mensagemField) {
-        mensagemField.value = '[Promoção] ' + (mensagemField.value || '');
-        mensagemField.setAttribute('data-promo', '[Promoção] ');
-        console.log('Campo mensagem preenchido com: ' + mensagemField.value);
+      const nomeField = document.getElementById('nome');
+      if (nomeField) {
+        nomeField.value = '[Promoção] ' + (nomeField.value || '');
+        nomeField.setAttribute('data-promo', '[Promoção] ');
+        console.log('Campo nome preenchido com: ' + nomeField.value);
         
         // Impede a remoção de [Promoção]
-        mensagemField.addEventListener('input', function() {
+        nomeField.addEventListener('input', function() {
           if (!this.value.startsWith('[Promoção] ')) {
-            this.value = '[Promoção] ' + this.value;
+            this.value = '[Promoção] ' + this.value.replace(/^\[Promoção\] /, '');
             console.log('Tentativa de remover [Promoção] bloqueada. Valor restaurado: ' + this.value);
           }
         });
       } else {
-        console.error('Campo mensagem não encontrado no DOM');
+        console.error('Campo nome não encontrado no DOM');
       }
     }
     
@@ -1731,19 +1717,12 @@
 
   // Garante que [Promoção] esteja presente no envio
   document.getElementById('orçamentoForm').addEventListener('submit', function(event) {
-    if (isPromoSubmission) {
-      const promoField = document.getElementById('promoField');
-      const mensagemField = document.getElementById('mensagem');
-      
-      if (promoField) {
-        promoField.value = 'arte-gratis';
-        console.log('Campo _promo confirmado antes do envio: arte-gratis');
-      }
-      
-      if (mensagemField && !mensagemField.value.startsWith('[Promoção] ')) {
-        mensagemField.value = '[Promoção] ' + mensagemField.value;
-        console.log('Campo mensagem corrigido antes do envio: ' + mensagemField.value);
-      }
+    event.preventDefault(); // Impede o envio padrão
+    const nomeField = document.getElementById('nome');
+    
+    if (isPromoSubmission && nomeField && !nomeField.value.startsWith('[Promoção] ')) {
+      nomeField.value = '[Promoção] ' + nomeField.value;
+      console.log('Campo nome corrigido antes do envio: ' + nomeField.value);
     }
     
     // Loga os dados do formulário
@@ -1752,6 +1731,26 @@
     for (const [key, value] of formData.entries()) {
       console.log(`${key}: ${value}`);
     }
+    
+    // Envia manualmente com fetch
+    fetch('https://formspree.io/f/meoajgpy', {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
+    })
+    .then(response => {
+      if (!response.ok) throw new Error('Erro no envio: ' + response.status);
+      console.log('Formulário enviado com sucesso');
+      alert('Formulário enviado com sucesso!');
+      // Opcional: fecha o formulário e volta ao botão, conforme pedido em 06/03/2025
+      showForm(false);
+    })
+    .catch(error => {
+      console.error('Erro:', error);
+      alert('Erro ao enviar o formulário: ' + error.message);
+    });
   });
 </script>
 </body>
