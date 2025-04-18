@@ -1506,5 +1506,72 @@
 
     window.onresize = setRandomPositions;
   </script>
+	<!-- Este código deve ser adicionado ao final do seu arquivo HTML, antes do </body> -->
+<style>
+  /* Estilo da mensagem promocional */
+  .promo-popup {
+    display: none;
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ffcc00;
+    color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+  }
+  .promo-popup.active {
+    display: block;
+  }
+  .promo-popup h2 {
+    margin: 0 0 10px;
+    font-size: 1.5em;
+  }
+  .promo-popup button {
+    background-color: #6a1b9a;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+  }
+  .promo-popup button:hover {
+    background-color: #4a148c;
+  }
+</style>
+
+<!-- Mensagem promocional -->
+<div class="promo-popup" id="promoPopup">
+  <h2>Primeira Arte Estática Grátis!</h2>
+  <button onclick="showForm()">Clique Aqui!</button>
+</div>
+
+<script>
+  // Função para verificar o parâmetro na URL
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
+
+  // Verifica se o parâmetro promo=arte-gratis está na URL
+  window.onload = function() {
+    const promo = getQueryParam('promo');
+    const popup = document.getElementById('promoPopup');
+    
+    if (promo === 'arte-gratis') {
+      popup.classList.add('active');
+    }
+    // Chama a função original de loadFormData e toggleOptions
+    toggleOptions();
+    loadFormData();
+  };
+</script>
 </body>
 </html>
