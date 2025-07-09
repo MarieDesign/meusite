@@ -256,11 +256,11 @@
             height: 100%;
             background-color: #fff;
             border-radius: 3px;
-            transition: width 0.1s linear;
+            transition: width 0.1s linear; /* Transition mais suave para a barra */
         }
         .progress-segment.active .progress-fill {
             width: 100%;
-            animation: fill-progress 15s linear forwards;
+            animation: fill-progress 15s linear forwards; /* Duração da animação ajustada no JS */
         }
         .progress-segment.filled .progress-fill {
             width: 100%;
@@ -316,6 +316,13 @@
             height: 100%;
             object-fit: contain;
         }
+        /* Estilo para vídeo dentro do story */
+        .story-image-container video.story-image {
+            object-fit: cover; /* Ou 'contain' dependendo da preferência */
+            width: 100%;
+            height: 100%;
+        }
+
         .story-nav {
             position: relative;
             width: 45px;
@@ -376,7 +383,7 @@
             z-index: 2014;
             pointer-events: none;
             opacity: 1;
-            animation: float-up 2s ease-out forwards;
+            /* animation: float-up 2s ease-out forwards; (Removido para ser gerado dinamicamente) */
         }
         @keyframes float-up {
             to {
@@ -567,20 +574,20 @@
             </section>
             
             <section class="quote-section" id="form-section-anchor">
-                 <div class="btn-container"><button class="main-quote-btn" onclick="showForm()">Solicitar Orçamento</button></div>
-                <div class="form-container" id="formContainer"><form id="orçamentoForm"><h1>Solicitação de Orçamento</h1><p class="subtitle">Resposta em até 20 minutos</p>
-                    <div class="form-group"><label for="nome">Nome <span class="required">*</span></label><input type="text" id="nome" name="nome" required><div id="nome-error" class="error-message">Este campo é obrigatório.</div></div>
-                    <div class="form-group"><label for="email">E-mail</label><input type="email" id="email" name="email" placeholder="Digite seu e-mail"></div>
-                    <div class="form-group"><label for="whatsapp">WhatsApp</label><input type="tel" id="whatsapp" name="whatsapp" placeholder="Ex: (11) 98765-4321"></div>
-                    <div id="contact-error" class="error-message" style="margin-top:-10px; margin-bottom: 15px;">Por favor, preencha seu E-mail ou WhatsApp.</div>
-                    <div class="form-group"><label for="servico">Qual tipo de serviço você procura? <span class="required">*</span></label><select id="servico" name="servico" required><option value="">Selecione...</option><option value="Design para Social Media">Design para Social Media</option><option value="Design para materiais impressos e digitais">Design para materiais impressos e digitais</option></select><div id="servico-error" class="error-message">Selecione um tipo de serviço.</div></div>
-                    <div class="form-group hidden" id="socialMediaOptions"><label>Escolha o pacote <span class="required">*</span></label><div class="radio-group"><div class="radio-option"><input type="radio" id="pacote_8" name="pacote" value="8 posts"><label for="pacote_8">8 posts</label></div><div class="radio-option"><input type="radio" id="pacote_12" name="pacote" value="12 posts"><label for="pacote_12">12 posts</label></div><div class="radio-option"><input type="radio" id="pacote_16" name="pacote" value="16 posts"><label for="pacote_16">16 posts</label></div><div class="radio-option"><input type="radio" id="pacote_outro" name="pacote" value="Outro"><label for="pacote_outro">Outro:</label><input type="text" id="outro_pacote" name="outro_pacote" disabled></div></div></div>
-                    <div class="form-group hidden" id="materiaisImpressosOptions"><label>Escolha o material <span class="required">*</span></label><div class="radio-group"><div class="radio-option"><input type="radio" id="material_banners" name="material" value="Banners"><label for="material_banners">Banners</label></div><div class="radio-option"><input type="radio" id="material_alin" name="material" value="Alinhamento Visual"><label for="material_alin">Alinhamento Visual</label></div><div class="radio-option"><input type="radio" id="material_cartao" name="material" value="Cartão de Visita"><label for="material_cartao">Cartão de Visita</label></div><div class="radio-option"><input type="radio" id="material_panfletos" name="material" value="Panfletos"><label for="material_panfletos">Panfletos</label></div><div class="radio-option"><input type="radio" id="material_video" name="material" value="Edição de Vídeo"><label for="material_video">Edição de Vídeo</label></div><div class="radio-option"><input type="radio" id="material_outro" name="material" value="Outro"><label for="material_outro">Outro:</label><input type="text" id="outro_material" name="outro_material" disabled></div></div></div>
-                    <div class="form-group"><label for="detalhes">Detalhes do projeto <span class="required">*</span></label><textarea id="detalhes" name="detalhes" required minlength="100" rows="4"></textarea></div>
-                    <div class="form-group"><label for="identidade">Já possui identidade visual? <span class="required">*</span></label><input type="text" id="identidade" name="identidade" required placeholder="Ex: Sim, já temos logo e cores."></div>
-                    <div class="form-group"><label for="observacoes">Observações (opcional)</label><textarea id="observacoes" name="observacoes" rows="3"></textarea></div>
-                    <button type="submit">Enviar Solicitação</button>
-                </form></div>
+                     <div class="btn-container"><button class="main-quote-btn" onclick="showForm()">Solicitar Orçamento</button></div>
+                    <div class="form-container" id="formContainer"><form id="orçamentoForm"><h1>Solicitação de Orçamento</h1><p class="subtitle">Resposta em até 20 minutos</p>
+                        <div class="form-group"><label for="nome">Nome <span class="required">*</span></label><input type="text" id="nome" name="nome" required><div id="nome-error" class="error-message">Este campo é obrigatório.</div></div>
+                        <div class="form-group"><label for="email">E-mail</label><input type="email" id="email" name="email" placeholder="Digite seu e-mail"></div>
+                        <div class="form-group"><label for="whatsapp">WhatsApp</label><input type="tel" id="whatsapp" name="whatsapp" placeholder="Ex: (11) 98765-4321"></div>
+                        <div id="contact-error" class="error-message" style="margin-top:-10px; margin-bottom: 15px;">Por favor, preencha seu E-mail ou WhatsApp.</div>
+                        <div class="form-group"><label for="servico">Qual tipo de serviço você procura? <span class="required">*</span></label><select id="servico" name="servico" required><option value="">Selecione...</option><option value="Design para Social Media">Design para Social Media</option><option value="Design para materiais impressos e digitais">Design para materiais impressos e digitais</option></select><div id="servico-error" class="error-message">Selecione um tipo de serviço.</div></div>
+                        <div class="form-group hidden" id="socialMediaOptions"><label>Escolha o pacote <span class="required">*</span></label><div class="radio-group"><div class="radio-option"><input type="radio" id="pacote_8" name="pacote" value="8 posts"><label for="pacote_8">8 posts</label></div><div class="radio-option"><input type="radio" id="pacote_12" name="pacote" value="12 posts"><label for="pacote_12">12 posts</label></div><div class="radio-option"><input type="radio" id="pacote_16" name="pacote" value="16 posts"><label for="pacote_16">16 posts</label></div><div class="radio-option"><input type="radio" id="pacote_outro" name="pacote" value="Outro"><label for="pacote_outro">Outro:</label><input type="text" id="outro_pacote" name="outro_pacote" disabled></div></div></div>
+                        <div class="form-group hidden" id="materiaisImpressosOptions"><label>Escolha o material <span class="required">*</span></label><div class="radio-group"><div class="radio-option"><input type="radio" id="material_banners" name="material" value="Banners"><label for="material_banners">Banners</label></div><div class="radio-option"><input type="radio" id="material_alin" name="material" value="Alinhamento Visual"><label for="material_alin">Alinhamento Visual</label></div><div class="radio-option"><input type="radio" id="material_cartao" name="material" value="Cartão de Visita"><label for="material_cartao">Cartão de Visita</label></div><div class="radio-option"><input type="radio" id="material_panfletos" name="material" value="Panfletos"><label for="material_panfletos">Panfletos</label></div><div class="radio-option"><input type="radio" id="material_video" name="material" value="Edição de Vídeo"><label for="material_video">Edição de Vídeo</label></div><div class="radio-option"><input type="radio" id="material_outro" name="material" value="Outro"><label for="material_outro">Outro:</label><input type="text" id="outro_material" name="outro_material" disabled></div></div></div>
+                        <div class="form-group"><label for="detalhes">Detalhes do projeto <span class="required">*</span></label><textarea id="detalhes" name="detalhes" required minlength="100" rows="4"></textarea></div>
+                        <div class="form-group"><label for="identidade">Já possui identidade visual? <span class="required">*</span></label><input type="text" id="identidade" name="identidade" required placeholder="Ex: Sim, já temos logo e cores."></div>
+                        <div class="form-group"><label for="observacoes">Observações (opcional)</label><textarea id="observacoes" name="observacoes" rows="3"></textarea></div>
+                        <button type="submit">Enviar Solicitação</button>
+                    </form></div>
             </section>
         </main>
         
@@ -622,277 +629,417 @@
     </div>
 
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const videos = document.querySelectorAll(".video-on-scroll");
-        if ('IntersectionObserver' in window) {
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    const playPromise = entry.target.play();
-                    if (entry.isIntersecting) { if (playPromise !== undefined) playPromise.catch(error => console.error("Autoplay impedido:", error)); }
-                    else { if (playPromise !== undefined) playPromise.then(() => entry.target.pause()); }
-                });
-            }, { threshold: 0.5 });
-            videos.forEach(video => observer.observe(video));
-        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const videos = document.querySelectorAll(".video-on-scroll");
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        const playPromise = entry.target.play();
+                        if (entry.isIntersecting) { if (playPromise !== undefined) playPromise.catch(error => console.error("Autoplay impedido:", error)); }
+                        else { if (playPromise !== undefined) playPromise.then(() => entry.target.pause()); }
+                    });
+                }, { threshold: 0.5 });
+                videos.forEach(video => observer.observe(video));
+            }
 
-        if (getQueryParam('promo') === 'arte-gratis') document.getElementById('promoPopup').classList.add('active');
-        
-        initializeFormLogic();
-        initializeStoryHighlights(); 
-    });
-
-    function initializeStoryHighlights() {
-        const storyData = [
-            { name: "Alinhamento Visual", thumbnail: "https://i.postimg.cc/VNbQhG85/IMG-20240702-WA0013.jpg", images: ["https://i.postimg.cc/k4G3x7kC/alinhamento1.png", "https://i.postimg.cc/Y0QzVBCp/alinhamento2.png"] },
-            { name: "Logotipos", thumbnail: "https://i.postimg.cc/nrpL9WfW/IMG-20240702-WA0014.jpg", images: ["https://i.postimg.cc/d1h2s1wX/logo1.png", "https://i.postimg.cc/wMS4yQvV/logo2.png", "https://i.postimg.cc/L6ZJ5bJ2/logo3.png"] },
-            { name: "Mídia Social", thumbnail: "https://i.postimg.cc/y8XwK7Fz/IMG-20240702-WA0015.jpg", images: ["https://i.postimg.cc/bN1jXkYx/social1.png", "https://i.postimg.cc/C1MmzZXV/social2.png", "https://i.postimg.cc/tJSNKmdc/social3.png"] },
-            { name: "Banners", thumbnail: "https://i.postimg.cc/hG09TRtP/IMG-20240702-WA0016.jpg", images: ["https://i.postimg.cc/8cM2SFrB/bandeira1.png"] },
-            { name: "Anúncios", thumbnail: "https://i.postimg.cc/d19GfbDr/IMG-20240702-WA0017.jpg", images: ["https://i.postimg.cc/wB2gHw7D/anuncio1.png", "https://i.postimg.cc/RhdQyCgG/anuncio2.png"] },
-            { name: "Edição de Vídeo", thumbnail: "https://i.postimg.cc/YqX8Bv5b/IMG-20240702-WA0018.jpg", images: ["https://i.imgur.com/gdPVfJP.mp4"] }
-        ];
-
-        const highlightsContainer = document.getElementById('story-highlights-container');
-        const popup = document.getElementById('story-popup');
-        const popupImage = document.getElementById('story-image-content');
-        const imageContainer = document.getElementById('story-image-container');
-        const closeBtn = document.getElementById('story-close-btn');
-        const navPrev = document.getElementById('story-nav-prev');
-        const navNext = document.getElementById('story-nav-next');
-        const likeBtn = document.getElementById('story-like-btn');
-        const likeBtnIcon = likeBtn.querySelector('i');
-        const progressBarContainer = document.getElementById('story-progress-bar-container');
-        const commentForm = document.getElementById('storyCommentForm');
-        const commentInput = commentForm.querySelector('.story-comment-input');
-        const commentSendBtn = commentForm.querySelector('.story-comment-send-btn');
-        const storyPopupContainer = document.querySelector('.story-popup-container'); // Novo: container do story
-        
-        let currentStoryIndex = 0;
-        let currentImageIndex = 0;
-        let storyTimer;
-        let animationStartTime; // Novo: para controlar o tempo de início da animação
-        let pausedTime = 0; // Novo: para armazenar o tempo pausado
-        const STORY_DURATION = 15000; // 15 segundos
-
-        let isPaused = false; // Novo: Flag para indicar se a história está pausada
-
-        storyData.forEach((story, index) => {
-            const highlightHTML = `<div class="story-highlight" data-story-index="${index}"><div class="story-highlight-circle"><img src="${story.thumbnail}" alt="${story.name}" class="story-highlight-thumb"></div><span class="story-highlight-name">${story.name}</span></div>`;
-            highlightsContainer.innerHTML += highlightHTML;
+            if (getQueryParam('promo') === 'arte-gratis') document.getElementById('promoPopup').classList.add('active');
+            
+            initializeFormLogic();
+            initializeStoryHighlights(); 
         });
 
-        function playStory() {
-            clearTimeout(storyTimer); // Limpa qualquer timer anterior
-            const story = storyData[currentStoryIndex];
-            const images = story.images;
-            const currentMedia = images[currentImageIndex];
+        function initializeStoryHighlights() {
+            const storyData = [
+                { name: "Alinhamento Visual", thumbnail: "https://i.postimg.cc/VNbQhG85/IMG-20240702-WA0013.jpg", images: ["https://i.postimg.cc/k4G3x7kC/alinhamento1.png", "https://i.postimg.cc/Y0QzVBCp/alinhamento2.png"] },
+                { name: "Logotipos", thumbnail: "https://i.postimg.cc/nrpL9WfW/IMG-20240702-WA0014.jpg", images: ["https://i.postimg.cc/d1h2s1wX/logo1.png", "https://i.postimg.cc/wMS4yQvV/logo2.png", "https://i.postimg.cc/L6ZJ5bJ2/logo3.png"] },
+                { name: "Mídia Social", thumbnail: "https://i.postimg.cc/y8XwK7Fz/IMG-20240702-WA0015.jpg", images: ["https://i.postimg.cc/bN1jXkYx/social1.png", "https://i.postimg.cc/C1MmzZXV/social2.png", "https://i.postimg.cc/tJSNKmdc/social3.png"] },
+                { name: "Banners", thumbnail: "https://i.postimg.cc/hG09TRtP/IMG-20240702-WA0016.jpg", images: ["https://i.postimg.cc/8cM2SFrB/bandeira1.png"] },
+                { name: "Anúncios", thumbnail: "https://i.postimg.cc/d19GfbDr/IMG-20240702-WA0017.jpg", images: ["https://i.postimg.cc/wB2gHw7D/anuncio1.png", "https://i.postimg.cc/RhdQyCgG/anuncio2.png"] },
+                { name: "Edição de Vídeo", thumbnail: "https://i.postimg.cc/YqX8Bv5b/IMG-20240702-WA0018.jpg", images: ["https://i.imgur.com/gdPVfJP.mp4"] }
+            ];
 
-            // Limpa o conteúdo anterior (imagem ou vídeo)
-            imageContainer.innerHTML = ''; 
-
-            // Cria o elemento apropriado (img ou video)
-            let mediaElement;
-            if (currentMedia.endsWith('.mp4') || currentMedia.endsWith('.webm') || currentMedia.endsWith('.ogg')) {
-                mediaElement = document.createElement('video');
-                mediaElement.src = currentMedia;
-                mediaElement.autoplay = true;
-                mediaElement.muted = true;
-                mediaElement.loop = true; // Vídeos de stories geralmente não são loopeados, mas se for a intenção
-                mediaElement.setAttribute('playsinline', ''); // Para iOS
-                // Adicione um ouvinte para garantir que o vídeo comece a reprodução
-                mediaElement.addEventListener('loadeddata', () => {
-                     mediaElement.play().catch(e => console.error("Erro ao reproduzir vídeo:", e));
-                });
-            } else {
-                mediaElement = document.createElement('img');
-                mediaElement.src = currentMedia;
-            }
-            mediaElement.className = 'story-image'; // Reutiliza a classe existente
-            mediaElement.id = 'story-image-content'; // Mantém o ID se necessário para outros acessos
-            imageContainer.appendChild(mediaElement);
-
-
-            const segments = progressBarContainer.querySelectorAll('.progress-segment');
-            segments.forEach((segment, index) => {
-                const fill = segment.querySelector('.progress-fill');
-                // Reseta a animação para o segmento atual ou futuro
-                if (index >= currentImageIndex) {
-                    fill.style.animation = 'none'; // Remove a animação
-                    // Força um reflow para reiniciar a animação
-                    void fill.offsetWidth; 
-                    fill.style.animation = null; // Restaura a animação padrão
-                }
-                segment.classList.remove('active', 'filled');
-                if (index < currentImageIndex) segment.classList.add('filled');
-            });
-            if (segments[currentImageIndex]) {
-                segments[currentImageIndex].classList.add('active');
-            }
+            const highlightsContainer = document.getElementById('story-highlights-container');
+            const popup = document.getElementById('story-popup');
+            const popupImage = document.getElementById('story-image-content');
+            const imageContainer = document.getElementById('story-image-container');
+            const closeBtn = document.getElementById('story-close-btn');
+            const navPrev = document.getElementById('story-nav-prev');
+            const navNext = document.getElementById('story-nav-next');
+            const likeBtn = document.getElementById('story-like-btn');
+            const likeBtnIcon = likeBtn.querySelector('i');
+            const progressBarContainer = document.getElementById('story-progress-bar-container');
+            const commentForm = document.getElementById('storyCommentForm');
+            const commentInput = commentForm.querySelector('.story-comment-input');
+            const commentSendBtn = commentForm.querySelector('.story-comment-send-btn');
+            const storyPopupContainer = document.querySelector('.story-popup-container'); 
             
-            // Define o estado de reprodução da animação
-            const activeFill = progressBarContainer.querySelector('.progress-segment.active .progress-fill');
-            if (activeFill) {
-                activeFill.style.animationDuration = `${STORY_DURATION / 1000}s`; // Define a duração da animação
-                if (isPaused) {
-                    activeFill.style.animationPlayState = 'paused';
+            let currentStoryIndex = 0;
+            let currentImageIndex = 0;
+            let storyTimer;
+            let animationStartTime; 
+            let pausedTime = 0; 
+            const STORY_DURATION = 15000; 
+
+            let isPaused = false; 
+
+            storyData.forEach((story, index) => {
+                const highlightHTML = `<div class="story-highlight" data-story-index="${index}"><div class="story-highlight-circle"><img src="${story.thumbnail}" alt="${story.name}" class="story-highlight-thumb"></div><span class="story-highlight-name">${story.name}</span></div>`;
+                highlightsContainer.innerHTML += highlightHTML;
+            });
+
+            function playStory() {
+                clearTimeout(storyTimer); 
+                const story = storyData[currentStoryIndex];
+                const images = story.images;
+                const currentMedia = images[currentImageIndex];
+
+                imageContainer.innerHTML = ''; 
+
+                let mediaElement;
+                if (currentMedia.endsWith('.mp4') || currentMedia.endsWith('.webm') || currentMedia.endsWith('.ogg')) {
+                    mediaElement = document.createElement('video');
+                    mediaElement.src = currentMedia;
+                    mediaElement.autoplay = true;
+                    mediaElement.muted = true;
+                    mediaElement.loop = true; 
+                    mediaElement.setAttribute('playsinline', ''); 
+                    mediaElement.addEventListener('loadeddata', () => {
+                         mediaElement.play().catch(e => console.error("Erro ao reproduzir vídeo:", e));
+                    });
                 } else {
+                    mediaElement = document.createElement('img');
+                    mediaElement.src = currentMedia;
+                }
+                mediaElement.className = 'story-image'; 
+                mediaElement.id = 'story-image-content'; 
+                imageContainer.appendChild(mediaElement);
+
+
+                const segments = progressBarContainer.querySelectorAll('.progress-segment');
+                segments.forEach((segment, index) => {
+                    const fill = segment.querySelector('.progress-fill');
+                    if (index >= currentImageIndex) {
+                        fill.style.animation = 'none'; 
+                        void fill.offsetWidth; 
+                        fill.style.animation = null; 
+                    }
+                    segment.classList.remove('active', 'filled');
+                    if (index < currentImageIndex) segment.classList.add('filled');
+                });
+                if (segments[currentImageIndex]) {
+                    segments[currentImageIndex].classList.add('active');
+                }
+                
+                const activeFill = progressBarContainer.querySelector('.progress-segment.active .progress-fill');
+                if (activeFill) {
+                    activeFill.style.animationDuration = `${STORY_DURATION / 1000}s`; 
+                    if (isPaused) {
+                        activeFill.style.animationPlayState = 'paused';
+                    } else {
+                        activeFill.style.animationPlayState = 'running';
+                    }
+                }
+
+
+                navPrev.classList.toggle('disabled', currentImageIndex === 0);
+                navNext.classList.toggle('disabled', currentImageIndex === images.length - 1);
+
+                animationStartTime = Date.now();
+                storyTimer = setTimeout(() => {
+                    if (currentImageIndex < images.length - 1) {
+                        currentImageIndex++;
+                        playStory();
+                    } else {
+                        closePopup();
+                    }
+                }, STORY_DURATION - pausedTime);
+                pausedTime = 0; 
+            }
+
+            function pauseStory() {
+                if (isPaused) return; 
+                isPaused = true;
+                clearTimeout(storyTimer);
+                const activeFill = progressBarContainer.querySelector('.progress-segment.active .progress-fill');
+                if (activeFill) {
+                    const computedStyle = getComputedStyle(activeFill);
+                    // const transformMatrix = new WebKitCSSMatrix(computedStyle.transform); // Esta linha não é necessária e pode causar erro
+                    const currentWidth = parseFloat(computedStyle.width);
+                    
+                    const animationDuration = parseFloat(computedStyle.animationDuration) * 1000;
+                    pausedTime = (currentWidth / 100) * animationDuration;
+                    
+                    activeFill.style.animationPlayState = 'paused';
+                }
+
+                const currentVideo = imageContainer.querySelector('video');
+                if (currentVideo && !currentVideo.paused) {
+                    currentVideo.pause();
+                }
+            }
+
+            function resumeStory() {
+                if (!isPaused) return; 
+                isPaused = false;
+                const activeFill = progressBarContainer.querySelector('.progress-segment.active .progress-fill');
+                if (activeFill) {
                     activeFill.style.animationPlayState = 'running';
                 }
-            }
 
-
-            navPrev.classList.toggle('disabled', currentImageIndex === 0);
-            navNext.classList.toggle('disabled', currentImageIndex === images.length - 1);
-
-            animationStartTime = Date.now();
-            storyTimer = setTimeout(() => {
-                if (currentImageIndex < images.length - 1) {
-                    currentImageIndex++;
-                    playStory();
-                } else {
-                    closePopup();
+                const currentVideo = imageContainer.querySelector('video');
+                if (currentVideo && currentVideo.paused) {
+                    currentVideo.play().catch(e => console.error("Erro ao reproduzir vídeo:", e));
                 }
-            }, STORY_DURATION - pausedTime);
-            pausedTime = 0; // Reseta o tempo pausado ao iniciar uma nova história
-        }
-
-        function pauseStory() {
-            if (isPaused) return; // Já pausado
-            isPaused = true;
-            clearTimeout(storyTimer);
-            const activeFill = progressBarContainer.querySelector('.progress-segment.active .progress-fill');
-            if (activeFill) {
-                const computedStyle = getComputedStyle(activeFill);
-                const transformMatrix = new WebKitCSSMatrix(computedStyle.transform);
-                const currentWidth = parseFloat(computedStyle.width); // Obter a largura atual
                 
-                // Calcula o tempo que a animação já percorreu
-                const animationDuration = parseFloat(computedStyle.animationDuration) * 1000;
-                pausedTime = (currentWidth / 100) * animationDuration;
-                
-                activeFill.style.animationPlayState = 'paused';
+                clearTimeout(storyTimer);
+                storyTimer = setTimeout(() => {
+                    if (currentImageIndex < storyData[currentStoryIndex].images.length - 1) {
+                        currentImageIndex++;
+                        playStory();
+                    } else {
+                        closePopup();
+                    }
+                }, STORY_DURATION - pausedTime);
+                pausedTime = 0; 
             }
 
-             // Pausar vídeo, se houver
-            const currentVideo = imageContainer.querySelector('video');
-            if (currentVideo && !currentVideo.paused) {
-                currentVideo.pause();
-            }
-        }
-
-        function resumeStory() {
-            if (!isPaused) return; // Não está pausado
-            isPaused = false;
-            const activeFill = progressBarContainer.querySelector('.progress-segment.active .progress-fill');
-            if (activeFill) {
-                activeFill.style.animationPlayState = 'running';
-            }
-
-            // Retomar vídeo, se houver
-            const currentVideo = imageContainer.querySelector('video');
-            if (currentVideo && currentVideo.paused) {
-                currentVideo.play().catch(e => console.error("Erro ao reproduzir vídeo:", e));
-            }
-            
-            // Retomar o timer da história do ponto onde parou
-            clearTimeout(storyTimer);
-            storyTimer = setTimeout(() => {
-                if (currentImageIndex < storyData[currentStoryIndex].images.length - 1) {
-                    currentImageIndex++;
-                    playStory();
-                } else {
-                    closePopup();
-                }
-            }, STORY_DURATION - pausedTime);
-            pausedTime = 0; // Reseta o tempo pausado
-        }
-
-        function openPopup(storyIndex) {
-            likeBtn.classList.remove('liked');
-            likeBtnIcon.className = 'far fa-heart';
-
-            currentStoryIndex = storyIndex;
-            currentImageIndex = 0;
-            pausedTime = 0; // Garante que comece do zero ao abrir novo story
-            const images = storyData[currentStoryIndex].images;
-            progressBarContainer.innerHTML = '';
-            images.forEach(() => {
-                progressBarContainer.innerHTML += '<div class="progress-segment"><div class="progress-fill"></div></div>';
-            });
-            playStory();
-            popup.classList.add('active');
-        }
-
-        function closePopup() {
-            clearTimeout(storyTimer);
-            popup.classList.remove('active');
-            const activeSegment = progressBarContainer.querySelector('.active');
-            if(activeSegment) activeSegment.classList.remove('active');
-            // Certifique-se de pausar qualquer vídeo ao fechar o popup
-            const currentVideo = imageContainer.querySelector('video');
-            if (currentVideo) {
-                currentVideo.pause();
-                currentVideo.currentTime = 0; // Reinicia o vídeo
-            }
-        }
-        
-        function navigate(direction) {
-            const storyImages = storyData[currentStoryIndex].images;
-            if ( (direction === -1 && currentImageIndex === 0) || (direction === 1 && currentImageIndex === storyImages.length - 1) ) {
-                return;
-            }
-            clearTimeout(storyTimer);
-            currentImageIndex += direction;
-            pausedTime = 0; // Reinicia o tempo pausado ao navegar
-            playStory();
-        }
-
-        function createFloatingHearts() {
-            if (likeBtn.classList.contains('liked')) {
+            function openPopup(storyIndex) {
                 likeBtn.classList.remove('liked');
                 likeBtnIcon.className = 'far fa-heart';
-                return;
+
+                currentStoryIndex = storyIndex;
+                currentImageIndex = 0;
+                pausedTime = 0; 
+                const images = storyData[currentStoryIndex].images;
+                progressBarContainer.innerHTML = '';
+                images.forEach(() => {
+                    progressBarContainer.innerHTML += '<div class="progress-segment"><div class="progress-fill"></div></div>';
+                });
+                playStory();
+                popup.classList.add('active');
+            }
+
+            function closePopup() {
+                clearTimeout(storyTimer);
+                popup.classList.remove('active');
+                const activeSegment = progressBarContainer.querySelector('.active');
+                if(activeSegment) activeSegment.classList.remove('active');
+                const currentVideo = imageContainer.querySelector('video');
+                if (currentVideo) {
+                    currentVideo.pause();
+                    currentVideo.currentTime = 0; 
+                }
             }
             
-            likeBtn.classList.add('liked');
-            likeBtnIcon.className = 'fas fa-heart';
+            function navigate(direction) {
+                const storyImages = storyData[currentStoryIndex].images;
+                if ( (direction === -1 && currentImageIndex === 0) || (direction === 1 && currentImageIndex === storyImages.length - 1) ) {
+                    return;
+                }
+                clearTimeout(storyTimer);
+                currentImageIndex += direction;
+                pausedTime = 0; 
+                playStory();
+            }
 
-            for (let i = 0; i < 15; i++) {
-                const heart = document.createElement('i');
-                heart.className = 'fas fa-heart floating-heart';
-                const randomX = (Math.random() - 0.5) * 100;
-                const randomDelay = Math.random() * 0.5;
-                const randomDuration = 1.5 + Math.random();
+            function createFloatingHearts() {
+                if (likeBtn.classList.contains('liked')) {
+                    likeBtn.classList.remove('liked');
+                    likeBtnIcon.className = 'far fa-heart';
+                    return;
+                }
                 
-                const keyframes = `@keyframes float-up-${i} { 0% { transform: translate(0, 0); opacity: 1; } 100% { transform: translate(${randomX}px, -500px) rotate(${randomX}deg); opacity: 0; } }`;
-                const styleSheet = document.createElement("style");
-                styleSheet.innerText = keyframes;
-                document.head.appendChild(styleSheet);
-                heart.style.animationName = `float-up-${i}`;
-                heart.style.animationDelay = `${randomDelay}s`;
-                heart.style.animationDuration = `${randomDuration}s`;
-                imageContainer.appendChild(heart);
+                likeBtn.classList.add('liked');
+                likeBtnIcon.className = 'fas fa-heart';
 
-                heart.addEventListener('animationend', () => {
-                    heart.remove();
-                    styleSheet.remove();
+                for (let i = 0; i < 15; i++) {
+                    const heart = document.createElement('i');
+                    heart.className = 'fas fa-heart floating-heart';
+                    const randomX = (Math.random() - 0.5) * 100;
+                    const randomDelay = Math.random() * 0.5;
+                    const randomDuration = 1.5 + Math.random();
+                    
+                    const keyframes = `@keyframes float-up-${i} { 0% { transform: translate(0, 0); opacity: 1; } 100% { transform: translate(${randomX}px, -500px) rotate(${randomX}deg); opacity: 0; } }`;
+                    const styleSheet = document.createElement("style");
+                    styleSheet.innerText = keyframes;
+                    document.head.appendChild(styleSheet);
+                    heart.style.animationName = `float-up-${i}`;
+                    heart.style.animationDelay = `${randomDelay}s`;
+                    heart.style.animationDuration = `${randomDuration}s`;
+                    imageContainer.appendChild(heart);
+
+                    heart.addEventListener('animationend', () => {
+                        heart.remove();
+                        styleSheet.remove();
+                    });
+                }
+            }
+
+            function handleCommentSubmit(event) {
+                event.preventDefault();
+                const commentText = commentInput.value.trim();
+                if (commentText === '') return;
+
+                const storyName = storyData[currentStoryIndex].name;
+                
+                const formData = new FormData();
+                formData.append('_subject', `Novo comentário no Story: ${storyName}`);
+                formData.append('Comentário', commentText);
+                formData.append('Referência do Story', storyName);
+
+                commentSendBtn.disabled = true;
+                commentSendBtn.textContent = 'Enviando...';
+
+                fetch("https://formspree.io/f/meoajgpy", { // USANDO O MESMO ENDPOINT
+                    method: "POST",
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        commentInput.value = '';
+                        commentSendBtn.textContent = 'Enviado!';
+                        commentSendBtn.classList.add('sent');
+                    } else {
+                        response.json().then(data => {
+                            console.error('Erro ao enviar comentário:', data);
+                            alert('Ocorreu um problema ao enviar seu comentário.');
+                        });
+                        commentSendBtn.textContent = 'Erro!';
+                    }
+                    setTimeout(() => {
+                        commentSendBtn.disabled = false;
+                        commentSendBtn.textContent = 'Enviar';
+                        commentSendBtn.classList.remove('sent');
+                    }, 3000);
+                }).catch(error => {
+                    alert('Erro de conexão. Tente novamente.');
+                    console.error("Erro no fetch:", error);
+                    commentSendBtn.disabled = false;
+                    commentSendBtn.textContent = 'Enviar';
                 });
             }
+
+            document.querySelectorAll('.story-highlight').forEach(el => {
+                el.addEventListener('click', () => openPopup(parseInt(el.getAttribute('data-story-index'))));
+            });
+            
+            commentForm.addEventListener('submit', handleCommentSubmit);
+            navPrev.addEventListener('click', () => navigate(-1));
+            navNext.addEventListener('click', () => navigate(1));
+            likeBtn.addEventListener('click', createFloatingHearts);
+            closeBtn.addEventListener('click', closePopup);
+            popup.addEventListener('click', (e) => {
+                if (e.target === popup) closePopup();
+            });
+
+            storyPopupContainer.addEventListener('mousedown', pauseStory);
+            storyPopupContainer.addEventListener('mouseup', resumeStory);
+            storyPopupContainer.addEventListener('mouseleave', resumeStory); 
+
+            storyPopupContainer.addEventListener('touchstart', pauseStory);
+            storyPopupContainer.addEventListener('touchend', resumeStory);
+            storyPopupContainer.addEventListener('touchcancel', resumeStory); 
+
+            imageContainer.addEventListener('click', (e) => {
+                if (window.innerWidth >= 600) {
+                    return;
+                }
+
+                if (e.target.closest('.story-like-btn') || e.target.closest('.story-comment-bar')) {
+                    return;
+                }
+
+                const rect = imageContainer.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+
+                if (clickX < rect.width / 3) {
+                    navigate(-1);
+                }   
+                else if (clickX > rect.width * (2 / 3)) {
+                    navigate(1);
+                }
+            });
+        }
+        
+        function showForm() { document.getElementById("formContainer").style.display = "block"; document.querySelector(".btn-container").style.display = "none"; document.getElementById("form-section-anchor").scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+        
+        function initializeFormLogic() {
+            document.getElementById('servico').addEventListener('change', toggleOptions);
+            setupRadioLogic('pacote', 'outro_pacote');
+            setupRadioLogic('material', 'outro_material');
+            toggleOptions();
         }
 
-        function handleCommentSubmit(event) {
-            event.preventDefault();
-            const commentText = commentInput.value.trim();
-            if (commentText === '') return;
+        function toggleOptions() {
+            const servico = document.getElementById('servico').value;
+            const smOpts = document.getElementById('socialMediaOptions');
+            const miOpts = document.getElementById('materiaisImpressosOptions');
+            smOpts.classList.add('hidden');
+            miOpts.classList.add('hidden');
+            if (servico === "Design para Social Media") smOpts.classList.remove('hidden');
+            else if (servico === "Design para materiais impressos e digitais") miOpts.classList.remove('hidden');
+        }
 
-            const storyName = storyData[currentStoryIndex].name;
+        function setupRadioLogic(radioGroupName, textInputId) {
+            const radios = document.querySelectorAll(`input[name="${radioGroupName}"]`);
+            const textInput = document.getElementById(textInputId);
+            radios.forEach(radio => {
+                radio.addEventListener('change', (event) => {
+                    if (event.target.value === 'Outro') {
+                        textInput.disabled = false;
+                        textInput.focus();
+                    } else {
+                        textInput.disabled = true;
+                        textInput.value = '';
+                    }
+                });
+            });
+        }
+
+        function validateForm() {
+            let isValid = true;
+            document.querySelectorAll('.form-group.invalid').forEach(el => el.classList.remove('invalid'));
+            document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
+
+            const nome = document.getElementById('nome');
+            if (nome.value.trim() === '') {
+                nome.parentElement.classList.add('invalid');
+                document.getElementById('nome-error').style.display = 'block';
+                isValid = false;
+            }
+
+            const emailInput = document.getElementById('email');
+            const whatsappInput = document.getElementById('whatsapp');
+            if (emailInput.value.trim() === '' && whatsappInput.value.trim() === '') {
+                emailInput.parentElement.classList.add('invalid');
+                whatsappInput.parentElement.classList.add('invalid');
+                document.getElementById('contact-error').style.display = 'block';
+                isValid = false;
+            }
             
-            const formData = new FormData();
-            formData.append('_subject', `Novo comentário no Story: ${storyName}`);
-            formData.append('Comentário', commentText);
-            formData.append('Referência do Story', storyName);
+            const servico = document.getElementById('servico');
+            if (servico.value === '') {
+                servico.parentElement.classList.add('invalid');
+                document.getElementById('servico-error').style.display = 'block';
+                isValid = false;
+            }
 
-            commentSendBtn.disabled = true;
-            commentSendBtn.textContent = 'Enviando...';
+            return isValid;
+        }
+
+        function getQueryParam(param) { return new URLSearchParams(window.location.search).get(param); }
+        function openFormAndScroll() { showForm(); document.getElementById('promoPopup').classList.remove('active'); const nomeField = document.getElementById('nome'); if (nomeField && !nomeField.value.startsWith('[Promoção] ')) nomeField.value = '[Promoção] '; }
+        
+        document.getElementById('orçamentoForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            if (!validateForm()) {
+                return; 
+            }
+            
+            const form = event.target;
+            const formData = new FormData(form);
 
             fetch("https://formspree.io/f/meoajgpy", {
                 method: "POST",
@@ -901,179 +1048,26 @@
             })
             .then(response => {
                 if (response.ok) {
-                    commentInput.value = '';
-                    commentSendBtn.textContent = 'Enviado!';
-                    commentSendBtn.classList.add('sent');
+                    const successPopup = document.getElementById('success-popup');
+                    successPopup.classList.add('show');
+                    setTimeout(() => {
+                        successPopup.classList.remove('show');
+                    }, 4400); 
+
+                    form.reset();
+                    document.getElementById('formContainer').style.display = 'none';
+                    document.querySelector('.btn-container').style.display = 'block';
+                    toggleOptions();
                 } else {
-                    commentSendBtn.textContent = 'Erro!';
+                    response.json().then(data => {
+                        alert('Ocorreu um problema ao enviar seu formulário.');
+                    });
                 }
-                setTimeout(() => {
-                    commentSendBtn.disabled = false;
-                    commentSendBtn.textContent = 'Enviar';
-                    commentSendBtn.classList.remove('sent');
-                }, 3000);
             }).catch(error => {
-                alert('Erro de conexão. Tente novamente.');
-                commentSendBtn.disabled = false;
-                commentSendBtn.textContent = 'Enviar';
-            });
-        }
-
-        document.querySelectorAll('.story-highlight').forEach(el => {
-            el.addEventListener('click', () => openPopup(parseInt(el.getAttribute('data-story-index'))));
-        });
-        
-        commentForm.addEventListener('submit', handleCommentSubmit);
-        navPrev.addEventListener('click', () => navigate(-1));
-        navNext.addEventListener('click', () => navigate(1));
-        likeBtn.addEventListener('click', createFloatingHearts);
-        closeBtn.addEventListener('click', closePopup);
-        popup.addEventListener('click', (e) => {
-            if (e.target === popup) closePopup();
-        });
-
-        // Event listeners para pausar/retomar ao segurar/soltar
-        storyPopupContainer.addEventListener('mousedown', pauseStory);
-        storyPopupContainer.addEventListener('mouseup', resumeStory);
-        storyPopupContainer.addEventListener('mouseleave', resumeStory); // Caso o mouse saia do container
-
-        // Para dispositivos móveis
-        storyPopupContainer.addEventListener('touchstart', pauseStory);
-        storyPopupContainer.addEventListener('touchend', resumeStory);
-        storyPopupContainer.addEventListener('touchcancel', resumeStory); // Caso o toque seja cancelado
-
-        // NOVO CÓDIGO: Habilita navegação por toque nos stories em telas mobile
-        imageContainer.addEventListener('click', (e) => {
-            // Só executa em telas onde as setas estão escondidas (mobile)
-            if (window.innerWidth >= 600) {
-                return;
-            }
-
-            // Impede que o clique em botões ou no formulário acione a navegação
-            if (e.target.closest('.story-like-btn') || e.target.closest('.story-comment-bar')) {
-                return;
-            }
-
-            const rect = imageContainer.getBoundingClientRect();
-            const clickX = e.clientX - rect.left;
-
-            // Navega para a esquerda (anterior) se o clique for no primeiro terço da tela
-            if (clickX < rect.width / 3) {
-                navigate(-1);
-            }   
-            // Navega para a direita (próximo) se o clique for no último terço
-            else if (clickX > rect.width * (2 / 3)) {
-                navigate(1);
-            }
-        });
-    }
-    
-    function showForm() { document.getElementById("formContainer").style.display = "block"; document.querySelector(".btn-container").style.display = "none"; document.getElementById("form-section-anchor").scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-    
-    function initializeFormLogic() {
-        document.getElementById('servico').addEventListener('change', toggleOptions);
-        setupRadioLogic('pacote', 'outro_pacote');
-        setupRadioLogic('material', 'outro_material');
-        toggleOptions();
-    }
-
-    function toggleOptions() {
-        const servico = document.getElementById('servico').value;
-        const smOpts = document.getElementById('socialMediaOptions');
-        const miOpts = document.getElementById('materiaisImpressosOptions');
-        smOpts.classList.add('hidden');
-        miOpts.classList.add('hidden');
-        if (servico === "Design para Social Media") smOpts.classList.remove('hidden');
-        else if (servico === "Design para materiais impressos e digitais") miOpts.classList.remove('hidden');
-    }
-
-    function setupRadioLogic(radioGroupName, textInputId) {
-        const radios = document.querySelectorAll(`input[name="${radioGroupName}"]`);
-        const textInput = document.getElementById(textInputId);
-        radios.forEach(radio => {
-            radio.addEventListener('change', (event) => {
-                if (event.target.value === 'Outro') {
-                    textInput.disabled = false;
-                    textInput.focus();
-                } else {
-                    textInput.disabled = true;
-                    textInput.value = '';
-                }
+                alert('Erro de conexão. Por favor, verifique sua internet e tente novamente.');
+                console.error("Erro no fetch:", error);
             });
         });
-    }
-
-    function validateForm() {
-        let isValid = true;
-        document.querySelectorAll('.form-group.invalid').forEach(el => el.classList.remove('invalid'));
-        document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
-
-        const nome = document.getElementById('nome');
-        if (nome.value.trim() === '') {
-            nome.parentElement.classList.add('invalid');
-            document.getElementById('nome-error').style.display = 'block';
-            isValid = false;
-        }
-
-        const emailInput = document.getElementById('email');
-        const whatsappInput = document.getElementById('whatsapp');
-        if (emailInput.value.trim() === '' && whatsappInput.value.trim() === '') {
-            emailInput.parentElement.classList.add('invalid');
-            whatsappInput.parentElement.classList.add('invalid');
-            document.getElementById('contact-error').style.display = 'block';
-            isValid = false;
-        }
-        
-        const servico = document.getElementById('servico');
-        if (servico.value === '') {
-            servico.parentElement.classList.add('invalid');
-            document.getElementById('servico-error').style.display = 'block';
-            isValid = false;
-        }
-
-        return isValid;
-    }
-
-    function getQueryParam(param) { return new URLSearchParams(window.location.search).get(param); }
-    function openFormAndScroll() { showForm(); document.getElementById('promoPopup').classList.remove('active'); const nomeField = document.getElementById('nome'); if (nomeField && !nomeField.value.startsWith('[Promoção] ')) nomeField.value = '[Promoção] '; }
-    
-    document.getElementById('orçamentoForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        
-        if (!validateForm()) {
-            return; 
-        }
-        
-        const form = event.target;
-        const formData = new FormData(form);
-
-        fetch("https://formspree.io/f/meoajgpy", {
-            method: "POST",
-            body: formData,
-            headers: { 'Accept': 'application/json' }
-        })
-        .then(response => {
-            if (response.ok) {
-                const successPopup = document.getElementById('success-popup');
-                successPopup.classList.add('show');
-                setTimeout(() => {
-                    successPopup.classList.remove('show');
-                }, 4400); 
-
-                form.reset();
-                document.getElementById('formContainer').style.display = 'none';
-                document.querySelector('.btn-container').style.display = 'block';
-                toggleOptions();
-            } else {
-                response.json().then(data => {
-                    alert('Ocorreu um problema ao enviar seu formulário.');
-                });
-            }
-        }).catch(error => {
-            alert('Erro de conexão. Por favor, verifique sua internet e tente novamente.');
-            console.error("Erro no fetch:", error);
-        });
-    });
-</script>
+    </script>
 </body>
 </html>
