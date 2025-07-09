@@ -16,7 +16,8 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Abril+Fatface&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+
 
     <style>
         :root {
@@ -24,71 +25,358 @@
             --secondary-color: #792bd9; /* Roxo céu */
             --accent-color: #ffc600; /* Amarelo vibrante */
             
-            --bg-dark-1: #050505;
-            --bg-dark-2: #101012;
-            --bg-dark-purple-hint: #140c1b;
+            --bg-dark-1: #020202; /* Tom de preto mais escuro para a base */
+            --bg-glow-purple: rgba(121, 43, 217, 0.2); /* Roxo para o brilho (opacidade ajustada) */
+            --bg-glow-white: rgba(255, 255, 255, 0.1); /* Branco para o brilho (opacidade ajustada) */
 
             --text-color: #efefef;
             --card-color: rgba(255, 255, 255, 0.08);
             --border-color: rgba(255, 255, 255, 0.15);
             --error-color: #ffc600;
 
-            --title-font: 'Abril Fatface', serif;
+            --title-font: 'Britanica Black', 'Playfair Display', serif;
             --body-font: 'Poppins', sans-serif;
         }
 
         html { scroll-behavior: smooth; }
 
+        /* FUNDO ATUALIZADO: Brilhos fixos na página, não na tela. */
         body {
             font-family: var(--body-font);
-            background: linear-gradient(-45deg, var(--bg-dark-1), var(--bg-dark-2), var(--bg-dark-purple-hint), var(--bg-dark-1));
-            background-size: 400% 400%;
-            animation: gradientMove 25s ease infinite;
+            background-color: var(--bg-dark-1);
+            background-image: 
+                /* 1. Brilho roxo pequeno no canto inferior esquerdo da PÁGINA */
+                radial-gradient(circle at -12% 60%, var(--bg-glow-purple), transparent 12%),
+                /* 2. Brilho branco pequeno no canto inferior direito da PÁGINA */
+                radial-gradient(circle at 110% 105%, var(--bg-glow-white), transparent 12%),
+                /* 3. Brilho principal no topo da PÁGINA */
+                radial-gradient(ellipse at 109% 45%, var(--bg-glow-purple), transparent 10%);
+            
+            background-repeat: no-repeat;
+            /* A propriedade 'background-attachment: fixed' foi REMOVIDA para que o fundo role com a página. */
             color: var(--text-color);
             margin: 0;
             padding: 0;
             overflow-x: hidden;
         }
 
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        #design-background { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; overflow: hidden; }
-        .design-icon { font-size: 40px; color: rgba(255, 255, 255, 0.5); position: absolute; opacity: 0; will-change: transform, opacity; }
-        @keyframes fade { 0% { opacity: 0; } 50% { opacity: 0.08; } 100% { opacity: 0; } }
-
         .main-container { position: relative; z-index: 10; max-width: 1100px; margin: 0 auto; padding: 20px; }
-        header { text-align: center; padding: 40px 0 0; }
+        
+        header { 
+            text-align: center; 
+            padding: 40px 0;
+            position: relative; 
+        }
         header img { width: 150px; height: 150px; border-radius: 50%; border: 4px solid var(--primary-color); box-shadow: 0 0 20px var(--primary-color); object-fit: cover; margin-bottom: 25px; }
-        header h1 { font-family: var(--title-font); font-size: 3em; font-weight: normal; margin: 0 0 5px 0; color: var(--text-color); }
+        header h1 { font-family: var(--title-font); font-size: 3em; font-weight: 900; margin: 0 0 5px 0; color: var(--text-color); }
         header p { font-size: 1.1em; font-weight: 300; color: var(--primary-color); margin: 0; }
         
+        .header-socials {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .header-socials a {
+            color: var(--secondary-color);
+            font-size: 24px;
+            opacity: 0.7;
+            transition: opacity 0.3s ease, color 0.3s ease, transform 0.3s ease;
+        }
+        .header-socials a:hover {
+            opacity: 1;
+            color: var(--primary-color);
+            transform: scale(1.15);
+        }
+
         .professional-section { display: flex; align-items: center; gap: 40px; padding: 40px 0; margin: 40px auto; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
         .professional-text { flex: 1.5; }
         .professional-image { flex: 1; min-width: 250px; text-align: center; }
         .professional-image .media-container { max-width: 100%; display: inline-block; }
         .professional-image img { max-width: 100%; display: block; }
-        .professional-text h2 { font-family: var(--title-font); font-size: 2.8em; font-weight: normal; color: var(--primary-color); margin-top: 0; margin-bottom: 20px; }
+        .professional-text h2 { font-family: var(--title-font); font-size: 2.8em; font-weight: 700; color: var(--primary-color); margin-top: 0; margin-bottom: 20px; }
         .professional-text p { line-height: 1.8; margin-bottom: 15px; font-size: 1.05em; }
         .professional-text strong { color: var(--text-color); font-weight: 700; }
         
-        .section-title { text-align: center; font-family: var(--title-font); font-size: 2.8em; font-weight: normal; margin: 80px 0 10px 0; color: var(--primary-color); }
+        .section-title { text-align: center; font-family: var(--title-font); font-size: 2.8em; font-weight: 700; margin: 80px 0 40px 0; color: var(--primary-color); }
         
-        .links-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 50px; margin-top: 40px; margin-bottom: 80px; justify-items: center; }
-        .scene { width: 160px; height: 160px; perspective: 800px; cursor: grab; }
-        .cube { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transform: translateZ(-80px) rotateX(-20deg) rotateY(30deg); transition: transform 0.2s ease-out; }
-        .face { position: absolute; width: 160px; height: 160px; display: flex; flex-direction: column; justify-content: center; align-items: center; background: rgba(255, 255, 255, 0.08); border: 1px solid var(--border-color); backdrop-filter: blur(10px); color: var(--text-color); text-align: center; padding: 10px; box-sizing: border-box; user-select: none; }
-        .face h3 { margin: 8px 0 0 0; font-size: 0.9em; font-weight: 600; font-family: var(--body-font); }
-        .face .icon { font-size: 2.8em; color: var(--accent-color); }
-        .face-front   { transform: rotateY(0deg) translateZ(80px); } .face-back    { transform: rotateY(180deg) translateZ(80px); } .face-right   { transform: rotateY(90deg) translateZ(80px); } .face-left    { transform: rotateY(-90deg) translateZ(80px); } .face-top     { transform: rotateX(90deg) translateZ(80px); } .face-bottom  { transform: rotateX(-90deg) translateZ(80px); }
+        /* === ESTILOS PARA STORIES === */
+        .portfolio-stories-section {
+            padding: 20px 0 60px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .story-highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 20px;
+            justify-content: center;
+            padding: 0 10px;
+        }
+        .story-highlight {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--text-color);
+        }
+        .story-highlight-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            padding: 4px;
+            background: linear-gradient(45deg, var(--accent-color), var(--primary-color), var(--secondary-color));
+            margin-bottom: 10px;
+            transition: transform 0.3s ease;
+        }
+        .story-highlight:hover .story-highlight-circle {
+            transform: scale(1.08);
+        }
+        .story-highlight-thumb {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #1c1c1c;
+        }
+        .story-highlight-name {
+            font-size: 0.9em;
+            font-weight: 400;
+        }
+
+        .story-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px; 
+            padding: 0 15px;
+            box-sizing: border-box;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0s 0.3s;
+        }
+        .story-popup.active {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.3s ease;
+        }
+        .story-popup-container {
+            position: relative;
+            width: 90vw;
+            height: 90vh;
+            max-width: 450px;
+            max-height: 800px;
+            display: flex;
+            flex-direction: column;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: #000;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            flex-shrink: 0;
+        }
+        .story-progress-bar {
+            position: absolute;
+            top: 8px;
+            width: calc(100% - 16px);
+            left: 8px;
+            display: flex;
+            gap: 4px;
+            z-index: 2011;
+        }
+        .progress-segment {
+            flex-grow: 1;
+            height: 3px;
+            background-color: rgba(255, 255, 255, 0.4);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .progress-segment .progress-fill {
+            width: 0;
+            height: 100%;
+            background-color: #fff;
+            border-radius: 3px;
+            transition: width 0.1s linear;
+        }
+        .progress-segment.active .progress-fill {
+            width: 100%;
+            animation: fill-progress 15s linear forwards;
+        }
+        .progress-segment.filled .progress-fill {
+            width: 100%;
+        }
+        @keyframes fill-progress {
+            from { width: 0%; }
+            to { width: 100%; }
+        }
+
+        .story-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 15px 10px;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            z-index: 2010;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
+        }
+        .story-profile {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #fff;
+            margin-right: 10px;
+        }
+        .story-username {
+            font-weight: 600;
+            color: #fff;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+        .story-close {
+            margin-left: auto;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 35px;
+            cursor: pointer;
+            line-height: 1;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .story-image-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        .story-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .story-nav {
+            position: relative;
+            width: 45px;
+            height: 45px;
+            background-color: rgba(255, 255, 255, 0.1); 
+            backdrop-filter: blur(8px); 
+            -webkit-backdrop-filter: blur(8px); 
+            border: 1px solid rgba(255, 255, 255, 0.2); 
+            color: #fff;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2012;
+            transition: background-color 0.2s, transform 0.2s, opacity 0.3s;
+            flex-shrink: 0;
+        }
+        .story-nav:hover { 
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+        .story-nav.disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: scale(1);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .story-like-btn {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 30px;
+            cursor: pointer;
+            z-index: 2015;
+            transition: transform 0.2s ease, color 0.2s ease;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .story-like-btn:hover {
+            transform: scale(1.15);
+        }
+        .story-like-btn.liked .fa-heart {
+            color: var(--primary-color);
+            font-weight: 900;
+        }
+
+        .floating-heart {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            font-size: 25px;
+            color: var(--primary-color);
+            z-index: 2014;
+            pointer-events: none;
+            opacity: 1;
+            animation: float-up 2s ease-out forwards;
+        }
+        @keyframes float-up {
+            to {
+                transform: translateY(-400px);
+                opacity: 0;
+            }
+        }
+        
+        .story-comment-bar {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            left: 70px;
+            z-index: 2016;
+            display: flex;
+            gap: 10px;
+        }
+        .story-comment-input {
+            flex-grow: 1;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            background-color: rgba(0, 0, 0, 0.4);
+            border-radius: 20px;
+            padding: 8px 15px;
+            color: #fff;
+            font-family: var(--body-font);
+            font-size: 14px;
+        }
+        .story-comment-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .story-comment-send-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 10px 15px;
+            transition: background-color 0.3s;
+            border-radius: 20px;
+        }
+        .story-comment-send-btn.sent {
+            color: #34d399;
+            font-weight: bold;
+        }
         
         .video-section { display: flex; gap: 40px; padding: 60px 0; align-items: center; flex-wrap: wrap; border-top: 1px solid var(--border-color); }
         .video-section.reverse { flex-direction: row-reverse; }
         .video-content, .video-player { flex: 1; min-width: 300px; }
-        .video-content h2 { font-family: var(--title-font); font-size: 2.8em; font-weight:normal; color: var(--primary-color); }
+        .video-content h2 { font-family: var(--title-font); font-size: 2.8em; font-weight: 700; color: var(--primary-color); }
         .video-content p, .video-content li { font-size: 1em; line-height: 1.8; }
         .video-content ul { list-style: none; padding: 0; }
         .video-content li i { color: var(--accent-color); margin-right: 10px; }
@@ -111,7 +399,7 @@
         .quote-section { text-align: center; padding: 50px 0; border-top: 1px solid var(--border-color); }
         button.main-quote-btn { background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)); color: white; font-size: 1.2em; padding: 15px 40px; border-radius: 50px; border: none; cursor: pointer; transition: all 0.3s ease; }
         .form-container { max-width: 600px; margin: 40px auto; background-color: var(--card-color); padding: 30px; border-radius: 15px; backdrop-filter: blur(10px); display: none; }
-        .form-container h1 { font-family: var(--title-font); color: var(--primary-color); text-align: center; font-size: 2em; margin-bottom: 10px; font-weight:normal;}
+        .form-container h1 { font-family: var(--title-font); color: var(--primary-color); text-align: center; font-size: 2em; margin-bottom: 10px; font-weight:700;}
         .form-container p.subtitle { text-align: center; font-size: 0.9em; margin-bottom: 25px; }
         .form-group { margin-bottom: 15px; position: relative; }
         label { font-weight: bold; display: block; margin-bottom: 5px; }
@@ -123,7 +411,7 @@
             background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ffc600%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
             background-repeat: no-repeat; background-position: right 1em top 50%; background-size: .65em auto; padding-right: 2.5em;
         }
-        select option { background: var(--bg-dark-2); color: var(--text-color); }
+        select option { background: var(--bg-dark-1); color: var(--text-color); }
         
         .radio-group { display: flex; flex-direction: column; gap: 12px; margin-top: 10px; }
         .radio-option { display: flex; align-items: center; }
@@ -138,31 +426,11 @@
         .required { color: var(--accent-color); }
         footer { text-align: center; padding: 30px 0; margin-top: 40px; border-top: 1px solid var(--border-color); } footer p { margin: 0; font-size: 0.9em; font-weight: 300; }
         
-        /* POPUPS */
-        .popup-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(5px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
+        .popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; z-index: 1000; }
         .popup-overlay.show { display: flex; }
-        .popup-content {
-            background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
-            padding: 40px;
-            border-radius: 15px;
-            text-align: center;
-            max-width: 400px; width: 90%;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            border: 1px solid var(--border-color);
-            position: relative;
-            overflow: hidden;
-        }
+        .popup-content { background: linear-gradient(135deg, #1a1a2e, #0f0f1a); padding: 40px; border-radius: 15px; text-align: center; max-width: 400px; width: 90%; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid var(--border-color); position: relative; overflow: hidden; }
         .success-popup { animation: popup-show-hide 4.5s ease-in-out forwards; }
-        .success-popup h2 { font-family:var(--title-font); font-weight:normal; margin: 0 0 10px; font-size: 2em; color: var(--primary-color); }
+        .success-popup h2 { font-family:var(--title-font); font-weight:700; margin: 0 0 10px; font-size: 2em; color: var(--primary-color); }
         .success-popup p { margin: 0; font-size: 1em; }
         .success-popup .butterfly { position: absolute; width: 80px; opacity: 0.7; pointer-events: none; }
         .butterfly1 { top: -20px; left: -20px; animation: fly1 5s infinite ease-in-out; }
@@ -173,26 +441,45 @@
         
         .promo-popup { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: #ffffff; padding: 25px; border-radius: 15px; z-index: 1000; text-align: center; max-width: 400px; width: 90%; }
         .promo-popup.active { display: block; animation: fadeIn 0.5s ease-out forwards; }
-        .promo-popup h2 { font-family:var(--title-font); font-weight:normal; margin: 0 0 10px; font-size: 1.8em; }
+        .promo-popup h2 { font-family:var(--title-font); font-weight:700; margin: 0 0 10px; font-size: 1.8em; }
         .promo-popup p { margin: 0 0 15px; font-size: 0.9em; }
         .promo-popup button { background: #ffffff; color: var(--primary-color); border: none; padding: 12px 25px; border-radius: 25px; cursor: pointer; font-size: 1em; font-weight: bold; }
         @keyframes fadeIn { from { opacity: 0; transform: translate(-50%, -60%); } to { opacity: 1; transform: translate(-50%, -50%); } }
         
         @media (min-width: 1200px) { .main-container { max-width: 95%; } }
-        @media (max-width: 768px) { .professional-section, .video-section, .video-section.reverse { flex-direction: column; } .links-section { grid-template-columns: 1fr; gap: 80px; } }
+        
+        @media (max-width: 768px) { 
+            .professional-section, .video-section, .video-section.reverse { flex-direction: column; } 
+            .header-socials {
+                position: static;
+                transform: none;
+                flex-direction: row;
+                justify-content: center;
+                gap: 25px;
+                margin-top: 25px;
+            }
+            .header-socials a {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 600px) { .story-nav { display: none; } }
     </style>
 </head>
 <body>
-
-    <div id="design-background">
-        <i class="fas fa-pencil-alt design-icon"></i><i class="fas fa-laptop design-icon"></i><i class="fas fa-lightbulb design-icon"></i><i class="fas fa-palette design-icon"></i><i class="fas fa-rocket design-icon"></i><i class="fas fa-code design-icon"></i><i class="fas fa-paint-brush design-icon"></i><i class="fas fa-swatchbook design-icon"></i><i class="fas fa-drafting-compass design-icon"></i><i class="fas fa-vector-square design-icon"></i><i class="fas fa-pen-nib design-icon"></i><i class="fas fa-mouse-pointer design-icon"></i>
-    </div>
 
     <div class="main-container">
         <header>
             <img src="https://i.postimg.cc/Xq05Y013/Marjorie.jpg" alt="Foto de Marjorie Rosario">
             <h1>Marjorie Rosario</h1>
             <p>Designer Gráfica especialista em Design para Social Media</p>
+
+            <div class="header-socials">
+                <a href="https://www.instagram.com/mahrosario.dsg/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://api.whatsapp.com/send/?phone=5511987637786" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.behance.net/marjorierosrio" target="_blank" title="Behance"><i class="fab fa-behance"></i></a>
+                <a href="mailto:seuemail@exemplo.com" title="E-mail"><i class="fas fa-envelope"></i></a>
+            </div>
         </header>
 
         <main>
@@ -209,13 +496,12 @@
                 </div>
             </section>
             
-            <section class="links-section">
-                <div class="scene"><div class="cube"><div class="face face-front"><i class="fas fa-palette icon"></i><h3>Identidade Visual</h3></div><div class="face face-back"><i class="fas fa-lightbulb icon"></i><h3>Branding</h3></div><div class="face face-right"><i class="fas fa-pen-nib icon"></i><h3>Logotipos</h3></div><div class="face face-left"><i class="fas fa-book-open icon"></i><h3>Manual da Marca</h3></div><div class="face face-top"><i class="fas fa-swatchbook icon"></i><h3>Paleta de Cores</h3></div><div class="face face-bottom"><i class="fas fa-font icon"></i><h3>Tipografia</h3></div></div></div>
-                <div class="scene"><div class="cube"><div class="face face-front"><i class="fas fa-share-alt icon"></i><h3>Social Media</h3></div><div class="face face-back"><i class="fas fa-camera-retro icon"></i><h3>Posts</h3></div><div class="face face-right"><i class="fas fa-film icon"></i><h3>Stories</h3></div><div class="face face-left"><i class="fas fa-ad icon"></i><h3>Anúncios</h3></div><div class="face face-top"><i class="fas fa-bullhorn icon"></i><h3>Campanhas</h3></div><div class="face face-bottom"><i class="fas fa-chart-line icon"></i><h3>Engajamento</h3></div></div></div>
-                <div class="scene"><div class="cube"><div class="face face-front"><i class="fas fa-vector-square icon"></i><h3>Design Digital</h3></div><div class="face face-back"><i class="fas fa-desktop icon"></i><h3>UI/UX</h3></div><div class="face face-right"><i class="fas fa-mobile-alt icon"></i><h3>Layouts</h3></div><div class="face face-left"><i class="fas fa-object-group icon"></i><h3>Banners</h3></div><div class="face face-top"><i class="fas fa-envelope-open-text icon"></i><h3>E-mail Mkt</h3></div><div class="face face-bottom"><i class="fas fa-mouse-pointer icon"></i><h3>Interatividade</h3></div></div></div>
-                <div class="scene"><div class="cube"><div class="face face-front"><i class="fas fa-pencil-ruler icon"></i><h3>Ilustração</h3></div><div class="face face-back"><i class="fas fa-icons icon"></i><h3>Ícones</h3></div><div class="face face-right"><i class="fas fa-user-astronaut icon"></i><h3>Mascotes</h3></div><div class="face face-left"><i class="fas fa-box icon"></i><h3>Embalagens</h3></div><div class="face face-top"><i class="fas fa-tshirt icon"></i><h3>Estampas</h3></div><div class="face face-bottom"><i class="fas fa-paint-brush icon"></i><h3>Arte Vetorial</h3></div></div></div>
+            <section class="portfolio-stories-section">
+                <h2 class="section-title">Portfólio</h2>
+                <div id="story-highlights-container" class="story-highlights-grid">
+                    </div>
             </section>
-
+            
             <section class="video-section"><div class="video-player media-container static-gradient"><video class="video-on-scroll" loop muted playsinline><source src="https://i.imgur.com/5T4e4jB.mp4" type="video/mp4"></video></div><div class="video-content"><h2>Conheça meu Trabalho</h2><p>Cada projeto é uma nova história. Meu portfólio é um reflexo da minha paixão por criar designs que não apenas encantam visualmente, mas também comunicam, engajam e alcançam objetivos estratégicos para cada marca.</p><a href="https://www.behance.net/marjorierosrio" target="_blank" class="cta-button">Ver Portfólio Completo</a></div></section>
             <section class="video-section reverse"><div class="video-player media-container static-gradient"><video class="video-on-scroll" loop muted playsinline><source src="https://i.imgur.com/HvYf1mk.mp4" type="video/mp4"></video></div><div class="video-content"><h2>Nosso Processo Criativo</h2><p>Trabalho com um método claro e colaborativo para transformar suas ideias em realidade, garantindo que o resultado final seja exatamente o que você espera.</p><ul><li><i class="fas fa-check-circle"></i><b>Briefing:</b> Entendimento profundo das suas metas e público.</li><li><i class="fas fa-check-circle"></i><b>Criação:</b> Desenvolvimento de conceitos visuais estratégicos.</li><li><i class="fas fa-check-circle"></i><b>Aprovação:</b> Ajustes finos com base no seu feedback.</li><li><i class="fas fa-check-circle"></i><b>Entrega:</b> Arquivos finais em alta qualidade, prontos para uso.</li></ul></div></section>
             <section class="video-section"><div class="video-player media-container static-gradient"><video class="video-on-scroll" loop muted playsinline><source src="https://i.imgur.com/gdPVfJP.mp4" type="video/mp4"></video></div><div class="video-content"><h2>Potencialize sua Marca</h2><p>Um design profissional vai além da estética. É um investimento estratégico que fortalece sua marca, cria conexões com seu público e impulsiona seus resultados.</p><ul><li><i class="fas fa-rocket"></i>Destaque-se da concorrência com uma identidade única.</li><li><i class="fas fa-heart"></i>Aumente o engajamento e a confiança do seu público.</li><li><i class="fas fa-bullseye"></i>Comunique sua mensagem de forma clara e impactante.</li></ul></div></section>
@@ -262,115 +548,186 @@
         </div>
     </div>
 
+    <div class="story-popup" id="story-popup">
+        <button class="story-nav story-nav-prev" id="story-nav-prev"><i class="fas fa-chevron-left"></i></button>
+        <div class="story-popup-container">
+            <div class="story-progress-bar" id="story-progress-bar-container"></div>
+            <div class="story-header">
+                <img src="https://i.postimg.cc/Xq05Y013/Marjorie.jpg" alt="Perfil" class="story-profile">
+                <span class="story-username">Marjorie Rosario</span>
+                <button class="story-close" id="story-close-btn">&times;</button>
+            </div>
+            <div class="story-image-container" id="story-image-container">
+                <img src="" alt="Story Image" class="story-image" id="story-image-content">
+            </div>
+            <button class="story-like-btn" id="story-like-btn">
+                <i class="far fa-heart"></i>
+            </button>
+            <form class="story-comment-bar" id="storyCommentForm">
+                <input type="text" name="comment" class="story-comment-input" placeholder="Enviar mensagem..." required>
+                <button type="submit" class="story-comment-send-btn">Enviar</button>
+            </form>
+        </div>
+        <button class="story-nav story-nav-next" id="story-nav-next"><i class="fas fa-chevron-right"></i></button>
+    </div>
+
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const scenes = document.querySelectorAll('.scene');
-            scenes.forEach(scene => {
-                const cube = scene.querySelector('.cube');
-                let isDragging = false, startX, startY, currentX = -20, currentY = 30;
-                scene.addEventListener('mousedown', e => { e.preventDefault(); isDragging = true; startX = e.clientX; startY = e.clientY; scene.style.cursor = 'grabbing'; cube.style.transition = 'none'; });
-                document.addEventListener('mousemove', e => { if (!isDragging) return; const deltaX = e.clientX - startX, deltaY = e.clientY - startY; currentY += deltaX * 0.8; currentX -= deltaY * 0.8; cube.style.transform = `translateZ(-80px) rotateX(${currentX}deg) rotateY(${currentY}deg)`; startX = e.clientX; startY = e.clientY; });
-                const stopDragging = () => { if (isDragging) { isDragging = false; scene.style.cursor = 'grab'; cube.style.transition = 'transform 0.2s ease-out'; } };
-                document.addEventListener('mouseup', stopDragging);
-                scene.addEventListener('mouseleave', stopDragging);
-            });
+    document.addEventListener('DOMContentLoaded', () => {
+        const videos = document.querySelectorAll(".video-on-scroll");
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    const playPromise = entry.target.play();
+                    if (entry.isIntersecting) { if (playPromise !== undefined) playPromise.catch(error => console.error("Autoplay impedido:", error)); }
+                    else { if (playPromise !== undefined) playPromise.then(() => entry.target.pause()); }
+                });
+            }, { threshold: 0.5 });
+            videos.forEach(video => observer.observe(video));
+        }
 
-            const videos = document.querySelectorAll(".video-on-scroll");
-            if ('IntersectionObserver' in window) {
-                const observer = new IntersectionObserver(entries => {
-                    entries.forEach(entry => {
-                        const playPromise = entry.target.play();
-                        if (entry.isIntersecting) { if (playPromise !== undefined) playPromise.catch(error => console.error("Autoplay impedido:", error)); }
-                        else { if (playPromise !== undefined) playPromise.then(() => entry.target.pause()); }
-                    });
-                }, { threshold: 0.5 });
-                videos.forEach(video => observer.observe(video));
-            }
+        if (getQueryParam('promo') === 'arte-gratis') document.getElementById('promoPopup').classList.add('active');
+        
+        initializeFormLogic();
+        initializeStoryHighlights(); 
+    });
 
-            if (getQueryParam('promo') === 'arte-gratis') document.getElementById('promoPopup').classList.add('active');
-            
-            setupBackgroundAnimation();
-            initializeFormLogic();
+    function initializeStoryHighlights() {
+        const storyData = [
+            { name: "Alinhamento Visual", thumbnail: "https://i.postimg.cc/VNbQhG85/IMG-20240702-WA0013.jpg", images: ["https://i.postimg.cc/k4G3x7kC/alinhamento1.png", "https://i.postimg.cc/Y0QzVBCp/alinhamento2.png"] },
+            { name: "Logotipos", thumbnail: "https://i.postimg.cc/nrpL9WfW/IMG-20240702-WA0014.jpg", images: ["https://i.postimg.cc/d1h2s1wX/logo1.png", "https://i.postimg.cc/wMS4yQvV/logo2.png", "https://i.postimg.cc/L6ZJ5bJ2/logo3.png"] },
+            { name: "Mídia Social", thumbnail: "https://i.postimg.cc/y8XwK7Fz/IMG-20240702-WA0015.jpg", images: ["https://i.postimg.cc/bN1jXkYx/social1.png", "https://i.postimg.cc/C1MmzZXV/social2.png", "https://i.postimg.cc/tJSNKmdc/social3.png"] },
+            { name: "Banners", thumbnail: "https://i.postimg.cc/hG09TRtP/IMG-20240702-WA0016.jpg", images: ["https://i.postimg.cc/8cM2SFrB/bandeira1.png"] },
+            { name: "Anúncios", thumbnail: "https://i.postimg.cc/d19GfbDr/IMG-20240702-WA0017.jpg", images: ["https://i.postimg.cc/wB2gHw7D/anuncio1.png", "https://i.postimg.cc/RhdQyCgG/anuncio2.png"] },
+            { name: "Edição de Vídeo", thumbnail: "https://i.postimg.cc/YqX8Bv5b/IMG-20240702-WA0018.jpg", images: ["https://i.imgur.com/gdPVfJP.mp4"] }
+        ];
+
+        const highlightsContainer = document.getElementById('story-highlights-container');
+        const popup = document.getElementById('story-popup');
+        const popupImage = document.getElementById('story-image-content');
+        const imageContainer = document.getElementById('story-image-container');
+        const closeBtn = document.getElementById('story-close-btn');
+        const navPrev = document.getElementById('story-nav-prev');
+        const navNext = document.getElementById('story-nav-next');
+        const likeBtn = document.getElementById('story-like-btn');
+        const likeBtnIcon = likeBtn.querySelector('i');
+        const progressBarContainer = document.getElementById('story-progress-bar-container');
+        const commentForm = document.getElementById('storyCommentForm');
+        const commentInput = commentForm.querySelector('.story-comment-input');
+        const commentSendBtn = commentForm.querySelector('.story-comment-send-btn');
+        
+        let currentStoryIndex = 0;
+        let currentImageIndex = 0;
+        let storyTimer;
+
+        storyData.forEach((story, index) => {
+            const highlightHTML = `<div class="story-highlight" data-story-index="${index}"><div class="story-highlight-circle"><img src="${story.thumbnail}" alt="${story.name}" class="story-highlight-thumb"></div><span class="story-highlight-name">${story.name}</span></div>`;
+            highlightsContainer.innerHTML += highlightHTML;
         });
 
-        function showForm() { document.getElementById("formContainer").style.display = "block"; document.querySelector(".btn-container").style.display = "none"; document.getElementById("form-section-anchor").scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-        
-        function initializeFormLogic() {
-            document.getElementById('servico').addEventListener('change', toggleOptions);
-            setupRadioLogic('pacote', 'outro_pacote');
-            setupRadioLogic('material', 'outro_material');
-            toggleOptions();
-        }
+        function playStory() {
+            const story = storyData[currentStoryIndex];
+            const images = story.images;
+            popupImage.src = images[currentImageIndex];
 
-        function toggleOptions() {
-            const servico = document.getElementById('servico').value;
-            const smOpts = document.getElementById('socialMediaOptions');
-            const miOpts = document.getElementById('materiaisImpressosOptions');
-            smOpts.classList.add('hidden');
-            miOpts.classList.add('hidden');
-            if (servico === "Design para Social Media") smOpts.classList.remove('hidden');
-            else if (servico === "Design para materiais impressos e digitais") miOpts.classList.remove('hidden');
-        }
-
-        function setupRadioLogic(radioGroupName, textInputId) {
-            const radios = document.querySelectorAll(`input[name="${radioGroupName}"]`);
-            const textInput = document.getElementById(textInputId);
-            radios.forEach(radio => {
-                radio.addEventListener('change', (event) => {
-                    if (event.target.value === 'Outro') {
-                        textInput.disabled = false;
-                        textInput.focus();
-                    } else {
-                        textInput.disabled = true;
-                        textInput.value = '';
-                    }
-                });
+            const segments = progressBarContainer.querySelectorAll('.progress-segment');
+            segments.forEach((segment, index) => {
+                segment.classList.remove('active', 'filled');
+                if (index < currentImageIndex) segment.classList.add('filled');
+                else if (index === currentImageIndex) segment.classList.add('active');
             });
-        }
-
-        function validateForm() {
-            let isValid = true;
-            document.querySelectorAll('.form-group.invalid').forEach(el => el.classList.remove('invalid'));
-            document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
-
-            const nome = document.getElementById('nome');
-            if (nome.value.trim() === '') {
-                nome.parentElement.classList.add('invalid');
-                document.getElementById('nome-error').style.display = 'block';
-                isValid = false;
-            }
-
-            const emailInput = document.getElementById('email');
-            const whatsappInput = document.getElementById('whatsapp');
-            if (emailInput.value.trim() === '' && whatsappInput.value.trim() === '') {
-                emailInput.parentElement.classList.add('invalid');
-                whatsappInput.parentElement.classList.add('invalid');
-                document.getElementById('contact-error').style.display = 'block';
-                isValid = false;
-            }
             
-            const servico = document.getElementById('servico');
-            if (servico.value === '') {
-                servico.parentElement.classList.add('invalid');
-                document.getElementById('servico-error').style.display = 'block';
-                isValid = false;
-            }
+            navPrev.classList.toggle('disabled', currentImageIndex === 0);
+            navNext.classList.toggle('disabled', currentImageIndex === images.length - 1);
 
-            return isValid;
+            clearTimeout(storyTimer);
+            storyTimer = setTimeout(() => {
+                if (currentImageIndex < images.length - 1) {
+                    currentImageIndex++;
+                    playStory();
+                } else {
+                    closePopup();
+                }
+            }, 15000);
         }
 
-        function getQueryParam(param) { return new URLSearchParams(window.location.search).get(param); }
-        function openFormAndScroll() { showForm(); document.getElementById('promoPopup').classList.remove('active'); const nomeField = document.getElementById('nome'); if (nomeField && !nomeField.value.startsWith('[Promoção] ')) nomeField.value = '[Promoção] '; }
+        function openPopup(storyIndex) {
+            likeBtn.classList.remove('liked');
+            likeBtnIcon.className = 'far fa-heart';
+
+            currentStoryIndex = storyIndex;
+            currentImageIndex = 0;
+            const images = storyData[currentStoryIndex].images;
+            progressBarContainer.innerHTML = '';
+            images.forEach(() => {
+                progressBarContainer.innerHTML += '<div class="progress-segment"><div class="progress-fill"></div></div>';
+            });
+            playStory();
+            popup.classList.add('active');
+        }
+
+        function closePopup() {
+            clearTimeout(storyTimer);
+            popup.classList.remove('active');
+            const activeSegment = progressBarContainer.querySelector('.active');
+            if(activeSegment) activeSegment.classList.remove('active');
+        }
         
-        document.getElementById('orçamentoForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            if (!validateForm()) {
-                return; // Impede o envio se a validação falhar
+        function navigate(direction) {
+            if ( (direction === -1 && currentImageIndex === 0) || (direction === 1 && currentImageIndex === storyData[currentStoryIndex].images.length - 1) ) {
+                return;
+            }
+            clearTimeout(storyTimer);
+            currentImageIndex += direction;
+            playStory();
+        }
+
+        function createFloatingHearts() {
+            if (likeBtn.classList.contains('liked')) {
+                likeBtn.classList.remove('liked');
+                likeBtnIcon.className = 'far fa-heart';
+                return;
             }
             
-            const form = event.target;
-            const formData = new FormData(form);
+            likeBtn.classList.add('liked');
+            likeBtnIcon.className = 'fas fa-heart';
+
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('i');
+                heart.className = 'fas fa-heart floating-heart';
+                const randomX = (Math.random() - 0.5) * 100;
+                const randomDelay = Math.random() * 0.5;
+                const randomDuration = 1.5 + Math.random();
+                
+                const keyframes = `@keyframes float-up-${i} { 0% { transform: translate(0, 0); opacity: 1; } 100% { transform: translate(${randomX}px, -500px) rotate(${randomX}deg); opacity: 0; } }`;
+                const styleSheet = document.createElement("style");
+                styleSheet.innerText = keyframes;
+                document.head.appendChild(styleSheet);
+                heart.style.animationName = `float-up-${i}`;
+                heart.style.animationDelay = `${randomDelay}s`;
+                heart.style.animationDuration = `${randomDuration}s`;
+                imageContainer.appendChild(heart);
+
+                heart.addEventListener('animationend', () => {
+                    heart.remove();
+                    styleSheet.remove();
+                });
+            }
+        }
+
+        function handleCommentSubmit(event) {
+            event.preventDefault();
+            const commentText = commentInput.value.trim();
+            if (commentText === '') return;
+
+            const storyName = storyData[currentStoryIndex].name;
+            
+            const formData = new FormData();
+            formData.append('_subject', `Novo comentário no Story: ${storyName}`);
+            formData.append('Comentário', commentText);
+            formData.append('Referência do Story', storyName);
+
+            commentSendBtn.disabled = true;
+            commentSendBtn.textContent = 'Enviando...';
 
             fetch("https://formspree.io/f/meoajgpy", {
                 method: "POST",
@@ -379,45 +736,144 @@
             })
             .then(response => {
                 if (response.ok) {
-                    const successPopup = document.getElementById('success-popup');
-                    successPopup.classList.add('show');
-                    setTimeout(() => {
-                        successPopup.classList.remove('show');
-                    }, 4400); // Garante que o popup desapareça após a animação
-
-                    form.reset();
-                    document.getElementById('formContainer').style.display = 'none';
-                    document.querySelector('.btn-container').style.display = 'block';
-                    toggleOptions();
+                    commentInput.value = '';
+                    commentSendBtn.textContent = 'Enviado!';
+                    commentSendBtn.classList.add('sent');
                 } else {
-                    response.json().then(data => {
-                        alert('Ocorreu um problema ao enviar seu formulário.');
-                    });
+                    commentSendBtn.textContent = 'Erro!';
                 }
+                setTimeout(() => {
+                    commentSendBtn.disabled = false;
+                    commentSendBtn.textContent = 'Enviar';
+                    commentSendBtn.classList.remove('sent');
+                }, 3000);
             }).catch(error => {
-                alert('Erro de conexão. Por favor, verifique sua internet e tente novamente.');
-                console.error("Erro no fetch:", error);
+                alert('Erro de conexão. Tente novamente.');
+                commentSendBtn.disabled = false;
+                commentSendBtn.textContent = 'Enviar';
+            });
+        }
+
+        document.querySelectorAll('.story-highlight').forEach(el => {
+            el.addEventListener('click', () => openPopup(parseInt(el.getAttribute('data-story-index'))));
+        });
+        
+        commentForm.addEventListener('submit', handleCommentSubmit);
+        navPrev.addEventListener('click', () => navigate(-1));
+        navNext.addEventListener('click', () => navigate(1));
+        likeBtn.addEventListener('click', createFloatingHearts);
+        closeBtn.addEventListener('click', closePopup);
+        popup.addEventListener('click', (e) => {
+            if (e.target === popup) closePopup();
+        });
+    }
+    
+    function showForm() { document.getElementById("formContainer").style.display = "block"; document.querySelector(".btn-container").style.display = "none"; document.getElementById("form-section-anchor").scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    
+    function initializeFormLogic() {
+        document.getElementById('servico').addEventListener('change', toggleOptions);
+        setupRadioLogic('pacote', 'outro_pacote');
+        setupRadioLogic('material', 'outro_material');
+        toggleOptions();
+    }
+
+    function toggleOptions() {
+        const servico = document.getElementById('servico').value;
+        const smOpts = document.getElementById('socialMediaOptions');
+        const miOpts = document.getElementById('materiaisImpressosOptions');
+        smOpts.classList.add('hidden');
+        miOpts.classList.add('hidden');
+        if (servico === "Design para Social Media") smOpts.classList.remove('hidden');
+        else if (servico === "Design para materiais impressos e digitais") miOpts.classList.remove('hidden');
+    }
+
+    function setupRadioLogic(radioGroupName, textInputId) {
+        const radios = document.querySelectorAll(`input[name="${radioGroupName}"]`);
+        const textInput = document.getElementById(textInputId);
+        radios.forEach(radio => {
+            radio.addEventListener('change', (event) => {
+                if (event.target.value === 'Outro') {
+                    textInput.disabled = false;
+                    textInput.focus();
+                } else {
+                    textInput.disabled = true;
+                    textInput.value = '';
+                }
             });
         });
+    }
 
-        function setupBackgroundAnimation() {
-            const icons = document.querySelectorAll('.design-icon');
-            function setRandomPositions() {
-                icons.forEach((icon, index) => {
-                    icon.style.left = `${Math.random() * 100}vw`;
-                    icon.style.top = `${Math.random() * 100}vh`;
-                    const moveDuration = 20 + Math.random() * 15, fadeDuration = 10 + Math.random() * 8, xMove = (Math.random() - 0.5) * 250, yMove = (Math.random() - 0.5) * 250;
-                    if (document.getElementById(`moveIconStyle${index}`)) document.getElementById(`moveIconStyle${index}`).remove();
-                    const styleSheet = document.createElement('style');
-                    styleSheet.id = `moveIconStyle${index}`;
-                    styleSheet.textContent = `@keyframes moveIcon${index} { 0%, 100% { transform: translate(0, 0) rotate(0deg); } 50% { transform: translate(${xMove}px, ${yMove}px) rotate(180deg); } }`;
-                    document.head.appendChild(styleSheet);
-                    icon.style.animation = `moveIcon${index} ${moveDuration}s infinite ease-in-out, fade ${fadeDuration}s infinite ease-in-out`;
+    function validateForm() {
+        let isValid = true;
+        document.querySelectorAll('.form-group.invalid').forEach(el => el.classList.remove('invalid'));
+        document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
+
+        const nome = document.getElementById('nome');
+        if (nome.value.trim() === '') {
+            nome.parentElement.classList.add('invalid');
+            document.getElementById('nome-error').style.display = 'block';
+            isValid = false;
+        }
+
+        const emailInput = document.getElementById('email');
+        const whatsappInput = document.getElementById('whatsapp');
+        if (emailInput.value.trim() === '' && whatsappInput.value.trim() === '') {
+            emailInput.parentElement.classList.add('invalid');
+            whatsappInput.parentElement.classList.add('invalid');
+            document.getElementById('contact-error').style.display = 'block';
+            isValid = false;
+        }
+        
+        const servico = document.getElementById('servico');
+        if (servico.value === '') {
+            servico.parentElement.classList.add('invalid');
+            document.getElementById('servico-error').style.display = 'block';
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+    function getQueryParam(param) { return new URLSearchParams(window.location.search).get(param); }
+    function openFormAndScroll() { showForm(); document.getElementById('promoPopup').classList.remove('active'); const nomeField = document.getElementById('nome'); if (nomeField && !nomeField.value.startsWith('[Promoção] ')) nomeField.value = '[Promoção] '; }
+    
+    document.getElementById('orçamentoForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        if (!validateForm()) {
+            return; 
+        }
+        
+        const form = event.target;
+        const formData = new FormData(form);
+
+        fetch("https://formspree.io/f/meoajgpy", {
+            method: "POST",
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+        })
+        .then(response => {
+            if (response.ok) {
+                const successPopup = document.getElementById('success-popup');
+                successPopup.classList.add('show');
+                setTimeout(() => {
+                    successPopup.classList.remove('show');
+                }, 4400); 
+
+                form.reset();
+                document.getElementById('formContainer').style.display = 'none';
+                document.querySelector('.btn-container').style.display = 'block';
+                toggleOptions();
+            } else {
+                response.json().then(data => {
+                    alert('Ocorreu um problema ao enviar seu formulário.');
                 });
             }
-            setRandomPositions();
-            window.addEventListener('resize', setRandomPositions);
-        }
+        }).catch(error => {
+            alert('Erro de conexão. Por favor, verifique sua internet e tente novamente.');
+            console.error("Erro no fetch:", error);
+        });
+    });
     </script>
 </body>
 </html>
