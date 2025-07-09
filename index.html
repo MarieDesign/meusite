@@ -18,7 +18,48 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
 
+<style>
+    /* Estilos para o botão e sua animação */
+    .main-quote-btn {
+        /* Cores e estilos para o botão */
+        background: linear-gradient(45deg, #ff00cb, #792bd9); 
+        color: white;
+        font-size: 1.2em;
+        font-family: 'Poppins', sans-serif; /* Use a fonte que preferir */
+        font-weight: bold;
+        padding: 15px 40px;
+        border-radius: 50px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
 
+    /* Animação de salto para o botão */
+    @keyframes button-jump {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-8px);
+        }
+    }
+
+    /* Gatilho da animação de salto ao passar o mouse */
+    .main-quote-btn:hover {
+        animation: button-jump 0.4s ease-in-out;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Estilo para as borboletas criadas pelo JavaScript */
+    .quote-btn-butterfly {
+        position: fixed; /* Posição relativa à janela do navegador */
+        pointer-events: none; /* Permite clicar através das borboletas */
+        z-index: 9999; /* Garante que fiquem na frente de tudo */
+        opacity: 0; /* Começam invisíveis */
+        transform-origin: center;
+    }
+</style>
     <style>
         :root {
             --primary-color: #ff00cb; /* Rosa choque */
