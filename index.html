@@ -143,11 +143,11 @@
             line-height: 1.8;
             margin-bottom: 15px;
             font-size: 1.05em;
-            text-align: justify; /* Apenas aqui */
-            -webkit-hyphens: auto;   /* Apenas aqui */
-            -ms-hyphens: auto;       /* Apenas aqui */
-            hyphens: auto;           /* Apenas aqui */
-            max-width: 70ch;         /* Apenas aqui */
+            text-align: justify;
+            -webkit-hyphens: auto;
+            -ms-hyphens: auto;
+            hyphens: auto;
+            max-width: 70ch;
         }
         .professional-text strong { color: var(--text-color); font-weight: 700; }
         
@@ -427,7 +427,6 @@
         .video-section.reverse { flex-direction: row-reverse; }
         .video-content, .video-player { flex: 1; min-width: 300px; }
         .video-content h2 { font-family: var(--title-font); font-size: 2.8em; font-weight: 700; color: var(--primary-color); }
-        /* REGRA ABAIXO RETORNADA AO ORIGINAL */
         .video-content p, .video-content li { font-size: 1em; line-height: 1.8; }
         .video-content ul { list-style: none; padding: 0; }
         .video-content li i { color: var(--accent-color); margin-right: 10px; }
@@ -724,7 +723,8 @@
         }
         
         function navigate(direction) {
-            if ( (direction === -1 && currentImageIndex === 0) || (direction === 1 && currentImageIndex === storyData[currentStoryIndex].images.length - 1) ) {
+            const storyImages = storyData[currentStoryIndex].images;
+            if ( (direction === -1 && currentImageIndex === 0) || (direction === 1 && currentImageIndex === storyImages.length - 1) ) {
                 return;
             }
             clearTimeout(storyTimer);
@@ -816,6 +816,31 @@
         closeBtn.addEventListener('click', closePopup);
         popup.addEventListener('click', (e) => {
             if (e.target === popup) closePopup();
+        });
+
+        // NOVO CÓDIGO: Habilita navegação por toque nos stories em telas mobile
+        imageContainer.addEventListener('click', (e) => {
+            // Só executa em telas onde as setas estão escondidas (mobile)
+            if (window.innerWidth >= 600) {
+                return;
+            }
+
+            // Impede que o clique em botões ou no formulário acione a navegação
+            if (e.target.closest('.story-like-btn') || e.target.closest('.story-comment-bar')) {
+                return;
+            }
+
+            const rect = imageContainer.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+
+            // Navega para a esquerda (anterior) se o clique for no primeiro terço da tela
+            if (clickX < rect.width / 3) {
+                navigate(-1);
+            } 
+            // Navega para a direita (próximo) se o clique for no último terço
+            else if (clickX > rect.width * (2 / 3)) {
+                navigate(1);
+            }
         });
     }
     
