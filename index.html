@@ -664,10 +664,16 @@
         const commentForm = document.getElementById('storyCommentForm');
         const commentInput = commentForm.querySelector('.story-comment-input');
         const commentSendBtn = commentForm.querySelector('.story-comment-send-btn');
+        const storyPopupContainer = document.querySelector('.story-popup-container'); // Novo: container do story
         
         let currentStoryIndex = 0;
         let currentImageIndex = 0;
         let storyTimer;
+        let animationStartTime; // Novo: para controlar o tempo de início da animação
+        let pausedTime = 0; // Novo: para armazenar o tempo pausado
+        const STORY_DURATION = 15000; // 15 segundos
+
+        let isPaused = false; // Novo: Flag para indicar se a história está pausada
 
         storyData.forEach((story, index) => {
             const highlightHTML = `<div class="story-highlight" data-story-index="${index}"><div class="story-highlight-circle"><img src="${story.thumbnail}" alt="${story.name}" class="story-highlight-thumb"></div><span class="story-highlight-name">${story.name}</span></div>`;
@@ -675,21 +681,69 @@
         });
 
         function playStory() {
+            clearTimeout(storyTimer); // Limpa qualquer timer anterior
             const story = storyData[currentStoryIndex];
             const images = story.images;
-            popupImage.src = images[currentImageIndex];
+            const currentMedia = images[currentImageIndex];
+
+            // Limpa o conteúdo anterior (imagem ou vídeo)
+            imageContainer.innerHTML = ''; 
+
+            // Cria o elemento apropriado (img ou video)
+            let mediaElement;
+            if (currentMedia.endsWith('.mp4') || currentMedia.endsWith('.webm') || currentMedia.endsWith('.ogg')) {
+                mediaElement = document.createElement('video');
+                mediaElement.src = currentMedia;
+                mediaElement.autoplay = true;
+                mediaElement.muted = true;
+                mediaElement.loop = true; // Vídeos de stories geralmente não são loopeados, mas se for a intenção
+                mediaElement.setAttribute('playsinline', ''); // Para iOS
+                // Adicione um ouvinte para garantir que o vídeo comece a reprodução
+                mediaElement.addEventListener('loadeddata', () => {
+                     mediaElement.play().catch(e => console.error("Erro ao reproduzir vídeo:", e));
+                });
+            } else {
+                mediaElement = document.createElement('img');
+                mediaElement.src = currentMedia;
+            }
+            mediaElement.className = 'story-image'; // Reutiliza a classe existente
+            mediaElement.id = 'story-image-content'; // Mantém o ID se necessário para outros acessos
+            imageContainer.appendChild(mediaElement);
+
 
             const segments = progressBarContainer.querySelectorAll('.progress-segment');
             segments.forEach((segment, index) => {
+                const fill = segment.querySelector('.progress-fill');
+                // Reseta a animação para o segmento atual ou futuro
+                if (index >= currentImageIndex) {
+                    fill.style.animation = 'none'; // Remove a animação
+                    // Força um reflow para reiniciar a animação
+                    void fill.offsetWidth; 
+                    fill.style.animation = null; // Restaura a animação padrão
+                }
                 segment.classList.remove('active', 'filled');
                 if (index < currentImageIndex) segment.classList.add('filled');
-                else if (index === currentImageIndex) segment.classList.add('active');
             });
+            if (segments[currentImageIndex]) {
+                segments[currentImageIndex].classList.add('active');
+            }
             
+            // Define o estado de reprodução da animação
+            const activeFill = progressBarContainer.querySelector('.progress-segment.active .progress-fill');
+            if (activeFill) {
+                activeFill.style.animationDuration = `${STORY_DURATION / 1000}s`; // Define a duração da animação
+                if (isPaused) {
+                    activeFill.style.animationPlayState = 'paused';
+                } else {
+                    activeFill.style.animationPlayState = 'running';
+                }
+            }
+
+
             navPrev.classList.toggle('disabled', currentImageIndex === 0);
             navNext.classList.toggle('disabled', currentImageIndex === images.length - 1);
 
-            clearTimeout(storyTimer);
+            animationStartTime = Date.now();
             storyTimer = setTimeout(() => {
                 if (currentImageIndex < images.length - 1) {
                     currentImageIndex++;
@@ -697,7 +751,59 @@
                 } else {
                     closePopup();
                 }
-            }, 15000);
+            }, STORY_DURATION - pausedTime);
+            pausedTime = 0; // Reseta o tempo pausado ao iniciar uma nova história
+        }
+
+        function pauseStory() {
+            if (isPaused) return; // Já pausado
+            isPaused = true;
+            clearTimeout(storyTimer);
+            const activeFill = progressBarContainer.querySelector('.progress-segment.active .progress-fill');
+            if (activeFill) {
+                const computedStyle = getComputedStyle(activeFill);
+                const transformMatrix = new WebKitCSSMatrix(computedStyle.transform);
+                const currentWidth = parseFloat(computedStyle.width); // Obter a largura atual
+                
+                // Calcula o tempo que a animação já percorreu
+                const animationDuration = parseFloat(computedStyle.animationDuration) * 1000;
+                pausedTime = (currentWidth / 100) * animationDuration;
+                
+                activeFill.style.animationPlayState = 'paused';
+            }
+
+             // Pausar vídeo, se houver
+            const currentVideo = imageContainer.querySelector('video');
+            if (currentVideo && !currentVideo.paused) {
+                currentVideo.pause();
+            }
+        }
+
+        function resumeStory() {
+            if (!isPaused) return; // Não está pausado
+            isPaused = false;
+            const activeFill = progressBarContainer.querySelector('.progress-segment.active .progress-fill');
+            if (activeFill) {
+                activeFill.style.animationPlayState = 'running';
+            }
+
+            // Retomar vídeo, se houver
+            const currentVideo = imageContainer.querySelector('video');
+            if (currentVideo && currentVideo.paused) {
+                currentVideo.play().catch(e => console.error("Erro ao reproduzir vídeo:", e));
+            }
+            
+            // Retomar o timer da história do ponto onde parou
+            clearTimeout(storyTimer);
+            storyTimer = setTimeout(() => {
+                if (currentImageIndex < storyData[currentStoryIndex].images.length - 1) {
+                    currentImageIndex++;
+                    playStory();
+                } else {
+                    closePopup();
+                }
+            }, STORY_DURATION - pausedTime);
+            pausedTime = 0; // Reseta o tempo pausado
         }
 
         function openPopup(storyIndex) {
@@ -706,6 +812,7 @@
 
             currentStoryIndex = storyIndex;
             currentImageIndex = 0;
+            pausedTime = 0; // Garante que comece do zero ao abrir novo story
             const images = storyData[currentStoryIndex].images;
             progressBarContainer.innerHTML = '';
             images.forEach(() => {
@@ -720,6 +827,12 @@
             popup.classList.remove('active');
             const activeSegment = progressBarContainer.querySelector('.active');
             if(activeSegment) activeSegment.classList.remove('active');
+            // Certifique-se de pausar qualquer vídeo ao fechar o popup
+            const currentVideo = imageContainer.querySelector('video');
+            if (currentVideo) {
+                currentVideo.pause();
+                currentVideo.currentTime = 0; // Reinicia o vídeo
+            }
         }
         
         function navigate(direction) {
@@ -729,6 +842,7 @@
             }
             clearTimeout(storyTimer);
             currentImageIndex += direction;
+            pausedTime = 0; // Reinicia o tempo pausado ao navegar
             playStory();
         }
 
@@ -818,6 +932,16 @@
             if (e.target === popup) closePopup();
         });
 
+        // Event listeners para pausar/retomar ao segurar/soltar
+        storyPopupContainer.addEventListener('mousedown', pauseStory);
+        storyPopupContainer.addEventListener('mouseup', resumeStory);
+        storyPopupContainer.addEventListener('mouseleave', resumeStory); // Caso o mouse saia do container
+
+        // Para dispositivos móveis
+        storyPopupContainer.addEventListener('touchstart', pauseStory);
+        storyPopupContainer.addEventListener('touchend', resumeStory);
+        storyPopupContainer.addEventListener('touchcancel', resumeStory); // Caso o toque seja cancelado
+
         // NOVO CÓDIGO: Habilita navegação por toque nos stories em telas mobile
         imageContainer.addEventListener('click', (e) => {
             // Só executa em telas onde as setas estão escondidas (mobile)
@@ -836,7 +960,7 @@
             // Navega para a esquerda (anterior) se o clique for no primeiro terço da tela
             if (clickX < rect.width / 3) {
                 navigate(-1);
-            } 
+            }   
             // Navega para a direita (próximo) se o clique for no último terço
             else if (clickX > rect.width * (2 / 3)) {
                 navigate(1);
@@ -950,6 +1074,6 @@
             console.error("Erro no fetch:", error);
         });
     });
-    </script>
+</script>
 </body>
 </html>
