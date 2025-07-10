@@ -16,8 +16,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700;900&family=League+Spartan:wght@700;900&display=swap" rel="stylesheet">
 
 <style>
     /* Estilos para o botão e sua animação */
@@ -76,31 +75,48 @@
             --border-color: rgba(255, 255, 255, 0.15);
             --error-color: #ffc600;
 
-            /* ALTERAÇÃO 2: A variável '--title-font' agora usa 'League Spartan' */
-            --title-font: 'League Spartan', sans-serif;
+            --title-font: 'League Spartan', 'Playfair Display', serif;
             --body-font: 'Poppins', sans-serif;
         }
 
         html { scroll-behavior: smooth; }
 
-        /* FUNDO ATUALIZADO: Brilhos fixos na página, não na tela. */
         body {
             font-family: var(--body-font);
             background-color: var(--bg-dark-1);
-            background-image: 
-                /* 1. Brilho roxo pequeno no canto inferior esquerdo da PÁGINA */
-                radial-gradient(circle at -12% 60%, var(--bg-glow-purple), transparent 12%),
-                /* 2. Brilho branco pequeno no canto inferior direito da PÁGINA */
-                radial-gradient(circle at 110% 105%, var(--bg-glow-white), transparent 12%),
-                /* 3. Brilho principal no topo da PÁGINA */
-                radial-gradient(ellipse at 109% 45%, var(--bg-glow-purple), transparent 10%);
-            
-            background-repeat: no-repeat;
-            /* A propriedade 'background-attachment: fixed' foi REMOVIDA para que o fundo role com a página. */
             color: var(--text-color);
             margin: 0;
             padding: 0;
             overflow-x: hidden;
+            position: relative; 
+        }
+        
+        #background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; 
+            background-image: 
+                radial-gradient(circle at -12% 60%, var(--bg-glow-purple), transparent 12%),
+                radial-gradient(circle at 110% 105%, var(--bg-glow-white), transparent 12%),
+                radial-gradient(ellipse at 109% 45%, var(--bg-glow-purple), transparent 10%);
+            background-repeat: no-repeat;
+            background-color: var(--bg-dark-1);
+        }
+
+        .dust-particle {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            opacity: 0;
+            animation: blink-dust infinite;
+        }
+
+        @keyframes blink-dust {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
         }
 
         .main-container { position: relative; z-index: 10; max-width: 1100px; margin: 0 auto; padding: 20px; }
@@ -236,16 +252,14 @@
             background-color: #000;
             box-shadow: 0 10px 40px rgba(0,0,0,0.5);
             flex-shrink: 0;
-
-            /* NOVO: Propriedades para desativar o menu de contexto no mobile */
-            -webkit-touch-callout: none; /* iOS Safari */
-            -webkit-user-select: none;   /* Safari */
-            -khtml-user-select: none;    /* Konqueror HTML */
-            -moz-user-select: none;      /* Old versions of Firefox */
-            -ms-user-select: none;       /* Internet Explorer/Edge */
-            user-select: none;           /* Non-prefixed version */
-            -webkit-tap-highlight-color: transparent; /* Remove o highlight azul/cinza ao tocar */
-            touch-action: manipulation; /* Otimização de toque para evitar atrasos e outros comportamentos */
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
         }
         .story-progress-bar {
             position: absolute;
@@ -268,11 +282,11 @@
             height: 100%;
             background-color: #fff;
             border-radius: 3px;
-            transition: width 0.1s linear; /* Transition mais suave para a barra */
+            transition: width 0.1s linear;
         }
         .progress-segment.active .progress-fill {
             width: 100%;
-            animation: fill-progress 15s linear forwards; /* Duração da animação ajustada no JS */
+            animation: fill-progress 15s linear forwards;
         }
         .progress-segment.filled .progress-fill {
             width: 100%;
@@ -327,19 +341,17 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
-            /* NOVO: Propriedades para desativar o menu de contexto no mobile */
-            -webkit-touch-callout: none; /* iOS Safari */
-            -webkit-user-select: none;   /* Safari */
-            -khtml-user-select: none;    /* Konqueror HTML */
-            -moz-user-select: none;      /* Old versions of Firefox */
-            -ms-user-select: none;       /* Internet Explorer/Edge */
-            user-select: none;           /* Non-prefixed version */
-            -webkit-tap-highlight-color: transparent; /* Remove o highlight azul/cinza ao tocar */
-            touch-action: manipulation; /* Otimização de toque para evitar atrasos e outros comportamentos */
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
         }
-        /* Estilo para vídeo dentro do story */
         .story-image-container video.story-image {
-            object-fit: cover; /* Ou 'contain' dependendo da preferência */
+            object-fit: cover;
             width: 100%;
             height: 100%;
         }
@@ -404,7 +416,6 @@
             z-index: 2014;
             pointer-events: none;
             opacity: 1;
-            /* animation: float-up 2s ease-out forwards; (Removido para ser gerado dinamicamente) */
         }
         @keyframes float-up {
             to {
@@ -546,6 +557,8 @@
 </head>
 <body>
 
+    <div id="background-container"></div>
+
     <div class="main-container">
         <header>
             <img src="https://i.postimg.cc/Xq05Y013/Marjorie.jpg" alt="Foto de Marjorie Rosario">
@@ -577,7 +590,7 @@
             <section class="portfolio-stories-section">
                 <h2 class="section-title">Portfólio</h2>
                 <div id="story-highlights-container" class="story-highlights-grid">
-                    </div>
+                </div>
             </section>
             
             <section class="video-section"><div class="video-player media-container static-gradient"><video class="video-on-scroll" loop muted playsinline><source src="https://i.imgur.com/5T4e4jB.mp4" type="video/mp4"></video></div><div class="video-content"><h2>Conheça meu Trabalho</h2><p>Cada projeto é uma nova história. Meu portfólio é um reflexo da minha paixão por criar designs que não apenas encantam visualmente, mas também comunicam, engajam e alcançam objetivos estratégicos para cada marca.</p><a href="https://www.behance.net/marjorierosrio" target="_blank" class="cta-button">Ver Portfólio Completo</a></div></section>
@@ -595,20 +608,20 @@
             </section>
             
             <section class="quote-section" id="form-section-anchor">
-                       <div class="btn-container"><button class="main-quote-btn" onclick="showForm()">Solicitar Orçamento</button></div>
-                    <div class="form-container" id="formContainer"><form id="orçamentoForm"><h1>Solicitação de Orçamento</h1><p class="subtitle">Resposta em até 20 minutos</p>
-                            <div class="form-group"><label for="nome">Nome <span class="required">*</span></label><input type="text" id="nome" name="nome" required><div id="nome-error" class="error-message">Este campo é obrigatório.</div></div>
-                            <div class="form-group"><label for="email">E-mail</label><input type="email" id="email" name="email" placeholder="Digite seu e-mail"></div>
-                            <div class="form-group"><label for="whatsapp">WhatsApp</label><input type="tel" id="whatsapp" name="whatsapp" placeholder="Ex: (11) 98765-4321"></div>
-                            <div id="contact-error" class="error-message" style="margin-top:-10px; margin-bottom: 15px;">Por favor, preencha seu E-mail ou WhatsApp.</div>
-                            <div class="form-group"><label for="servico">Qual tipo de serviço você procura? <span class="required">*</span></label><select id="servico" name="servico" required><option value="">Selecione...</option><option value="Design para Social Media">Design para Social Media</option><option value="Design para materiais impressos e digitais">Design para materiais impressos e digitais</option></select><div id="servico-error" class="error-message">Selecione um tipo de serviço.</div></div>
-                            <div class="form-group hidden" id="socialMediaOptions"><label>Escolha o pacote <span class="required">*</span></label><div class="radio-group"><div class="radio-option"><input type="radio" id="pacote_8" name="pacote" value="8 posts"><label for="pacote_8">8 posts</label></div><div class="radio-option"><input type="radio" id="pacote_12" name="pacote" value="12 posts"><label for="pacote_12">12 posts</label></div><div class="radio-option"><input type="radio" id="pacote_16" name="pacote" value="16 posts"><label for="pacote_16">16 posts</label></div><div class="radio-option"><input type="radio" id="pacote_outro" name="pacote" value="Outro"><label for="pacote_outro">Outro:</label><input type="text" id="outro_pacote" name="outro_pacote" disabled></div></div></div>
-                            <div class="form-group hidden" id="materiaisImpressosOptions"><label>Escolha o material <span class="required">*</span></label><div class="radio-group"><div class="radio-option"><input type="radio" id="material_banners" name="material" value="Banners"><label for="material_banners">Banners</label></div><div class="radio-option"><input type="radio" id="material_alin" name="material" value="Alinhamento Visual"><label for="material_alin">Alinhamento Visual</label></div><div class="radio-option"><input type="radio" id="material_cartao" name="material" value="Cartão de Visita"><label for="material_cartao">Cartão de Visita</label></div><div class="radio-option"><input type="radio" id="material_panfletos" name="material" value="Panfletos"><label for="material_panfletos">Panfletos</label></div><div class="radio-option"><input type="radio" id="material_video" name="material" value="Edição de Vídeo"><label for="material_video">Edição de Vídeo</label></div><div class="radio-option"><input type="radio" id="material_outro" name="material" value="Outro"><label for="material_outro">Outro:</label><input type="text" id="outro_material" name="outro_material" disabled></div></div></div>
-                            <div class="form-group"><label for="detalhes">Detalhes do projeto <span class="required">*</span></label><textarea id="detalhes" name="detalhes" required minlength="100" rows="4"></textarea></div>
-                            <div class="form-group"><label for="identidade">Já possui identidade visual? <span class="required">*</span></label><input type="text" id="identidade" name="identidade" required placeholder="Ex: Sim, já temos logo e cores."></div>
-                            <div class="form-group"><label for="observacoes">Observações (opcional)</label><textarea id="observacoes" name="observacoes" rows="3"></textarea></div>
-                            <button type="submit">Enviar Solicitação</button>
-                        </form></div>
+               <div class="btn-container"><button class="main-quote-btn" onclick="showForm()">Solicitar Orçamento</button></div>
+                <div class="form-container" id="formContainer"><form id="orçamentoForm"><h1>Solicitação de Orçamento</h1><p class="subtitle">Resposta em até 20 minutos</p>
+                        <div class="form-group"><label for="nome">Nome <span class="required">*</span></label><input type="text" id="nome" name="nome" required><div id="nome-error" class="error-message">Este campo é obrigatório.</div></div>
+                        <div class="form-group"><label for="email">E-mail</label><input type="email" id="email" name="email" placeholder="Digite seu e-mail"></div>
+                        <div class="form-group"><label for="whatsapp">WhatsApp</label><input type="tel" id="whatsapp" name="whatsapp" placeholder="Ex: (11) 98765-4321"></div>
+                        <div id="contact-error" class="error-message" style="margin-top:-10px; margin-bottom: 15px;">Por favor, preencha seu E-mail ou WhatsApp.</div>
+                        <div class="form-group"><label for="servico">Qual tipo de serviço você procura? <span class="required">*</span></label><select id="servico" name="servico" required><option value="">Selecione...</option><option value="Design para Social Media">Design para Social Media</option><option value="Design para materiais impressos e digitais">Design para materiais impressos e digitais</option></select><div id="servico-error" class="error-message">Selecione um tipo de serviço.</div></div>
+                        <div class="form-group hidden" id="socialMediaOptions"><label>Escolha o pacote <span class="required">*</span></label><div class="radio-group"><div class="radio-option"><input type="radio" id="pacote_8" name="pacote" value="8 posts"><label for="pacote_8">8 posts</label></div><div class="radio-option"><input type="radio" id="pacote_12" name="pacote" value="12 posts"><label for="pacote_12">12 posts</label></div><div class="radio-option"><input type="radio" id="pacote_16" name="pacote" value="16 posts"><label for="pacote_16">16 posts</label></div><div class="radio-option"><input type="radio" id="pacote_outro" name="pacote" value="Outro"><label for="pacote_outro">Outro:</label><input type="text" id="outro_pacote" name="outro_pacote" disabled></div></div></div>
+                        <div class="form-group hidden" id="materiaisImpressosOptions"><label>Escolha o material <span class="required">*</span></label><div class="radio-group"><div class="radio-option"><input type="radio" id="material_banners" name="material" value="Banners"><label for="material_banners">Banners</label></div><div class="radio-option"><input type="radio" id="material_alin" name="material" value="Alinhamento Visual"><label for="material_alin">Alinhamento Visual</label></div><div class="radio-option"><input type="radio" id="material_cartao" name="material" value="Cartão de Visita"><label for="material_cartao">Cartão de Visita</label></div><div class="radio-option"><input type="radio" id="material_panfletos" name="material" value="Panfletos"><label for="material_panfletos">Panfletos</label></div><div class="radio-option"><input type="radio" id="material_video" name="material" value="Edição de Vídeo"><label for="material_video">Edição de Vídeo</label></div><div class="radio-option"><input type="radio" id="material_outro" name="material" value="Outro"><label for="material_outro">Outro:</label><input type="text" id="outro_material" name="outro_material" disabled></div></div></div>
+                        <div class="form-group"><label for="detalhes">Detalhes do projeto <span class="required">*</span></label><textarea id="detalhes" name="detalhes" required minlength="100" rows="4"></textarea></div>
+                        <div class="form-group"><label for="identidade">Já possui identidade visual? <span class="required">*</span></label><input type="text" id="identidade" name="identidade" required placeholder="Ex: Sim, já temos logo e cores."></div>
+                        <div class="form-group"><label for="observacoes">Observações (opcional)</label><textarea id="observacoes" name="observacoes" rows="3"></textarea></div>
+                        <button type="submit">Enviar Solicitação</button>
+                    </form></div>
             </section>
         </main>
         
@@ -667,7 +680,33 @@
             
             initializeFormLogic();
             initializeStoryHighlights(); 
+            createDust();
         });
+
+        // EFEITO DE POEIRA AJUSTADO PARA SER MAIS FRENÉTICO
+        function createDust() {
+            const container = document.getElementById('background-container');
+            const dustCount = 150; // Aumentado para mais partículas
+
+            for (let i = 0; i < dustCount; i++) {
+                const dust = document.createElement('div');
+                dust.className = 'dust-particle';
+                
+                const size = Math.random() * 2 + 1;
+                dust.style.width = `${size}px`;
+                dust.style.height = `${size}px`;
+
+                dust.style.top = `${Math.random() * 100}%`;
+                dust.style.left = `${Math.random() * 100}%`;
+
+                // Atraso e duração reduzidos para um efeito mais rápido
+                dust.style.animationDelay = `${Math.random() * 5}s`; // Atraso máximo de 5s
+                dust.style.animationDuration = `${Math.random() * 2 + 1}s`; // Duração entre 1s e 3s
+
+                container.appendChild(dust);
+            }
+        }
+
 
         function initializeStoryHighlights() {
             const storyData = [
@@ -767,7 +806,7 @@
 
                 animationStartTime = Date.now();
                 storyTimer = setTimeout(() => {
-                    if (currentImageIndex < images.length - 1) {
+                    if (currentImageIndex < storyData[currentStoryIndex].images.length - 1) {
                         currentImageIndex++;
                         playStory();
                     } else {
@@ -961,7 +1000,6 @@
             storyPopupContainer.addEventListener('touchend', resumeStory);
             storyPopupContainer.addEventListener('touchcancel', resumeStory); 
 
-            // NOVO CÓDIGO: Bloqueia o menu de contexto (clique direito no desktop e toque longo no mobile)
             storyPopupContainer.addEventListener('contextmenu', (e) => {
                 e.preventDefault(); 
             });
