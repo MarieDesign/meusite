@@ -21,11 +21,10 @@
 <style>
     /* Estilos para o botão e sua animação */
     .main-quote-btn {
-        /* Cores e estilos para o botão */
         background: linear-gradient(45deg, #ff00cb, #792bd9); 
         color: white;
         font-size: 1.2em;
-        font-family: 'Poppins', sans-serif; /* Use a fonte que preferir */
+        font-family: 'Poppins', sans-serif;
         font-weight: bold;
         padding: 15px 40px;
         border-radius: 50px;
@@ -35,46 +34,36 @@
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
 
-    /* Animação de salto para o botão */
     @keyframes button-jump {
-        0%, 100% {
-            transform: translateY(0);
-        }
-        50% {
-            transform: translateY(-8px);
-        }
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
     }
 
-    /* Gatilho da animação de salto ao passar o mouse */
     .main-quote-btn:hover {
         animation: button-jump 0.4s ease-in-out;
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
     }
 
-    /* Estilo para as borboletas criadas pelo JavaScript */
     .quote-btn-butterfly {
-        position: fixed; /* Posição relativa à janela do navegador */
-        pointer-events: none; /* Permite clicar através das borboletas */
-        z-index: 9999; /* Garante que fiquem na frente de tudo */
-        opacity: 0; /* Começam invisíveis */
+        position: fixed;
+        pointer-events: none;
+        z-index: 9999;
+        opacity: 0;
         transform-origin: center;
     }
 </style>
     <style>
         :root {
-            --primary-color: #ff00cb; /* Rosa choque */
-            --secondary-color: #792bd9; /* Roxo céu */
-            --accent-color: #ffc600; /* Amarelo vibrante */
-            
-            --bg-dark-1: #020202; /* Tom de preto mais escuro para a base */
-            --bg-glow-purple: rgba(121, 43, 217, 0.2); /* Roxo para o brilho (opacidade ajustada) */
-            --bg-glow-white: rgba(255, 255, 255, 0.1); /* Branco para o brilho (opacidade ajustada) */
-
+            --primary-color: #ff00cb;
+            --secondary-color: #792bd9;
+            --accent-color: #ffc600;
+            --bg-dark-1: #020202;
+            --bg-glow-purple: rgba(121, 43, 217, 0.2);
+            --bg-glow-white: rgba(255, 255, 255, 0.1);
             --text-color: #efefef;
             --card-color: rgba(255, 255, 255, 0.08);
             --border-color: rgba(255, 255, 255, 0.15);
             --error-color: #ffc600;
-
             --title-font: 'League Spartan', 'Playfair Display', serif;
             --body-font: 'Poppins', sans-serif;
         }
@@ -118,6 +107,42 @@
             0%, 100% { opacity: 0; }
             50% { opacity: 1; }
         }
+
+        /* INÍCIO: NOVOS ESTILOS PARA ANIMAÇÃO DE CORAÇÕES */
+        #hearts-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none; /* Permite clicar através do overlay */
+            z-index: 1999; /* Fica abaixo do popup do story mas acima do resto */
+            overflow: hidden;
+        }
+
+        .rising-heart {
+            position: absolute;
+            color: #E31B23; /* Vermelho vibrante */
+            font-size: 20px;
+            bottom: -50px; /* Começa fora da tela, embaixo */
+            opacity: 0;
+            animation: rise-and-fade linear forwards;
+        }
+
+        @keyframes rise-and-fade {
+            0% {
+                transform: translateY(0) scale(0.8);
+                opacity: 1;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1.2); /* Sobe a tela inteira e aumenta um pouco */
+                opacity: 0;
+            }
+        }
+        /* FIM: NOVOS ESTILOS PARA ANIMAÇÃO DE CORAÇÕES */
 
         .main-container { position: relative; z-index: 10; max-width: 1100px; margin: 0 auto; padding: 20px; }
         
@@ -558,6 +583,7 @@
 <body>
 
     <div id="background-container"></div>
+    <div id="hearts-overlay"></div>
 
     <div class="main-container">
         <header>
@@ -683,10 +709,9 @@
             createDust();
         });
 
-        // EFEITO DE POEIRA AJUSTADO PARA SER MAIS FRENÉTICO
         function createDust() {
             const container = document.getElementById('background-container');
-            const dustCount = 150; // Aumentado para mais partículas
+            const dustCount = 150;
 
             for (let i = 0; i < dustCount; i++) {
                 const dust = document.createElement('div');
@@ -699,14 +724,41 @@
                 dust.style.top = `${Math.random() * 100}%`;
                 dust.style.left = `${Math.random() * 100}%`;
 
-                // Atraso e duração reduzidos para um efeito mais rápido
-                dust.style.animationDelay = `${Math.random() * 5}s`; // Atraso máximo de 5s
-                dust.style.animationDuration = `${Math.random() * 2 + 1}s`; // Duração entre 1s e 3s
+                dust.style.animationDelay = `${Math.random() * 5}s`;
+                dust.style.animationDuration = `${Math.random() * 2 + 1}s`;
 
                 container.appendChild(dust);
             }
         }
+        
+        // INÍCIO: NOVA FUNÇÃO PARA ANIMAÇÃO DE CORAÇÕES
+        function triggerHeartRain() {
+            const container = document.getElementById('hearts-overlay');
+            const heartsCount = 25; // Número de corações
 
+            for (let i = 0; i < heartsCount; i++) {
+                const heart = document.createElement('i');
+                heart.className = 'fas fa-heart rising-heart';
+
+                // Posição horizontal aleatória
+                heart.style.left = `${Math.random() * 100}%`;
+                
+                // Tamanho aleatório
+                heart.style.fontSize = `${Math.random() * 20 + 15}px`; // Entre 15px e 35px
+
+                // Duração e atraso aleatórios para um efeito mais natural
+                heart.style.animationDuration = `${Math.random() * 2 + 3}s`; // Duração entre 3s e 5s
+                heart.style.animationDelay = `${Math.random() * 0.5}s`;
+
+                container.appendChild(heart);
+
+                // Remove o coração do DOM após a animação terminar para não sobrecarregar
+                heart.addEventListener('animationend', () => {
+                    heart.remove();
+                });
+            }
+        }
+        // FIM: NOVA FUNÇÃO PARA ANIMAÇÃO DE CORAÇÕES
 
         function initializeStoryHighlights() {
             const storyData = [
@@ -720,7 +772,6 @@
 
             const highlightsContainer = document.getElementById('story-highlights-container');
             const popup = document.getElementById('story-popup');
-            const popupImage = document.getElementById('story-image-content');
             const imageContainer = document.getElementById('story-image-container');
             const closeBtn = document.getElementById('story-close-btn');
             const navPrev = document.getElementById('story-nav-prev');
@@ -736,10 +787,8 @@
             let currentStoryIndex = 0;
             let currentImageIndex = 0;
             let storyTimer;
-            let animationStartTime; 
             let pausedTime = 0; 
             const STORY_DURATION = 15000; 
-
             let isPaused = false; 
 
             storyData.forEach((story, index) => {
@@ -800,11 +849,9 @@
                     }
                 }
 
-
                 navPrev.classList.toggle('disabled', currentImageIndex === 0);
                 navNext.classList.toggle('disabled', currentImageIndex === images.length - 1);
 
-                animationStartTime = Date.now();
                 storyTimer = setTimeout(() => {
                     if (currentImageIndex < storyData[currentStoryIndex].images.length - 1) {
                         currentImageIndex++;
@@ -824,10 +871,8 @@
                 if (activeFill) {
                     const computedStyle = getComputedStyle(activeFill);
                     const currentWidth = parseFloat(computedStyle.width);
-                    
                     const animationDuration = parseFloat(computedStyle.animationDuration) * 1000;
                     pausedTime = (currentWidth / 100) * animationDuration;
-                    
                     activeFill.style.animationPlayState = 'paused';
                 }
 
@@ -862,10 +907,13 @@
                 pausedTime = 0; 
             }
 
+            // FUNÇÃO PRINCIPAL DE ABERTURA DO POPUP
             function openPopup(storyIndex) {
+                // ALTERAÇÃO: Chama a animação de corações
+                triggerHeartRain(); 
+
                 likeBtn.classList.remove('liked');
                 likeBtnIcon.className = 'far fa-heart';
-
                 currentStoryIndex = storyIndex;
                 currentImageIndex = 0;
                 pausedTime = 0; 
