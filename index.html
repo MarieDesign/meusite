@@ -16,7 +16,8 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 
 <style>
     /* Estilos para o botão e sua animação */
@@ -75,7 +76,8 @@
             --border-color: rgba(255, 255, 255, 0.15);
             --error-color: #ffc600;
 
-            --title-font: 'Britanica Black', 'Playfair Display', serif;
+            /* ALTERAÇÃO 2: A variável '--title-font' agora usa 'League Spartan' */
+            --title-font: 'League Spartan', sans-serif;
             --body-font: 'Poppins', sans-serif;
         }
 
@@ -593,20 +595,20 @@
             </section>
             
             <section class="quote-section" id="form-section-anchor">
-                     <div class="btn-container"><button class="main-quote-btn" onclick="showForm()">Solicitar Orçamento</button></div>
+                       <div class="btn-container"><button class="main-quote-btn" onclick="showForm()">Solicitar Orçamento</button></div>
                     <div class="form-container" id="formContainer"><form id="orçamentoForm"><h1>Solicitação de Orçamento</h1><p class="subtitle">Resposta em até 20 minutos</p>
-                        <div class="form-group"><label for="nome">Nome <span class="required">*</span></label><input type="text" id="nome" name="nome" required><div id="nome-error" class="error-message">Este campo é obrigatório.</div></div>
-                        <div class="form-group"><label for="email">E-mail</label><input type="email" id="email" name="email" placeholder="Digite seu e-mail"></div>
-                        <div class="form-group"><label for="whatsapp">WhatsApp</label><input type="tel" id="whatsapp" name="whatsapp" placeholder="Ex: (11) 98765-4321"></div>
-                        <div id="contact-error" class="error-message" style="margin-top:-10px; margin-bottom: 15px;">Por favor, preencha seu E-mail ou WhatsApp.</div>
-                        <div class="form-group"><label for="servico">Qual tipo de serviço você procura? <span class="required">*</span></label><select id="servico" name="servico" required><option value="">Selecione...</option><option value="Design para Social Media">Design para Social Media</option><option value="Design para materiais impressos e digitais">Design para materiais impressos e digitais</option></select><div id="servico-error" class="error-message">Selecione um tipo de serviço.</div></div>
-                        <div class="form-group hidden" id="socialMediaOptions"><label>Escolha o pacote <span class="required">*</span></label><div class="radio-group"><div class="radio-option"><input type="radio" id="pacote_8" name="pacote" value="8 posts"><label for="pacote_8">8 posts</label></div><div class="radio-option"><input type="radio" id="pacote_12" name="pacote" value="12 posts"><label for="pacote_12">12 posts</label></div><div class="radio-option"><input type="radio" id="pacote_16" name="pacote" value="16 posts"><label for="pacote_16">16 posts</label></div><div class="radio-option"><input type="radio" id="pacote_outro" name="pacote" value="Outro"><label for="pacote_outro">Outro:</label><input type="text" id="outro_pacote" name="outro_pacote" disabled></div></div></div>
-                        <div class="form-group hidden" id="materiaisImpressosOptions"><label>Escolha o material <span class="required">*</span></label><div class="radio-group"><div class="radio-option"><input type="radio" id="material_banners" name="material" value="Banners"><label for="material_banners">Banners</label></div><div class="radio-option"><input type="radio" id="material_alin" name="material" value="Alinhamento Visual"><label for="material_alin">Alinhamento Visual</label></div><div class="radio-option"><input type="radio" id="material_cartao" name="material" value="Cartão de Visita"><label for="material_cartao">Cartão de Visita</label></div><div class="radio-option"><input type="radio" id="material_panfletos" name="material" value="Panfletos"><label for="material_panfletos">Panfletos</label></div><div class="radio-option"><input type="radio" id="material_video" name="material" value="Edição de Vídeo"><label for="material_video">Edição de Vídeo</label></div><div class="radio-option"><input type="radio" id="material_outro" name="material" value="Outro"><label for="material_outro">Outro:</label><input type="text" id="outro_material" name="outro_material" disabled></div></div></div>
-                        <div class="form-group"><label for="detalhes">Detalhes do projeto <span class="required">*</span></label><textarea id="detalhes" name="detalhes" required minlength="100" rows="4"></textarea></div>
-                        <div class="form-group"><label for="identidade">Já possui identidade visual? <span class="required">*</span></label><input type="text" id="identidade" name="identidade" required placeholder="Ex: Sim, já temos logo e cores."></div>
-                        <div class="form-group"><label for="observacoes">Observações (opcional)</label><textarea id="observacoes" name="observacoes" rows="3"></textarea></div>
-                        <button type="submit">Enviar Solicitação</button>
-                    </form></div>
+                            <div class="form-group"><label for="nome">Nome <span class="required">*</span></label><input type="text" id="nome" name="nome" required><div id="nome-error" class="error-message">Este campo é obrigatório.</div></div>
+                            <div class="form-group"><label for="email">E-mail</label><input type="email" id="email" name="email" placeholder="Digite seu e-mail"></div>
+                            <div class="form-group"><label for="whatsapp">WhatsApp</label><input type="tel" id="whatsapp" name="whatsapp" placeholder="Ex: (11) 98765-4321"></div>
+                            <div id="contact-error" class="error-message" style="margin-top:-10px; margin-bottom: 15px;">Por favor, preencha seu E-mail ou WhatsApp.</div>
+                            <div class="form-group"><label for="servico">Qual tipo de serviço você procura? <span class="required">*</span></label><select id="servico" name="servico" required><option value="">Selecione...</option><option value="Design para Social Media">Design para Social Media</option><option value="Design para materiais impressos e digitais">Design para materiais impressos e digitais</option></select><div id="servico-error" class="error-message">Selecione um tipo de serviço.</div></div>
+                            <div class="form-group hidden" id="socialMediaOptions"><label>Escolha o pacote <span class="required">*</span></label><div class="radio-group"><div class="radio-option"><input type="radio" id="pacote_8" name="pacote" value="8 posts"><label for="pacote_8">8 posts</label></div><div class="radio-option"><input type="radio" id="pacote_12" name="pacote" value="12 posts"><label for="pacote_12">12 posts</label></div><div class="radio-option"><input type="radio" id="pacote_16" name="pacote" value="16 posts"><label for="pacote_16">16 posts</label></div><div class="radio-option"><input type="radio" id="pacote_outro" name="pacote" value="Outro"><label for="pacote_outro">Outro:</label><input type="text" id="outro_pacote" name="outro_pacote" disabled></div></div></div>
+                            <div class="form-group hidden" id="materiaisImpressosOptions"><label>Escolha o material <span class="required">*</span></label><div class="radio-group"><div class="radio-option"><input type="radio" id="material_banners" name="material" value="Banners"><label for="material_banners">Banners</label></div><div class="radio-option"><input type="radio" id="material_alin" name="material" value="Alinhamento Visual"><label for="material_alin">Alinhamento Visual</label></div><div class="radio-option"><input type="radio" id="material_cartao" name="material" value="Cartão de Visita"><label for="material_cartao">Cartão de Visita</label></div><div class="radio-option"><input type="radio" id="material_panfletos" name="material" value="Panfletos"><label for="material_panfletos">Panfletos</label></div><div class="radio-option"><input type="radio" id="material_video" name="material" value="Edição de Vídeo"><label for="material_video">Edição de Vídeo</label></div><div class="radio-option"><input type="radio" id="material_outro" name="material" value="Outro"><label for="material_outro">Outro:</label><input type="text" id="outro_material" name="outro_material" disabled></div></div></div>
+                            <div class="form-group"><label for="detalhes">Detalhes do projeto <span class="required">*</span></label><textarea id="detalhes" name="detalhes" required minlength="100" rows="4"></textarea></div>
+                            <div class="form-group"><label for="identidade">Já possui identidade visual? <span class="required">*</span></label><input type="text" id="identidade" name="identidade" required placeholder="Ex: Sim, já temos logo e cores."></div>
+                            <div class="form-group"><label for="observacoes">Observações (opcional)</label><textarea id="observacoes" name="observacoes" rows="3"></textarea></div>
+                            <button type="submit">Enviar Solicitação</button>
+                        </form></div>
             </section>
         </main>
         
