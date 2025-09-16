@@ -253,12 +253,18 @@
     .carousel-images img {
         width: 120px; /* Largura menor para mobile */
     }
+    /* Regras para Mobile (3 imagens) */
+@media (max-width: 768px) {
+    .carousel-images img {
+        width: 120px; /* Largura menor para mobile */
+    }
     .carousel-container {
         /* Garante que 3 imagens sejam visíveis */
         max-width: calc(120px * 3 + 20px * 2);
         margin: 0 auto;
         pointer-events: none; /* Ignora todos os eventos de mouse e toque */
-        overflow: hidden; /* **NOVO**: Impede a rolagem do carrossel */
+        overflow: hidden; /* Impede a rolagem do carrossel */
+        touch-action: none; /* **NOVO**: Desabilita qualquer ação de toque no elemento */
     }
 }
     @keyframes auto-scroll {
@@ -795,25 +801,22 @@
         startCarouselLogic(); // A função do carrossel
     });
 
-    let carouselInterval; // Variável para armazenar o ID do intervalo globalmente
+    let carouselInterval;
+let isAnimating = false;
 
 function startCarouselLogic() {
-    // Limpa qualquer intervalo anterior para evitar múltiplos carrosseis rodando
     if (carouselInterval) {
         clearInterval(carouselInterval);
     }
     
     const carouselContainer = document.querySelector('.carousel-images');
     const imagesOriginal = Array.from(carouselContainer.querySelectorAll('img'));
-    let currentIndex = 0; // Índice da imagem que será CENTRALIZADA
-
-    // Para um carrossel visualmente infinito, precisamos de mais imagens.
+    let currentIndex = 0;
+    
     const numPaddingImages = window.innerWidth <= 768 ? 1 : 2;
 
-    // Limpa o conteúdo do carrossel para evitar duplicações anteriores
     carouselContainer.innerHTML = '';
     
-    // Adiciona as imagens de "padding"
     for (let i = 0; i < numPaddingImages; i++) {
         carouselContainer.appendChild(imagesOriginal[imagesOriginal.length - numPaddingImages + i].cloneNode(true));
     }
@@ -825,36 +828,46 @@ function startCarouselLogic() {
     const allImages = Array.from(carouselContainer.querySelectorAll('img'));
     currentIndex = numPaddingImages;
     
-    // Chama a função imediatamente para centralizar a primeira imagem
-    updateCarousel();
+    updateCarousel(true); // Chama a primeira vez imediatamente, com transição desabilitada
 
-    // Cria o intervalo para rolar automaticamente
     carouselInterval = setInterval(updateCarousel, 2000);
 
-    function updateCarousel() {
+    function updateCarousel(initial = false) {
+        if (isAnimating) return;
+        isAnimating = true;
+
         const imageWidth = allImages[0].offsetWidth;
         const gap = parseInt(window.getComputedStyle(carouselContainer).gap);
         
         allImages.forEach(img => img.classList.remove('centered-image'));
         
-        // --- Lógica de "teletransporte" para loop infinito ---
+        // Lógica de "teletransporte" para loop infinito
+        // Usa `initial` para garantir que a primeira transição seja instantânea
         if (currentIndex >= imagesOriginal.length + numPaddingImages) {
             carouselContainer.style.transition = 'none';
             currentIndex = numPaddingImages;
-            const offset = (currentIndex * (imageWidth + gap)) - (carouselContainer.offsetWidth / 2) + (imageWidth / 2);
-            carouselContainer.style.transform = `translateX(${-offset}px)`;
-            carouselContainer.offsetWidth;
+        } else {
             carouselContainer.style.transition = 'transform 0.8s cubic-bezier(0.25, 1, 0.5, 1)';
         }
 
-        const offset = (currentIndex * (imageWidth + gap)) - (carouselContainer.offsetWidth / 2) + (imageWidth / 2);
-        carouselContainer.style.transform = `translateX(${-offset}px)`;
+        // Se for a chamada inicial, remove a transição para pular direto para a posição correta
+        if (initial) {
+            carouselContainer.style.transition = 'none';
+        }
 
+        const offset = (currentIndex * (imageWidth + gap));
+        const centerOffset = (carouselContainer.offsetWidth / 2) - (imageWidth / 2) - (gap / 2);
+        carouselContainer.style.transform = `translateX(${-offset + centerOffset}px)`;
+        
         if (allImages[currentIndex]) {
             allImages[currentIndex].classList.add('centered-image');
         }
 
         currentIndex++;
+        
+        setTimeout(() => {
+            isAnimating = false;
+        }, 800); // tempo de espera para a transição terminar
     }
 
     // Reinicia a lógica do carrossel ao redimensionar a tela
