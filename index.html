@@ -890,7 +890,7 @@ function startCarouselLogic() {
         }
 
         const offset = (currentIndex + numPaddingImages) * (imageWidth + gap);
-        const centerOffset = (carouselContainer.parentElement.offsetWidth / 2) - (imageWidth / 2) - (gap / 2);
+        const centerOffset = (carouselContainer.parentElement.offsetWidth / 2) - (imageWidth / 2);
         carouselContainer.style.transform = `translateX(${-offset + centerOffset}px)`;
         
         if (allImages[currentIndex + numPaddingImages]) {
