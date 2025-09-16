@@ -197,6 +197,60 @@
         .section-title { text-align: center; font-family: var(--title-font); font-size: 2.8em; font-weight: 700; margin: 1px 0 100px 0; color: var(--primary-color); }
         
         /* === ESTILOS PARA STORIES === */
+        /* NOVO: ESTILOS PARA O CARROSSEL AUTOMÁTICO */
+.portfolio-carousel-section {
+    padding: 20px 0 60px;
+    border-bottom: 1px solid var(--border-color);
+    overflow: hidden; /* Importante para o efeito de carrossel */
+}
+.carousel-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 20px 0;
+}
+.carousel-images {
+    display: flex;
+    animation: auto-scroll 60s linear infinite;
+    gap: 20px;
+    padding: 10px 0;
+    /* Novo: Adicionamos o dobro da largura para acomodar as imagens duplicadas */
+    width: 2800px; /* (250px * 14 imagens + 20px de gap * 13) * 2 */
+}
+.carousel-images:hover {
+    animation-play-state: paused;
+}
+.carousel-images img {
+    flex-shrink: 0;
+    width: 250px; /* Largura padrão para desktop */
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    filter: brightness(0.9);
+}
+.carousel-images img:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+    filter: brightness(1);
+}
+
+/* Chave da mudança: A animação agora desliza exatamente a largura de UM conjunto de imagens */
+@keyframes auto-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-250px * 14 - 20px * 13)); } /* Rola 14 imagens + 13 espaços */
+}
+
+@media (max-width: 768px) {
+    .carousel-images img {
+        width: 180px; /* Largura menor para telas pequenas */
+    }
+    /* O cálculo da animação precisa ser ajustado para a largura do mobile */
+    @keyframes auto-scroll {
+        100% { transform: translateX(calc(-180px * 14 - 20px * 13)); }
+    }
+}
+/* FIM DOS ESTILOS DO CARROSSEL */
         .portfolio-stories-section {
             padding: 20px 0 60px;
             border-bottom: 1px solid var(--border-color);
@@ -613,11 +667,41 @@
                 </div>
             </section>
             
-            <section class="portfolio-stories-section">
-                <h2 class="section-title">Exemplos do meu Trabalho</h2>
-                <div id="story-highlights-container" class="story-highlights-grid">
-                </div>
-            </section>
+            <section class="portfolio-carousel-section">
+    <h2 class="section-title">Exemplos do meu Trabalho</h2>
+    <div class="carousel-container">
+        <div class="carousel-images">
+            <img src="https://i.imgur.com/kbMff4q.png" alt="Exemplo de trabalho 1">
+            <img src="https://i.imgur.com/XhuU3RB.png" alt="Exemplo de trabalho 2">
+            <img src="https://i.imgur.com/sGMuBOW.png" alt="Exemplo de trabalho 3">
+            <img src="https://i.imgur.com/wkmMBJI.png" alt="Exemplo de trabalho 4">
+            <img src="https://i.imgur.com/3z7cvH4.png" alt="Exemplo de trabalho 5">
+            <img src="https://i.imgur.com/VBTgR4w.png" alt="Exemplo de trabalho 6">
+            <img src="https://i.imgur.com/ToriCGQ.png" alt="Exemplo de trabalho 7">
+            <img src="https://i.imgur.com/Szpa48n.png" alt="Exemplo de trabalho 8">
+            <img src="https://i.imgur.com/g9MLNaH.png" alt="Exemplo de trabalho 9">
+            <img src="https://i.imgur.com/d9oVHDT.jpeg" alt="Exemplo de trabalho 10">
+            <img src="https://i.imgur.com/5nplRby.jpeg" alt="Exemplo de trabalho 11">
+            <img src="https://i.imgur.com/OTZtjQ3.png" alt="Exemplo de trabalho 12">
+            <img src="https://i.imgur.com/1mdRt1b.png" alt="Exemplo de trabalho 13">
+            <img src="https://i.imgur.com/buMvm7G.png" alt="Exemplo de trabalho 14">
+            <img src="https://i.imgur.com/kbMff4q.png" alt="Exemplo de trabalho 1">
+            <img src="https://i.imgur.com/XhuU3RB.png" alt="Exemplo de trabalho 2">
+            <img src="https://i.imgur.com/sGMuBOW.png" alt="Exemplo de trabalho 3">
+            <img src="https://i.imgur.com/wkmMBJI.png" alt="Exemplo de trabalho 4">
+            <img src="https://i.imgur.com/3z7cvH4.png" alt="Exemplo de trabalho 5">
+            <img src="https://i.imgur.com/VBTgR4w.png" alt="Exemplo de trabalho 6">
+            <img src="https://i.imgur.com/ToriCGQ.png" alt="Exemplo de trabalho 7">
+            <img src="https://i.imgur.com/Szpa48n.png" alt="Exemplo de trabalho 8">
+            <img src="https://i.imgur.com/g9MLNaH.png" alt="Exemplo de trabalho 9">
+            <img src="https://i.imgur.com/d9oVHDT.jpeg" alt="Exemplo de trabalho 10">
+            <img src="https://i.imgur.com/5nplRby.jpeg" alt="Exemplo de trabalho 11">
+            <img src="https://i.imgur.com/OTZtjQ3.png" alt="Exemplo de trabalho 12">
+            <img src="https://i.imgur.com/1mdRt1b.png" alt="Exemplo de trabalho 13">
+            <img src="https://i.imgur.com/buMvm7G.png" alt="Exemplo de trabalho 14">
+        </div>
+    </div>
+</section>
             
             <section class="video-section"><div class="video-player media-container static-gradient"><video class="video-on-scroll" loop muted playsinline><source src="https://i.imgur.com/5T4e4jB.mp4" type="video/mp4"></video></div><div class="video-content"><h2>Conheça meu Trabalho</h2><p>Cada projeto é uma nova história. Meu portfólio é um reflexo da minha paixão por criar designs que não apenas encantam visualmente, mas também comunicam, engajam e alcançam objetivos estratégicos para cada marca.</p><a href="https://www.behance.net/marjorierosrio" target="_blank" class="cta-button">Ver Portfólio Completo</a></div></section>
             <section class="video-section reverse"><div class="video-player media-container static-gradient"><video class="video-on-scroll" loop muted playsinline><source src="https://i.imgur.com/HvYf1mk.mp4" type="video/mp4"></video></div><div class="video-content"><h2>Nosso Processo Criativo</h2><p>Trabalho com um método claro e colaborativo para transformar suas ideias em realidade, garantindo que o resultado final seja exatamente o que você espera.</p><ul><li><i class="fas fa-check-circle"></i><b>Briefing:</b> Entendimento profundo das suas metas e público.</li><li><i class="fas fa-check-circle"></i><b>Criação:</b> Desenvolvimento de conceitos visuais estratégicos.</li><li><i class="fas fa-check-circle"></i><b>Aprovação:</b> Ajustes finos com base no seu feedback.</li><li><i class="fas fa-check-circle"></i><b>Entrega:</b> Arquivos finais em alta qualidade, prontos para uso.</li></ul></div></section>
@@ -688,497 +772,264 @@
         <button class="story-nav story-nav-next" id="story-nav-next"><i class="fas fa-chevron-right"></i></button>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const videos = document.querySelectorAll(".video-on-scroll");
-            if ('IntersectionObserver' in window) {
-                const observer = new IntersectionObserver(entries => {
-                    entries.forEach(entry => {
-                        const playPromise = entry.target.play();
-                        if (entry.isIntersecting) { if (playPromise !== undefined) playPromise.catch(error => console.error("Autoplay impedido:", error)); }
-                        else { if (playPromise !== undefined) playPromise.then(() => entry.target.pause()); }
-                    });
-                }, { threshold: 0.5 });
-                videos.forEach(video => observer.observe(video));
+   <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const videos = document.querySelectorAll(".video-on-scroll");
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    const playPromise = entry.target.play();
+                    if (entry.isIntersecting) { if (playPromise !== undefined) playPromise.catch(error => console.error("Autoplay impedido:", error)); }
+                    else { if (playPromise !== undefined) playPromise.then(() => entry.target.pause()); }
+                });
+            }, { threshold: 0.5 });
+            videos.forEach(video => observer.observe(video));
+        }
+
+        if (getQueryParam('promo') === 'arte-gratis') document.getElementById('promoPopup').classList.add('active');
+        
+        initializeFormLogic();
+        createDust();
+    });
+
+    function createDust() {
+        const container = document.getElementById('background-container');
+        const dustCount = 150;
+
+        for (let i = 0; i < dustCount; i++) {
+            const dust = document.createElement('div');
+            dust.className = 'dust-particle';
+            
+            const size = Math.random() * 2 + 1;
+            dust.style.width = `${size}px`;
+            dust.style.height = `${size}px`;
+
+            dust.style.top = `${Math.random() * 100}%`;
+            dust.style.left = `${Math.random() * 100}%`;
+
+            dust.style.animationDelay = `${Math.random() * 5}s`;
+            dust.style.animationDuration = `${Math.random() * 2 + 1}s`;
+
+            container.appendChild(dust);
+        }
+    }
+    
+    function triggerHeartRain() {
+        const container = document.getElementById('hearts-overlay');
+        const heartsCount = 25; 
+
+        for (let i = 0; i < heartsCount; i++) {
+            const heart = document.createElement('i');
+            heart.className = 'fas fa-heart rising-heart';
+
+            heart.style.left = `${Math.random() * 100}%`;
+            
+            heart.style.fontSize = `${Math.random() * 20 + 15}px`; 
+
+            heart.style.animationDuration = `${Math.random() * 2 + 3}s`; 
+            heart.style.animationDelay = `${Math.random() * 0.5}s`;
+
+            container.appendChild(heart);
+
+            heart.addEventListener('animationend', () => {
+                heart.remove();
+            });
+        }
+    }
+    
+
+    
+    function showForm() { document.getElementById("formContainer").style.display = "block"; document.querySelector(".btn-container").style.display = "none"; document.getElementById("form-section-anchor").scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    
+    function initializeFormLogic() {
+        document.getElementById('servico').addEventListener('change', toggleOptions);
+        setupRadioLogic('pacote', 'outro_pacote');
+        setupRadioLogic('material', 'outro_material');
+        toggleOptions();
+    }
+
+    function toggleOptions() {
+        const servico = document.getElementById('servico').value;
+        const smOpts = document.getElementById('socialMediaOptions');
+        const miOpts = document.getElementById('materiaisImpressosOptions');
+        smOpts.classList.add('hidden');
+        miOpts.classList.add('hidden');
+        if (servico === "Design para Social Media") smOpts.classList.remove('hidden');
+        else if (servico === "Design para materiais impressos e digitais") miOpts.classList.remove('hidden');
+    }
+
+    function setupRadioLogic(radioGroupName, textInputId) {
+        const radios = document.querySelectorAll(`input[name="${radioGroupName}"]`);
+        const textInput = document.getElementById(textInputId);
+        radios.forEach(radio => {
+            radio.addEventListener('change', (event) => {
+                if (event.target.value === 'Outro') {
+                    textInput.disabled = false;
+                    textInput.focus();
+                } else {
+                    textInput.disabled = true;
+                    textInput.value = '';
+                }
+            });
+        });
+    }
+
+    function validateForm() {
+        let isValid = true;
+        document.querySelectorAll('.form-group.invalid').forEach(el => el.classList.remove('invalid'));
+        document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
+
+        const nome = document.getElementById('nome');
+        if (nome.value.trim() === '') {
+            nome.parentElement.classList.add('invalid');
+            document.getElementById('nome-error').style.display = 'block';
+            isValid = false;
+        }
+
+        const emailInput = document.getElementById('email');
+        const whatsappInput = document.getElementById('whatsapp');
+        if (emailInput.value.trim() === '' && whatsappInput.value.trim() === '') {
+            emailInput.parentElement.classList.add('invalid');
+            whatsappInput.parentElement.classList.add('invalid');
+            document.getElementById('contact-error').style.display = 'block';
+            isValid = false;
+        }
+        
+        const servico = document.getElementById('servico');
+        if (servico.value === '') {
+            servico.parentElement.classList.add('invalid');
+            document.getElementById('servico-error').style.display = 'block';
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+    function getQueryParam(param) { return new URLSearchParams(window.location.search).get(param); }
+    function openFormAndScroll() { showForm(); document.getElementById('promoPopup').classList.remove('active'); const nomeField = document.getElementById('nome'); if (nomeField && !nomeField.value.startsWith('[Promoção] ')) nomeField.value = '[Promoção] '; }
+    
+    document.getElementById('orçamentoForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        if (!validateForm()) {
+            return; 
+        }
+        
+        const form = event.target;
+        const formData = new FormData(form);
+
+        fetch("https://formspree.io/f/meoajgpy", {
+            method: "POST",
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+        })
+        .then(response => {
+            if (response.ok) {
+                const successPopup = document.getElementById('success-popup');
+                successPopup.classList.add('show');
+                setTimeout(() => {
+                    successPopup.classList.remove('show');
+                }, 4400); 
+
+                form.reset();
+                document.getElementById('formContainer').style.display = 'none';
+                document.querySelector('.btn-container').style.display = 'block';
+                toggleOptions();
+            } else {
+                response.json().then(data => {
+                    alert('Ocorreu um problema ao enviar seu formulário.');
+                });
+            }
+        }).catch(error => {
+            alert('Erro de conexão. Por favor, verifique sua internet e tente novamente.');
+            console.error("Erro no fetch:", error);
+        });
+    });
+        // --- NOVO CÓDIGO PARA O CARROSSEL CONTROLADO POR JS ---
+        const carouselImages = document.querySelector('.carousel-images');
+        const carouselContainer = document.querySelector('.carousel-container');
+        const images = document.querySelectorAll('.carousel-images img');
+        const imageWidth = images[0] ? images[0].offsetWidth : 250; // Pega a largura da imagem
+        const gap = 20; // O gap definido no CSS
+        const totalOriginalImages = 14; // O número de imagens originais
+        
+        let visibleImagesCount; // Quantidade de imagens visíveis por vez
+        let scrollAmount; // Quanto precisamos rolar para mostrar o próximo grupo
+
+        function setCarouselConfig() {
+            if (window.innerWidth <= 768) {
+                visibleImagesCount = 2; // Mostrar 2 imagens no mobile
+                // Largura da imagem mobile (180px) + gap
+                scrollAmount = (180 + gap) * 2; // Rola 2 imagens por vez
+            } else {
+                visibleImagesCount = 3; // Mostrar 3 imagens no desktop
+                // Largura da imagem desktop (250px) + gap
+                scrollAmount = (250 + gap) * 3; // Rola 3 imagens por vez
             }
 
-            if (getQueryParam('promo') === 'arte-gratis') document.getElementById('promoPopup').classList.add('active');
-            
-            initializeFormLogic();
-            initializeStoryHighlights(); 
-            createDust();
-        });
-
-        function createDust() {
-            const container = document.getElementById('background-container');
-            const dustCount = 150;
-
-            for (let i = 0; i < dustCount; i++) {
-                const dust = document.createElement('div');
-                dust.className = 'dust-particle';
-                
-                const size = Math.random() * 2 + 1;
-                dust.style.width = `${size}px`;
-                dust.style.height = `${size}px`;
-
-                dust.style.top = `${Math.random() * 100}%`;
-                dust.style.left = `${Math.random() * 100}%`;
-
-                dust.style.animationDelay = `${Math.random() * 5}s`;
-                dust.style.animationDuration = `${Math.random() * 2 + 1}s`;
-
-                container.appendChild(dust);
+            // O container precisa ser centralizado para que as imagens visíveis fiquem no centro
+            // Não é mais necessário `justify-content: center` no `.carousel-container`
+            // mas precisamos garantir que o `max-width` do container é para o grupo visível
+            if (window.innerWidth <= 768) {
+                 carouselContainer.style.maxWidth = `calc(${180 * visibleImagesCount}px + ${gap * (visibleImagesCount - 1)}px)`;
+            } else {
+                 carouselContainer.style.maxWidth = `calc(${250 * visibleImagesCount}px + ${gap * (visibleImagesCount - 1)}px)`;
             }
         }
         
-        // INÍCIO: NOVA FUNÇÃO PARA ANIMAÇÃO DE CORAÇÕES
-        function triggerHeartRain() {
-            const container = document.getElementById('hearts-overlay');
-            const heartsCount = 25; // Número de corações
+        let currentIndex = 0;
+        let animationInterval;
+        const animationSpeed = 5000; // Tempo em ms para cada avanço de grupo
 
-            for (let i = 0; i < heartsCount; i++) {
-                const heart = document.createElement('i');
-                heart.className = 'fas fa-heart rising-heart';
-
-                // Posição horizontal aleatória
-                heart.style.left = `${Math.random() * 100}%`;
-                
-                // Tamanho aleatório
-                heart.style.fontSize = `${Math.random() * 20 + 15}px`; // Entre 15px e 35px
-
-                // Duração e atraso aleatórios para um efeito mais natural
-                heart.style.animationDuration = `${Math.random() * 2 + 3}s`; // Duração entre 3s e 5s
-                heart.style.animationDelay = `${Math.random() * 0.5}s`;
-
-                container.appendChild(heart);
-
-                // Remove o coração do DOM após a animação terminar para não sobrecarregar
-                heart.addEventListener('animationend', () => {
-                    heart.remove();
-                });
-            }
-        }
-        // FIM: NOVA FUNÇÃO PARA ANIMAÇÃO DE CORAÇÕES
-
-        function initializeStoryHighlights() {
-            const storyData = [
-                { name: "Alinhamento Visual", thumbnail: "https://i.postimg.cc/VNbQhG85/IMG-20240702-WA0013.jpg", images: ["https://i.postimg.cc/k4G3x7kC/alinhamento1.png", "https://i.postimg.cc/Y0QzVBCp/alinhamento2.png"] },
-                { name: "Logotipos", thumbnail: "https://i.postimg.cc/nrpL9WfW/IMG-20240702-WA0014.jpg", images: ["https://i.postimg.cc/d1h2s1wX/logo1.png", "https://i.postimg.cc/wMS4yQvV/logo2.png", "https://i.postimg.cc/L6ZJ5bJ2/logo3.png"] },
-                { name: "Mídia Social", thumbnail: "https://i.postimg.cc/y8XwK7Fz/IMG-20240702-WA0015.jpg", images: ["https://i.postimg.cc/bN1jXkYx/social1.png", "https://i.postimg.cc/C1MmzZXV/social2.png", "https://i.postimg.cc/tJSNKmdc/social3.png"] },
-                { name: "Banners", thumbnail: "https://i.postimg.cc/hG09TRtP/IMG-20240702-WA0016.jpg", images: ["https://i.postimg.cc/8cM2SFrB/bandeira1.png"] },
-                { name: "Anúncios", thumbnail: "https://i.postimg.cc/d19GfbDr/IMG-20240702-WA0017.jpg", images: ["https://i.postimg.cc/wB2gHw7D/anuncio1.png", "https://i.postimg.cc/RhdQyCgG/anuncio2.png"] },
-                { name: "Edição de Vídeo", thumbnail: "https://i.postimg.cc/YqX8Bv5b/IMG-20240702-WA0018.jpg", images: ["https://i.imgur.com/gdPVfJP.mp4"] }
-            ];
-
-            const highlightsContainer = document.getElementById('story-highlights-container');
-            const popup = document.getElementById('story-popup');
-            const imageContainer = document.getElementById('story-image-container');
-            const closeBtn = document.getElementById('story-close-btn');
-            const navPrev = document.getElementById('story-nav-prev');
-            const navNext = document.getElementById('story-nav-next');
-            const likeBtn = document.getElementById('story-like-btn');
-            const likeBtnIcon = likeBtn.querySelector('i');
-            const progressBarContainer = document.getElementById('story-progress-bar-container');
-            const commentForm = document.getElementById('storyCommentForm');
-            const commentInput = commentForm.querySelector('.story-comment-input');
-            const commentSendBtn = commentForm.querySelector('.story-comment-send-btn');
-            const storyPopupContainer = document.querySelector('.story-popup-container'); 
+        function startCarouselAutoScroll() {
+            setCarouselConfig(); // Define a configuração inicial e a ajusta na redimensionamento
             
-            let currentStoryIndex = 0;
-            let currentImageIndex = 0;
-            let storyTimer;
-            let pausedTime = 0; 
-            const STORY_DURATION = 15000; 
-            let isPaused = false; 
+            clearInterval(animationInterval); // Limpa qualquer intervalo anterior
+            animationInterval = setInterval(() => {
+                const totalContentWidth = (imageWidth + gap) * totalOriginalImages;
+                const maxScroll = totalContentWidth; // Deslocamento total do primeiro conjunto de imagens
 
-            storyData.forEach((story, index) => {
-                const highlightHTML = `<div class="story-highlight" data-story-index="${index}"><div class="story-highlight-circle"><img src="${story.thumbnail}" alt="${story.name}" class="story-highlight-thumb"></div><span class="story-highlight-name">${story.name}</span></div>`;
-                highlightsContainer.innerHTML += highlightHTML;
-            });
+                currentIndex += visibleImagesCount; // Avança o índice pelo número de imagens visíveis
 
-            function playStory() {
-                clearTimeout(storyTimer); 
-                const story = storyData[currentStoryIndex];
-                const images = story.images;
-                const currentMedia = images[currentImageIndex];
+                // Calcula o novo deslocamento
+                let newTranslateX = -(currentIndex * (imageWidth + gap));
 
-                imageContainer.innerHTML = ''; 
-
-                let mediaElement;
-                if (currentMedia.endsWith('.mp4') || currentMedia.endsWith('.webm') || currentMedia.endsWith('.ogg')) {
-                    mediaElement = document.createElement('video');
-                    mediaElement.src = currentMedia;
-                    mediaElement.autoplay = true;
-                    mediaElement.muted = true;
-                    mediaElement.loop = true; 
-                    mediaElement.setAttribute('playsinline', ''); 
-                    mediaElement.addEventListener('loadeddata', () => {
-                         mediaElement.play().catch(e => console.error("Erro ao reproduzir vídeo:", e));
-                    });
-                } else {
-                    mediaElement = document.createElement('img');
-                    mediaElement.src = currentMedia;
-                }
-                mediaElement.className = 'story-image'; 
-                mediaElement.id = 'story-image-content'; 
-                imageContainer.appendChild(mediaElement);
-
-
-                const segments = progressBarContainer.querySelectorAll('.progress-segment');
-                segments.forEach((segment, index) => {
-                    const fill = segment.querySelector('.progress-fill');
-                    if (index >= currentImageIndex) {
-                        fill.style.animation = 'none'; 
-                        void fill.offsetWidth; 
-                        fill.style.animation = null; 
-                    }
-                    segment.classList.remove('active', 'filled');
-                    if (index < currentImageIndex) segment.classList.add('filled');
-                });
-                if (segments[currentImageIndex]) {
-                    segments[currentImageIndex].classList.add('active');
-                }
-                
-                const activeFill = progressBarContainer.querySelector('.progress-segment.active .progress-fill');
-                if (activeFill) {
-                    activeFill.style.animationDuration = `${STORY_DURATION / 1000}s`; 
-                    if (isPaused) {
-                        activeFill.style.animationPlayState = 'paused';
-                    } else {
-                        activeFill.style.animationPlayState = 'running';
-                    }
-                }
-
-                navPrev.classList.toggle('disabled', currentImageIndex === 0);
-                navNext.classList.toggle('disabled', currentImageIndex === images.length - 1);
-
-                storyTimer = setTimeout(() => {
-                    if (currentImageIndex < storyData[currentStoryIndex].images.length - 1) {
-                        currentImageIndex++;
-                        playStory();
-                    } else {
-                        closePopup();
-                    }
-                }, STORY_DURATION - pausedTime);
-                pausedTime = 0; 
-            }
-
-            function pauseStory() {
-                if (isPaused) return; 
-                isPaused = true;
-                clearTimeout(storyTimer);
-                const activeFill = progressBarContainer.querySelector('.progress-segment.active .progress-fill');
-                if (activeFill) {
-                    const computedStyle = getComputedStyle(activeFill);
-                    const currentWidth = parseFloat(computedStyle.width);
-                    const animationDuration = parseFloat(computedStyle.animationDuration) * 1000;
-                    pausedTime = (currentWidth / 100) * animationDuration;
-                    activeFill.style.animationPlayState = 'paused';
-                }
-
-                const currentVideo = imageContainer.querySelector('video');
-                if (currentVideo && !currentVideo.paused) {
-                    currentVideo.pause();
-                }
-            }
-
-            function resumeStory() {
-                if (!isPaused) return; 
-                isPaused = false;
-                const activeFill = progressBarContainer.querySelector('.progress-segment.active .progress-fill');
-                if (activeFill) {
-                    activeFill.style.animationPlayState = 'running';
-                }
-
-                const currentVideo = imageContainer.querySelector('video');
-                if (currentVideo && currentVideo.paused) {
-                    currentVideo.play().catch(e => console.error("Erro ao reproduzir vídeo:", e));
-                }
-                
-                clearTimeout(storyTimer);
-                storyTimer = setTimeout(() => {
-                    if (currentImageIndex < storyData[currentStoryIndex].images.length - 1) {
-                        currentImageIndex++;
-                        playStory();
-                    } else {
-                        closePopup();
-                    }
-                }, STORY_DURATION - pausedTime);
-                pausedTime = 0; 
-            }
-
-            // FUNÇÃO PRINCIPAL DE ABERTURA DO POPUP
-            function openPopup(storyIndex) {
-                // ALTERAÇÃO: Chama a animação de corações
-                triggerHeartRain(); 
-
-                likeBtn.classList.remove('liked');
-                likeBtnIcon.className = 'far fa-heart';
-                currentStoryIndex = storyIndex;
-                currentImageIndex = 0;
-                pausedTime = 0; 
-                const images = storyData[currentStoryIndex].images;
-                progressBarContainer.innerHTML = '';
-                images.forEach(() => {
-                    progressBarContainer.innerHTML += '<div class="progress-segment"><div class="progress-fill"></div></div>';
-                });
-                playStory();
-                popup.classList.add('active');
-            }
-
-            function closePopup() {
-                clearTimeout(storyTimer);
-                popup.classList.remove('active');
-                const activeSegment = progressBarContainer.querySelector('.active');
-                if(activeSegment) activeSegment.classList.remove('active');
-                const currentVideo = imageContainer.querySelector('video');
-                if (currentVideo) {
-                    currentVideo.pause();
-                    currentVideo.currentTime = 0; 
-                }
-            }
-            
-            function navigate(direction) {
-                const storyImages = storyData[currentStoryIndex].images;
-                if ( (direction === -1 && currentImageIndex === 0) || (direction === 1 && currentImageIndex === storyImages.length - 1) ) {
-                    return;
-                }
-                clearTimeout(storyTimer);
-                currentImageIndex += direction;
-                pausedTime = 0; 
-                playStory();
-            }
-
-            function createFloatingHearts() {
-                if (likeBtn.classList.contains('liked')) {
-                    likeBtn.classList.remove('liked');
-                    likeBtnIcon.className = 'far fa-heart';
-                    return;
-                }
-                
-                likeBtn.classList.add('liked');
-                likeBtnIcon.className = 'fas fa-heart';
-
-                for (let i = 0; i < 15; i++) {
-                    const heart = document.createElement('i');
-                    heart.className = 'fas fa-heart floating-heart';
-                    const randomX = (Math.random() - 0.5) * 100;
-                    const randomDelay = Math.random() * 0.5;
-                    const randomDuration = 1.5 + Math.random();
+                // Se passamos do primeiro conjunto de imagens, reinicie a posição para o início do segundo
+                // Mas, com um truque para não ser perceptível.
+                if (newTranslateX <= -maxScroll) {
+                    // Sem transição para o reset
+                    carouselImages.style.transition = 'none';
+                    currentIndex = 0; // Reinicia o índice
+                    carouselImages.style.transform = `translateX(0px)`;
                     
-                    const keyframes = `@keyframes float-up-${i} { 0% { transform: translate(0, 0); opacity: 1; } 100% { transform: translate(${randomX}px, -500px) rotate(${randomX}deg); opacity: 0; } }`;
-                    const styleSheet = document.createElement("style");
-                    styleSheet.innerText = keyframes;
-                    document.head.appendChild(styleSheet);
-                    heart.style.animationName = `float-up-${i}`;
-                    heart.style.animationDelay = `${randomDelay}s`;
-                    heart.style.animationDuration = `${randomDuration}s`;
-                    imageContainer.appendChild(heart);
-
-                    heart.addEventListener('animationend', () => {
-                        heart.remove();
-                        styleSheet.remove();
-                    });
-                }
-            }
-
-            function handleCommentSubmit(event) {
-                event.preventDefault();
-                const commentText = commentInput.value.trim();
-                if (commentText === '') return;
-
-                const storyName = storyData[currentStoryIndex].name;
-                
-                const formData = new FormData();
-                formData.append('_subject', `Novo comentário no Story: ${storyName}`);
-                formData.append('Comentário', commentText);
-                formData.append('Referência do Story', storyName);
-
-                commentSendBtn.disabled = true;
-                commentSendBtn.textContent = 'Enviando...';
-
-                fetch("https://formspree.io/f/meoajgpy", { 
-                    method: "POST",
-                    body: formData,
-                    headers: { 'Accept': 'application/json' }
-                })
-                .then(response => {
-                    if (response.ok) {
-                        commentInput.value = '';
-                        commentSendBtn.textContent = 'Enviado!';
-                        commentSendBtn.classList.add('sent');
-                    } else {
-                        response.json().then(data => {
-                            console.error('Erro ao enviar comentário:', data);
-                            alert('Ocorreu um problema ao enviar seu comentário.');
-                        });
-                        commentSendBtn.textContent = 'Erro!';
-                    }
-                    setTimeout(() => {
-                        commentSendBtn.disabled = false;
-                        commentSendBtn.textContent = 'Enviar';
-                        commentSendBtn.classList.remove('sent');
-                    }, 3000);
-                }).catch(error => {
-                    alert('Erro de conexão. Tente novamente.');
-                    console.error("Erro no fetch:", error);
-                    commentSendBtn.disabled = false;
-                    commentSendBtn.textContent = 'Enviar';
-                });
-            }
-
-            document.querySelectorAll('.story-highlight').forEach(el => {
-                el.addEventListener('click', () => openPopup(parseInt(el.getAttribute('data-story-index'))));
-            });
-            
-            commentForm.addEventListener('submit', handleCommentSubmit);
-            navPrev.addEventListener('click', () => navigate(-1));
-            navNext.addEventListener('click', () => navigate(1));
-            likeBtn.addEventListener('click', createFloatingHearts);
-            closeBtn.addEventListener('click', closePopup);
-            popup.addEventListener('click', (e) => {
-                if (e.target === popup) closePopup();
-            });
-
-            storyPopupContainer.addEventListener('mousedown', pauseStory);
-            storyPopupContainer.addEventListener('mouseup', resumeStory);
-            storyPopupContainer.addEventListener('mouseleave', resumeStory); 
-
-            storyPopupContainer.addEventListener('touchstart', pauseStory);
-            storyPopupContainer.addEventListener('touchend', resumeStory);
-            storyPopupContainer.addEventListener('touchcancel', resumeStory); 
-
-            storyPopupContainer.addEventListener('contextmenu', (e) => {
-                e.preventDefault(); 
-            });
-
-            imageContainer.addEventListener('click', (e) => {
-                if (window.innerWidth >= 600) {
-                    return;
+                    // Força um reflow para que a transição seja aplicada novamente no próximo frame
+                    void carouselImages.offsetWidth; 
+                    
+                    // Volta a transição para o próximo movimento
+                    carouselImages.style.transition = 'transform 0.5s ease-in-out';
+                    
+                    // E então move para o próximo slide (que agora é o início do segundo conjunto de imagens)
+                    currentIndex += visibleImagesCount;
+                    newTranslateX = -(currentIndex * (imageWidth + gap));
                 }
 
-                if (e.target.closest('.story-like-btn') || e.target.closest('.story-comment-bar')) {
-                    return;
-                }
+                carouselImages.style.transform = `translateX(${newTranslateX}px)`;
 
-                const rect = imageContainer.getBoundingClientRect();
-                const clickX = e.clientX - rect.left;
-
-                if (clickX < rect.width / 3) {
-                    navigate(-1);
-                }   
-                else if (clickX > rect.width * (2 / 3)) {
-                    navigate(1);
-                }
-            });
-        }
-        
-        function showForm() { document.getElementById("formContainer").style.display = "block"; document.querySelector(".btn-container").style.display = "none"; document.getElementById("form-section-anchor").scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-        
-        function initializeFormLogic() {
-            document.getElementById('servico').addEventListener('change', toggleOptions);
-            setupRadioLogic('pacote', 'outro_pacote');
-            setupRadioLogic('material', 'outro_material');
-            toggleOptions();
+            }, animationSpeed);
         }
 
-        function toggleOptions() {
-            const servico = document.getElementById('servico').value;
-            const smOpts = document.getElementById('socialMediaOptions');
-            const miOpts = document.getElementById('materiaisImpressosOptions');
-            smOpts.classList.add('hidden');
-            miOpts.classList.add('hidden');
-            if (servico === "Design para Social Media") smOpts.classList.remove('hidden');
-            else if (servico === "Design para materiais impressos e digitais") miOpts.classList.remove('hidden');
-        }
+        // Inicia o carrossel quando a página carrega
+        startCarouselAutoScroll();
 
-        function setupRadioLogic(radioGroupName, textInputId) {
-            const radios = document.querySelectorAll(`input[name="${radioGroupName}"]`);
-            const textInput = document.getElementById(textInputId);
-            radios.forEach(radio => {
-                radio.addEventListener('change', (event) => {
-                    if (event.target.value === 'Outro') {
-                        textInput.disabled = false;
-                        textInput.focus();
-                    } else {
-                        textInput.disabled = true;
-                        textInput.value = '';
-                    }
-                });
-            });
-        }
+        // Reinicia o carrossel em caso de redimensionamento da janela
+        window.addEventListener('resize', startCarouselAutoScroll);
 
-        function validateForm() {
-            let isValid = true;
-            document.querySelectorAll('.form-group.invalid').forEach(el => el.classList.remove('invalid'));
-            document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
+        // Opcional: Pausar no hover
+        carouselContainer.addEventListener('mouseenter', () => clearInterval(animationInterval));
+        carouselContainer.addEventListener('mouseleave', startCarouselAutoScroll);
 
-            const nome = document.getElementById('nome');
-            if (nome.value.trim() === '') {
-                nome.parentElement.classList.add('invalid');
-                document.getElementById('nome-error').style.display = 'block';
-                isValid = false;
-            }
-
-            const emailInput = document.getElementById('email');
-            const whatsappInput = document.getElementById('whatsapp');
-            if (emailInput.value.trim() === '' && whatsappInput.value.trim() === '') {
-                emailInput.parentElement.classList.add('invalid');
-                whatsappInput.parentElement.classList.add('invalid');
-                document.getElementById('contact-error').style.display = 'block';
-                isValid = false;
-            }
-            
-            const servico = document.getElementById('servico');
-            if (servico.value === '') {
-                servico.parentElement.classList.add('invalid');
-                document.getElementById('servico-error').style.display = 'block';
-                isValid = false;
-            }
-
-            return isValid;
-        }
-
-        function getQueryParam(param) { return new URLSearchParams(window.location.search).get(param); }
-        function openFormAndScroll() { showForm(); document.getElementById('promoPopup').classList.remove('active'); const nomeField = document.getElementById('nome'); if (nomeField && !nomeField.value.startsWith('[Promoção] ')) nomeField.value = '[Promoção] '; }
-        
-        document.getElementById('orçamentoForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            if (!validateForm()) {
-                return; 
-            }
-            
-            const form = event.target;
-            const formData = new FormData(form);
-
-            fetch("https://formspree.io/f/meoajgpy", {
-                method: "POST",
-                body: formData,
-                headers: { 'Accept': 'application/json' }
-            })
-            .then(response => {
-                if (response.ok) {
-                    const successPopup = document.getElementById('success-popup');
-                    successPopup.classList.add('show');
-                    setTimeout(() => {
-                        successPopup.classList.remove('show');
-                    }, 4400); 
-
-                    form.reset();
-                    document.getElementById('formContainer').style.display = 'none';
-                    document.querySelector('.btn-container').style.display = 'block';
-                    toggleOptions();
-                } else {
-                    response.json().then(data => {
-                        alert('Ocorreu um problema ao enviar seu formulário.');
-                    });
-                }
-            }).catch(error => {
-                alert('Erro de conexão. Por favor, verifique sua internet e tente novamente.');
-                console.error("Erro no fetch:", error);
-            });
-        });
-    </script>
+        // --- FIM DO NOVO CÓDIGO PARA O CARROSSEL CONTROLADO POR JS ---
+    });
+</script>
 </body>
 </html>
