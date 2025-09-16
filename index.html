@@ -197,50 +197,68 @@
         .section-title { text-align: center; font-family: var(--title-font); font-size: 2.8em; font-weight: 700; margin: 1px 0 100px 0; color: var(--primary-color); }
         
         /* === ESTILOS PARA STORIES === */
-       /* NOVO: ESTILOS PARA O CARROSSEL AUTOMÁTICO (CORRIGIDO PARA 4 IMAGENS) */
+       /* --- ESTILOS PARA O CARROSSEL AUTOMÁTICO --- */
 .portfolio-carousel-section {
     padding: 20px 0 60px;
     border-bottom: 1px solid var(--border-color);
-    overflow: hidden; /* Importante para o efeito de carrossel */
+    overflow: hidden;
 }
+
 .carousel-container {
-    /* Limita a largura do container para mostrar no máximo 4 imagens no desktop */
-    max-width: calc(250px * 4 + 20px * 3);
-    width: 100%;
     overflow: hidden;
     position: relative;
     padding: 20px 0;
     margin: 0 auto;
 }
+
 .carousel-images {
     display: flex;
     gap: 20px;
     padding: 10px 0;
     transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
-        .carousel-images img.centered-image {
-    transform: scale(1.15); /* Aumenta o tamanho da imagem em 15% */
-    filter: brightness(1.2); /* Aumenta o brilho */
-}
-.carousel-images:hover {
-}
+
 .carousel-images img {
     flex-shrink: 0;
-    width: 250px; /* Largura padrão para desktop */
     height: auto;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-    transition: transform 0.5s ease, box-shadow 0.5s ease;
-    filter: brightness(0.9);
+    transition: transform 0.5s ease, box-shadow 0.5s ease, filter 0.5s ease;
+    filter: brightness(0.75) grayscale(1); /* Imagens sem destaque */
 }
+
+.carousel-images img.centered-image {
+    transform: scale(1.15);
+    filter: brightness(1.2) grayscale(0); /* Imagem destacada */
+}
+
 .carousel-images img:hover {
-    transform: translateY(-8px) scale(1.05);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
-    filter: brightness(1);
+    filter: brightness(1) grayscale(0.5); /* Efeito no hover */
 }
+
+/* Regras para Desktop (5 imagens) */
+@media (min-width: 769px) {
     .carousel-images img {
-        width: 180px; /* Largura menor para telas pequenas */
+        width: 180px; /* Largura para desktop */
     }
+    .carousel-container {
+        /* Garante que 5 imagens sejam visíveis */
+        max-width: calc(180px * 5 + 20px * 4);
+        margin: 0 auto;
+    }
+}
+
+/* Regras para Mobile (3 imagens) */
+@media (max-width: 768px) {
+    .carousel-images img {
+        width: 120px; /* Largura menor para mobile */
+    }
+    .carousel-container {
+        /* Garante que 3 imagens sejam visíveis */
+        max-width: calc(120px * 3 + 20px * 2);
+        margin: 0 auto;
+    }
+}
     @keyframes auto-scroll {
         100% { transform: translateX(calc(-180px * 14 - 20px * 13)); }
     }
@@ -789,49 +807,65 @@
         startCarouselLogic(); // A função do carrossel
     });
 
-    // Lógica para o carrossel infinito
     function startCarouselLogic() {
-        const carouselContainer = document.querySelector('.carousel-images');
-        const allImages = Array.from(carouselContainer.querySelectorAll('img'));
-        const totalImagesInSet = allImages.length / 2;
+    const carouselContainer = document.querySelector('.carousel-images');
+    const allImages = Array.from(carouselContainer.querySelectorAll('img'));
+    const totalImagesInSet = allImages.length / 2;
+    let currentIndex = 0;
+    let imagesVisible = 0;
+
+    function getImagesVisible() {
+        // Usa a largura da tela para determinar a quantidade de imagens visíveis
+        return window.innerWidth <= 768 ? 3 : 5;
+    }
+
+    function updateCarousel() {
+        imagesVisible = getImagesVisible();
         const imageWidth = allImages[0].offsetWidth;
         const gap = parseInt(window.getComputedStyle(carouselContainer).gap);
-        let currentIndex = 0;
-
-        function updateCarousel() {
-            // Remove o destaque de todas as imagens
-            allImages.forEach(img => img.classList.remove('centered-image'));
-
-            // Reseta a rolagem para o início do segundo bloco
-            if (currentIndex >= totalImagesInSet) {
-                currentIndex = 0;
-                carouselContainer.style.transition = 'none';
-                carouselContainer.style.transform = `translateX(${-currentIndex * (imageWidth + gap)}px)`;
-                carouselContainer.offsetWidth; // Força o reflow para o "pulo"
-                carouselContainer.style.transition = 'transform 0.8s cubic-bezier(0.25, 1, 0.5, 1)';
-            }
-            
-            // Move o carrossel para a próxima imagem
-            const newTransformValue = -currentIndex * (imageWidth + gap);
-            carouselContainer.style.transform = `translateX(${newTransformValue}px)`;
-
-            // Atraso para a imagem centralizar antes de aplicar o destaque
-            setTimeout(() => {
-                const centeredIndex = currentIndex + 2;
-                allImages[centeredIndex].classList.add('centered-image');
-
-                // Pausa por 2 segundos antes de continuar
-                setTimeout(() => {
-                    allImages[centeredIndex].classList.remove('centered-image');
-                    currentIndex++;
-                    updateCarousel();
-                }, 2000);
-            }, 800);
+        
+        allImages.forEach(img => img.classList.remove('centered-image'));
+        
+        // Reinicia a rolagem para o início do segundo bloco
+        if (currentIndex >= totalImagesInSet) {
+            currentIndex = 0;
+            carouselContainer.style.transition = 'none';
+            carouselContainer.style.transform = `translateX(${-currentIndex * (imageWidth + gap)}px)`;
+            carouselContainer.offsetWidth;
+            carouselContainer.style.transition = 'transform 0.8s cubic-bezier(0.25, 1, 0.5, 1)';
         }
+        
+        const newTransformValue = -currentIndex * (imageWidth + gap);
+        carouselContainer.style.transform = `translateX(${newTransformValue}px)`;
+        
+        setTimeout(() => {
+            const centeredIndexOffset = Math.floor(imagesVisible / 2);
+            const centeredIndex = currentIndex + centeredIndexOffset;
+            
+            // Verifica se o índice está dentro dos limites do array
+            if (allImages[centeredIndex]) {
+                allImages[centeredIndex].classList.add('centered-image');
+            }
 
-        // Inicia o carrossel após um pequeno atraso inicial
-        setTimeout(updateCarousel, 1000);
+            setTimeout(() => {
+                if (allImages[centeredIndex]) {
+                    allImages[centeredIndex].classList.remove('centered-image');
+                }
+                currentIndex++;
+                updateCarousel();
+            }, 2000);
+        }, 800);
     }
+    
+    // Inicia o carrossel após um pequeno atraso inicial
+    setTimeout(updateCarousel, 1000);
+
+    // Reinicia o carrossel ao redimensionar a tela para se adaptar ao mobile/desktop
+    window.addEventListener('resize', () => {
+        currentIndex = 0;
+        updateCarousel();
+    });
+}
     
     // Funções existentes que foram mantidas
     function createDust() {
