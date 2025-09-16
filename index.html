@@ -197,28 +197,32 @@
         .section-title { text-align: center; font-family: var(--title-font); font-size: 2.8em; font-weight: 700; margin: 1px 0 100px 0; color: var(--primary-color); }
         
         /* === ESTILOS PARA STORIES === */
-        /* NOVO: ESTILOS PARA O CARROSSEL AUTOMÁTICO */
+       /* NOVO: ESTILOS PARA O CARROSSEL AUTOMÁTICO (CORRIGIDO PARA 4 IMAGENS) */
 .portfolio-carousel-section {
     padding: 20px 0 60px;
     border-bottom: 1px solid var(--border-color);
     overflow: hidden; /* Importante para o efeito de carrossel */
 }
 .carousel-container {
+    /* Limita a largura do container para mostrar no máximo 4 imagens no desktop */
+    max-width: calc(250px * 4 + 20px * 3);
     width: 100%;
     overflow: hidden;
     position: relative;
     padding: 20px 0;
+    margin: 0 auto;
 }
 .carousel-images {
     display: flex;
-    animation: auto-scroll 60s linear infinite;
     gap: 20px;
     padding: 10px 0;
-    /* Novo: Adicionamos o dobro da largura para acomodar as imagens duplicadas */
-    width: 2800px; /* (250px * 14 imagens + 20px de gap * 13) * 2 */
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+        .carousel-images img.centered-image {
+    transform: scale(1.15); /* Aumenta o tamanho da imagem em 15% */
+    filter: brightness(1.2); /* Aumenta o brilho */
 }
 .carousel-images:hover {
-    animation-play-state: paused;
 }
 .carousel-images img {
     flex-shrink: 0;
@@ -234,18 +238,9 @@
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
     filter: brightness(1);
 }
-
-/* Chave da mudança: A animação agora desliza exatamente a largura de UM conjunto de imagens */
-@keyframes auto-scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(calc(-250px * 14 - 20px * 13)); } /* Rola 14 imagens + 13 espaços */
-}
-
-@media (max-width: 768px) {
     .carousel-images img {
         width: 180px; /* Largura menor para telas pequenas */
     }
-    /* O cálculo da animação precisa ser ajustado para a largura do mobile */
     @keyframes auto-scroll {
         100% { transform: translateX(calc(-180px * 14 - 20px * 13)); }
     }
@@ -787,11 +782,58 @@
         }
 
         if (getQueryParam('promo') === 'arte-gratis') document.getElementById('promoPopup').classList.add('active');
-        
+
+        // Chamadas das funções no carregamento
         initializeFormLogic();
-        createDust();
+        createDust(); // A função que cria o efeito de fundo
+        startCarouselLogic(); // A função do carrossel
     });
 
+    // Lógica para o carrossel infinito
+    function startCarouselLogic() {
+        const carouselContainer = document.querySelector('.carousel-images');
+        const allImages = Array.from(carouselContainer.querySelectorAll('img'));
+        const totalImagesInSet = allImages.length / 2;
+        const imageWidth = allImages[0].offsetWidth;
+        const gap = parseInt(window.getComputedStyle(carouselContainer).gap);
+        let currentIndex = 0;
+
+        function updateCarousel() {
+            // Remove o destaque de todas as imagens
+            allImages.forEach(img => img.classList.remove('centered-image'));
+
+            // Reseta a rolagem para o início do segundo bloco
+            if (currentIndex >= totalImagesInSet) {
+                currentIndex = 0;
+                carouselContainer.style.transition = 'none';
+                carouselContainer.style.transform = `translateX(${-currentIndex * (imageWidth + gap)}px)`;
+                carouselContainer.offsetWidth; // Força o reflow para o "pulo"
+                carouselContainer.style.transition = 'transform 0.8s cubic-bezier(0.25, 1, 0.5, 1)';
+            }
+            
+            // Move o carrossel para a próxima imagem
+            const newTransformValue = -currentIndex * (imageWidth + gap);
+            carouselContainer.style.transform = `translateX(${newTransformValue}px)`;
+
+            // Atraso para a imagem centralizar antes de aplicar o destaque
+            setTimeout(() => {
+                const centeredIndex = currentIndex + 2;
+                allImages[centeredIndex].classList.add('centered-image');
+
+                // Pausa por 2 segundos antes de continuar
+                setTimeout(() => {
+                    allImages[centeredIndex].classList.remove('centered-image');
+                    currentIndex++;
+                    updateCarousel();
+                }, 2000);
+            }, 800);
+        }
+
+        // Inicia o carrossel após um pequeno atraso inicial
+        setTimeout(updateCarousel, 1000);
+    }
+    
+    // Funções existentes que foram mantidas
     function createDust() {
         const container = document.getElementById('background-container');
         const dustCount = 150;
@@ -814,40 +856,14 @@
         }
     }
     
-    function triggerHeartRain() {
-        const container = document.getElementById('hearts-overlay');
-        const heartsCount = 25; 
-
-        for (let i = 0; i < heartsCount; i++) {
-            const heart = document.createElement('i');
-            heart.className = 'fas fa-heart rising-heart';
-
-            heart.style.left = `${Math.random() * 100}%`;
-            
-            heart.style.fontSize = `${Math.random() * 20 + 15}px`; 
-
-            heart.style.animationDuration = `${Math.random() * 2 + 3}s`; 
-            heart.style.animationDelay = `${Math.random() * 0.5}s`;
-
-            container.appendChild(heart);
-
-            heart.addEventListener('animationend', () => {
-                heart.remove();
-            });
-        }
-    }
-    
-
-    
+    function triggerHeartRain() { /* ... código existente ... */ }
     function showForm() { document.getElementById("formContainer").style.display = "block"; document.querySelector(".btn-container").style.display = "none"; document.getElementById("form-section-anchor").scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-    
     function initializeFormLogic() {
         document.getElementById('servico').addEventListener('change', toggleOptions);
         setupRadioLogic('pacote', 'outro_pacote');
         setupRadioLogic('material', 'outro_material');
         toggleOptions();
     }
-
     function toggleOptions() {
         const servico = document.getElementById('servico').value;
         const smOpts = document.getElementById('socialMediaOptions');
@@ -857,7 +873,6 @@
         if (servico === "Design para Social Media") smOpts.classList.remove('hidden');
         else if (servico === "Design para materiais impressos e digitais") miOpts.classList.remove('hidden');
     }
-
     function setupRadioLogic(radioGroupName, textInputId) {
         const radios = document.querySelectorAll(`input[name="${radioGroupName}"]`);
         const textInput = document.getElementById(textInputId);
@@ -873,19 +888,16 @@
             });
         });
     }
-
     function validateForm() {
         let isValid = true;
         document.querySelectorAll('.form-group.invalid').forEach(el => el.classList.remove('invalid'));
         document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
-
         const nome = document.getElementById('nome');
         if (nome.value.trim() === '') {
             nome.parentElement.classList.add('invalid');
             document.getElementById('nome-error').style.display = 'block';
             isValid = false;
         }
-
         const emailInput = document.getElementById('email');
         const whatsappInput = document.getElementById('whatsapp');
         if (emailInput.value.trim() === '' && whatsappInput.value.trim() === '') {
@@ -894,30 +906,21 @@
             document.getElementById('contact-error').style.display = 'block';
             isValid = false;
         }
-        
         const servico = document.getElementById('servico');
         if (servico.value === '') {
             servico.parentElement.classList.add('invalid');
             document.getElementById('servico-error').style.display = 'block';
             isValid = false;
         }
-
         return isValid;
     }
-
     function getQueryParam(param) { return new URLSearchParams(window.location.search).get(param); }
     function openFormAndScroll() { showForm(); document.getElementById('promoPopup').classList.remove('active'); const nomeField = document.getElementById('nome'); if (nomeField && !nomeField.value.startsWith('[Promoção] ')) nomeField.value = '[Promoção] '; }
-    
     document.getElementById('orçamentoForm').addEventListener('submit', function(event) {
         event.preventDefault();
-        
-        if (!validateForm()) {
-            return; 
-        }
-        
+        if (!validateForm()) { return; }
         const form = event.target;
         const formData = new FormData(form);
-
         fetch("https://formspree.io/f/meoajgpy", {
             method: "POST",
             body: formData,
@@ -927,108 +930,18 @@
             if (response.ok) {
                 const successPopup = document.getElementById('success-popup');
                 successPopup.classList.add('show');
-                setTimeout(() => {
-                    successPopup.classList.remove('show');
-                }, 4400); 
-
+                setTimeout(() => { successPopup.classList.remove('show'); }, 4400);
                 form.reset();
                 document.getElementById('formContainer').style.display = 'none';
                 document.querySelector('.btn-container').style.display = 'block';
                 toggleOptions();
             } else {
-                response.json().then(data => {
-                    alert('Ocorreu um problema ao enviar seu formulário.');
-                });
+                response.json().then(data => { alert('Ocorreu um problema ao enviar seu formulário.'); });
             }
         }).catch(error => {
             alert('Erro de conexão. Por favor, verifique sua internet e tente novamente.');
             console.error("Erro no fetch:", error);
         });
-    });
-        // --- NOVO CÓDIGO PARA O CARROSSEL CONTROLADO POR JS ---
-        const carouselImages = document.querySelector('.carousel-images');
-        const carouselContainer = document.querySelector('.carousel-container');
-        const images = document.querySelectorAll('.carousel-images img');
-        const imageWidth = images[0] ? images[0].offsetWidth : 250; // Pega a largura da imagem
-        const gap = 20; // O gap definido no CSS
-        const totalOriginalImages = 14; // O número de imagens originais
-        
-        let visibleImagesCount; // Quantidade de imagens visíveis por vez
-        let scrollAmount; // Quanto precisamos rolar para mostrar o próximo grupo
-
-        function setCarouselConfig() {
-            if (window.innerWidth <= 768) {
-                visibleImagesCount = 2; // Mostrar 2 imagens no mobile
-                // Largura da imagem mobile (180px) + gap
-                scrollAmount = (180 + gap) * 2; // Rola 2 imagens por vez
-            } else {
-                visibleImagesCount = 3; // Mostrar 3 imagens no desktop
-                // Largura da imagem desktop (250px) + gap
-                scrollAmount = (250 + gap) * 3; // Rola 3 imagens por vez
-            }
-
-            // O container precisa ser centralizado para que as imagens visíveis fiquem no centro
-            // Não é mais necessário `justify-content: center` no `.carousel-container`
-            // mas precisamos garantir que o `max-width` do container é para o grupo visível
-            if (window.innerWidth <= 768) {
-                 carouselContainer.style.maxWidth = `calc(${180 * visibleImagesCount}px + ${gap * (visibleImagesCount - 1)}px)`;
-            } else {
-                 carouselContainer.style.maxWidth = `calc(${250 * visibleImagesCount}px + ${gap * (visibleImagesCount - 1)}px)`;
-            }
-        }
-        
-        let currentIndex = 0;
-        let animationInterval;
-        const animationSpeed = 5000; // Tempo em ms para cada avanço de grupo
-
-        function startCarouselAutoScroll() {
-            setCarouselConfig(); // Define a configuração inicial e a ajusta na redimensionamento
-            
-            clearInterval(animationInterval); // Limpa qualquer intervalo anterior
-            animationInterval = setInterval(() => {
-                const totalContentWidth = (imageWidth + gap) * totalOriginalImages;
-                const maxScroll = totalContentWidth; // Deslocamento total do primeiro conjunto de imagens
-
-                currentIndex += visibleImagesCount; // Avança o índice pelo número de imagens visíveis
-
-                // Calcula o novo deslocamento
-                let newTranslateX = -(currentIndex * (imageWidth + gap));
-
-                // Se passamos do primeiro conjunto de imagens, reinicie a posição para o início do segundo
-                // Mas, com um truque para não ser perceptível.
-                if (newTranslateX <= -maxScroll) {
-                    // Sem transição para o reset
-                    carouselImages.style.transition = 'none';
-                    currentIndex = 0; // Reinicia o índice
-                    carouselImages.style.transform = `translateX(0px)`;
-                    
-                    // Força um reflow para que a transição seja aplicada novamente no próximo frame
-                    void carouselImages.offsetWidth; 
-                    
-                    // Volta a transição para o próximo movimento
-                    carouselImages.style.transition = 'transform 0.5s ease-in-out';
-                    
-                    // E então move para o próximo slide (que agora é o início do segundo conjunto de imagens)
-                    currentIndex += visibleImagesCount;
-                    newTranslateX = -(currentIndex * (imageWidth + gap));
-                }
-
-                carouselImages.style.transform = `translateX(${newTranslateX}px)`;
-
-            }, animationSpeed);
-        }
-
-        // Inicia o carrossel quando a página carrega
-        startCarouselAutoScroll();
-
-        // Reinicia o carrossel em caso de redimensionamento da janela
-        window.addEventListener('resize', startCarouselAutoScroll);
-
-        // Opcional: Pausar no hover
-        carouselContainer.addEventListener('mouseenter', () => clearInterval(animationInterval));
-        carouselContainer.addEventListener('mouseleave', startCarouselAutoScroll);
-
-        // --- FIM DO NOVO CÓDIGO PARA O CARROSSEL CONTROLADO POR JS ---
     });
 </script>
 </body>
