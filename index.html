@@ -698,20 +698,6 @@
             <img src="https://i.imgur.com/OTZtjQ3.png" alt="Exemplo de trabalho 12">
             <img src="https://i.imgur.com/1mdRt1b.png" alt="Exemplo de trabalho 13">
             <img src="https://i.imgur.com/buMvm7G.png" alt="Exemplo de trabalho 14">
-            <img src="https://i.imgur.com/kbMff4q.png" alt="Exemplo de trabalho 1">
-            <img src="https://i.imgur.com/XhuU3RB.png" alt="Exemplo de trabalho 2">
-            <img src="https://i.imgur.com/sGMuBOW.png" alt="Exemplo de trabalho 3">
-            <img src="https://i.imgur.com/wkmMBJI.png" alt="Exemplo de trabalho 4">
-            <img src="https://i.imgur.com/3z7cvH4.png" alt="Exemplo de trabalho 5">
-            <img src="https://i.imgur.com/VBTgR4w.png" alt="Exemplo de trabalho 6">
-            <img src="https://i.imgur.com/ToriCGQ.png" alt="Exemplo de trabalho 7">
-            <img src="https://i.imgur.com/Szpa48n.png" alt="Exemplo de trabalho 8">
-            <img src="https://i.imgur.com/g9MLNaH.png" alt="Exemplo de trabalho 9">
-            <img src="https://i.imgur.com/d9oVHDT.jpeg" alt="Exemplo de trabalho 10">
-            <img src="https://i.imgur.com/5nplRby.jpeg" alt="Exemplo de trabalho 11">
-            <img src="https://i.imgur.com/OTZtjQ3.png" alt="Exemplo de trabalho 12">
-            <img src="https://i.imgur.com/1mdRt1b.png" alt="Exemplo de trabalho 13">
-            <img src="https://i.imgur.com/buMvm7G.png" alt="Exemplo de trabalho 14">
         </div>
     </div>
 </section>
@@ -807,60 +793,67 @@
         startCarouselLogic(); // A função do carrossel
     });
 
-    function startCarouselLogic() {
+    // Lógica para o carrossel infinito e contínuo
+function startCarouselLogic() {
     const carouselContainer = document.querySelector('.carousel-images');
-    const allImages = Array.from(carouselContainer.querySelectorAll('img'));
-    const totalImagesInSet = allImages.length / 2;
+    const imagesOriginal = Array.from(carouselContainer.querySelectorAll('img'));
     let currentIndex = 0;
-    let imagesVisible = 0;
+    
+    // Duplica as imagens uma vez para garantir que o carrossel nunca pare
+    imagesOriginal.forEach(img => {
+        carouselContainer.appendChild(img.cloneNode(true));
+    });
+
+    const allImages = Array.from(carouselContainer.querySelectorAll('img'));
 
     function getImagesVisible() {
-        // Usa a largura da tela para determinar a quantidade de imagens visíveis
         return window.innerWidth <= 768 ? 3 : 5;
     }
 
     function updateCarousel() {
-        imagesVisible = getImagesVisible();
+        const imagesVisible = getImagesVisible();
         const imageWidth = allImages[0].offsetWidth;
         const gap = parseInt(window.getComputedStyle(carouselContainer).gap);
         
+        // Remove o destaque de todas as imagens antes de aplicar o novo
         allImages.forEach(img => img.classList.remove('centered-image'));
         
-        // Reinicia a rolagem para o início do segundo bloco
-        if (currentIndex >= totalImagesInSet) {
+        // Verifica se chegamos ao final do conjunto original de imagens
+        // Se sim, teletransporta de volta para o início da segunda cópia de forma instantânea
+        if (currentIndex >= imagesOriginal.length) {
             currentIndex = 0;
+            // Remove a transição para evitar o 'salto'
             carouselContainer.style.transition = 'none';
-            carouselContainer.style.transform = `translateX(${-currentIndex * (imageWidth + gap)}px)`;
-            carouselContainer.offsetWidth;
+            carouselContainer.style.transform = `translateX(0px)`;
+            // Força o navegador a aplicar a mudança instantânea antes de continuar
+            carouselContainer.offsetWidth; 
+            // Volta a transição para que a próxima animação seja suave
             carouselContainer.style.transition = 'transform 0.8s cubic-bezier(0.25, 1, 0.5, 1)';
         }
-        
-        const newTransformValue = -currentIndex * (imageWidth + gap);
-        carouselContainer.style.transform = `translateX(${newTransformValue}px)`;
-        
-        setTimeout(() => {
-            const centeredIndexOffset = Math.floor(imagesVisible / 2);
-            const centeredIndex = currentIndex + centeredIndexOffset;
-            
-            // Verifica se o índice está dentro dos limites do array
-            if (allImages[centeredIndex]) {
-                allImages[centeredIndex].classList.add('centered-image');
-            }
 
-            setTimeout(() => {
-                if (allImages[centeredIndex]) {
-                    allImages[centeredIndex].classList.remove('centered-image');
-                }
-                currentIndex++;
-                updateCarousel();
-            }, 2000);
-        }, 800);
+        // Aplica o destaque na imagem que deve estar no centro
+        const centeredIndex = currentIndex + Math.floor(imagesVisible / 2);
+        if (allImages[centeredIndex]) {
+            allImages[centeredIndex].classList.add('centered-image');
+        }
+
+        // Calcula a posição de rolagem para a próxima imagem
+        const newTransformValue = (currentIndex) * (imageWidth + gap);
+        carouselContainer.style.transform = `translateX(${-newTransformValue}px)`;
+        
+        // Aumenta o índice para a próxima imagem
+        currentIndex++;
+        
+        // Agenda a próxima transição
+        setTimeout(() => {
+            updateCarousel();
+        }, 2000); 
     }
     
     // Inicia o carrossel após um pequeno atraso inicial
     setTimeout(updateCarousel, 1000);
 
-    // Reinicia o carrossel ao redimensionar a tela para se adaptar ao mobile/desktop
+    // Reinicia a lógica do carrossel ao redimensionar a tela
     window.addEventListener('resize', () => {
         currentIndex = 0;
         updateCarousel();
