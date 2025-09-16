@@ -796,7 +796,15 @@
         initializeFormLogic();
         createDust(); // A função que cria o efeito de fundo
         startCarouselLogic(); // A função do carrossel
+        // Adiciona o listener de resize com otimização (debounce)
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            startCarouselLogic();
+        }, 200); // Aguarda 200ms após o redimensionamento para reiniciar
     });
+});
 
     let carouselInterval;
 let isAnimating = false;
@@ -810,6 +818,7 @@ function startCarouselLogic() {
     const imagesOriginal = Array.from(carouselContainer.querySelectorAll('img'));
     let currentIndex = 0;
     
+    // Calcula o número de imagens de padding com base no tamanho da tela
     const numPaddingImages = window.innerWidth <= 768 ? 1 : 2;
 
     carouselContainer.innerHTML = '';
@@ -838,8 +847,6 @@ function startCarouselLogic() {
         
         allImages.forEach(img => img.classList.remove('centered-image'));
         
-        // Lógica de "teletransporte" para loop infinito
-        // Usa `initial` para garantir que a primeira transição seja instantânea
         if (currentIndex >= imagesOriginal.length + numPaddingImages) {
             carouselContainer.style.transition = 'none';
             currentIndex = numPaddingImages;
@@ -847,7 +854,6 @@ function startCarouselLogic() {
             carouselContainer.style.transition = 'transform 0.8s cubic-bezier(0.25, 1, 0.5, 1)';
         }
 
-        // Se for a chamada inicial, remove a transição para pular direto para a posição correta
         if (initial) {
             carouselContainer.style.transition = 'none';
         }
@@ -864,13 +870,8 @@ function startCarouselLogic() {
         
         setTimeout(() => {
             isAnimating = false;
-        }, 800); // tempo de espera para a transição terminar
+        }, 800);
     }
-
-    // Reinicia a lógica do carrossel ao redimensionar a tela
-    window.addEventListener('resize', () => {
-        startCarouselLogic();
-    });
 }
     
     // Funções existentes que foram mantidas
