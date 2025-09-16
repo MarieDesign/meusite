@@ -797,44 +797,48 @@
         createDust(); // A função que cria o efeito de fundo
         startCarouselLogic(); // A função do carrossel
         // Adiciona o listener de resize com otimização (debounce)
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-            startCarouselLogic();
-        }, 200); // Aguarda 200ms após o redimensionamento para reiniciar
-    });
 });
 
     let carouselInterval;
 let isAnimating = false;
 
 function startCarouselLogic() {
+    // Para o intervalo anterior, se existir
     if (carouselInterval) {
         clearInterval(carouselInterval);
     }
-    
+
     const carouselContainer = document.querySelector('.carousel-images');
     const imagesOriginal = Array.from(carouselContainer.querySelectorAll('img'));
+
+    // Verifica se já existem imagens clonadas (para evitar duplicação)
+    if (carouselContainer.classList.contains('initialized')) {
+        // Se já foi inicializado, apenas para a animação
+        return;
+    }
+
     let currentIndex = 0;
-    
-    // Calcula o número de imagens de padding com base no tamanho da tela
     const numPaddingImages = window.innerWidth <= 768 ? 1 : 2;
 
+    // Limpa o conteúdo original para adicionar os clones
     carouselContainer.innerHTML = '';
     
+    // Adiciona o padding no início
     for (let i = 0; i < numPaddingImages; i++) {
         carouselContainer.appendChild(imagesOriginal[imagesOriginal.length - numPaddingImages + i].cloneNode(true));
     }
+    // Adiciona as imagens originais
     imagesOriginal.forEach(img => carouselContainer.appendChild(img.cloneNode(true)));
+    // Adiciona o padding no final
     for (let i = 0; i < numPaddingImages; i++) {
         carouselContainer.appendChild(imagesOriginal[i].cloneNode(true));
     }
 
+    carouselContainer.classList.add('initialized');
     const allImages = Array.from(carouselContainer.querySelectorAll('img'));
-    currentIndex = numPaddingImages;
     
-    updateCarousel(true); // Chama a primeira vez imediatamente, com transição desabilitada
+    // Inicia na posição correta
+    updateCarousel(true);
 
     carouselInterval = setInterval(updateCarousel, 2000);
 
@@ -847,23 +851,22 @@ function startCarouselLogic() {
         
         allImages.forEach(img => img.classList.remove('centered-image'));
         
-        if (currentIndex >= imagesOriginal.length + numPaddingImages) {
+        // Lógica de "teletransporte" para loop infinito
+        if (currentIndex >= imagesOriginal.length) {
             carouselContainer.style.transition = 'none';
-            currentIndex = numPaddingImages;
+            currentIndex = 0;
+            // Força o navegador a recalcular o layout para a transição 'none' funcionar
+            void carouselContainer.offsetWidth; 
         } else {
             carouselContainer.style.transition = 'transform 0.8s cubic-bezier(0.25, 1, 0.5, 1)';
         }
 
-        if (initial) {
-            carouselContainer.style.transition = 'none';
-        }
-
-        const offset = (currentIndex * (imageWidth + gap));
-        const centerOffset = (carouselContainer.offsetWidth / 2) - (imageWidth / 2) - (gap / 2);
+        const offset = (currentIndex + numPaddingImages) * (imageWidth + gap);
+        const centerOffset = (carouselContainer.parentElement.offsetWidth / 2) - (imageWidth / 2) - (gap / 2);
         carouselContainer.style.transform = `translateX(${-offset + centerOffset}px)`;
         
-        if (allImages[currentIndex]) {
-            allImages[currentIndex].classList.add('centered-image');
+        if (allImages[currentIndex + numPaddingImages]) {
+            allImages[currentIndex + numPaddingImages].classList.add('centered-image');
         }
 
         currentIndex++;
@@ -873,6 +876,7 @@ function startCarouselLogic() {
         }, 800);
     }
 }
+
     
     // Funções existentes que foram mantidas
     function createDust() {
