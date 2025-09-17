@@ -268,26 +268,26 @@
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
     transition: transform 0.5s ease, box-shadow 0.5s ease, filter 0.5s ease;
-    filter: brightness(0.75) grayscale(1); /* Imagens sem destaque */
+    filter: brightness(0.75) grayscale(1);
 }
 
 .carousel-images img.centered-image {
     transform: scale(1.15);
-    filter: brightness(1.2) grayscale(0); /* Imagem destacada */
+    filter: brightness(1.2) grayscale(0);
 }
 
 .carousel-images img:hover {
-    filter: brightness(1) grayscale(0.5); /* Efeito no hover */
+    filter: brightness(1) grayscale(0.5);
 }
 
 /* Regras para Desktop (5 imagens) */
 @media (min-width: 769px) {
     .carousel-images img {
-        width: 180px; /* Largura para desktop */
+        width: 250px; /* Aumentado de 180px para 250px */
     }
     .carousel-container {
         /* Garante que 5 imagens sejam visíveis */
-        max-width: calc(180px * 5 + 20px * 4);
+        max-width: calc(250px * 5 + 20px * 4); /* A largura também foi atualizada aqui */
         margin: 0 auto;
     }
 }
@@ -295,23 +295,15 @@
 /* Regras para Mobile (3 imagens) */
 @media (max-width: 768px) {
     .carousel-images img {
-        width: 120px; /* Largura menor para mobile */
-    }
-    /* Regras para Mobile (3 imagens) */
-@media (max-width: 768px) {
-    .carousel-images img {
-        width: 120px; /* Largura menor para mobile */
+        width: 180px; /* Aumentado de 120px para 180px */
     }
     .carousel-container {
         /* Garante que 3 imagens sejam visíveis */
-        max-width: calc(120px * 3 + 20px * 2);
+        max-width: calc(180px * 3 + 20px * 2); /* A largura também foi atualizada aqui */
         margin: 0 auto;
     }
 }
-    @keyframes auto-scroll {
-        100% { transform: translateX(calc(-180px * 14 - 20px * 13)); }
-    }
-}
+
 /* FIM DOS ESTILOS DO CARROSSEL */
         .portfolio-stories-section {
             padding: 20px 0 60px;
